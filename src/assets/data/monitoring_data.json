@@ -1,0 +1,205 @@
+[
+    {
+      "id": 1,
+      "category": "medical",
+      "question": "FECHA",
+      "label": "Fecha",
+      "redcap_value": "f_seguimiento",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 2,
+      "category": "medical",
+      "question": "Ubicación",
+      "label": "Ubicación",
+      "redcap_value": "ub_seguimiento",
+      "field_type": "radio",
+      "answers": [
+        {"answer": "Vive solo", "redcap_value": 0},
+        {"answer": "Vive acompañado", "redcap_value": 1},
+        {"answer": "Residencia", "redcap_value": 2},
+        {"answer": "Otra", "redcap_value": 3}
+      ]
+    },
+    {
+      "id": 3,
+      "category": "medical",
+      "question": "¿Esta el paciente en tratamiento rehabilitador ahora mismo?",
+      "label": "Tratamiento rehabilitador",
+      "redcap_value": "rehab_seg",
+      "field_type": "radio",
+      "answers": [
+        {"answer": "No", "redcap_value": 0},
+        {"answer": "Sí", "redcap_value": 1}
+      ]
+    },
+    {
+      "id": 4,
+      "category": "medical",
+      "question": "Ayuda técnica que precisa el paciente para caminar",
+      "label": "Ayuda caminar",
+      "redcap_value": "ay_seguimiento",
+      "field_type": "radio",
+      "answers": [
+        {"answer": "Sin ayuda", "redcap_value": 0},
+        {"answer": "Bastón", "redcap_value": 1},
+        {"answer": "Dos muletas", "redcap_value": 2},
+        {"answer": "Andador", "redcap_value": 3},
+        {"answer": "Silla de ruedas", "redcap_value": 4}
+      ]
+    },
+    {
+      "id": 5,
+      "category": "medical",
+      "question": "Escala verbal de dolor",
+      "label": "Escala dolor",
+      "redcap_value": "evera",
+      "field_type": "radio",
+      "answers": [
+        {"answer": "El paciente no experimenta dolor", "redcap_value": 1},
+        {"answer": "El paciente experimenta un dolor suave", "redcap_value": 2},
+        {"answer": "El paciente experimenta un dolor moderado", "redcap_value": 3},
+        {"answer": "El paciente experimenta un dolor intenso", "redcap_value": 4},
+        {"answer": "El paciente experimenta un dolor insoportable", "redcap_value": 5}
+      ]
+    },
+    {
+      "id": 6,
+      "category": "medical",
+      "question": "Fármacos antiosteoporóticos",
+      "label": "Fármacos antiosteoporóticos",
+      "redcap_value": "op_seguimiento",
+      "field_type": "checkbox",
+      "answers": [
+        {"answer": "No", "redcap_value": 0},
+        {"answer": "Calcio", "redcap_value": 1},
+        {"answer": "Calcio + vitamina D", "redcap_value": 2},
+        {"answer": "Bifosfonatos", "redcap_value": 3},
+        {"answer": "Denosumab", "redcap_value": 4},
+        {"answer": "Teriparatida", "redcap_value": 5},
+        {"answer": "Otro", "redcap_value": 6}
+      ]
+    },
+    {
+      "id": 7,
+      "category": "medical",
+      "question": "¿Cuántas veces se ha caído desde la última entrevista?",
+      "label": "Caídas",
+      "redcap_value": "caidas_seg",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 8,
+      "category": "medical",
+      "question": "Reingresos desde la última entrevista",
+      "label": "Reingresos",
+      "redcap_value": "reingreso_seguimiento",
+      "field_type": "radio",
+      "answers": [
+        {"answer": "No", "redcap_value": 0},
+        {"answer": "Sí", "redcap_value": 1}
+      ]
+    },
+    {
+      "id": 9,
+      "category": "medical",
+      "question": "Visitas a urgencias desde la última entrevista",
+      "label": "Urgencias",
+      "redcap_value": "urg_seguimiento",
+      "field_type": "radio",
+      "answers": [
+        {"answer": "No", "redcap_value": 0},
+        {"answer": "Sí", "redcap_value": 1}
+      ]
+    },
+    {
+      "id": 10,
+      "category": "medical",
+      "question": "Fallecimiento del paciente",
+      "label": "Fallecimiento",
+      "redcap_value": "exitus_seguimiento",
+      "field_type": "radio",
+      "answers": [
+        {"answer": "No", "redcap_value": 0},
+        {"answer": "Sí", "redcap_value": 1, "properties": [
+            {
+                "question": "Fecha de fallecimiento del paciente",
+                "label": "Fecha fallecimiento",
+                "redcap_value": "f_exitus_seguimiento",
+                "field_type": "text",
+                "answers": ""
+            }
+        ]}
+      ]
+    },
+    {
+      "id": 11,
+      "category": "mycap",
+      "question": "UUID",
+      "label": "",
+      "redcap_value": "f350_uuid",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 12,
+      "category": "mycap",
+      "question": "Start Date",
+      "label": "",
+      "redcap_value": "f350_startdate",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 13,
+      "category": "mycap",
+      "question": "End Date",
+      "label": "",
+      "redcap_value": "f350_enddate",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 14,
+      "category": "mycap",
+      "question": "Schedule Date",
+      "label": "",
+      "redcap_value": "f350_scheduledate",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 15,
+      "category": "mycap",
+      "question": "Status",
+      "label": "",
+      "redcap_value": "f350_status",
+      "field_type": "dropdown",
+      "answers": [
+        {"answer": "Deleted", "redcap_value": 0},
+        {"answer": "Completed", "redcap_value": 1},
+        {"answer": "Incomplete", "redcap_value": 2}
+      ]
+    },
+    {
+      "id": 16,
+      "category": "mycap",
+      "question": "Supplemental Data (JSON)",
+      "label": "",
+      "redcap_value": "f350_supplementaldata",
+      "field_type": "notes",
+      "answers": ""
+    },
+    {
+      "id": 17,
+      "category": "mycap",
+      "question": "Serailized Result",
+      "label": "",
+      "redcap_value": "f350_serializedresult",
+      "field_type": "file",
+      "answers": ""
+    }
+  ]
+  

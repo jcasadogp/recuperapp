@@ -1,0 +1,217 @@
+[
+    {
+      "id": 1,
+      "category": "medical",
+      "question": "FECHA",
+      "label": "Fecha",
+      "redcap_value": "f_barthel",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 2,
+      "category": "medical",
+      "question": "COMER",
+      "label": "Comer",
+      "redcap_value": "barthel_1_s",
+      "field_type": "radio",
+      "answers": [
+        { "answer": "DEPENDIENTE (necesita ser alimentado por otra persona)", "redcap_value": 0},
+        { "answer": "NECESITA AYUDA (para comer la carne o el pan, pero es capaz de comer solo)", "redcap_value": 5},
+        { "answer": "INDEPENDIENTE (capaz de comer por si solo y en un tiempo razonable. La comida puede ser cocinada y servida por otra persona)", "redcap_value": 10}
+      ]
+    },
+    {
+      "id": 3,
+      "category": "medical",
+      "question": "LAVARSE (BAÑARSE)",
+      "label": "Lavarse",
+      "redcap_value": "barthel_2_s",
+      "field_type": "radio",
+      "answers": [
+        { "answer": "DEPENDIENTE (Necesita ayuda o supervisión)", "redcap_value": 0},
+        { "answer": "INDEPENDIENTE (capaz de lavarse entero sin estar una persona presente al ingresar y salir del baño)", "redcap_value": 5}
+      ]
+    },
+    {
+      "id": 4,
+      "category": "medical",
+      "question": "VESTIRSE",
+      "label": "Vestirse",
+      "redcap_value": "barthel_3_s",
+      "field_type": "radio",
+      "answers": [
+        { "answer": "DEPENDIENTE (totalmente dependiente)", "redcap_value": 0},
+        { "answer": "NECESITA AYUDA (realiza solo al menos la mitad de las tareas en un tiempo razonable)", "redcap_value": 5},
+        { "answer": "INDEPENDIENTE (capaz de ponerse y quitarse la ropa sin ayuda)", "redcap_value": 10}
+      ]
+    },
+    {
+      "id": 5,
+      "category": "medical",
+      "question": "ASEO PERSONAL, ARREGLARSE",
+      "label": "Aseo personal",
+      "redcap_value": "barthel_4_s",
+      "field_type": "radio",
+      "answers": [
+        { "answer": "DEPENDIENTE (necesita de alguna ayuda)", "redcap_value": 0},
+        { "answer": "INDEPENDIENTE (realiza todas las actividades personales sin ninguna ayuda. Los complementos necesarios pueden ser imprevistos por otra persona)", "redcap_value": 5}
+      ]
+    },
+    {
+      "id": 6,
+      "category": "medical",
+      "question": "DEPOSICIÓN",
+      "label": "Deposición",
+      "redcap_value": "barthel_5_s",
+      "field_type": "radio",
+      "answers": [
+        { "answer": "INCONTINENTE", "redcap_value": 0},
+        { "answer": "ACCIDENTE OCASIONAL (máximo un episodio de incontinencia en 24 horas. Incluye necesitas ayuda en la manipulación de sondas y otros dispositivos)", "redcap_value": 5},
+        { "answer": "CONTINENTE (ningún episodio de incontinencia)", "redcap_value": 10}
+      ]
+    },
+    {
+      "id": 7,
+      "category": "medical",
+      "question": "MICCIÓN: valorar la situación en la semana previa",
+      "label": "Micción",
+      "redcap_value": "barthel_6_s",
+      "field_type": "radio",
+      "answers": [
+        { "answer": "INCONTINENTE (incluye pacientes con sonda incapaces de manejarse)", "redcap_value": 0},
+        { "answer": "ACCIDENTE OCASIONAL (menos de una vez por semana o necesita ayuda para enemas o supositorios)", "redcap_value": 5},
+        { "answer": "CONTINENTE (ningún episodio de incontinencia (seco día y noche). Capaz de usar cualquier dispositivo)", "redcap_value": 10}
+      ]
+    },
+    {
+      "id": 8,
+      "category": "medical",
+      "question": "IR AL RETRETE",
+      "label": "Ir al retrete",
+      "redcap_value": "barthel_7_s",
+      "field_type": "radio",
+      "answers": [
+        { "answer": "DEPENDIENTE (necesita ayuda por completo)", "redcap_value": 0},
+        { "answer": "NECESITA AYUDA (capaz de manejarse con pequeña ayuda en el equilibrio, quitarse y ponerse la ropa, pero puede limpiarse solo. Aún es capaz de utilizar el retrete)", "redcap_value": 5},
+        { "answer": "INDEPENDIENTE (entra y sale solo. Capaz de quitarse y ponerse la ropa, limpiarse y prevenir el manchado de la ropa y tirar la cadena, capaz de sentarse y levantarse de la taza sin ayuda (puede utilizar barras de soporte))", "redcap_value": 10}
+      ]
+    },
+    {
+      "id": 9,
+      "category": "medical",
+      "question": "TRASLADO (TRANSFERENCIA) SILLÓN-CAMA",
+      "label": "Traslado",
+      "redcap_value": "barthel_8_s",
+      "field_type": "radio",
+      "answers": [
+        { "answer": "DEPENDIENTE (necesita ayuda por completo, incapaz de permanecer sentado)", "redcap_value": 0},
+        { "answer": "GRAN AYUDA (capaz de estar sentado sin ayuda pero necesita mucha asistencia (persona fuerte y entrenada) para salir/entrar a la cama o desplazarse)", "redcap_value": 5},
+        { "answer": "MÍNIMA AYUDA (incluye supervisión verbal o pequeña ayuda física, tal como la ofrecida por una persona no muy fuerte y sin entrenamiento)", "redcap_value": 10},
+        { "answer": "INDEPENDIENTE (sin ayudas en todas las fases, si utiliza silla de ruedas se aproxima a la cama, frena y se desplaza)", "redcap_value": 15}
+      ]
+    },
+    {
+      "id": 10,
+      "category": "medical",
+      "question": "DEAMBULACIÓN",
+      "label": "Deambulación",
+      "redcap_value": "barthel_9_s",
+      "field_type": "radio",
+      "answers": [
+        { "answer": "DEPENDIENTE (si utiliza silla de ruedas precisa ser empujado por otro)", "redcap_value": 0},
+        { "answer": "INDEPENDIENTE (EN SILLA DE RUEDAS) (en 50m debe ser capaz de desplazarse, atravesar puertas y doblar esquinas solo)", "redcap_value": 5},
+        { "answer": "NECESITA AYUDA (supervisión o pequeña ayuda física (persona no muy fuerte) para andar 50m (incluye andador))", "redcap_value": 10},
+        { "answer": "INDEPENDIENTE (puede caminar al menos 50m os u equivalente en casa sin ayuda ni supervisión)", "redcap_value": 15}
+      ]
+    },
+    {
+      "id": 11,
+      "category": "medical",
+      "question": "USO DE LAS ESCALERAS",
+      "label": "Escaleras",
+      "redcap_value": "barthel_10_s",
+      "field_type": "radio",
+      "answers": [
+        { "answer": "DEPENDIENTE (incapaz de salvar escalones. Necesita alzamiento (ascensor))", "redcap_value": 0},
+        { "answer": "NECESITA AYUDA (supervisión física o verbal)", "redcap_value": 5},
+        { "answer": "INDEPENDIENTE (capaz de subir y bajar un piso sin supervisión. Puede utilizar el apoyo que precisa para andar (bastón, muletas, etc.) y el pasamanos)", "redcap_value": 10}
+      ]
+    },
+    {
+      "id": 12,
+      "category": "medical",
+      "question": "Barthel SCORE",
+      "label": "Puntuación",
+      "redcap_value": "barthel_score_s",
+      "field_type": "calc",
+      "answers": ""
+    },
+    {
+      "id": 13,
+      "category": "mycap",
+      "question": "",
+      "label": "",
+      "redcap_value": "barthel786_uuid",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 14,
+      "category": "mycap",
+      "question": "Start Date",
+      "label": "",
+      "redcap_value": "barthel786_startdate",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 15,
+      "category": "mycap",
+      "question": "End Date",
+      "label": "",
+      "redcap_value": "barthel786_enddate",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 16,
+      "category": "mycap",
+      "question": "Schedule Date",
+      "label": "",
+      "redcap_value": "barthel786_scheduledate",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 17,
+      "category": "mycap",
+      "question": "Status",
+      "label": "",
+      "redcap_value": "barthel786_status",
+      "field_type": "dropdown",
+      "answers": [
+        {"answer": "Deleted", "redcap_value": 0},
+        {"answer": "Completed", "redcap_value": 1},
+        {"answer": "Incomplete", "redcap_value": 2}
+      ]
+    },
+    {
+      "id": 18,
+      "category": "mycap",
+      "question": "Supplemental Data (JSON)",
+      "label": "",
+      "redcap_value": "barthel786_supplementaldata",
+      "field_type": "notes",
+      "answers": ""
+    },
+    {
+      "id": 19,
+      "category": "mycap",
+      "question": "Serailized Result",
+      "label": "",
+      "redcap_value": "barthel786_serializedresult",
+      "field_type": "file",
+      "answers": ""
+    }
+  ]

@@ -1,0 +1,91 @@
+[
+    {
+      "id": 1,
+      "category": "medical",
+      "question": "FECHA",
+      "label": "Fecha",
+      "redcap_value": "f_facseg",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 2,
+      "category": "medical",
+      "question": "Escala FAC",
+      "label": "Escala FAC",
+      "redcap_value": "fac_seguimiento",
+      "field_type": "radio",
+      "answers": [
+        {"answer": "El paciente no camina o lo hace con ayuda de dos personas", "redcap_value": 0},
+        {"answer": "El paciente camina con ayuda de una persona", "redcap_value": 1},
+        {"answer": "El paciente camina con ligero contacto físico de una persona", "redcap_value": 2},
+        {"answer": "El paciente camina con supervisión", "redcap_value": 3},
+        {"answer": "El paciente camina independiente en llano, pero no puede salvar escaleras", "redcap_value": 4},
+        {"answer": "El paciente camina independiente en llano y puede salvar escaleras", "redcap_value": 5}
+      ]
+    },
+    {
+      "id": 3,
+      "category": "mycap",
+      "question": "",
+      "label": "",
+      "redcap_value": "fac365_uuid",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 4,
+      "category": "mycap",
+      "question": "Start Date",
+      "label": "",
+      "redcap_value": "fac365_startdate",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 5,
+      "category": "mycap",
+      "question": "End Date",
+      "label": "",
+      "redcap_value": "fac365_enddate",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 6,
+      "category": "mycap",
+      "question": "Schedule Date",
+      "label": "",
+      "redcap_value": "fac365_scheduledate",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 7,
+      "category": "mycap",
+      "question": "Status",
+      "label": "",
+      "redcap_value": "fac365_status",
+      "field_type": "dropdown",
+      "answers": "0, Deleted | 1, Completed | 2, Incomplete"
+    },
+    {
+      "id": 8,
+      "category": "mycap",
+      "question": "Supplemental Data (JSON)",
+      "label": "",
+      "redcap_value": "fac365_supplementaldata",
+      "field_type": "notes",
+      "answers": ""
+    },
+    {
+      "id": 9,
+      "category": "",
+      "question": "Serailized Result",
+      "label": "",
+      "redcap_value": "fac365_serializedresult",
+      "field_type": "file",
+      "answers": ""
+    }
+  ]
+  

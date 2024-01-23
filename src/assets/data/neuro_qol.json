@@ -1,0 +1,353 @@
+[
+    {
+      "id": 1,
+      "category": "",
+      "question": "T-score",
+      "label": "",
+      "redcap_value": "neuroqol_banco_v10_funcionamiento_de_las_extremida_tscore",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 2,
+      "category": "",
+      "question": "Standard Error",
+      "label": "",
+      "redcap_value": "neuroqol_banco_v10_funcionamiento_de_las_extremida_std_error",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 3,
+      "category": "",
+      "question": "¿Puede sentarse y levantarse del inodoro (excusado)?",
+      "label": "",
+      "redcap_value": "promis_pfc45_db56e6",
+      "field_type": "radio",
+      "answers": "5, Sin dificultad | 4, Con poca dificultad | 3, Con alguna dificultad | 2, Con mucha dificultad | 1, No puedo hacerlo"
+    },
+    {
+      "id": 4,
+      "category": "",
+      "question": "T-score (Cumulative)",
+      "label": "",
+      "redcap_value": "promis_pfc45_tscore",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 5,
+      "category": "",
+      "question": "Standard Error (Cumulative)",
+      "label": "",
+      "redcap_value": "promis_pfc45_stderror",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 6,
+      "category": "",
+      "question": "Question Position",
+      "label": "",
+      "redcap_value": "promis_pfc45_qposition",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 7,
+      "category": "",
+      "question": "¿Puede subir y bajar aceras caminando?",
+      "label": "",
+      "redcap_value": "promis_pfa30_4b6c5e",
+      "field_type": "radio",
+      "answers": "5, Sin dificultad | 4, Con poca dificultad | 3, Con alguna dificultad | 2, Con mucha dificultad | 1, No puedo hacerlo"
+    },
+    {
+      "id": 8,
+      "category": "",
+      "question": "T-score (Cumulative)",
+      "label": "",
+      "redcap_value": "promis_pfa30_tscore",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 9,
+      "category": "",
+      "question": "Standard Error (Cumulative)",
+      "label": "",
+      "redcap_value": "promis_pfa30_stderror",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 10,
+      "category": "",
+      "question": "Question Position",
+      "label": "",
+      "redcap_value": "promis_pfa30_qposition",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 11,
+      "category": "",
+      "question": "¿Se puede subir y bajar de un automóvil?",
+      "label": "",
+      "redcap_value": "promis_pfa56_95f7fc",
+      "field_type": "radio",
+      "answers": "5, Sin dificultad | 4, Con poca dificultad | 3, Con alguna dificultad | 2, Con mucha dificultad | 1, No puedo hacerlo"
+    },
+    {
+      "id": 12,
+      "category": "",
+      "question": "T-score (Cumulative)",
+      "label": "",
+      "redcap_value": "promis_pfa56_tscore",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 13,
+      "category": "",
+      "question": "Standard Error (Cumulative)",
+      "label": "",
+      "redcap_value": "promis_pfa56_stderror",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 14,
+      "category": "",
+      "question": "Question Position",
+      "label": "",
+      "redcap_value": "promis_pfa56_qposition",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 15,
+      "category": "",
+      "question": "¿Puede levantarse de la cama y sentarse en una silla?",
+      "label": "",
+      "redcap_value": "promis_pfa45_e522ec",
+      "field_type": "radio",
+      "answers": "5, Sin dificultad | 4, Con poca dificultad | 3, Con alguna dificultad | 2, Con mucha dificultad | 1, No puedo hacerlo"
+    },
+    {
+      "id": 16,
+      "category": "",
+      "question": "T-score (Cumulative)",
+      "label": "",
+      "redcap_value": "promis_pfa45_tscore",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 17,
+      "category": "",
+      "question": "Standard Error (Cumulative)",
+      "label": "",
+      "redcap_value": "promis_pfa45_stderror",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 18,
+      "category": "",
+      "question": "Question Position",
+      "label": "",
+      "redcap_value": "promis_pfa45_qposition",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 19,
+      "category": "",
+      "question": "¿Puede abrir una puerta pesada empujándola?",
+      "label": "",
+      "redcap_value": "promis_pfa12_1245f7",
+      "field_type": "radio",
+      "answers": "5, Sin dificultad | 4, Con poca dificultad | 3, Con alguna dificultad | 2, Con mucha dificultad | 1, No puedo hacerlo"
+    },
+    {
+      "id": 20,
+      "category": "",
+      "question": "T-score (Cumulative)",
+      "label": "",
+      "redcap_value": "promis_pfa12_tscore",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 21,
+      "category": "",
+      "question": "Standard Error (Cumulative)",
+      "label": "",
+      "redcap_value": "promis_pfa12_stderror",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 22,
+      "category": "",
+      "question": "Question Position",
+      "label": "",
+      "redcap_value": "promis_pfa12_qposition",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 23,
+      "category": "",
+      "question": "¿Puede abrir un frasco de pepinillos?",
+      "label": "",
+      "redcap_value": "promis_pfa17_4e5a44",
+      "field_type": "radio",
+      "answers": "5, Sin dificultad | 4, Con poca dificultad | 3, Con alguna dificultad | 2, Con mucha dificultad | 1, No puedo hacerlo"
+    },
+    {
+      "id": 24,
+      "category": "",
+      "question": "T-score (Cumulative)",
+      "label": "",
+      "redcap_value": "promis_pfa17_tscore",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 25,
+      "category": "",
+      "question": "Standard Error (Cumulative)",
+      "label": "",
+      "redcap_value": "promis_pfa17_stderror",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 26,
+      "category": "",
+      "question": "Question Position",
+      "label": "",
+      "redcap_value": "promis_pfa17_qposition",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 27,
+      "category": "",
+      "question": "¿Puede cortar la carne con un cuchillo?",
+      "label": "",
+      "redcap_value": "promis_pfa9_36b0d4",
+      "field_type": "radio",
+      "answers": "5, Sin dificultad | 4, Con poca dificultad | 3, Con alguna dificultad | 2, Con mucha dificultad | 1, No puedo hacerlo"
+    },
+    {
+      "id": 28,
+      "category": "",
+      "question": "T-score (Cumulative)",
+      "label": "",
+      "redcap_value": "promis_pfa9_tscore",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 29,
+      "category": "",
+      "question": "Standard Error (Cumulative)",
+      "label": "",
+      "redcap_value": "promis_pfa9_stderror",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 30,
+      "category": "",
+      "question": "Question Position",
+      "label": "",
+      "redcap_value": "promis_pfa9_qposition",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 31,
+      "category": "",
+      "question": "¿Puede abotonarse la camisa?",
+      "label": "",
+      "redcap_value": "promis_pfa4_8a2d5d",
+      "field_type": "radio",
+      "answers": "5, Sin dificultad | 4, Con poca dificultad | 3, Con alguna dificultad | 2, Con mucha dificultad | 1, No puedo hacerlo"
+    },
+    {
+      "id": 32,
+      "category": "",
+      "question": "T-score (Cumulative)",
+      "label": "",
+      "redcap_value": "promis_pfa4_tscore",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 33,
+      "category": "",
+      "question": "Standard Error (Cumulative)",
+      "label": "",
+      "redcap_value": "promis_pfa4_stderror",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 34,
+      "category": "",
+      "question": "Question Position",
+      "label": "",
+      "redcap_value": "promis_pfa4_qposition",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 35,
+      "category": "",
+      "question": "¿Puede caminar en superficie irregular?",
+      "label": "",
+      "redcap_value": "promis_pfa7_3b1a10",
+      "field_type": "radio",
+      "answers": "5, Sin dificultad | 4, Con poca dificultad | 3, Con alguna dificultad | 2, Con mucha dificultad | 1, No puedo hacerlo"
+    },
+    {
+      "id": 36,
+      "category": "",
+      "question": "T-score (Cumulative)",
+      "label": "",
+      "redcap_value": "promis_pfa7_tscore",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 37,
+      "category": "",
+      "question": "Standard Error (Cumulative)",
+      "label": "",
+      "redcap_value": "promis_pfa7_stderror",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 38,
+      "category": "",
+      "question": "Question Position",
+      "label": "",
+      "redcap_value": "promis_pfa7_qposition",
+      "field_type": "text",
+      "answers": ""
+    },
+    {
+      "id": 39,
+      "category": "",
+      "question": "¿Puede caminar en una pendiente?",
+      "label": "",
+      "redcap_value": "promis_pfa11_567244",
+      "field_type": "radio",
+      "answers": "5, Sin dificultad | 4, Con poca dificultad | 3, Con alguna dificultad | 2, Con mucha dificultad | 1, No puedo hacerlo"
+    }
+]
