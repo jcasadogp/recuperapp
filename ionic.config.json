@@ -1,0 +1,7 @@
+{
+  "name": "recuperapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
