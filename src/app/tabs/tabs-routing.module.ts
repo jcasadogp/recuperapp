@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
 
-const routes: Routes = [
+const routes1: Routes = [
   {
     path: 'tabs',
     component: TabsPage,
@@ -30,6 +30,32 @@ const routes: Routes = [
     path: '',
     redirectTo: '/tabs/home',
     pathMatch: 'full'
+  }
+];
+
+const routes: Routes = [
+  {
+    path: '',
+    component: TabsPage,
+    children: [
+      {
+        path: 'home',
+        loadChildren: () => import('../pages/home/home.module').then(m => m.HomePageModule)
+      },
+      {
+        path: 'quests',
+        loadChildren: () => import('../pages/quests/quests.module').then(m => m.QuestsPageModule)
+      },
+      {
+        path: 'results',
+        loadChildren: () => import('../pages/results/results.module').then(m => m.ResultsPageModule)
+      },
+      {
+        path: '',
+        redirectTo: '/tabs/home',
+        pathMatch: 'full'
+      }
+    ]
   }
 ];
 
