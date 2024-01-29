@@ -2,8 +2,8 @@
 # http://git-scm.com/docs/gitignore
 
 # Specific file with data for RedCAP (including token)
-*shared/body-import.ts
-*shared/body-export.ts
+src/app/shared/body-import.ts
+src/app/shared/body-export.ts
 
 *~
 *.sw[mnpcod]
