@@ -1,13 +1,34 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>quests</ion-title>
+  <ion-toolbar class="ppal-toolbar">
+    <ion-title>
+      Cuestionarios
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">quests</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true"> 
+
+  <div class="ion-padding">
+
+    <!-- <ion-label *ngIf="enableCheck[0] || enableCheck[1] || enableCheck[2]" style="font-weight: bold; font-size: 120%;">
+      Por favor, complete los cuestionarios que están disponibles:</ion-label> -->
+
+    <!-- Cuestionario BPI -->
+    <ion-card mode="ios">
+      <ion-card-header>
+        <ion-card-title>Cuestionario BPI</ion-card-title>
+        <br>
+        <ion-card-subtitle>Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle>
+        <!-- <ion-card-subtitle *ngIf="!enableCheck[0]">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle> -->
+      </ion-card-header>
+      <ion-card-content>
+        <!-- <ion-label *ngIf="!enableCheck[0]">Disponible a partir del: {{periodoBPI}}</ion-label> -->
+        <ion-label><ion-text style="font-weight: bold; font-size: 110%;">Brief Pain Inventory (BPI)</ion-text></ion-label>
+        <p class="info_time">Tiempo estimado: <ion-text style="font-weight: bold;">3 minutos</ion-text></p>
+        <ion-button mode="ios" expand="block">Comenzar</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+  
 </ion-content>
