@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="ppal-toolbar">
+
+    <ion-button (click)="dismissModal()" slot="end" fill="clear">
+      <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+    </ion-button>
+
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-item-divider>
+    <ion-label>
+      Mis datos
+    </ion-label>
+  </ion-item-divider>
+
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="profile-att" style="font-weight: bold;" size=5>Nombre</ion-col>
+        <ion-col size=7>María</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="profile-att" style="font-weight: bold;" size=5>Apellidos</ion-col>
+        <ion-col size=7>García</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="profile-att" style="font-weight: bold;" size=5>Sexo</ion-col>
+        <ion-col size=7></ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="profile-att" style="font-weight: bold;" size=5>Fecha de nacimiento</ion-col>
+        <ion-col size=7></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+</ion-content>
+
