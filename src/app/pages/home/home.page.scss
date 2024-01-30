@@ -1,0 +1,82 @@
+.logout-icon {
+    font-size: 30px;
+  }
+  
+  .home-name {
+    font-size: 26px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 8px;
+    padding-bottom: 7px;
+  }
+  
+  .home-date {
+    font-size: 16px;
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-bottom: 8px;
+    // font-style: italic;
+  }
+  
+  #mensaje  {
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 20px;
+    margin-left: 20px;
+  
+  }
+  
+  #mensaje2 {
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 20px;
+    margin-left: 20px;
+  
+  }
+    
+  ion-card {
+    border-radius: 10px;
+    width: 100%;
+    margin: 0 !important;
+  
+    ion-card-header{
+      height: 0px;
+    }
+  
+    ion-card-content{
+      text-align: center;
+      justify-content: center;
+      padding: 25px;
+    }
+  
+    ion-icon {
+      color: #1B4F72;
+    }
+    ion-card-title, ion-card-subtitle {
+      color: #1B4F72;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    
+  }
+  
+  .profile-card{  --background: #D4EFDF;  }
+  .information-card{  --background: #D1F2EB;  }
+  .diary-card{ --background: #AED6F1; }
+  .feedback-card{ --background: #FEF5E7; }
+  // #D4E6F1
+    
+  ion-segment {
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 4px;
+  }
+  ion-segment-button {
+    color: #2874A6;
+    --indicator-color: #2874A6;
+    --indicator-height: 1px;
+    --background-checked: #F2F3F4;
+    --background: #F9F9F9;
+  }
