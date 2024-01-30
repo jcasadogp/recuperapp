@@ -1,7 +1,5 @@
 export interface Login {
     record_id?: number,
-    // redcap_repeat_instrument?: string,
-    // redcap_repeat_instance?: number,
     
     contrasena?: string,
     contrasena_2?: string,
