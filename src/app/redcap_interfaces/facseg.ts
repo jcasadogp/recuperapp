@@ -1,4 +1,4 @@
-export interface MonitoringData {
+export interface Facseg {
     record_id?: string, 
     // redcap_repeat_instrument?: string,
     // redcap_repeat_instance?: number, 
