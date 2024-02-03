@@ -10,19 +10,19 @@
 
 <ion-content [fullscreen]="true">
 
-  <!-- <ion-refresher slot="fixed" (ionRefresh)="[getPatient($event), getEva($event), getMed($event)]">
+  <ion-refresher slot="fixed" (ionRefresh)="[getParticipant($event)]">
     <ion-refresher-content></ion-refresher-content>
-  </ion-refresher> -->
+  </ion-refresher>
 
   <ion-item lines="none">
     <ion-grid class="home-info">
-      <ion-row class="home-name">Hola María</ion-row>
-      <ion-row class="home-date"><b>Fecha de hoy: &nbsp;</b>30 enero 2024</ion-row>
+      <ion-row class="home-name">Hola {{participant.f645_firstname}}</ion-row>
+      <ion-row class="home-date"><b>Fecha: &nbsp;</b>{{currentDate}}</ion-row>
     </ion-grid>
 
-    <ion-thumbnail slot="end">
-      <!-- <img src="assets/img/logo2.jpeg" alt="Logo Accompain" style="width:65px;height:65px;"> -->
-    </ion-thumbnail>
+    <!-- <ion-thumbnail slot="end">
+      <img src="assets/img/logo2.jpeg" alt="Logo Accompain" style="width:65px;height:65px;">
+    </ion-thumbnail> -->
   </ion-item>
 
   <ion-grid>
