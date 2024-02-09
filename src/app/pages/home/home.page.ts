@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { InformationComponent } from 'src/app/components/information/information.component';
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
+import { EvaComponent } from 'src/app/components/eva/eva.component';
 import { Participant } from 'src/app/redcap_interfaces/participant';
 import { ParticipantService } from 'src/app/services/participant/participant.service';
 
@@ -54,6 +55,13 @@ export class HomePage implements OnInit {
   async presentInformationModal(){
     const modal = await this.modalCntrl.create({
       component: InformationComponent
+    });
+    return await modal.present();
+  }
+
+  async presentEvaModal(){
+    const modal = await this.modalCntrl.create({
+      component: EvaComponent
     });
     return await modal.present();
   }

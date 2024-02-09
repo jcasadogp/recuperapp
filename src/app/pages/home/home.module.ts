@@ -9,6 +9,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
 import { InformationComponent } from 'src/app/components/information/information.component';
+import { EvaComponent } from 'src/app/components/eva/eva.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { InformationComponent } from 'src/app/components/information/information
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, ProfileComponent, InformationComponent]
+  declarations: [HomePage, ProfileComponent, InformationComponent, EvaComponent]
 })
 export class HomePageModule {}

@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="ppal-toolbar">
+
+    <ion-button (click)="dismissModal()" slot="end" fill="clear">
+      <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+    </ion-button>
+
+    <ion-title>Escala Visual del Dolor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <!-- <p><ion-text style="font-weight: bold;">Fecha de evaluación del dolor:</ion-text></p>
+
+  <ion-item>
+    <ion-label style="font-weight: bold;">Fecha</ion-label>
+    <ion-datetime mode="ios" displayFormat="DD-MM-YYYY" [max]="todayDate" placeholder="Seleccione una fecha"
+      [(ngModel)]="eva_form.fecha_eva" name="createdOn" cancelText="Cancelar" doneText="Hecho"></ion-datetime>
+  </ion-item> -->
+
+  <ion-label><b>Fecha: </b>{{currentDate}}</ion-label>
+
+  <p><ion-text>Teniendo en cuenta la escala que se muestra en la imagen, ¿cuál es su dolor actual?</ion-text></p>
+    
+  <ion-item lines="none">
+    <ion-img src="assets/img/escala-eva.jpeg"></ion-img>
+  </ion-item>
+
+  
+  <ion-label><b>Nivel de dolor: </b>{{eva_form.eva}}</ion-label>
+  <ion-range mode="ios" min="0" max="10" step="1" snaps="true" ticks="true" pin="true" [(ngModel)]="eva_form.eva"></ion-range>
+
+
+<ion-list>
+  <ion-row>
+    <ion-col>
+      <ion-button mode="ios" style="font-weight: bold;" class="send-button" expand="block" size="large" 
+        (click)="postEvaForm()">ENVIAR CUESTIONARIO</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-list>
+
+</ion-content>
