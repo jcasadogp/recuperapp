@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { DataService } from '../data/data.service';
-import { Eva } from 'src/app/interfaces/eva';
+import { EvaForm } from 'src/app/interfaces/eva-form';
+import { Eva } from 'src/app/redcap_interfaces/eva';
 
 
 @Injectable({
@@ -19,8 +20,7 @@ export class EvaService {
     this.num_eva = 0
   }
 
-  // Import de la entrada de eva
-  async postEvaForm(eva_form: Eva): Promise<void>{
+  async postEvaForm(eva_form: EvaForm): Promise<void>{
 
     var data: Eva[] = [];
 
