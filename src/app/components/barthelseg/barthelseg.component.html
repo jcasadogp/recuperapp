@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="ppal-toolbar">
+
+    <ion-button (click)="dismissModal()" slot="end" fill="clear">
+      <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+    </ion-button>
+
+    <ion-title>Cuestionario de Barthel</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-text *ngFor="let q of barthelseg_questions">
+    <h4>Pregunta {{q.id}}:</h4>
+    <p>{{q.question}}</p>
+
+    <ion-item *ngIf="q.field_type == 'text' || q.field_type == 'notes'" lines="none">
+      <ion-input label="{{q.label}}" placeholder="Introduzca su respuesta"></ion-input>
+    </ion-item>
+
+    <ion-radio-group *ngIf="q.field_type == 'radio' || q.field_type == 'dropdown'" [(ngModel)]="barthelseg_form[q.redcap_value]">
+      <ion-item *ngFor="let a of q.answers" lines="none">
+        <ion-radio justify="start" labelPlacement="end" [value]="a.redcap_value">
+          <span class="ion-text-wrap">{{a.answer}}</span>
+        </ion-radio>
+      </ion-item>
+    </ion-radio-group>
+
+    <ion-list *ngIf="q.field_type == 'checkbox'" [(ngModel)]="barthelseg_form[q.redcap_value]">
+      <ion-item *ngFor="let a of q.answers" lines="none">
+        <ion-checkbox justify="start" labelPlacement="end" [value]="a.redcap_value">{{a.answer}}</ion-checkbox>
+      </ion-item>
+    </ion-list>
+    
+  </ion-text>
+
+  
+  <ion-button mode="ios" expand="block" class="post-quest-button" (click)="postBarthelsegForm()">Enviar Respuesta</ion-button>
+
+</ion-content>
