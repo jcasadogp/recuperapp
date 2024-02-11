@@ -1,6 +1,6 @@
 [
     {
-      "id": 1,
+      "id": 0,
       "category": "medical",
       "question": "FECHA",
       "label": "Fecha",
@@ -9,7 +9,7 @@
       "answers": ""
     },
     {
-      "id": 2,
+      "id": 1,
       "category": "medical",
       "question": "Escala FAC",
       "label": "Escala FAC",
@@ -25,7 +25,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": 2,
       "category": "mycap",
       "question": "",
       "label": "",
@@ -34,7 +34,7 @@
       "answers": ""
     },
     {
-      "id": 4,
+      "id": 3,
       "category": "mycap",
       "question": "Start Date",
       "label": "",
@@ -43,7 +43,7 @@
       "answers": ""
     },
     {
-      "id": 5,
+      "id": 4,
       "category": "mycap",
       "question": "End Date",
       "label": "",
@@ -52,7 +52,7 @@
       "answers": ""
     },
     {
-      "id": 6,
+      "id": 5,
       "category": "mycap",
       "question": "Schedule Date",
       "label": "",
@@ -61,7 +61,7 @@
       "answers": ""
     },
     {
-      "id": 7,
+      "id": 6,
       "category": "mycap",
       "question": "Status",
       "label": "",
@@ -70,7 +70,7 @@
       "answers": "0, Deleted | 1, Completed | 2, Incomplete"
     },
     {
-      "id": 8,
+      "id": 7,
       "category": "mycap",
       "question": "Supplemental Data (JSON)",
       "label": "",
@@ -79,7 +79,7 @@
       "answers": ""
     },
     {
-      "id": 9,
+      "id": 8,
       "category": "",
       "question": "Serailized Result",
       "label": "",
