@@ -1,7 +1,7 @@
 export interface NeuroQol {
-    record_id?: string, 
-    // redcap_repeat_instrument?: string,
-    // redcap_repeat_instance?: number, 
+    record_id?: number, 
+    redcap_repeat_instrument?: string,
+    redcap_repeat_instance?: number, 
     
     neuroqol_banco_v10_funcionamiento_de_las_extremida_tscore?: string,
     neuroqol_banco_v10_funcionamiento_de_las_extremida_std_error?: string,
@@ -109,5 +109,5 @@ export interface NeuroQol {
     promis113_supplementaldata?: string,
     promis113_serializedresult?: string,
 
-    neuroqol_banco_v10_funcionamiento_de_las_extremida_complete?: string
+    neuroqol_banco_v10_funcionamiento_de_las_extremida_complete?: number
 }

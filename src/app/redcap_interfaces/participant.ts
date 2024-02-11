@@ -1,7 +1,7 @@
 export interface Participant {
     record_id?: number,
-    // redcap_repeat_instrument?: string,
-    // redcap_repeat_instance?: number,
+    redcap_repeat_instrument?: string,
+    redcap_repeat_instance?: number,
 
     f645_firstname?: string,
     f645_lastname?: string,

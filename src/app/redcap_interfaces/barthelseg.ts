@@ -1,7 +1,7 @@
 export interface Barthelseg {
-    record_id?: string, 
-    // redcap_repeat_instrument?: string,
-    // redcap_repeat_instance?: number, 
+    record_id?: number, 
+    redcap_repeat_instrument?: string,
+    redcap_repeat_instance?: number, 
     
     f_barthel?: string,
     barthel_1_s?: string,
@@ -24,5 +24,5 @@ export interface Barthelseg {
     barthel786_supplementaldata?: string,
     barthel786_serializedresult?: string,
 
-    barthelseg_complete?: string,
+    barthelseg_complete?: number,
 }

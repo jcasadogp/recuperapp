@@ -1,7 +1,7 @@
 export interface Facseg {
-    record_id?: string, 
-    // redcap_repeat_instrument?: string,
-    // redcap_repeat_instance?: number, 
+    record_id?: number, 
+    redcap_repeat_instrument?: string,
+    redcap_repeat_instance?: number, 
     
     f_facseg?: string,
     fac_seguimiento?: string,
@@ -14,5 +14,5 @@ export interface Facseg {
     fac365_supplementaldata?: string,
     fac365_serializedresult?: string,
     
-    facseg_complete?: string
+    facseg_complete?: number
 }

@@ -1,7 +1,7 @@
 export interface MonitoringData {
-    record_id?: string, 
-    // redcap_repeat_instrument?: string,
-    // redcap_repeat_instance?: number, 
+    record_id?: number, 
+    redcap_repeat_instrument?: string,
+    redcap_repeat_instance?: number, 
     
     f_seguimiento?: string,
     ub_seguimiento?: string,
@@ -29,5 +29,5 @@ export interface MonitoringData {
     f350_supplementaldata?: string,
     f350_serializedresult?: string,
     
-    datos_seguimiento_complete?: string
+    datos_seguimiento_complete?: number
 }
