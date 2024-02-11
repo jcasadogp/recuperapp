@@ -24,3 +24,38 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+ion-container {
+    padding: 5px;
+}
+
+ion-title {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+h4 {
+    // color: red;
+    padding: 5px;
+    padding-left: 10px;
+    margin: 5px 0px 5px 0px;
+
+    font-weight: bolder;
+}
+
+p {
+    // color: red;
+    padding: 5px;
+    padding-left: 10px;
+    margin: 5px 0px 5px 0px;
+}
+
+.post-quest-button {
+    padding: 8px;
+    margin-top: 5px;
+
+    color: black;
+    // --background: #99FF66; //verde succes intenso
+    // --background: #FFCDD2; //rojo clarito
+    --background: #DCEDC8; //verde clarito
+}
