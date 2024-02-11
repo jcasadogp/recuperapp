@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController, ToastController } from '@ionic/angular';
-import { Eva } from 'src/app/interfaces/eva';
+import { EvaForm } from 'src/app/interfaces/eva-form';
 import { EvaService } from 'src/app/services/eva/eva.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { EvaService } from 'src/app/services/eva/eva.service';
 export class EvaComponent  implements OnInit {
 
   public currentDate: string;
-  eva_form: Eva;
+  eva_form: EvaForm;
 
   constructor(
     private modalCntrl: ModalController,
