@@ -8,23 +8,75 @@
 
 <ion-content [fullscreen]="true"> 
 
-  <div class="ion-padding">
-
+  <div>
     <!-- <ion-label *ngIf="enableCheck[0] || enableCheck[1] || enableCheck[2]" style="font-weight: bold; font-size: 120%;">
       Por favor, complete los cuestionarios que están disponibles:</ion-label> -->
 
-    <!-- Cuestionario BPI -->
+    <!-- Cuestionario XXX -->
     <ion-card mode="ios">
       <ion-card-header>
-        <ion-card-title>Cuestionario BPI</ion-card-title>
+        <ion-card-title>Cuestionario de Seguimiento</ion-card-title>
+        <br>
+        <!-- <ion-card-subtitle>Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle> -->
+        <ion-card-subtitle>Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle>
+      </ion-card-header>
+      <!-- <ion-card-content>
+        <ion-label><ion-text>Cuestionario de seguimiento</ion-text></ion-label>
+        <p class="quest_time_estimate">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
+        <ion-button mode="ios" expand="block">Comenzar</ion-button>
+      </ion-card-content> -->
+      <ion-card-content>
+        <ion-label>Disponible a partir del <b>20 de febrero</b></ion-label>
+        <!-- <ion-label><ion-text>Cuestionario de seguimiento</ion-text></ion-label>
+        <p class="quest_time_estimate">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
+        <ion-button mode="ios" expand="block">Comenzar</ion-button> -->
+      </ion-card-content>
+    </ion-card>
+
+     <!-- Cuestionario XXX -->
+     <ion-card mode="ios">
+      <ion-card-header>
+        <ion-card-title>Cuestionario de Barthel</ion-card-title>
         <br>
         <ion-card-subtitle>Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle>
         <!-- <ion-card-subtitle *ngIf="!enableCheck[0]">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle> -->
       </ion-card-header>
       <ion-card-content>
         <!-- <ion-label *ngIf="!enableCheck[0]">Disponible a partir del: {{periodoBPI}}</ion-label> -->
-        <ion-label><ion-text style="font-weight: bold; font-size: 110%;">Brief Pain Inventory (BPI)</ion-text></ion-label>
-        <p class="info_time">Tiempo estimado: <ion-text style="font-weight: bold;">3 minutos</ion-text></p>
+        <ion-label><ion-text>Cuestionario de Barthel</ion-text></ion-label>
+        <p class="quest_time_estimate">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
+        <ion-button mode="ios" expand="block" (click)="presentBarthelsegModal()">Comenzar</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+     <!-- Cuestionario XXX -->
+     <ion-card mode="ios">
+      <ion-card-header>
+        <ion-card-title>Cuestionario de Fac</ion-card-title>
+        <br>
+        <ion-card-subtitle>Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle>
+        <!-- <ion-card-subtitle *ngIf="!enableCheck[0]">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle> -->
+      </ion-card-header>
+      <ion-card-content>
+        <!-- <ion-label *ngIf="!enableCheck[0]">Disponible a partir del: {{periodoBPI}}</ion-label> -->
+        <ion-label><ion-text>Cuestionario de Fac</ion-text></ion-label>
+        <p class="quest_time_estimate">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
+        <ion-button mode="ios" expand="block" (click)="presentFacsegModal()">Comenzar</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+     <!-- Cuestionario XXX -->
+     <ion-card mode="ios">
+      <ion-card-header>
+        <ion-card-title>Cuestionario Neuro Calidad de Vida</ion-card-title>
+        <br>
+        <ion-card-subtitle>Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle>
+        <!-- <ion-card-subtitle *ngIf="!enableCheck[0]">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle> -->
+      </ion-card-header>
+      <ion-card-content>
+        <!-- <ion-label *ngIf="!enableCheck[0]">Disponible a partir del: {{periodoBPI}}</ion-label> -->
+        <ion-label><ion-text>Cuestionario Neuro Calidad de Vida</ion-text></ion-label>
+        <p class="quest_time_estimate">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
         <ion-button mode="ios" expand="block">Comenzar</ion-button>
       </ion-card-content>
     </ion-card>

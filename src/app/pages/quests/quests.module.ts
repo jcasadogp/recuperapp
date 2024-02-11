@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { QuestsPageRoutingModule } from './quests-routing.module';
 
 import { QuestsPage } from './quests.page';
+import { FacsegComponent } from 'src/app/components/facseg/facseg.component';
+import { BarthelsegComponent } from 'src/app/components/barthelseg/barthelseg.component';
 
 @NgModule({
   imports: [
@@ -15,6 +17,6 @@ import { QuestsPage } from './quests.page';
     IonicModule,
     QuestsPageRoutingModule
   ],
-  declarations: [QuestsPage]
+  declarations: [QuestsPage, FacsegComponent, BarthelsegComponent]
 })
 export class QuestsPageModule {}
