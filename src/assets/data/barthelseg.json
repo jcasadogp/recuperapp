@@ -1,6 +1,6 @@
 [
     {
-      "id": 1,
+      "id": 0,
       "category": "medical",
       "question": "FECHA",
       "label": "Fecha",
@@ -9,7 +9,7 @@
       "answers": ""
     },
     {
-      "id": 2,
+      "id": 1,
       "category": "medical",
       "question": "COMER",
       "label": "Comer",
@@ -22,7 +22,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": 2,
       "category": "medical",
       "question": "LAVARSE (BAÑARSE)",
       "label": "Lavarse",
@@ -34,7 +34,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": 3,
       "category": "medical",
       "question": "VESTIRSE",
       "label": "Vestirse",
@@ -47,7 +47,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": 4,
       "category": "medical",
       "question": "ASEO PERSONAL, ARREGLARSE",
       "label": "Aseo personal",
@@ -59,7 +59,7 @@
       ]
     },
     {
-      "id": 6,
+      "id": 5,
       "category": "medical",
       "question": "DEPOSICIÓN",
       "label": "Deposición",
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "id": 7,
+      "id": 6,
       "category": "medical",
       "question": "MICCIÓN: valorar la situación en la semana previa",
       "label": "Micción",
@@ -85,7 +85,7 @@
       ]
     },
     {
-      "id": 8,
+      "id": 7,
       "category": "medical",
       "question": "IR AL RETRETE",
       "label": "Ir al retrete",
@@ -98,7 +98,7 @@
       ]
     },
     {
-      "id": 9,
+      "id": 8,
       "category": "medical",
       "question": "TRASLADO (TRANSFERENCIA) SILLÓN-CAMA",
       "label": "Traslado",
@@ -112,7 +112,7 @@
       ]
     },
     {
-      "id": 10,
+      "id": 9,
       "category": "medical",
       "question": "DEAMBULACIÓN",
       "label": "Deambulación",
@@ -126,7 +126,7 @@
       ]
     },
     {
-      "id": 11,
+      "id": 10,
       "category": "medical",
       "question": "USO DE LAS ESCALERAS",
       "label": "Escaleras",
@@ -139,7 +139,7 @@
       ]
     },
     {
-      "id": 12,
+      "id": 11,
       "category": "medical",
       "question": "Barthel SCORE",
       "label": "Puntuación",
@@ -148,7 +148,7 @@
       "answers": ""
     },
     {
-      "id": 13,
+      "id": 12,
       "category": "mycap",
       "question": "",
       "label": "",
@@ -157,7 +157,7 @@
       "answers": ""
     },
     {
-      "id": 14,
+      "id": 13,
       "category": "mycap",
       "question": "Start Date",
       "label": "",
@@ -166,7 +166,7 @@
       "answers": ""
     },
     {
-      "id": 15,
+      "id": 14,
       "category": "mycap",
       "question": "End Date",
       "label": "",
@@ -175,7 +175,7 @@
       "answers": ""
     },
     {
-      "id": 16,
+      "id": 15,
       "category": "mycap",
       "question": "Schedule Date",
       "label": "",
@@ -184,7 +184,7 @@
       "answers": ""
     },
     {
-      "id": 17,
+      "id": 16,
       "category": "mycap",
       "question": "Status",
       "label": "",
@@ -197,7 +197,7 @@
       ]
     },
     {
-      "id": 18,
+      "id": 17,
       "category": "mycap",
       "question": "Supplemental Data (JSON)",
       "label": "",
@@ -206,7 +206,7 @@
       "answers": ""
     },
     {
-      "id": 19,
+      "id": 18,
       "category": "mycap",
       "question": "Serailized Result",
       "label": "",
