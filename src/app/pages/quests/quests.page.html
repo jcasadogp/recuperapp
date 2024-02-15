@@ -26,10 +26,10 @@
         <ion-button mode="ios" expand="block">Comenzar</ion-button>
       </ion-card-content> -->
       <ion-card-content>
-        <ion-label>Disponible a partir del <b>20 de febrero</b></ion-label>
-        <!-- <ion-label><ion-text>Cuestionario de seguimiento</ion-text></ion-label>
+        <!-- <ion-label>Disponible a partir del <b>20 de febrero</b></ion-label> -->
+        <ion-label><ion-text>Cuestionario de seguimiento</ion-text></ion-label>
         <p class="quest_time_estimate">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
-        <ion-button mode="ios" expand="block">Comenzar</ion-button> -->
+        <ion-button mode="ios" expand="block" (click)="presentMonitoringModal()">Comenzar</ion-button>
       </ion-card-content>
     </ion-card>
 
@@ -77,7 +77,7 @@
         <!-- <ion-label *ngIf="!enableCheck[0]">Disponible a partir del: {{periodoBPI}}</ion-label> -->
         <ion-label><ion-text>Cuestionario Neuro Calidad de Vida</ion-text></ion-label>
         <p class="quest_time_estimate">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
-        <ion-button mode="ios" expand="block">Comenzar</ion-button>
+        <ion-button mode="ios" expand="block" (click)="presentNeuroQoLModal()">Comenzar</ion-button>
       </ion-card-content>
     </ion-card>
 
