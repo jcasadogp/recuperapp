@@ -50,7 +50,14 @@ export class FacsegComponent  implements OnInit {
   }
 
   dismissModal(): void {
-		this.modalCntrl.dismiss().then().catch();
+    var i = Object.keys(this.facseg_form).length;
+    console.log("preguntas contestadas:", i)
+
+    if(i == 0){
+      this.modalCntrl.dismiss().then().catch();
+    } else {
+      this.presentCloseAlert().then(data => {});
+    }		
   }
 
   async presentEmptyFieldsAlert() {
@@ -78,7 +85,7 @@ export class FacsegComponent  implements OnInit {
         }, {
           text: 'Salir',
           handler: () => {
-            this.dismissModal();
+            this.modalCntrl.dismiss().then().catch();
           }
         }
       ]
