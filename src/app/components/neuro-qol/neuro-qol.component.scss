@@ -1,0 +1,35 @@
+ion-checkbox {
+    --size: 25px;
+
+    --color: #ddd;
+    --color-checked: #3880ff;
+    --border-color-checked: #3880ff;
+    // --checkbox-background-checked: black;
+}
+
+ion-checkbox::part(container) {
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    // #3880ff; 
+    // #6815ec;
+}
+
+ion-radio {
+    --border-radius: 10px;
+    --inner-border-radius: 10px;
+
+    --color: #ddd;
+    --color-checked: #3880ff;
+}
+
+ion-radio.ios::part(container) {
+    width: 20px;
+    height: 20px;
+
+    border: 2px solid #ddd;
+    border-radius: 10px;
+}
+
+.radio-checked.ios::part(container) {
+    border-color: #3880ff;
+}
