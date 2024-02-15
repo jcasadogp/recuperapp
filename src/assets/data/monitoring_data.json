@@ -1,6 +1,6 @@
 [
     {
-      "id": 1,
+      "id": 0,
       "category": "medical",
       "question": "FECHA",
       "label": "Fecha",
@@ -9,7 +9,7 @@
       "answers": ""
     },
     {
-      "id": 2,
+      "id": 1,
       "category": "medical",
       "question": "Ubicación",
       "label": "Ubicación",
@@ -23,7 +23,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": 2,
       "category": "medical",
       "question": "¿Esta el paciente en tratamiento rehabilitador ahora mismo?",
       "label": "Tratamiento rehabilitador",
@@ -35,7 +35,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": 3,
       "category": "medical",
       "question": "Ayuda técnica que precisa el paciente para caminar",
       "label": "Ayuda caminar",
@@ -50,7 +50,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": 4,
       "category": "medical",
       "question": "Escala verbal de dolor",
       "label": "Escala dolor",
@@ -65,7 +65,7 @@
       ]
     },
     {
-      "id": 6,
+      "id": 5,
       "category": "medical",
       "question": "Fármacos antiosteoporóticos",
       "label": "Fármacos antiosteoporóticos",
@@ -82,7 +82,7 @@
       ]
     },
     {
-      "id": 7,
+      "id": 6,
       "category": "medical",
       "question": "¿Cuántas veces se ha caído desde la última entrevista?",
       "label": "Caídas",
@@ -91,7 +91,7 @@
       "answers": ""
     },
     {
-      "id": 8,
+      "id": 7,
       "category": "medical",
       "question": "Reingresos desde la última entrevista",
       "label": "Reingresos",
@@ -103,7 +103,7 @@
       ]
     },
     {
-      "id": 9,
+      "id": 8,
       "category": "medical",
       "question": "Visitas a urgencias desde la última entrevista",
       "label": "Urgencias",
@@ -115,7 +115,7 @@
       ]
     },
     {
-      "id": 10,
+      "id": 9,
       "category": "medical",
       "question": "Fallecimiento del paciente",
       "label": "Fallecimiento",
@@ -135,7 +135,7 @@
       ]
     },
     {
-      "id": 11,
+      "id": 10,
       "category": "mycap",
       "question": "UUID",
       "label": "",
@@ -144,7 +144,7 @@
       "answers": ""
     },
     {
-      "id": 12,
+      "id": 11,
       "category": "mycap",
       "question": "Start Date",
       "label": "",
@@ -153,7 +153,7 @@
       "answers": ""
     },
     {
-      "id": 13,
+      "id": 12,
       "category": "mycap",
       "question": "End Date",
       "label": "",
@@ -162,7 +162,7 @@
       "answers": ""
     },
     {
-      "id": 14,
+      "id": 13,
       "category": "mycap",
       "question": "Schedule Date",
       "label": "",
@@ -171,7 +171,7 @@
       "answers": ""
     },
     {
-      "id": 15,
+      "id": 14,
       "category": "mycap",
       "question": "Status",
       "label": "",
@@ -184,7 +184,7 @@
       ]
     },
     {
-      "id": 16,
+      "id": 15,
       "category": "mycap",
       "question": "Supplemental Data (JSON)",
       "label": "",
@@ -193,7 +193,7 @@
       "answers": ""
     },
     {
-      "id": 17,
+      "id": 16,
       "category": "mycap",
       "question": "Serailized Result",
       "label": "",
