@@ -42,39 +42,33 @@
             {"answer": "Enfermedad cerebrovascular", "redcap_value": 9},
             {"answer": "Enfermedad renal crónica", "redcap_value": 10},
             {"answer": "Demencia", "redcap_value": 11},
-            {"answer": "Cáncer", "redcap_value": 12, "properties": [
-                {
-                    "question": "Cáncer en tratamiento activo",
-                    "redcap_value": "cancer_ta",
-                    "field_type": "radio",
-                    "answers": [
-                        {"answer": "No", "redcap_value": 0},
-                        {"answer": "Sí", "redcap_value": 1}
-                    ]
-                }
-            ]},
-            {"answer": "EPOC", "redcap_value": 13, "properties": [
-                {
-                    "question": "Enfermedad renal crónica - estadio",
-                    "redcap_value": "estadio_erc",
-                    "field_type": "radio",
-                    "answers": [
-                        {"answer": "TFG>60", "redcap_value": 1},
-                        {"answer": "TFG 30-59", "redcap_value": 2},
-                        {"answer": "TFG 15-29", "redcap_value": 3},
-                        {"answer": "TFG< 15", "redcap_value": 4}
-                    ]
-                }
-            ]},
+            {"answer": "Cáncer", "redcap_value": 12, "sub_question": {
+                "question": "Cáncer en tratamiento activo",
+                "redcap_value": "cancer_ta",
+                "field_type": "radio",
+                "answers": [
+                    {"answer": "No", "redcap_value": 0},
+                    {"answer": "Sí", "redcap_value": 1}
+                ]
+            }},
+            {"answer": "EPOC", "redcap_value": 13, "sub_question": {
+                "question": "Enfermedad renal crónica - estadio",
+                "redcap_value": "estadio_erc",
+                "field_type": "radio",
+                "answers": [
+                    {"answer": "TFG>60", "redcap_value": 1},
+                    {"answer": "TFG 30-59", "redcap_value": 2},
+                    {"answer": "TFG 15-29", "redcap_value": 3},
+                    {"answer": "TFG< 15", "redcap_value": 4}
+                ]
+            }},
             {"answer": "Depresión (Diagnóstico previo, tratamiento o DSM V)", "redcap_value": 14},
-            {"answer": "Otros", "redcap_value": 15, "properties": [
-                {
-                    "question": "Otros (especifique)",
-                    "redcap_value": "otros",
-                    "field_type": "text",
-                    "answers": ""
-                }
-            ]}
+            {"answer": "Otros", "redcap_value": 15, "sub_question": {
+                "question": "Otros (especifique)",
+                "redcap_value": "otros",
+                "field_type": "text",
+                "answers": ""
+            }}
         ]
     },{
         "id": 5,
@@ -137,33 +131,29 @@
         "redcap_value": "f_basales",
         "field_type": "text",
         "answers": "",
-        "properties": [
-            {
-                "question": "Fármacos basales - tipo",
-                "redcap_value": "f_basales_tipo",
-                "field_type": "checkbox",
-                "answers": [
-                    {"answer": "Psicofármacos", "redcap_value": 1},
-                    {"answer": "Fármacos anticoagulantes/antiagregantes", "redcap_value": 2},
-                    {"answer": "Fármacos antiosteoporóticos", "redcap_value": 3, "properties": [
-                        {
-                            "question": "Fármacos antiosteoporóticos basales",
-                            "redcap_value": "op_basales",
-                            "field_type": "checkbox",
-                            "answers": [
-                                {"answer": "No", "redcap_value": 0},
-                                {"answer": "Calcio", "redcap_value": 1},
-                                {"answer": "Calcio + vitamina D", "redcap_value": 2},
-                                {"answer": "Bifosfonatos", "redcap_value": 3},
-                                {"answer": "Denosumab", "redcap_value": 4},
-                                {"answer": "Teriparatida", "redcap_value": 5},
-                                {"answer": "Otro", "redcap_value": 6}
-                            ]
-                        }
-                    ]}
-                ]
-            }
-        ]
+        "sub_question": {
+            "question": "Fármacos basales - tipo",
+            "redcap_value": "f_basales_tipo",
+            "field_type": "checkbox",
+            "answers": [
+                {"answer": "Psicofármacos", "redcap_value": 1},
+                {"answer": "Fármacos anticoagulantes/antiagregantes", "redcap_value": 2},
+                {"answer": "Fármacos antiosteoporóticos", "redcap_value": 3, "sub_question": {
+                    "question": "Fármacos antiosteoporóticos basales",
+                    "redcap_value": "op_basales",
+                    "field_type": "checkbox",
+                    "answers": [
+                        {"answer": "No", "redcap_value": 0},
+                        {"answer": "Calcio", "redcap_value": 1},
+                        {"answer": "Calcio + vitamina D", "redcap_value": 2},
+                        {"answer": "Bifosfonatos", "redcap_value": 3},
+                        {"answer": "Denosumab", "redcap_value": 4},
+                        {"answer": "Teriparatida", "redcap_value": 5},
+                        {"answer": "Otro", "redcap_value": 6}
+                    ]
+                }}
+            ]
+        }
     },{
         "id": 11,
         "question": "Fecha de ingreso",
@@ -233,19 +223,17 @@
         "field_type": "radio",
         "answers": [
             {"answer": "No", "redcap_value": 0},
-            {"answer": "Sí", "redcap_value": 1, "properties": [
-                {
-                    "question": "Motivo retraso quirúrgico",
-                    "redcap_value": "motivo_ret_qx",
-                    "field_type": "radio",
-                    "answers": [
-                        {"answer": "No apto por falta de pruebas complementarias", "redcap_value": 1},
-                        {"answer": "No apto por problemas médicos activos", "redcap_value": 2},
-                        {"answer": "No apto por causa antigregantes/anticoagulantes", "redcap_value": 3},
-                        {"answer": "Retraso por imposibilidad para programarle (lista de espera)", "redcap_value": 4}
-                    ]
-                }
-            ]}
+            {"answer": "Sí", "redcap_value": 1, "sub_question": {
+                "question": "Motivo retraso quirúrgico",
+                "redcap_value": "motivo_ret_qx",
+                "field_type": "radio",
+                "answers": [
+                    {"answer": "No apto por falta de pruebas complementarias", "redcap_value": 1},
+                    {"answer": "No apto por problemas médicos activos", "redcap_value": 2},
+                    {"answer": "No apto por causa antigregantes/anticoagulantes", "redcap_value": 3},
+                    {"answer": "Retraso por imposibilidad para programarle (lista de espera)", "redcap_value": 4}
+                ]
+            }}
         ]
     },{
         "id": 18,
@@ -254,33 +242,29 @@
         "field_type": "radio",
         "answers": [
             {"answer": "No", "redcap_value": 0},
-            {"answer": "Sí", "redcap_value": 1, "properties": [
-                {
-                    "question": "Complicaciones intrahospitalarias (tipo)",
-                    "redcap_value": "compl_intrahosp_tipo",
-                    "field_type": "checkbox",
-                    "answers": [
-                        {"answer": "Trombóticas", "redcap_value": 1},
-                        {"answer": "Hemorrágicas", "redcap_value": 2},
-                        {"answer": "Cardiovasculares", "redcap_value": 3},
-                        {"answer": "Cerebrovasculares", "redcap_value": 4},
-                        {"answer": "Infecciosas", "redcap_value": 5},
-                        {"answer": "Delirium", "redcap_value": 6},
-                        {"answer": "Úlceras por presión", "redcap_value": 7},
-                        {"answer": "Digestivas", "redcap_value": 8},
-                        {"answer": "Fracaso renal agudo", "redcap_value": 9},
-                        {"answer": "Quirúrgicas", "redcap_value": 10},
-                        {"answer": "Otras", "redcap_value": 11, "properties": [
-                            {
-                                "question": "Complicaciones intrahospitalarias (otras)",
-                                "redcap_value": "comp_intrahosp_otras",
-                                "field_type": "text",
-                                "answers": ""
-                            }
-                        ]}
-                    ]
-                }
-            ]}
+            {"answer": "Sí", "redcap_value": 1, "sub_question": {
+                "question": "Complicaciones intrahospitalarias (tipo)",
+                "redcap_value": "compl_intrahosp_tipo",
+                "field_type": "checkbox",
+                "answers": [
+                    {"answer": "Trombóticas", "redcap_value": 1},
+                    {"answer": "Hemorrágicas", "redcap_value": 2},
+                    {"answer": "Cardiovasculares", "redcap_value": 3},
+                    {"answer": "Cerebrovasculares", "redcap_value": 4},
+                    {"answer": "Infecciosas", "redcap_value": 5},
+                    {"answer": "Delirium", "redcap_value": 6},
+                    {"answer": "Úlceras por presión", "redcap_value": 7},
+                    {"answer": "Digestivas", "redcap_value": 8},
+                    {"answer": "Fracaso renal agudo", "redcap_value": 9},
+                    {"answer": "Quirúrgicas", "redcap_value": 10},
+                    {"answer": "Otras", "redcap_value": 11, "sub_question": {
+                        "question": "Complicaciones intrahospitalarias (otras)",
+                        "redcap_value": "comp_intrahosp_otras",
+                        "field_type": "text",
+                        "answers": ""
+                    }}
+                ]
+            }}
         ]
     },{
         "id": 19,
@@ -300,14 +284,12 @@
             {"answer": "Domicilio", "redcap_value": 1},
             {"answer": "Residencia", "redcap_value": 2},
             {"answer": "Hospital de apoyo", "redcap_value": 3},
-            {"answer": "Exitus", "redcap_value": 4, "properties": [
-                {
-                    "question": "Causa de muerte hospitalaria",
-                    "redcap_value": "causa_exitus_intrahosp",
-                    "field_type": "text",
-                    "answers": ""
-                }
-            ]}
+            {"answer": "Exitus", "redcap_value": 4, "sub_question": {
+                "question": "Causa de muerte hospitalaria",
+                "redcap_value": "causa_exitus_intrahosp",
+                "field_type": "text",
+                "answers": ""
+            }}
         ]
     },{
         "id": 21,

@@ -123,15 +123,13 @@
       "field_type": "radio",
       "answers": [
         {"answer": "No", "redcap_value": 0},
-        {"answer": "Sí", "redcap_value": 1, "properties": [
-            {
-                "question": "Fecha de fallecimiento del paciente",
-                "label": "Fecha fallecimiento",
-                "redcap_value": "f_exitus_seguimiento",
-                "field_type": "text",
-                "answers": ""
-            }
-        ]}
+        {"answer": "Sí", "redcap_value": 1, "sub_question": {
+          "question": "Fecha de fallecimiento del paciente",
+          "label": "Fecha fallecimiento",
+          "redcap_value": "f_exitus_seguimiento",
+          "field_type": "text",
+          "answers": ""
+        }}
       ]
     },
     {
