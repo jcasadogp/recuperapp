@@ -12,13 +12,16 @@ export class MonitoringComponent  implements OnInit {
 
   monitoring_questions;
   monitoring_form: MonitoringForm = {}
+  public currentDate: string;
 
   constructor(
     private modalCntrl: ModalController,
     private alertCntrl: AlertController,
     private toastCntrl: ToastController,
     private questsSrvc: QuestsService
-  ) { }
+  ) {
+    this.currentDate = new Date().toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'})
+   }
 
   ngOnInit() {
     this.questsSrvc.getQuestsQuestions('monitoring_data').subscribe(data => {
@@ -37,18 +40,29 @@ export class MonitoringComponent  implements OnInit {
     var i = Object.keys(this.monitoring_form).length;
     console.log("preguntas contestadas:", i)
 
-    if(i < 11){
-      var camposVacios = 11 - i;
-      this.presentEmptyFieldsAlert;
+    if(i < 10){
+      var camposVacios = 10 - i;
+      this.presentEmptyFieldsAlert();
     } else {
 
-      this.questsSrvc.postBarthelsegForm(this.monitoring_form).then(()=>{
+      this.questsSrvc.postMonitoringForm(this.monitoring_form).then(()=>{
 
-        // this.questSrvc.blockQuest(2);
-        this.dismissModal();
+        this.questsSrvc.setQuestStatus("monitoring");
+        this.modalCntrl.dismiss().then().catch();
         this.presentConfirmationToast();
         
       }).catch((err) => console.log(err));
+    }
+  }
+
+  updateCheckboxSelectedValues(event: any, redcap_value: string) {
+    if (event.detail.checked) {
+      if (!this.monitoring_form[redcap_value]) {
+        this.monitoring_form[redcap_value] = [];
+      }
+      this.monitoring_form[redcap_value].push(event.detail.value);
+    } else {
+      this.monitoring_form[redcap_value] = this.monitoring_form[redcap_value].filter((value: any) => value !== event.detail.value);
     }
   }
 

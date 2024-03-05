@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { DataService } from '../data/data.service';
+import { QuestControl } from 'src/app/redcap_interfaces/quest_control';
 
 import { MonitoringForm } from 'src/app/interfaces/monitoring-form';
 import { MonitoringData } from 'src/app/redcap_interfaces/monitoring_data';
@@ -23,6 +24,8 @@ export class QuestsService {
   num_barthelseg: number;
   num_seguimiento: number;
 
+  monitoring_data: MonitoringData;
+
   constructor(
     private http: HttpClient,
     private dataSrvc: DataService
@@ -31,7 +34,7 @@ export class QuestsService {
     this.num_facseg = 0
     this.num_barthelseg = 0
     this.num_seguimiento = 0
-   }
+  }
 
   getQuestsQuestions(quest: string): Observable<any> {
     const path = '../../../assets/data/'+quest+'.json'
@@ -52,9 +55,24 @@ export class QuestsService {
     data.push(elem);
     
     // Allocate MONITORING DATA data into data array
+    for (var key in monitoring_form) {
+      if (!Array.isArray(monitoring_form[key])) {
+        data[0][key] = monitoring_form[key];
+      } else {
+        monitoring_form[key].forEach(value => {
+          data[0][`${key}___${value}`] = 1;
+        });
+
+        var emptyFields = Array.from(Array(7).keys()).filter(num => !monitoring_form[key].includes(num))
+
+        emptyFields.forEach(value => {
+          data[0][`${key}___${value}`] = 0;
+        });
+      }
+    }
 
     console.log(data)
-    
+
     this.dataSrvc.import(data).subscribe((res) => {
 
       var data_monitoring = [
@@ -65,10 +83,7 @@ export class QuestsService {
       ];
 
       this.num_seguimiento++;
-      
-      this.dataSrvc.import(data_monitoring).subscribe((res) => {
-      })
-
+      this.dataSrvc.import(data_monitoring).subscribe((res) => {})
     })
   }
   
@@ -85,7 +100,9 @@ export class QuestsService {
     
     data.push(elem);
     
-    // Allocate BARTHELSEG data into data array
+    for (var key in barthelseg_form) {
+      data[0][key] = barthelseg_form[key];
+    }
 
     console.log(data)
     
@@ -121,7 +138,7 @@ export class QuestsService {
     data[0].f_facseg = facseg_form.f_facseg;
     data[0].fac_seguimiento = facseg_form.fac_seguimiento;
 
-    console.log(data)
+    // console.log(data)
     
     this.dataSrvc.import(data).subscribe((res) => {
 
@@ -137,6 +154,48 @@ export class QuestsService {
       this.dataSrvc.import(data_facseg).subscribe((res) => {
       })
 
+    })
+  }
+
+  getQuestStatus(id: number): Observable<QuestControl> {
+    
+    var record: number = id;
+    var forms: string = "control_cuestionarios";
+
+    return this.dataSrvc.export(record, forms);
+  }
+
+  async setQuestStatus(quest_name: string): Promise<void> {
+    this.getQuestStatus(this.id).subscribe({
+      next: (data: QuestControl) => {
+
+        var data2: QuestControl[] = [];
+
+        const elem: QuestControl = {
+          record_id: this.id,
+          control_cuestionarios_complete: 2
+        }
+
+        data2.push(elem)
+
+        data2[0] = { ...data[0], ...data2[0] };
+
+        if(quest_name == "barthelseg"){
+          data2[0].barthelseg_enabled = '0'
+        } else if(quest_name == "monitoring"){
+          data2[0].monitoring_enabled = '0'
+        } else if(quest_name == "facseg") {
+          data2[0].facseg_enabled = '0'
+        }
+        
+
+        this.dataSrvc.import(data2).subscribe((res) => {
+          console.log("Quest Status Updated")
+        })
+
+      },
+      error: (err) => {console.log(err)},
+      complete: () => {}
     })
   }
 }

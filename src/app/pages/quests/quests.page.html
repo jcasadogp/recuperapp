@@ -9,77 +9,81 @@
 <ion-content [fullscreen]="true"> 
 
   <div>
-    <!-- <ion-label *ngIf="enableCheck[0] || enableCheck[1] || enableCheck[2]" style="font-weight: bold; font-size: 120%;">
+    <ion-refresher slot="fixed" (ionRefresh)="[getQuestStatus($event)]">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <!-- <ion-label *ngIf="isEnabledMonitoring == '1' || isEnabledBarthelseg == '1' || isEnabledFacseg == '1'">
       Por favor, complete los cuestionarios que están disponibles:</ion-label> -->
 
-    <!-- Cuestionario XXX -->
     <ion-card mode="ios">
       <ion-card-header>
         <ion-card-title>Cuestionario de Seguimiento</ion-card-title>
         <br>
-        <!-- <ion-card-subtitle>Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle> -->
-        <ion-card-subtitle>Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle>
+        <ion-card-subtitle *ngIf="isEnabledMonitoring == '1'">Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle>
+        <ion-card-subtitle *ngIf="isEnabledMonitoring == '0'">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle>
       </ion-card-header>
-      <!-- <ion-card-content>
-        <ion-label><ion-text>Cuestionario de seguimiento</ion-text></ion-label>
-        <p class="quest_time_estimate">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
-        <ion-button mode="ios" expand="block">Comenzar</ion-button>
-      </ion-card-content> -->
       <ion-card-content>
-        <!-- <ion-label>Disponible a partir del <b>20 de febrero</b></ion-label> -->
-        <ion-label><ion-text>Cuestionario de seguimiento</ion-text></ion-label>
-        <p class="quest_time_estimate">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
-        <ion-button mode="ios" expand="block" (click)="presentMonitoringModal()">Comenzar</ion-button>
+        <ion-label *ngIf="isEnabledMonitoring == '1'"><ion-text>Cuestionario de seguimiento</ion-text></ion-label>
+        <p class="quest_time_estimate" *ngIf="isEnabledMonitoring == '1'">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
+
+        <ion-label *ngIf="isEnabledMonitoring == '0'">Disponible a partir del:</ion-label>
+        <ion-button mode="ios" expand="block" [disabled]="isEnabledMonitoring == '0'" (click)="presentMonitoringModal()">Comenzar</ion-button>
       </ion-card-content>
     </ion-card>
 
-     <!-- Cuestionario XXX -->
-     <ion-card mode="ios">
+    <ion-card mode="ios">
       <ion-card-header>
         <ion-card-title>Cuestionario de Barthel</ion-card-title>
         <br>
-        <ion-card-subtitle>Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle>
-        <!-- <ion-card-subtitle *ngIf="!enableCheck[0]">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle> -->
+        <ion-card-subtitle *ngIf="isEnabledBarthelseg == '1'">Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle>
+        <ion-card-subtitle *ngIf="isEnabledBarthelseg == '0'">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <!-- <ion-label *ngIf="!enableCheck[0]">Disponible a partir del: {{periodoBPI}}</ion-label> -->
-        <ion-label><ion-text>Cuestionario de Barthel</ion-text></ion-label>
-        <p class="quest_time_estimate">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
-        <ion-button mode="ios" expand="block" (click)="presentBarthelsegModal()">Comenzar</ion-button>
+        <ion-label *ngIf="isEnabledBarthelseg == '1'"><ion-text>Cuestionario de Barthel</ion-text></ion-label>
+        <p class="quest_time_estimate" *ngIf="isEnabledBarthelseg == '1'">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
+
+        <ion-label *ngIf="isEnabledBarthelseg == '0'">Disponible a partir del:</ion-label>
+        <ion-button mode="ios" expand="block" [disabled]="isEnabledBarthelseg == '0'" (click)="presentBarthelsegModal()">Comenzar</ion-button>
       </ion-card-content>
     </ion-card>
 
-     <!-- Cuestionario XXX -->
-     <ion-card mode="ios">
+    <ion-card mode="ios">
       <ion-card-header>
         <ion-card-title>Cuestionario de Fac</ion-card-title>
         <br>
-        <ion-card-subtitle>Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle>
-        <!-- <ion-card-subtitle *ngIf="!enableCheck[0]">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle> -->
+        <ion-card-subtitle *ngIf="isEnabledFacseg == '1'">Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle>
+        <ion-card-subtitle *ngIf="isEnabledFacseg == '0'">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <!-- <ion-label *ngIf="!enableCheck[0]">Disponible a partir del: {{periodoBPI}}</ion-label> -->
-        <ion-label><ion-text>Cuestionario de Fac</ion-text></ion-label>
-        <p class="quest_time_estimate">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
-        <ion-button mode="ios" expand="block" (click)="presentFacsegModal()">Comenzar</ion-button>
+        <ion-label *ngIf="isEnabledFacseg == '0'">Disponible a partir del:</ion-label>
+        <ion-label *ngIf="isEnabledFacseg == '1'"><ion-text>Cuestionario de Facseg</ion-text></ion-label>
+        <p class="quest_time_estimate" *ngIf="isEnabledFacseg == '1'">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
+        <ion-button mode="ios" expand="block" [disabled]="isEnabledFacseg == '0'" (click)="presentFacsegModal()">Comenzar</ion-button>
       </ion-card-content>
     </ion-card>
 
-     <!-- Cuestionario XXX -->
-     <ion-card mode="ios">
+
+
+
+
+
+
+
+    <!-- <ion-card mode="ios">
       <ion-card-header>
         <ion-card-title>Cuestionario Neuro Calidad de Vida</ion-card-title>
         <br>
-        <ion-card-subtitle>Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle>
-        <!-- <ion-card-subtitle *ngIf="!enableCheck[0]">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle> -->
+        <ion-card-subtitle *ngIf="isEnabledMonitoring == '1'">Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle>
+        <ion-card-subtitle *ngIf="isEnabledMonitoring == '0'">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <!-- <ion-label *ngIf="!enableCheck[0]">Disponible a partir del: {{periodoBPI}}</ion-label> -->
-        <ion-label><ion-text>Cuestionario Neuro Calidad de Vida</ion-text></ion-label>
-        <p class="quest_time_estimate">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
-        <ion-button mode="ios" expand="block" (click)="presentNeuroQoLModal()">Comenzar</ion-button>
+        <ion-label *ngIf="isEnabledMonitoring == '0'">Disponible a partir del:</ion-label>
+        <ion-label *ngIf="isEnabledMonitoring == '1'"><ion-text>Cuestionario Neuro Calidad de Vida</ion-text></ion-label>
+        <p class="quest_time_estimate" *ngIf="isEnabledMonitoring == '1'">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
+        <ion-button mode="ios" expand="block" [disabled]="isEnabledMonitoring == '0'" (click)="presentNeuroQoLModal()">Comenzar</ion-button>
       </ion-card-content>
-    </ion-card>
+    </ion-card> -->
 
   </div>
   

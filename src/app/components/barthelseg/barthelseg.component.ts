@@ -45,8 +45,8 @@ export class BarthelsegComponent  implements OnInit {
 
       this.questsSrvc.postBarthelsegForm(this.barthelseg_form).then(()=>{
 
-        // this.questSrvc.blockQuest(2);
-        this.dismissModal();
+        this.questsSrvc.setQuestStatus("barthelseg");
+        this.modalCntrl.dismiss().then().catch();
         this.presentConfirmationToast();
         
       }).catch((err) => console.log(err));
