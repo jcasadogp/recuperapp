@@ -27,7 +27,7 @@
         <ion-label *ngIf="isEnabledMonitoring == '1'"><ion-text>Cuestionario de seguimiento</ion-text></ion-label>
         <p class="quest_time_estimate" *ngIf="isEnabledMonitoring == '1'">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
 
-        <ion-label *ngIf="isEnabledMonitoring == '0'">Disponible a partir del:</ion-label>
+        <ion-label *ngIf="isEnabledMonitoring == '0'">Disponible a partir del <ion-text>{{nextMonitoringDate}}</ion-text></ion-label>
         <ion-button mode="ios" expand="block" [disabled]="isEnabledMonitoring == '0'" (click)="presentMonitoringModal()">Comenzar</ion-button>
       </ion-card-content>
     </ion-card>
@@ -43,7 +43,7 @@
         <ion-label *ngIf="isEnabledBarthelseg == '1'"><ion-text>Cuestionario de Barthel</ion-text></ion-label>
         <p class="quest_time_estimate" *ngIf="isEnabledBarthelseg == '1'">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
 
-        <ion-label *ngIf="isEnabledBarthelseg == '0'">Disponible a partir del:</ion-label>
+        <ion-label *ngIf="isEnabledBarthelseg == '0'">Disponible a partir del <ion-text>{{nextBarthelsegDate}}</ion-text></ion-label>
         <ion-button mode="ios" expand="block" [disabled]="isEnabledBarthelseg == '0'" (click)="presentBarthelsegModal()">Comenzar</ion-button>
       </ion-card-content>
     </ion-card>
@@ -56,9 +56,10 @@
         <ion-card-subtitle *ngIf="isEnabledFacseg == '0'">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <ion-label *ngIf="isEnabledFacseg == '0'">Disponible a partir del:</ion-label>
         <ion-label *ngIf="isEnabledFacseg == '1'"><ion-text>Cuestionario de Facseg</ion-text></ion-label>
         <p class="quest_time_estimate" *ngIf="isEnabledFacseg == '1'">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
+
+        <ion-label *ngIf="isEnabledFacseg == '0'">Disponible a partir del <ion-text>{{nextFacsegDate}}</ion-text></ion-label>
         <ion-button mode="ios" expand="block" [disabled]="isEnabledFacseg == '0'" (click)="presentFacsegModal()">Comenzar</ion-button>
       </ion-card-content>
     </ion-card>
