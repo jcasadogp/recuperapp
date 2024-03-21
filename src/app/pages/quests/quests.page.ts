@@ -38,7 +38,7 @@ export class QuestsPage implements OnInit {
   ) { 
     this.id = 118
     this.currentDate = new Date()
-    this.questFrecuencies = [1,5,6,7,11]
+    this.questFrecuencies = [1, 3, 4, 6, 9, 12]
 
     this.nextMonitoringDate = null;
     this.nextBarthelsegDate = null;
@@ -65,21 +65,21 @@ export class QuestsPage implements OnInit {
           for(let f of this.questFrecuencies){
             // Monitoring
             let updateMonitoringDate = new Date(this.firstMonitoring.getTime());
-            updateMonitoringDate.setDate(updateMonitoringDate.getDate() + f);
+            updateMonitoringDate.setMonth(updateMonitoringDate.getMonth() + f);
             this.isEnabledMonitoring = this.datesAreEqual(updateMonitoringDate, this.currentDate) ? "1" : this.isEnabledMonitoring;
             this.nextMonitoringDate = (this.nextMonitoringDate == null && updateMonitoringDate > this.currentDate) ? updateMonitoringDate.toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'}) : this.nextMonitoringDate;
             // console.log(f, this.isEnabledMonitoring, this.nextMonitoringDate)
 
             // Barthelseg
             let updateBarthelsegDate = new Date(this.firstBarthelseg.getTime());
-            updateBarthelsegDate.setDate(updateBarthelsegDate.getDate() + f);
+            updateBarthelsegDate.setMonth(updateBarthelsegDate.getMonth() + f);
             this.isEnabledBarthelseg = this.datesAreEqual(updateBarthelsegDate, this.currentDate) ? "1" : this.isEnabledBarthelseg;
             this.nextBarthelsegDate = (this.nextBarthelsegDate == null && updateBarthelsegDate > this.currentDate) ? updateBarthelsegDate.toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'}) : this.nextBarthelsegDate;
             // console.log(f, this.isEnabledBarthelseg, this.nextBarthelsegDate)
             
             // Facseg
             let updateFacsegDate = new Date(this.firstFacseg.getTime());
-            updateFacsegDate.setDate(updateFacsegDate.getDate() + f);
+            updateFacsegDate.setMonth(updateFacsegDate.getMonth() + f);
             this.isEnabledFacseg = this.datesAreEqual(updateFacsegDate, this.currentDate) ? "1" : this.isEnabledFacseg;
             this.nextFacsegDate = (this.nextFacsegDate == null && updateFacsegDate > this.currentDate) ? updateFacsegDate.toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'}) : this.nextFacsegDate;
             // console.log(f, this.isEnabledFacseg, this.nextFacsegDate)
