@@ -22,14 +22,17 @@ export class QuestsPage implements OnInit {
   firstMonitoring;
   firstBarthelseg;
   firstFacseg;
+  firstNeuroQol;
 
   nextMonitoringDate;
   nextBarthelsegDate;
   nextFacsegDate;
+  nextNeuroQolDate;
 
   isEnabledMonitoring: string;
   isEnabledBarthelseg: string;
   isEnabledFacseg: string;
+  isEnabledNeuroQol: string;
 
   constructor(
     private router: Router,
@@ -43,10 +46,12 @@ export class QuestsPage implements OnInit {
     this.nextMonitoringDate = null;
     this.nextBarthelsegDate = null;
     this.nextFacsegDate = null;
+    this.nextNeuroQolDate = null;
 
     this.isEnabledMonitoring = "0"
     this.isEnabledBarthelseg = "0"
     this.isEnabledFacseg = "0"
+    this.isEnabledNeuroQol = "0"
   }
 
   ngOnInit() {
@@ -61,6 +66,7 @@ export class QuestsPage implements OnInit {
           this.firstMonitoring = new Date(data[0].monitoring_date_1)
           this.firstBarthelseg = new Date(data[0].barthelseg_date_1)
           this.firstFacseg = new Date(data[0].facseg_date_1)
+          this.firstNeuroQol = new Date(data[0].neuroqol_date_1)
 
           for(let f of this.questFrecuencies){
             // Monitoring
@@ -83,11 +89,19 @@ export class QuestsPage implements OnInit {
             this.isEnabledFacseg = this.datesAreEqual(updateFacsegDate, this.currentDate) ? "1" : this.isEnabledFacseg;
             this.nextFacsegDate = (this.nextFacsegDate == null && updateFacsegDate > this.currentDate) ? updateFacsegDate.toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'}) : this.nextFacsegDate;
             // console.log(f, this.isEnabledFacseg, this.nextFacsegDate)
+
+            // NeuroQol
+            let updateNeuroQolDate = new Date(this.firstNeuroQol.getTime());
+            updateNeuroQolDate.setMonth(updateNeuroQolDate.getMonth() + f);
+            this.isEnabledNeuroQol = this.datesAreEqual(updateNeuroQolDate, this.currentDate) ? "1" : this.isEnabledNeuroQol;
+            this.nextNeuroQolDate = (this.nextNeuroQolDate == null && updateNeuroQolDate > this.currentDate) ? updateNeuroQolDate.toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'}) : this.nextNeuroQolDate;
+            // console.log(f, this.isEnabledNeuroQol, this.nextNeuroQolDate)
           }
         } else { //Manual
           this.isEnabledMonitoring = data[0].monitoring_enabled
           this.isEnabledBarthelseg = data[0].barthelseg_enabled
           this.isEnabledFacseg = data[0].facseg_enabled
+          this.isEnabledNeuroQol = data[0].neuroqol_enabled
         }
         if (event) event.target.complete();
       },

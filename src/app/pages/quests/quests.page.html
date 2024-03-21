@@ -13,9 +13,9 @@
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
 
-    <!-- <ion-label *ngIf="isEnabledMonitoring == '1' || isEnabledBarthelseg == '1' || isEnabledFacseg == '1'">
+    <!-- <ion-label *ngIf="isEnabledMonitoring == '1' || isEnabledBarthelseg == '1' || isEnabledFacseg == '1'" || isEnabledNeuroQol == '1'">
       Por favor, complete los cuestionarios que están disponibles:</ion-label>
-    <ion-label *ngIf="isEnabledMonitoring == '0' && isEnabledBarthelseg == '0' && isEnabledFacseg == '0'">
+    <ion-label *ngIf="isEnabledMonitoring == '0' && isEnabledBarthelseg == '0' && isEnabledFacseg == '0'" && isEnabledNeuroQol == '0'">
         No tiene que rellenar ningún cuestionario</ion-label> -->
 
     <ion-card mode="ios">
@@ -69,27 +69,22 @@
       </ion-card-content>
     </ion-card>
 
-
-
-
-
-
-
-
-    <!-- <ion-card mode="ios">
+    <ion-card mode="ios">
       <ion-card-header>
-        <ion-card-title>Cuestionario Neuro Calidad de Vida</ion-card-title>
+        <ion-card-title>Cuestionario de la Movilidad de las Extremidades Inferiores</ion-card-title>
         <br>
-        <ion-card-subtitle *ngIf="isEnabledMonitoring == '1'">Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle>
-        <ion-card-subtitle *ngIf="isEnabledMonitoring == '0'">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle>
+        <ion-card-subtitle *ngIf="isEnabledNeuroQol == '1'">Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle>
+        <ion-card-subtitle *ngIf="isEnabledNeuroQol == '0'">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <ion-label *ngIf="isEnabledMonitoring == '0'">Disponible a partir del:</ion-label>
-        <ion-label *ngIf="isEnabledMonitoring == '1'"><ion-text>Cuestionario Neuro Calidad de Vida</ion-text></ion-label>
-        <p class="quest_time_estimate" *ngIf="isEnabledMonitoring == '1'">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
-        <ion-button mode="ios" expand="block" [disabled]="isEnabledMonitoring == '0'" (click)="presentNeuroQoLModal()">Comenzar</ion-button>
+        <ion-label *ngIf="isEnabledNeuroQol == '1'"><ion-text>Escala FAC</ion-text></ion-label>
+        <p class="quest_time_estimate" *ngIf="isEnabledNeuroQol == '1'">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
+
+        <ion-label *ngIf="isEnabledNeuroQol == '0' && nextNeuroQolDate">Disponible a partir del <ion-text>{{nextNeuroQolDate}}</ion-text></ion-label>
+        <ion-label *ngIf="!nextNeuroQolDate"><ion-text color="success">No tiene que rellenar más cuestionarios!</ion-text></ion-label>
+        <ion-button mode="ios" expand="block" [disabled]="isEnabledNeuroQol == '0'" (click)="presentNeuroQoLModal()">Comenzar</ion-button>
       </ion-card-content>
-    </ion-card> -->
+    </ion-card>
 
   </div>
   
