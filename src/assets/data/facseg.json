@@ -11,7 +11,7 @@
     {
       "id": 1,
       "category": "medical",
-      "question": "Escala FAC",
+      "question": "Valore, del 0 al 5, la capacidad funcional de la marcha del paciente",
       "label": "Escala FAC",
       "redcap_value": "fac_seguimiento",
       "field_type": "radio",
