@@ -8,13 +8,20 @@ import { ResultsPageRoutingModule } from './results-routing.module';
 
 import { ResultsPage } from './results.page';
 
+import { NgxEchartsDirective, NgxEchartsModule, provideEcharts } from 'ngx-echarts';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ResultsPageRoutingModule
+    ResultsPageRoutingModule,
+    NgxEchartsDirective,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ],
-  declarations: [ResultsPage]
+  declarations: [ResultsPage],
+  providers: [provideEcharts()]
 })
 export class ResultsPageModule {}

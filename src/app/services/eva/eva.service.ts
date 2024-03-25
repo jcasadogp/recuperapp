@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { DataService } from '../data/data.service';
 import { EvaForm } from 'src/app/interfaces/eva-form';
 import { Eva } from 'src/app/redcap_interfaces/eva';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -50,5 +51,13 @@ export class EvaService {
       })
 
     })
+  }
+
+  getEvaData(id: number): Observable<Eva[]> {
+    
+    var record: number = id;
+    var forms: string = "eva";
+
+    return this.dataSrvc.export(record, forms);
   }
 }
