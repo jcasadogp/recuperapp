@@ -14,7 +14,7 @@ export class ResultsPage implements OnInit {
   id: number;
   eva_data: [];
 
-  options: EChartsOption;
+  eva_chart: EChartsOption;
 
   constructor(
     private evaSrvc: EvaService
@@ -73,11 +73,12 @@ export class ResultsPage implements OnInit {
       return 0;
     });
 
-    this.options = {
-      tooltip: {},
-      title: {
-        text: 'Valores de EVA'
+    this.eva_chart = {
+      title:{
+        text: "Cuestionario EVA",
+        subtext: "Niveles de dolor introducidos"
       },
+      tooltip: {},
       xAxis: {
         data: xAxisData,
         silent: false,
@@ -91,6 +92,13 @@ export class ResultsPage implements OnInit {
           name: 'line',
           type: 'line',
           data: evaData,
+          lineStyle: {
+            color: '#E67E22',
+            width: 2.5,
+          },
+          itemStyle: {
+            color: '#E67E22',
+          },
           animationDelay: idx => idx * 10,
         }
       ],

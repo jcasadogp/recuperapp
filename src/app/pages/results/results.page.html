@@ -7,28 +7,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
-  <!-- <ion-refresher slot="fixed" (ionRefresh)="[patientEva($event), patientNumQuest($event)]">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher> -->
 
   <ion-refresher slot="fixed" (ionRefresh)="[getEvaData($event)]">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  
-  <!-- <div class="ion-padding">
-    <ion-card>
-      <ion-card-header class="ion-text-center" style="font-weight: bold; font-size: 130%;">
-        EVA en el último mes
-      </ion-card-header>
-      <ion-card-content>
-        <canvas #lineCanvas style="position: relative; height:30vh; width:40vw"></canvas>
-        <ion-item *ngIf="noData" lines="none">
-          <ion-label class="ion-text-wrap" color="danger" style="font-weight: bold; font-size: 110%;">Aún no existen datos de EVA en {{mes}}</ion-label>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
-  </div> -->
 
-  <div echarts [options]="options" class="demo-chart"></div>
+  <div echarts [options]="eva_chart" class="demo-chart"></div>
+
 </ion-content>
