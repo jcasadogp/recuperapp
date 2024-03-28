@@ -29,11 +29,11 @@ export class DataService {
   // ===============================================================================================
   // EXPORT DATA DE REDCAP A LA APLICACIÓN
   // ===============================================================================================
-  export(record: number, forms: string, fields: string[]){
+  export(record: number, forms: string){
     this.body_export.append("records", JSON.stringify(record));
     this.body_export.append("forms", forms);
-    //this.body_export.append("fields", JSON.stringify(fields));
-      
+    // this.body_export.append("fields", JSON.stringify(fields));
+          
     var res = this.http.post<any>(this.url, this.body_export.toString(), this.httpOptions);
     return res;
   }
