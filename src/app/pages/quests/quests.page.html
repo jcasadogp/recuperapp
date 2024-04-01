@@ -13,11 +13,6 @@
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
 
-    <!-- <ion-label *ngIf="isEnabledMonitoring == '1' || isEnabledBarthelseg == '1' || isEnabledFacseg == '1'" || isEnabledNeuroQol == '1'">
-      Por favor, complete los cuestionarios que están disponibles:</ion-label>
-    <ion-label *ngIf="isEnabledMonitoring == '0' && isEnabledBarthelseg == '0' && isEnabledFacseg == '0'" && isEnabledNeuroQol == '0'">
-        No tiene que rellenar ningún cuestionario</ion-label> -->
-
     <ion-card mode="ios">
       <ion-card-header>
         <ion-card-title>Cuestionario de Seguimiento</ion-card-title>
@@ -54,7 +49,7 @@
 
     <ion-card mode="ios">
       <ion-card-header>
-        <ion-card-title>Cuestionario de Valoración Funcional de la Marcha (FAC)</ion-card-title>
+        <ion-card-title>Cuestionario de Valoración Funcional de la Marcha</ion-card-title>
         <br>
         <ion-card-subtitle *ngIf="isEnabledFacseg == '1'">Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle>
         <ion-card-subtitle *ngIf="isEnabledFacseg == '0'">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle>
@@ -77,7 +72,7 @@
         <ion-card-subtitle *ngIf="isEnabledNeuroQol == '0'">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <ion-label *ngIf="isEnabledNeuroQol == '1'"><ion-text>Escala FAC</ion-text></ion-label>
+        <ion-label *ngIf="isEnabledNeuroQol == '1'"><ion-text>Escala CAT</ion-text></ion-label>
         <p class="quest_time_estimate" *ngIf="isEnabledNeuroQol == '1'">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
 
         <ion-label *ngIf="isEnabledNeuroQol == '0' && nextNeuroQolDate">Disponible a partir del <ion-text>{{nextNeuroQolDate}}</ion-text></ion-label>
