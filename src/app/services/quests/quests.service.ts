@@ -173,16 +173,16 @@ export class QuestsService {
     })
   }
 
-  getQuestStatus(id: number): Observable<QuestControl> {
+  getQuestStatus(): Observable<QuestControl> {
     
-    var record: number = id;
+    var record: number = this.id;
     var forms: string = "control_cuestionarios";
 
     return this.dataSrvc.export(record, forms);
   }
 
   async setQuestStatus(quest_name: string): Promise<void> {
-    this.getQuestStatus(this.id).subscribe({
+    this.getQuestStatus().subscribe({
       next: (data: QuestControl) => {
 
         var data2: QuestControl[] = [];

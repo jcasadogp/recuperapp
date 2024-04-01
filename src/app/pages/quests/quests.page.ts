@@ -38,8 +38,7 @@ export class QuestsPage implements OnInit {
     private router: Router,
     private modalCntrl: ModalController,
     private questsSrvc: QuestsService
-  ) { 
-    this.id = 118
+  ) {
     this.currentDate = new Date()
     this.questFrecuencies = [1, 3, 4, 6, 9, 12]
 
@@ -59,7 +58,7 @@ export class QuestsPage implements OnInit {
   }
 
   getQuestStatus(event) {
-    this.questsSrvc.getQuestStatus(this.id).subscribe({
+    this.questsSrvc.getQuestStatus().subscribe({
       next: (data: QuestControl) => {
         if(data[0].quest_control == 0){ // Automático
 

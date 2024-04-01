@@ -25,7 +25,6 @@ export class HomePage implements OnInit {
     private participantSrvc: ParticipantService,
     private storageSrvc: StorageService
   ) {
-    this.id = 118
     this.currentDate = new Date().toLocaleDateString('es-ES', {day: '2-digit',month: 'long',year: 'numeric'})
   }
 
@@ -34,7 +33,7 @@ export class HomePage implements OnInit {
   }
 
   getParticipant(event){
-    this.participantSrvc.getParticipant(this.id).subscribe({
+    this.participantSrvc.getParticipant().subscribe({
       next: (data: Participant) => {
         this.participant = data[0];
         if (event) event.target.complete();

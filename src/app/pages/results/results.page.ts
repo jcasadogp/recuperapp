@@ -18,9 +18,7 @@ export class ResultsPage implements OnInit {
 
   constructor(
     private evaSrvc: EvaService
-  ) {
-    this.id = 118
-   }
+  ) { }
 
   ngOnInit(): void {
     this.getEvaData(null)
@@ -28,7 +26,7 @@ export class ResultsPage implements OnInit {
 
   getEvaData(event){
 
-    this.evaSrvc.getEvaData(this.id).subscribe({
+    this.evaSrvc.getEvaData().subscribe({
       next: (data: Eva[]) => {
         this.getEvaChart(data)
 

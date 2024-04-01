@@ -65,9 +65,9 @@ export class EvaService {
     })
   }
 
-  getEvaData(id: number): Observable<Eva[]> {
+  getEvaData(): Observable<Eva[]> {
     
-    var record: number = id;
+    var record: number = this.id;
     var forms: string = "eva";
 
     return this.dataSrvc.export(record, forms);

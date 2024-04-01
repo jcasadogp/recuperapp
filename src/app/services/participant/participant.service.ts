@@ -30,17 +30,17 @@ export class ParticipantService {
     catch(e) { console.log(e) }
   }
 
-  getParticipant(id: number): Observable<Participant> {
+  getParticipant(): Observable<Participant> {
     
-    var record: number = id;
+    var record: number = this.id;
     var forms: string = "participantes";
 
     return this.dataSrvc.export(record, forms);
   }
 
-  getBaselineData(id: number): Observable<BaselineData>{
+  getBaselineData(): Observable<BaselineData>{
     
-    var record: number = id;
+    var record: number = this.id;
     var forms: string = "datos_basales";
 
     return this.dataSrvc.export(record, forms);
