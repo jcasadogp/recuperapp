@@ -7,12 +7,12 @@ import { QuestControl } from 'src/app/redcap_interfaces/quest_control';
 
 import { MonitoringForm } from 'src/app/interfaces/monitoring-form';
 import { MonitoringData } from 'src/app/redcap_interfaces/monitoring_data';
-
 import { FacsegForm } from 'src/app/interfaces/facseg-form';
 import { Facseg } from 'src/app/redcap_interfaces/facseg';
-
 import { BarthelsegForm } from 'src/app/interfaces/barthelseg-form';
 import { Barthelseg } from 'src/app/redcap_interfaces/barthelseg';
+
+import { StorageService } from '../storage/storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,12 +28,28 @@ export class QuestsService {
 
   constructor(
     private http: HttpClient,
-    private dataSrvc: DataService
+    private dataSrvc: DataService,
+    private storageSrvc: StorageService
   ) {
-    this.id = 118
+    // this.id = 118
+    this.getRecordID();
+    
+    // Authentication Service
+    this.storageSrvc.init()
+    this.storageSrvc.set('RECORD_ID', 118);
+    
     this.num_facseg = 0
     this.num_barthelseg = 0
     this.num_seguimiento = 0
+  }
+
+  async getRecordID(): Promise<any> {
+    try {
+      const result =  await this.storageSrvc.get('RECORD_ID');
+      this.id = result
+      console.log(this.id);
+    }
+    catch(e) { console.log(e) }
   }
 
   getQuestsQuestions(quest: string): Observable<any> {

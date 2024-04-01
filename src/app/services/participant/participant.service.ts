@@ -4,16 +4,31 @@ import { Observable } from 'rxjs';
 import { DataService } from '../data/data.service';
 import { Participant, BaselineData } from 'src/app/redcap_interfaces/participant';
 import { HttpClient } from '@angular/common/http';
+import { StorageService } from '../storage/storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParticipantService {
 
+  id: number;
+
   constructor(
     private dataSrvc: DataService,
-    private http: HttpClient
-  ) { }
+    private http: HttpClient,
+    private storageSrvc: StorageService
+  ) {
+    this.getRecordID();
+   }
+
+  async getRecordID(): Promise<any> {
+    try {
+      const result =  await this.storageSrvc.get('RECORD_ID');
+      this.id = result
+      console.log(this.id);
+    }
+    catch(e) { console.log(e) }
+  }
 
   getParticipant(id: number): Observable<Participant> {
     

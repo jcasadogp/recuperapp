@@ -4,6 +4,7 @@ import { DataService } from '../data/data.service';
 import { EvaForm } from 'src/app/interfaces/eva-form';
 import { Eva } from 'src/app/redcap_interfaces/eva';
 import { Observable } from 'rxjs';
+import { StorageService } from '../storage/storage.service';
 
 
 @Injectable({
@@ -15,10 +16,21 @@ export class EvaService {
   num_eva: number;
 
   constructor(
-    private dataSrvc: DataService
+    private dataSrvc: DataService,
+    private storageSrvc: StorageService
   ) { 
-    this.id = 118
+    // this.id = 118
+    this.getRecordID();
     this.num_eva = 0
+  }
+
+  async getRecordID(): Promise<any> {
+    try {
+      const result =  await this.storageSrvc.get('RECORD_ID');
+      this.id = result
+      console.log(this.id);
+    }
+    catch(e) { console.log(e) }
   }
 
   async postEvaForm(eva_form: EvaForm): Promise<void>{
