@@ -6,6 +6,7 @@ import { ProfileComponent } from 'src/app/components/profile/profile.component';
 import { EvaComponent } from 'src/app/components/eva/eva.component';
 import { Participant } from 'src/app/redcap_interfaces/participant';
 import { ParticipantService } from 'src/app/services/participant/participant.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,8 @@ export class HomePage implements OnInit {
   constructor(
     private router: Router,
     private modalCntrl: ModalController,
-    private participantSrvc: ParticipantService
+    private participantSrvc: ParticipantService,
+    private storageSrvc: StorageService
   ) {
     this.id = 118
     this.currentDate = new Date().toLocaleDateString('es-ES', {day: '2-digit',month: 'long',year: 'numeric'})
@@ -65,15 +67,12 @@ export class HomePage implements OnInit {
     });
     return await modal.present();
   }
-
   
-  
-  
-  
-  
-  logout(){
-    this.router.navigateByUrl('login')
+  async logout(): Promise<any> {
+    try {
+      await this.storageSrvc.remove('RECORD_ID');
+      this.router.navigateByUrl('login')
+    }
+    catch(e) { console.log(e) }
   }
-
-
 }
