@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
   login(){
     this.validate_data = true;
 
-    var id = +(this.login_params.user);
+    var id = this.login_params.user;
     this.presentLoading();
     
     this.loginSrvc.getUser(id).subscribe(async data => {
@@ -52,8 +52,6 @@ export class LoginPage implements OnInit {
 
           //Se accede a la pantalla principal de la aplicacion
           await this.storageSrvc.set('RECORD_ID', this.login_params.user); // Línea IMPORTANTE
-          // this.storageSrvc.setObject('scrHeight', window.innerHeight);
-          // this.storageSrvc.setObject('scrWidth', window.innerWidth);
           this.router.navigateByUrl('tabs')
 
           //Se inicializan los parametros
