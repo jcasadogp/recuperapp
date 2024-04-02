@@ -1,5 +1,5 @@
 export interface QuestControl {
-    record_id?: number,
+    record_id?: string,
     
     quest_control?: string,
     barthelseg_enabled?: string,

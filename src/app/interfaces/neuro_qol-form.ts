@@ -1,4 +1,4 @@
 export interface NeuroQoLForm {
-    record_id?: number,
+    record_id?: string,
     
 }

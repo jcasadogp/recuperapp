@@ -1,5 +1,5 @@
 export interface Participant {
-    record_id?: number,
+    record_id?: string,
     redcap_repeat_instrument?: string,
     redcap_repeat_instance?: number,
 
@@ -16,7 +16,7 @@ export interface Participant {
 }
 
 export interface BaselineData {
-    record_id?: number,
+    record_id?: string,
 
     sexo?: string,
     edad?: string,

@@ -1,5 +1,5 @@
 export interface Login {
-    record_id?: number,
+    record_id?: string,
     
     contrasena?: string,
     contrasena_2?: string,

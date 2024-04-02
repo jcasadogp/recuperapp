@@ -1,5 +1,5 @@
 export interface BarthelsegForm {
-    record_id?: number,
+    record_id?: string,
     
     f_barthel?: string,
     barthel_1_s?: string,

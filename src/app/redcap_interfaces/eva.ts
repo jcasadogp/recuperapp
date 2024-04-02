@@ -1,5 +1,5 @@
 export interface Eva {
-    record_id?: number,
+    record_id?: string,
     redcap_repeat_instrument?: string,
     redcap_repeat_instance?: number,
     

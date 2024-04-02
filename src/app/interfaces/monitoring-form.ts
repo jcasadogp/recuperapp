@@ -1,5 +1,5 @@
 export interface MonitoringForm {
-    record_id?: number,
+    record_id?: string,
     
     f_seguimiento?: string,
     ub_seguimiento?: string,
