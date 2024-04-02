@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController, ToastController } from '@ionic/angular';
 import { BarthelsegForm } from 'src/app/interfaces/barthelseg-form';
 import { QuestsService } from 'src/app/services/quests/quests.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-barthelseg',
@@ -10,6 +11,7 @@ import { QuestsService } from 'src/app/services/quests/quests.service';
 })
 export class BarthelsegComponent  implements OnInit {
 
+  id: string;
   barthelseg_questions;
   barthelseg_form: BarthelsegForm = {}
 
@@ -17,17 +19,25 @@ export class BarthelsegComponent  implements OnInit {
     private modalCntrl: ModalController,
     private alertCntrl: AlertController,
     private toastCntrl: ToastController,
-    private questsSrvc: QuestsService
+    private questsSrvc: QuestsService,
+    private storageSrvc: StorageService
   ) { }
 
   ngOnInit() {
-    this.questsSrvc.getQuestsQuestions('barthelseg').subscribe(data => {
-      this.barthelseg_questions = data
+    this.getRecordID().then(data => {
+      this.id = data
+      this.questsSrvc.getQuestsQuestions('barthelseg').subscribe(data => {
+        this.barthelseg_questions = data
+  
+        this.barthelseg_questions = this.barthelseg_questions.filter(quest => quest.category == "medical");
+        this.barthelseg_questions = this.barthelseg_questions.filter(quest => quest.redcap_value != "f_barthel");
+        this.barthelseg_questions = this.barthelseg_questions.filter(quest => quest.redcap_value != "barthel_score_s");
+      });
+    })
+  }
 
-      this.barthelseg_questions = this.barthelseg_questions.filter(quest => quest.category == "medical");
-      this.barthelseg_questions = this.barthelseg_questions.filter(quest => quest.redcap_value != "f_barthel");
-      this.barthelseg_questions = this.barthelseg_questions.filter(quest => quest.redcap_value != "barthel_score_s");
-    });
+  async getRecordID(): Promise<any> {
+    return await this.storageSrvc.get('RECORD_ID');
   }
 
   postBarthelsegForm(): void {
@@ -43,9 +53,9 @@ export class BarthelsegComponent  implements OnInit {
       this.presentEmptyFieldsAlert;
     } else {
 
-      this.questsSrvc.postBarthelsegForm(this.barthelseg_form).then(()=>{
+      this.questsSrvc.postBarthelsegForm(this.id, this.barthelseg_form).then(()=>{
 
-        this.questsSrvc.setQuestStatus("barthelseg");
+        this.questsSrvc.setQuestStatus(this.id, "barthelseg");
         this.modalCntrl.dismiss().then().catch();
         this.presentConfirmationToast();
         

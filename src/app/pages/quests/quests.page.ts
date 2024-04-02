@@ -7,6 +7,7 @@ import { MonitoringComponent } from 'src/app/components/monitoring/monitoring.co
 import { NeuroQolComponent } from 'src/app/components/neuro-qol/neuro-qol.component';
 import { QuestControl } from 'src/app/redcap_interfaces/quest_control';
 import { QuestsService } from 'src/app/services/quests/quests.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-quests',
@@ -15,7 +16,7 @@ import { QuestsService } from 'src/app/services/quests/quests.service';
 })
 export class QuestsPage implements OnInit {
 
-  id: number
+  id: string
   public currentDate;
   questFrecuencies: number[];
 
@@ -37,7 +38,8 @@ export class QuestsPage implements OnInit {
   constructor(
     private router: Router,
     private modalCntrl: ModalController,
-    private questsSrvc: QuestsService
+    private questsSrvc: QuestsService,
+    private storageSrvc: StorageService
   ) {
     this.currentDate = new Date()
     this.questFrecuencies = [1, 3, 4, 6, 9, 12]
@@ -54,11 +56,18 @@ export class QuestsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.getQuestStatus(null)
+    this.getRecordID().then(data => {
+      this.id = data
+      this.getQuestStatus(null)
+    })
+  }
+
+  async getRecordID(): Promise<any> {
+    return await this.storageSrvc.get('RECORD_ID');
   }
 
   getQuestStatus(event) {
-    this.questsSrvc.getQuestStatus().subscribe({
+    this.questsSrvc.getQuestStatus(this.id).subscribe({
       next: (data: QuestControl) => {
         if(data[0].quest_control == 0){ // Automático
 

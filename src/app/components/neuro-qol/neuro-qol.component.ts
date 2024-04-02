@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController, ToastController } from '@ionic/angular';
 import { NeuroQoLForm } from 'src/app/interfaces/neuro_qol-form';
 import { QuestsService } from 'src/app/services/quests/quests.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-neuro-qol',
@@ -10,6 +11,7 @@ import { QuestsService } from 'src/app/services/quests/quests.service';
 })
 export class NeuroQolComponent  implements OnInit {
 
+  id: string;
   neuro_qol_questions;
   neuro_qol_form: NeuroQoLForm = {}
 
@@ -17,10 +19,19 @@ export class NeuroQolComponent  implements OnInit {
     private modalCntrl: ModalController,
     private alertCntrl: AlertController,
     private toastCntrl: ToastController,
-    private questsSrvc: QuestsService
+    private questsSrvc: QuestsService,
+    private storageSrvc: StorageService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getRecordID().then(data => {
+      this.id = data
+    })
+  }
+
+  async getRecordID(): Promise<any> {
+    return await this.storageSrvc.get('RECORD_ID');
+  }
 
   dismissModal(): void {
     var i = Object.keys(this.neuro_qol_form).length;

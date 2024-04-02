@@ -19,7 +19,6 @@ import { StorageService } from '../storage/storage.service';
 })
 export class QuestsService {
 
-  id: number;
   num_facseg: number;
   num_barthelseg: number;
   num_seguimiento: number;
@@ -28,28 +27,11 @@ export class QuestsService {
 
   constructor(
     private http: HttpClient,
-    private dataSrvc: DataService,
-    private storageSrvc: StorageService
+    private dataSrvc: DataService
   ) {
-    // this.id = 118
-    this.getRecordID();
-    
-    // Authentication Service
-    this.storageSrvc.init()
-    this.storageSrvc.set('RECORD_ID', 118);
-    
     this.num_facseg = 0
     this.num_barthelseg = 0
     this.num_seguimiento = 0
-  }
-
-  async getRecordID(): Promise<any> {
-    try {
-      const result =  await this.storageSrvc.get('RECORD_ID');
-      this.id = result
-      console.log(this.id);
-    }
-    catch(e) { console.log(e) }
   }
 
   getQuestsQuestions(quest: string): Observable<any> {
@@ -57,12 +39,12 @@ export class QuestsService {
     return this.http.get(path);
   }
 
-  async postMonitoringForm(monitoring_form: MonitoringForm): Promise<void>{
+  async postMonitoringForm(id: string, monitoring_form: MonitoringForm): Promise<void>{
 
     var data: MonitoringData[] = [];
 
     const elem: MonitoringData = {
-      record_id: this.id,
+      record_id: id,
       redcap_repeat_instrument: "datos_seguimiento",
       redcap_repeat_instance: this.num_seguimiento+1,
       datos_seguimiento_complete: 2
@@ -93,7 +75,7 @@ export class QuestsService {
 
       var data_monitoring = [
         {
-          record_id: this.id,
+          record_id: id,
           num_seguimiento: this.num_seguimiento+1
         }
       ];
@@ -103,12 +85,12 @@ export class QuestsService {
     })
   }
   
-  async postBarthelsegForm(barthelseg_form: BarthelsegForm): Promise<void>{
+  async postBarthelsegForm(id: string, barthelseg_form: BarthelsegForm): Promise<void>{
 
     var data: Barthelseg[] = [];
 
     const elem: Barthelseg = {
-      record_id: this.id,
+      record_id: id,
       redcap_repeat_instrument: "barthelseg",
       redcap_repeat_instance: this.num_barthelseg+1,
       barthelseg_complete: 2
@@ -126,25 +108,23 @@ export class QuestsService {
 
       var data_barthelseg = [
         {
-          record_id: this.id,
+          record_id: id,
           num_barthelseg: this.num_barthelseg+1
         }
       ];
 
       this.num_barthelseg++;
       
-      this.dataSrvc.import(data_barthelseg).subscribe((res) => {
-      })
-
+      this.dataSrvc.import(data_barthelseg).subscribe((res) => {})
     })
   }
   
-  async postFacsegForm(facseg_form: FacsegForm): Promise<void>{
+  async postFacsegForm(id: string, facseg_form: FacsegForm): Promise<void>{
 
     var data: Facseg[] = [];
 
     const elem: Facseg = {
-      record_id: this.id,
+      record_id: id,
       redcap_repeat_instrument: "facseg",
       redcap_repeat_instance: this.num_facseg+1,
       facseg_complete: 2
@@ -160,35 +140,35 @@ export class QuestsService {
 
       var data_facseg = [
         {
-          record_id: this.id,
+          record_id: id,
           num_facseg: this.num_facseg+1
         }
       ];
 
       this.num_facseg++;
       
-      this.dataSrvc.import(data_facseg).subscribe((res) => {
-      })
-
+      this.dataSrvc.import(data_facseg).subscribe((res) => {})
     })
   }
 
-  getQuestStatus(): Observable<QuestControl> {
+  getQuestStatus(id: string): Observable<QuestControl> {
     
-    var record: number = this.id;
+    var record: string = id;
     var forms: string = "control_cuestionarios";
+
+    // console.log(record, typeof(record))
 
     return this.dataSrvc.export(record, forms);
   }
 
-  async setQuestStatus(quest_name: string): Promise<void> {
-    this.getQuestStatus().subscribe({
+  async setQuestStatus(id: string, quest_name: string): Promise<void> {
+    this.getQuestStatus(id).subscribe({
       next: (data: QuestControl) => {
 
         var data2: QuestControl[] = [];
 
         const elem: QuestControl = {
-          record_id: this.id,
+          record_id: id,
           control_cuestionarios_complete: 2
         }
 

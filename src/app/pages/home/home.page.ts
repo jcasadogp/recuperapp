@@ -15,7 +15,7 @@ import { StorageService } from 'src/app/services/storage/storage.service';
 })
 export class HomePage implements OnInit {
 
-  public id: number;
+  public id: string;
   public participant: Participant = {};
   public currentDate: string;
 
@@ -29,11 +29,18 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    this.getParticipant(null)
+    this.getRecordID().then(data => {
+      this.id = data
+      this.getParticipant(null)
+    })
+  }
+
+  async getRecordID(): Promise<any> {
+    return await this.storageSrvc.get('RECORD_ID');
   }
 
   getParticipant(event){
-    this.participantSrvc.getParticipant().subscribe({
+    this.participantSrvc.getParticipant(this.id).subscribe({
       next: (data: Participant) => {
         this.participant = data[0];
         if (event) event.target.complete();

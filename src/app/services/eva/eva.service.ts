@@ -12,33 +12,20 @@ import { StorageService } from '../storage/storage.service';
 })
 export class EvaService {
 
-  id: number;
   num_eva: number;
 
   constructor(
-    private dataSrvc: DataService,
-    private storageSrvc: StorageService
+    private dataSrvc: DataService
   ) { 
-    // this.id = 118
-    this.getRecordID();
     this.num_eva = 0
   }
 
-  async getRecordID(): Promise<any> {
-    try {
-      const result =  await this.storageSrvc.get('RECORD_ID');
-      this.id = result
-      console.log(this.id);
-    }
-    catch(e) { console.log(e) }
-  }
-
-  async postEvaForm(eva_form: EvaForm): Promise<void>{
+  async postEvaForm(id: string, eva_form: EvaForm): Promise<void>{
 
     var data: Eva[] = [];
 
     const elem: Eva = {
-      record_id: this.id,
+      record_id: id,
       redcap_repeat_instrument: "eva",
       redcap_repeat_instance: this.num_eva+1,
       eva_complete: 2
@@ -52,7 +39,7 @@ export class EvaService {
 
       var data_eva = [
         {
-          record_id: this.id,
+          record_id: id,
           num_eva: this.num_eva+1
         }
       ];
@@ -65,9 +52,9 @@ export class EvaService {
     })
   }
 
-  getEvaData(): Observable<Eva[]> {
+  getEvaData(id: string): Observable<Eva[]> {
     
-    var record: number = this.id;
+    var record: string = id;
     var forms: string = "eva";
 
     return this.dataSrvc.export(record, forms);

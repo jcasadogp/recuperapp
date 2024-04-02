@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController, ToastController } from '@ionic/angular';
 import { MonitoringForm } from 'src/app/interfaces/monitoring-form';
 import { QuestsService } from 'src/app/services/quests/quests.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-monitoring',
@@ -10,6 +11,7 @@ import { QuestsService } from 'src/app/services/quests/quests.service';
 })
 export class MonitoringComponent  implements OnInit {
 
+  id: string;
   monitoring_questions;
   monitoring_form: MonitoringForm = {}
   public currentDate: string;
@@ -18,18 +20,26 @@ export class MonitoringComponent  implements OnInit {
     private modalCntrl: ModalController,
     private alertCntrl: AlertController,
     private toastCntrl: ToastController,
-    private questsSrvc: QuestsService
+    private questsSrvc: QuestsService,
+    private storageSrvc: StorageService
   ) {
     this.currentDate = new Date().toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'})
    }
 
   ngOnInit() {
-    this.questsSrvc.getQuestsQuestions('monitoring_data').subscribe(data => {
-      this.monitoring_questions = data
+    this.getRecordID().then(data => {
+      this.id = data
+      this.questsSrvc.getQuestsQuestions('monitoring_data').subscribe(data => {
+        this.monitoring_questions = data
+  
+        this.monitoring_questions = this.monitoring_questions.filter(quest => quest.category == "medical");
+        this.monitoring_questions = this.monitoring_questions.filter(quest => quest.redcap_value != "f_seguimiento");
+      });
+    })
+  }
 
-      this.monitoring_questions = this.monitoring_questions.filter(quest => quest.category == "medical");
-      this.monitoring_questions = this.monitoring_questions.filter(quest => quest.redcap_value != "f_seguimiento");
-    });
+  async getRecordID(): Promise<any> {
+    return await this.storageSrvc.get('RECORD_ID');
   }
 
   postMonitoringForm(): void {
@@ -45,9 +55,9 @@ export class MonitoringComponent  implements OnInit {
       this.presentEmptyFieldsAlert();
     } else {
 
-      this.questsSrvc.postMonitoringForm(this.monitoring_form).then(()=>{
+      this.questsSrvc.postMonitoringForm(this.id, this.monitoring_form).then(()=>{
 
-        this.questsSrvc.setQuestStatus("monitoring");
+        this.questsSrvc.setQuestStatus(this.id, "monitoring");
         this.modalCntrl.dismiss().then().catch();
         this.presentConfirmationToast();
         

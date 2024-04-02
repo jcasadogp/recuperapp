@@ -11,36 +11,22 @@ import { StorageService } from '../storage/storage.service';
 })
 export class ParticipantService {
 
-  id: number;
-
   constructor(
     private dataSrvc: DataService,
-    private http: HttpClient,
-    private storageSrvc: StorageService
-  ) {
-    this.getRecordID();
-   }
+    private http: HttpClient
+  ) { }
 
-  async getRecordID(): Promise<any> {
-    try {
-      const result =  await this.storageSrvc.get('RECORD_ID');
-      this.id = result
-      console.log(this.id);
-    }
-    catch(e) { console.log(e) }
-  }
-
-  getParticipant(): Observable<Participant> {
+  getParticipant(id: string): Observable<Participant> {
     
-    var record: number = this.id;
+    var record: string = id;
     var forms: string = "participantes";
 
     return this.dataSrvc.export(record, forms);
   }
 
-  getBaselineData(): Observable<BaselineData>{
+  getBaselineData(id: string): Observable<BaselineData>{
     
-    var record: number = this.id;
+    var record: string = id;
     var forms: string = "datos_basales";
 
     return this.dataSrvc.export(record, forms);

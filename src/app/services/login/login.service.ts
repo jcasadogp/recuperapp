@@ -13,8 +13,8 @@ export class LoginService {
 
   }
 
-  getUser(id: number): Observable<any>{
-    var record: number = id;
+  getUser(id: string): Observable<any>{
+    var record: string = id;
     var forms: string = 'login';
 
     return this.dataSrvc.export(record, forms);

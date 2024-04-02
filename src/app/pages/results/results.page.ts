@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import type { EChartsOption } from 'echarts';
 import { EvaService } from 'src/app/services/eva/eva.service';
 import { Eva } from 'src/app/redcap_interfaces/eva';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-results',
@@ -11,22 +12,29 @@ import { Eva } from 'src/app/redcap_interfaces/eva';
 })
 export class ResultsPage implements OnInit {
 
-  id: number;
+  id: string;
   eva_data: [];
 
   eva_chart: EChartsOption;
 
   constructor(
-    private evaSrvc: EvaService
+    private evaSrvc: EvaService,
+    private storageSrvc: StorageService
   ) { }
 
-  ngOnInit(): void {
-    this.getEvaData(null)
+  ngOnInit() {
+    this.getRecordID().then(data => {
+      this.id = data
+      this.getEvaData(null)
+    })
+  }
+
+  async getRecordID(): Promise<any> {
+    return await this.storageSrvc.get('RECORD_ID');
   }
 
   getEvaData(event){
-
-    this.evaSrvc.getEvaData().subscribe({
+    this.evaSrvc.getEvaData(this.id).subscribe({
       next: (data: Eva[]) => {
         this.getEvaChart(data)
 
@@ -55,8 +63,8 @@ export class ResultsPage implements OnInit {
       return { ...obj, fecha_eva: formattedDate };
     });
 
-    console.log(sortedData)
-    console.log(formattedData)
+    // console.log(sortedData)
+    // console.log(formattedData)
 
     var xAxisData: string[] = [];
     var evaData: number[] = [];

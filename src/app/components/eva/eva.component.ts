@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController, ToastController } from '@ionic/angular';
 import { EvaForm } from 'src/app/interfaces/eva-form';
 import { EvaService } from 'src/app/services/eva/eva.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-eva',
@@ -10,6 +11,7 @@ import { EvaService } from 'src/app/services/eva/eva.service';
 })
 export class EvaComponent  implements OnInit {
 
+  id: string;
   public currentDate: string;
   eva_form: EvaForm;
 
@@ -17,14 +19,22 @@ export class EvaComponent  implements OnInit {
     private modalCntrl: ModalController,
     private alertCntrl: AlertController,
     private toastCntrl: ToastController,
-    private evaSrvc: EvaService
+    private evaSrvc: EvaService,
+    private storageSrvc: StorageService
   ) { 
     this.currentDate = new Date().toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'})
     this.eva_form = {}
   }
 
   ngOnInit() {
-    this.eva_form.eva = 0;
+    this.getRecordID().then(data => {
+      this.id = data
+      this.eva_form.eva = 0;
+    })
+  }
+
+  async getRecordID(): Promise<any> {
+    return await this.storageSrvc.get('RECORD_ID');
   }
 
   postEvaForm(): void {
@@ -33,7 +43,7 @@ export class EvaComponent  implements OnInit {
       
       this.eva_form.fecha_eva = new Date().toISOString().split('T')[0]
       
-      this.evaSrvc.postEvaForm(this.eva_form).then(()=>{
+      this.evaSrvc.postEvaForm(this.id, this.eva_form).then(()=>{
 
         this.dismissModal();
         this.presentConfirmationToast();

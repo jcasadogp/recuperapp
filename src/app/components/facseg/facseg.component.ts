@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController, ToastController } from '@ionic/angular';
 import { FacsegForm } from 'src/app/interfaces/facseg-form';
 import { QuestsService } from 'src/app/services/quests/quests.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-facseg',
@@ -10,6 +11,7 @@ import { QuestsService } from 'src/app/services/quests/quests.service';
 })
 export class FacsegComponent  implements OnInit {
 
+  id: string;
   facseg_questions;
   facseg_form: FacsegForm = {}
 
@@ -17,16 +19,24 @@ export class FacsegComponent  implements OnInit {
     private modalCntrl: ModalController,
     private alertCntrl: AlertController,
     private toastCntrl: ToastController,
-    private questsSrvc: QuestsService
+    private questsSrvc: QuestsService,
+    private storageSrvc: StorageService
   ) { }
 
   ngOnInit() {
-    this.questsSrvc.getQuestsQuestions('facseg').subscribe(data => {
-      this.facseg_questions = data
+    this.getRecordID().then(data => {
+      this.id = data
+      this.questsSrvc.getQuestsQuestions('facseg').subscribe(data => {
+        this.facseg_questions = data
+  
+        this.facseg_questions = this.facseg_questions.filter(quest => quest.category == "medical");
+        this.facseg_questions = this.facseg_questions.filter(quest => quest.redcap_value != "f_facseg");
+      });
+    })
+  }
 
-      this.facseg_questions = this.facseg_questions.filter(quest => quest.category == "medical");
-      this.facseg_questions = this.facseg_questions.filter(quest => quest.redcap_value != "f_facseg");
-    });
+  async getRecordID(): Promise<any> {
+    return await this.storageSrvc.get('RECORD_ID');
   }
 
   postFacsegForm(): void {
@@ -37,9 +47,9 @@ export class FacsegComponent  implements OnInit {
 
       console.log(this.facseg_form)
       
-      this.questsSrvc.postFacsegForm(this.facseg_form).then(()=>{
+      this.questsSrvc.postFacsegForm(this.id, this.facseg_form).then(()=>{
 
-        this.questsSrvc.setQuestStatus("facseg")
+        this.questsSrvc.setQuestStatus(this.id, "facseg")
         this.modalCntrl.dismiss().then().catch();
         this.presentConfirmationToast();
         
