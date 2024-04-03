@@ -13,6 +13,7 @@ import { BarthelsegForm } from 'src/app/interfaces/barthelseg-form';
 import { Barthelseg } from 'src/app/redcap_interfaces/barthelseg';
 
 import { StorageService } from '../storage/storage.service';
+import { LoginService } from '../login/login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,16 +23,28 @@ export class QuestsService {
   num_facseg: number;
   num_barthelseg: number;
   num_seguimiento: number;
+  num_neuro_qol: number;
 
   monitoring_data: MonitoringData;
 
   constructor(
     private http: HttpClient,
-    private dataSrvc: DataService
+    private dataSrvc: DataService,
+    private loginSrvc: LoginService,
+    private storageSrvc: StorageService
   ) {
-    this.num_facseg = 0
-    this.num_barthelseg = 0
-    this.num_seguimiento = 0
+    this.getRecordID().then(id => {
+      this.loginSrvc.getUser(id).subscribe(data => {
+        this.num_facseg = data[0].num_facseg === "" ? 0 : +data[0].num_facseg;
+        this.num_barthelseg = data[0].num_barthelseg === "" ? 0 : +data[0].num_barthelseg;
+        this.num_seguimiento = data[0].num_seguimiento === "" ? 0 : +data[0].num_seguimiento;
+        this.num_neuro_qol = data[0].num_neuro_qol === "" ? 0 : +data[0].num_neuro_qol;
+      })
+    })
+  }
+
+  async getRecordID(): Promise<any> {
+    return await this.storageSrvc.get('RECORD_ID');
   }
 
   getQuestsQuestions(quest: string): Observable<any> {
@@ -156,7 +169,7 @@ export class QuestsService {
     var record: string = id;
     var forms: string = "control_cuestionarios";
 
-    // console.log(record, typeof(record))
+    console.log("getQuestStatus()", id, "control_cuestionarios")
 
     return this.dataSrvc.export(record, forms);
   }

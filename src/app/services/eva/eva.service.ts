@@ -1,3 +1,4 @@
+import { LoginService } from './../login/login.service';
 import { Injectable } from '@angular/core';
 
 import { DataService } from '../data/data.service';
@@ -15,9 +16,19 @@ export class EvaService {
   num_eva: number;
 
   constructor(
-    private dataSrvc: DataService
-  ) { 
-    this.num_eva = 0
+    private dataSrvc: DataService,
+    private loginSrvc: LoginService,
+    private storageSrvc: StorageService
+  ) {
+    this.getRecordID().then(id => {
+      this.loginSrvc.getUser(id).subscribe(data => {
+        this.num_eva = data[0].num_eva === "" ? 0 : +data[0].num_eva;
+      })
+    })
+  }
+
+  async getRecordID(): Promise<any> {
+    return await this.storageSrvc.get('RECORD_ID');
   }
 
   async postEvaForm(id: string, eva_form: EvaForm): Promise<void>{
@@ -56,6 +67,8 @@ export class EvaService {
     
     var record: string = id;
     var forms: string = "eva";
+
+    console.log("getEvaData()", id, "eva")
 
     return this.dataSrvc.export(record, forms);
   }

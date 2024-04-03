@@ -21,6 +21,8 @@ export class ParticipantService {
     var record: string = id;
     var forms: string = "participantes";
 
+    console.log("getParticipant()", id, "participantes")
+
     return this.dataSrvc.export(record, forms);
   }
 
@@ -28,6 +30,8 @@ export class ParticipantService {
     
     var record: string = id;
     var forms: string = "datos_basales";
+
+    console.log("getBaselineData()", id, "datos_basales")
 
     return this.dataSrvc.export(record, forms);
   }
