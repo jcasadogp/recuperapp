@@ -30,13 +30,11 @@ export class DataService {
   // EXPORT DATA DE REDCAP A LA APLICACIÓN
   // ===============================================================================================
   export(record: string, forms: string){
-    var body_export = BODYEXPORT;
-    // body_export.append("records", JSON.stringify(record));
-    body_export.append("records", record);
-    body_export.append("forms", forms);
+    var body_export = new URLSearchParams(BODYEXPORT);
+    body_export.set("records", record);
+    body_export.set("forms", forms);
     
-    console.log("**", record, typeof(record))
-    console.log("**", body_export.toString())
+    console.log(body_export.toString());
     
     var res = this.http.post<any>(this.url, body_export.toString(), this.httpOptions);
     return res;
@@ -46,8 +44,11 @@ export class DataService {
   // IMPORT DATA DE LA APLICACIÓN A REDCAP
   // ===============================================================================================
   import(data: any){
-    var body_import = BODYIMPORT;
-    body_import.append('data', JSON.stringify(data));
+    var body_import = new URLSearchParams(BODYIMPORT);
+    body_import.set("data", JSON.stringify(data));
+
+    console.log(body_import.toString());
+
     var res = this.http.post<any>(this.url, body_import.toString(), this.httpOptions);
     return res;
   }
