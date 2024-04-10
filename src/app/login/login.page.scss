@@ -1,10 +1,23 @@
-ion-toolbar {
-    --background: #f5f5f3;
-
-    ion-button {
-        text-transform: initial;
-        font-size: 17px;
+.logos_group {
+    ion-row, ion-col {
+        --background: transparent; /* Set background color of ion-row and ion-col to transparent */
     }
+
+    --background: #f5f5f3; /* Set the background color for ion-header */
+    
+    .logo {
+        max-width: 100%;
+        max-height: 45px; /* Adjust this height according to your requirements */
+        display: block;
+        margin: 0 auto; /* Centers the logos horizontally within their columns */
+        margin-top: 7%;
+        margin-bottom: 5%;
+        background-color: transparent; /* Set background color to transparent */
+    }
+}
+
+ion-toolbar {
+    --background: #f5f5f3; /* Set the background color for ion-toolbar */
 }
 
 ion-content {
@@ -19,19 +32,20 @@ ion-content {
             font-weight: 700;
             font-size: 26px;
             color: #010100;
+            // margin-top: 15px;
             margin-bottom: 15px;
         }
 
         img {
-            width: 125px;
-            height: 125px;
-            border-radius: 50%;
+            // width: 125px;
+            height: 90px;
+            // border-radius: 50%;
             border: 8px solid #ffffff;
         }
     }
 
     #form {
-        margin-top: 15%;
+        margin-top: 10%;
         padding-left: 30px;
         padding-right: 30px;
 
