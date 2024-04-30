@@ -12,8 +12,10 @@
 
 <ion-content>
   <ion-text *ngFor="let q of barthelseg_questions">
-    <h4>Pregunta {{q.id}}:</h4>
-    <p>{{q.question}}</p>
+    <!-- <h4>Pregunta {{q.id}}:</h4>
+    <p>{{q.question}}</p> -->
+
+    <h4>{{q.question}}</h4>
 
     <ion-item *ngIf="q.field_type == 'text' || q.field_type == 'notes'" lines="none">
       <ion-input label="{{q.label}}" placeholder="Introduzca su respuesta"></ion-input>

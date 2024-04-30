@@ -11,131 +11,133 @@
     {
       "id": 1,
       "category": "medical",
-      "question": "COMER",
-      "label": "Comer",
+      "question": "Alimentación",
+      "label": "Alimentación",
       "redcap_value": "barthel_1_s",
       "field_type": "radio",
       "answers": [
-        { "answer": "DEPENDIENTE (necesita ser alimentado por otra persona)", "redcap_value": 0},
-        { "answer": "NECESITA AYUDA (para comer la carne o el pan, pero es capaz de comer solo)", "redcap_value": 5},
-        { "answer": "INDEPENDIENTE (capaz de comer por si solo y en un tiempo razonable. La comida puede ser cocinada y servida por otra persona)", "redcap_value": 10}
+        { "answer": "INDEPENDIENTE (Capaz de usar cualquier instrumento. Come en un tiempo razonable.", "redcap_value": 10},
+        { "answer": "AYUDA. Necesita ayuda para cortar, extender mantequilla,...", "redcap_value": 5},
+        { "answer": "DEPENDIENTE", "redcap_value": 0}
       ]
     },
     {
       "id": 2,
       "category": "medical",
-      "question": "LAVARSE (BAÑARSE)",
-      "label": "Lavarse",
+      "question": "Baño",
+      "label": "Baño",
       "redcap_value": "barthel_2_s",
       "field_type": "radio",
       "answers": [
-        { "answer": "DEPENDIENTE (Necesita ayuda o supervisión)", "redcap_value": 0},
-        { "answer": "INDEPENDIENTE (capaz de lavarse entero sin estar una persona presente al ingresar y salir del baño)", "redcap_value": 5}
+        { "answer": "INDEPENDIENTE. Se lava por completo en ducha o baño. Entra y sale del baño sin una persona presente.", "redcap_value": 5},
+        { "answer": "DEPENDIENTE", "redcap_value": 0}
       ]
     },
     {
       "id": 3,
       "category": "medical",
-      "question": "VESTIRSE",
-      "label": "Vestirse",
+      "question": "Vestido",
+      "label": "Vestido",
       "redcap_value": "barthel_3_s",
       "field_type": "radio",
       "answers": [
-        { "answer": "DEPENDIENTE (totalmente dependiente)", "redcap_value": 0},
-        { "answer": "NECESITA AYUDA (realiza solo al menos la mitad de las tareas en un tiempo razonable)", "redcap_value": 5},
-        { "answer": "INDEPENDIENTE (capaz de ponerse y quitarse la ropa sin ayuda)", "redcap_value": 10}
+        { "answer": "INDEPENDIENTE. Se viste, se desnuda y ajusta la ropa. Se ata los zapatos.", "redcap_value": 10},
+        { "answer": "AYUDA. Necesita ayuda, pero al menos la mitad de las tareas las realiza en un tiempo razonable.", "redcap_value": 5},
+        { "answer": "DEPENDIENTE", "redcap_value": 0}
+        
       ]
     },
     {
       "id": 4,
       "category": "medical",
-      "question": "ASEO PERSONAL, ARREGLARSE",
+      "question": "Aseo personal",
       "label": "Aseo personal",
       "redcap_value": "barthel_4_s",
       "field_type": "radio",
       "answers": [
-        { "answer": "DEPENDIENTE (necesita de alguna ayuda)", "redcap_value": 0},
-        { "answer": "INDEPENDIENTE (realiza todas las actividades personales sin ninguna ayuda. Los complementos necesarios pueden ser imprevistos por otra persona)", "redcap_value": 5}
+        { "answer": "INDEPENDIENTE. Se lava cara, manos y dientes. Se afeita y maneja el enchufe si usa máquina eléctrica.", "redcap_value": 5},
+        { "answer": "DEPENDIENTE", "redcap_value": 0}
       ]
     },
     {
       "id": 5,
       "category": "medical",
-      "question": "DEPOSICIÓN",
+      "question": "Deposición",
       "label": "Deposición",
       "redcap_value": "barthel_5_s",
       "field_type": "radio",
       "answers": [
-        { "answer": "INCONTINENTE", "redcap_value": 0},
-        { "answer": "ACCIDENTE OCASIONAL (máximo un episodio de incontinencia en 24 horas. Incluye necesitas ayuda en la manipulación de sondas y otros dispositivos)", "redcap_value": 5},
-        { "answer": "CONTINENTE (ningún episodio de incontinencia)", "redcap_value": 10}
+        { "answer": "CONTINENTE. No presenta episodios de incontinencia. Si necesita enemas o supositorios, se arregla solo.", "redcap_value": 10},
+        { "answer": "INCONTINENTE OCASIONAL. Episodios ocasionales o necesita ayuda para usar enemas o supositorios.", "redcap_value": 5},
+        { "answer": "INCONTINENTE", "redcap_value": 0}
       ]
     },
     {
       "id": 6,
       "category": "medical",
-      "question": "MICCIÓN: valorar la situación en la semana previa",
+      "question": "Micción",
       "label": "Micción",
       "redcap_value": "barthel_6_s",
       "field_type": "radio",
       "answers": [
-        { "answer": "INCONTINENTE (incluye pacientes con sonda incapaces de manejarse)", "redcap_value": 0},
-        { "answer": "ACCIDENTE OCASIONAL (menos de una vez por semana o necesita ayuda para enemas o supositorios)", "redcap_value": 5},
-        { "answer": "CONTINENTE (ningún episodio de incontinencia (seco día y noche). Capaz de usar cualquier dispositivo)", "redcap_value": 10}
+        { "answer": "CONTINENTE. No presenta episodios de incontinencia. Si necesita sonda o colector, atiende a su cuidado solo.", "redcap_value": 10},
+        { "answer": "INCONTINENTE OCASIONAL. Episodios ocasionales. Necesita ayuda en el uso de sonda o colector.", "redcap_value": 5},
+        { "answer": "INCONTINENTE", "redcap_value": 0}
       ]
     },
     {
       "id": 7,
       "category": "medical",
-      "question": "IR AL RETRETE",
-      "label": "Ir al retrete",
+      "question": "Uso del retrete",
+      "label": "Uso del retrete",
       "redcap_value": "barthel_7_s",
       "field_type": "radio",
       "answers": [
-        { "answer": "DEPENDIENTE (necesita ayuda por completo)", "redcap_value": 0},
-        { "answer": "NECESITA AYUDA (capaz de manejarse con pequeña ayuda en el equilibrio, quitarse y ponerse la ropa, pero puede limpiarse solo. Aún es capaz de utilizar el retrete)", "redcap_value": 5},
-        { "answer": "INDEPENDIENTE (entra y sale solo. Capaz de quitarse y ponerse la ropa, limpiarse y prevenir el manchado de la ropa y tirar la cadena, capaz de sentarse y levantarse de la taza sin ayuda (puede utilizar barras de soporte))", "redcap_value": 10}
+        { "answer": "INDEPENDIENTE. Usa el retrete o cuña. Se sienta y levanta solo o con barras. Se limpia y se pone la ropa solo.", "redcap_value": 10},
+        { "answer": "AYUDA. Necesita ayuda para mantener el equilibrio, limpiarse o ponerse y quitarse la ropa.", "redcap_value": 5},
+        { "answer": "DEPENDIENTE", "redcap_value": 0}
+        
       ]
     },
     {
       "id": 8,
       "category": "medical",
-      "question": "TRASLADO (TRANSFERENCIA) SILLÓN-CAMA",
-      "label": "Traslado",
+      "question": "Transferencias sillón-cama",
+      "label": "Transferencias sillón-cama",
       "redcap_value": "barthel_8_s",
       "field_type": "radio",
       "answers": [
-        { "answer": "DEPENDIENTE (necesita ayuda por completo, incapaz de permanecer sentado)", "redcap_value": 0},
-        { "answer": "GRAN AYUDA (capaz de estar sentado sin ayuda pero necesita mucha asistencia (persona fuerte y entrenada) para salir/entrar a la cama o desplazarse)", "redcap_value": 5},
-        { "answer": "MÍNIMA AYUDA (incluye supervisión verbal o pequeña ayuda física, tal como la ofrecida por una persona no muy fuerte y sin entrenamiento)", "redcap_value": 10},
-        { "answer": "INDEPENDIENTE (sin ayudas en todas las fases, si utiliza silla de ruedas se aproxima a la cama, frena y se desplaza)", "redcap_value": 15}
+        { "answer": "INDEPENDIENTE. No necesita ninguna ayuda. Si usa silla de ruedas, lo hace independientemente.", "redcap_value": 15},
+        { "answer": "MÍNIMA AYUDA. Necesita una mínima ayuda o supervisión.", "redcap_value": 10},
+        { "answer": "GRAN AYUDA. Es capaz de sentarse, pero necesita mucha asistencia para el traslado.", "redcap_value": 5},
+        { "answer": "DEPENDIENTE", "redcap_value": 0}      
       ]
     },
     {
       "id": 9,
       "category": "medical",
-      "question": "DEAMBULACIÓN",
+      "question": "Deambulación",
       "label": "Deambulación",
       "redcap_value": "barthel_9_s",
       "field_type": "radio",
       "answers": [
-        { "answer": "DEPENDIENTE (si utiliza silla de ruedas precisa ser empujado por otro)", "redcap_value": 0},
-        { "answer": "INDEPENDIENTE (EN SILLA DE RUEDAS) (en 50m debe ser capaz de desplazarse, atravesar puertas y doblar esquinas solo)", "redcap_value": 5},
-        { "answer": "NECESITA AYUDA (supervisión o pequeña ayuda física (persona no muy fuerte) para andar 50m (incluye andador))", "redcap_value": 10},
-        { "answer": "INDEPENDIENTE (puede caminar al menos 50m os u equivalente en casa sin ayuda ni supervisión)", "redcap_value": 15}
+        { "answer": "INDEPENDIENTE Camina al menos 50 metros independientemente o con ayudas (bastón, andador...).", "redcap_value": 15},
+        { "answer": "AYUDA. Puede caminar al menos 50 metros, pero necesita ayuda o supervisión.", "redcap_value": 10},
+        { "answer": "INDEPENDIENTE EN SILLA DE RUEDAS. Propulsa su silla de ruedas al menos 50 metros.", "redcap_value": 5},
+        { "answer": "DEPENDIENTE", "redcap_value": 0}
       ]
     },
     {
       "id": 10,
       "category": "medical",
-      "question": "USO DE LAS ESCALERAS",
+      "question": "Escaleras",
       "label": "Escaleras",
       "redcap_value": "barthel_10_s",
       "field_type": "radio",
       "answers": [
-        { "answer": "DEPENDIENTE (incapaz de salvar escalones. Necesita alzamiento (ascensor))", "redcap_value": 0},
-        { "answer": "NECESITA AYUDA (supervisión física o verbal)", "redcap_value": 5},
-        { "answer": "INDEPENDIENTE (capaz de subir y bajar un piso sin supervisión. Puede utilizar el apoyo que precisa para andar (bastón, muletas, etc.) y el pasamanos)", "redcap_value": 10}
+        { "answer": "INDEPENDIENTE. Sube o baja escaleras sin supervisión aunque use barandilla o instrumentos de apoyo.", "redcap_value": 10},
+        { "answer": "AYUDA. Necesita ayuda física o supervisión para subir o bajar escaleras.", "redcap_value": 5},
+        { "answer": "DEPENDIENTE", "redcap_value": 0}
       ]
     },
     {
