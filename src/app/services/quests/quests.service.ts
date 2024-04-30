@@ -82,8 +82,6 @@ export class QuestsService {
       }
     }
 
-    console.log(data)
-
     this.dataSrvc.import(data).subscribe((res) => {
 
       var data_monitoring = [
@@ -111,11 +109,10 @@ export class QuestsService {
     
     data.push(elem);
     
+    // Allocate BARTHEL DATA data into data array
     for (var key in barthelseg_form) {
       data[0][key] = barthelseg_form[key];
     }
-
-    console.log(data)
     
     this.dataSrvc.import(data).subscribe((res) => {
 
@@ -144,11 +141,11 @@ export class QuestsService {
     };
     
     data.push(elem);
+
+    // Allocate FACSEG DATA data into data array
     data[0].f_facseg = facseg_form.f_facseg;
     data[0].fac_seguimiento = facseg_form.fac_seguimiento;
 
-    // console.log(data)
-    
     this.dataSrvc.import(data).subscribe((res) => {
 
       var data_facseg = [
@@ -175,33 +172,27 @@ export class QuestsService {
   }
 
   async setQuestStatus(id: string, quest_name: string): Promise<void> {
+
     this.getQuestStatus(id).subscribe({
       next: (data: QuestControl) => {
 
-        var data2: QuestControl[] = [];
+        if(data[0].quest_control == 0){
+          var data2: QuestControl[] = [];
 
-        const elem: QuestControl = {
-          record_id: id,
-          control_cuestionarios_complete: 2
-        }
+          const elem: QuestControl = {
+            record_id: id,
+            control_cuestionarios_complete: 2
+          }
 
-        data2.push(elem)
+          data2.push(elem)
+          data2[0] = { ...data[0], ...data2[0] };
 
-        data2[0] = { ...data[0], ...data2[0] };
-
-        if(quest_name == "barthelseg"){
-          data2[0].barthelseg_enabled = '0'
-        } else if(quest_name == "monitoring"){
-          data2[0].monitoring_enabled = '0'
-        } else if(quest_name == "facseg") {
-          data2[0].facseg_enabled = '0'
-        }
-        
-
-        this.dataSrvc.import(data2).subscribe((res) => {
-          console.log("Quest Status Updated")
-        })
-
+          if (data[0][`${quest_name}_date_1`] == ""){
+            data2[0][`${quest_name}_date_1`] = new Date().toISOString().split('T')[0]
+          }
+          
+          this.dataSrvc.import(data2).subscribe((res) => {})
+        } 
       },
       error: (err) => {console.log(err)},
       complete: () => {}

@@ -53,6 +53,8 @@ export class QuestsPage implements OnInit {
     this.isEnabledBarthelseg = "0"
     this.isEnabledFacseg = "0"
     this.isEnabledNeuroQol = "0"
+
+    console.log(this.isEnabledMonitoring, this.isEnabledBarthelseg, this.isEnabledFacseg, this.isEnabledNeuroQol)
   }
 
   ngOnInit() {
@@ -67,49 +69,44 @@ export class QuestsPage implements OnInit {
   }
 
   getQuestStatus(event) {
+    
     this.questsSrvc.getQuestStatus(this.id).subscribe({
+
       next: (data: QuestControl) => {
+
         if(data[0].quest_control == 0){ // Automático
 
-          this.firstMonitoring = new Date(data[0].monitoring_date_1)
-          this.firstBarthelseg = new Date(data[0].barthelseg_date_1)
-          this.firstFacseg = new Date(data[0].facseg_date_1)
-          this.firstNeuroQol = new Date(data[0].neuroqol_date_1)
-
-          for(let f of this.questFrecuencies){
-            // Monitoring
-            let updateMonitoringDate = new Date(this.firstMonitoring.getTime());
-            updateMonitoringDate.setMonth(updateMonitoringDate.getMonth() + f);
-            this.isEnabledMonitoring = this.datesAreEqual(updateMonitoringDate, this.currentDate) ? "1" : this.isEnabledMonitoring;
-            this.nextMonitoringDate = (this.nextMonitoringDate == null && updateMonitoringDate > this.currentDate) ? updateMonitoringDate.toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'}) : this.nextMonitoringDate;
-            // console.log(f, this.isEnabledMonitoring, this.nextMonitoringDate)
-
-            // Barthelseg
-            let updateBarthelsegDate = new Date(this.firstBarthelseg.getTime());
-            updateBarthelsegDate.setMonth(updateBarthelsegDate.getMonth() + f);
-            this.isEnabledBarthelseg = this.datesAreEqual(updateBarthelsegDate, this.currentDate) ? "1" : this.isEnabledBarthelseg;
-            this.nextBarthelsegDate = (this.nextBarthelsegDate == null && updateBarthelsegDate > this.currentDate) ? updateBarthelsegDate.toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'}) : this.nextBarthelsegDate;
-            // console.log(f, this.isEnabledBarthelseg, this.nextBarthelsegDate)
-            
-            // Facseg
-            let updateFacsegDate = new Date(this.firstFacseg.getTime());
-            updateFacsegDate.setMonth(updateFacsegDate.getMonth() + f);
-            this.isEnabledFacseg = this.datesAreEqual(updateFacsegDate, this.currentDate) ? "1" : this.isEnabledFacseg;
-            this.nextFacsegDate = (this.nextFacsegDate == null && updateFacsegDate > this.currentDate) ? updateFacsegDate.toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'}) : this.nextFacsegDate;
-            // console.log(f, this.isEnabledFacseg, this.nextFacsegDate)
-
-            // NeuroQol
-            let updateNeuroQolDate = new Date(this.firstNeuroQol.getTime());
-            updateNeuroQolDate.setMonth(updateNeuroQolDate.getMonth() + f);
-            this.isEnabledNeuroQol = this.datesAreEqual(updateNeuroQolDate, this.currentDate) ? "1" : this.isEnabledNeuroQol;
-            this.nextNeuroQolDate = (this.nextNeuroQolDate == null && updateNeuroQolDate > this.currentDate) ? updateNeuroQolDate.toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'}) : this.nextNeuroQolDate;
-            // console.log(f, this.isEnabledNeuroQol, this.nextNeuroQolDate)
+          if (data[0].monitoring_date_1 && data[0].monitoring_date_1 !== "") {
+            this.checkQuestDate('Monitoring', data[0].monitoring_date_1);
+          } else {
+            this.isEnabledMonitoring = '1'
           }
+          
+          if (data[0].barthelseg_date_1 && data[0].barthelseg_date_1 !== "") {
+            this.checkQuestDate('Barthelseg', data[0].barthelseg_date_1);
+          } else {
+            this.isEnabledBarthelseg = '1'
+          }
+          
+          if (data[0].facseg_date_1 && data[0].facseg_date_1 !== "") {
+            this.checkQuestDate('Facseg', data[0].facseg_date_1);
+          } else {
+            this.isEnabledFacseg = '1'
+          }
+          
+          if (data[0].neuroqol_date_1 && data[0].neuroqol_date_1 !== "") {
+            this.checkQuestDate('NeuroQol', data[0].neuroqol_date_1);
+          } else {
+            this.isEnabledNeuroQol = '1'
+          }
+
+          console.log(this.isEnabledMonitoring, this.isEnabledBarthelseg, this.isEnabledFacseg, this.isEnabledNeuroQol)
+
         } else { //Manual
-          this.isEnabledMonitoring = data[0].monitoring_enabled
-          this.isEnabledBarthelseg = data[0].barthelseg_enabled
-          this.isEnabledFacseg = data[0].facseg_enabled
-          this.isEnabledNeuroQol = data[0].neuroqol_enabled
+          this.isEnabledMonitoring = "1"
+          this.isEnabledBarthelseg = "1"
+          this.isEnabledFacseg = "1"
+          this.isEnabledNeuroQol = "1"
         }
         if (event) event.target.complete();
       },
@@ -119,6 +116,28 @@ export class QuestsPage implements OnInit {
       },
       complete: () => {}
     })
+  }
+
+  checkQuestDate(prefix, first_data_date) {
+
+    let firstDate = `first${prefix}`;
+    let isEnabled = `isEnabled${prefix}`;
+    let nextDate = `next${prefix}Date`;
+
+    this[firstDate] = new Date(first_data_date)
+    
+    for (let f of this.questFrecuencies) {
+      let updateDate = new Date(this[firstDate].getTime());
+      updateDate.setMonth(updateDate.getMonth() + f);
+      
+      // console.log('*', updateDate, this.currentDate)
+      this[isEnabled] = this.datesAreEqual(updateDate, this.currentDate) ? "1" : "0";
+      this[isEnabled] = (f == this.questFrecuencies.pop() && updateDate < this.currentDate) ? "2" : this[isEnabled];
+      this[nextDate] = (this[nextDate] == null && updateDate >= this.currentDate) ? updateDate.toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'}) : this[nextDate];
+
+      // console.log('*', this[isEnabled], this.isEnabledFacseg)
+    }
+
   }
 
   async presentMonitoringModal(){
@@ -166,9 +185,12 @@ export class QuestsPage implements OnInit {
   }
 
   datesAreEqual(date1, date2) {
+    // console.log('-', date1.getDate(), date2.getDate(), "Are equal?", date1.getDate() === date2.getDate())
+    // console.log('-', date1.getMonth(), date2.getMonth(), "Are equal?", date1.getMonth() === date2.getMonth())
+    // console.log('-', date1.getFullYear(), date2.getFullYear(), "Are equal?", date1.getFullYear() === date2.getFullYear())
     return date1.getDate() === date2.getDate() &&
            date1.getMonth() === date2.getMonth() &&
            date1.getFullYear() === date2.getFullYear();
-}
+  }
 
 }

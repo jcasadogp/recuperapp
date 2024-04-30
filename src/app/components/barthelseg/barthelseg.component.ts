@@ -43,10 +43,8 @@ export class BarthelsegComponent  implements OnInit {
   postBarthelsegForm(): void {
 
     this.barthelseg_form.f_barthel = new Date().toISOString().split('T')[0]
-    console.log(this.barthelseg_form)
 
     var i = Object.keys(this.barthelseg_form).length;
-    console.log("preguntas contestadas:", i)
 
     if(i < 11){
       var camposVacios = 11 - i;
@@ -55,9 +53,10 @@ export class BarthelsegComponent  implements OnInit {
 
       this.questsSrvc.postBarthelsegForm(this.id, this.barthelseg_form).then(()=>{
 
-        this.questsSrvc.setQuestStatus(this.id, "barthelseg");
-        this.modalCntrl.dismiss().then().catch();
-        this.presentConfirmationToast();
+        this.questsSrvc.setQuestStatus(this.id, "barthelseg").then(() => {
+          this.modalCntrl.dismiss().then().catch();
+          this.presentConfirmationToast();
+        });
         
       }).catch((err) => console.log(err));
     }

@@ -1,13 +1,12 @@
-<ion-header [translucent]="true">
-  <ion-toolbar class="ppal-toolbar">
+<ion-header mode="ios" [translucent]="true" class="custom-header">
+  <ion-toolbar>
     <ion-title>
       Cuestionarios
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true"> 
-
+<ion-content [fullscreen]="true">
   <div>
     <ion-refresher slot="fixed" (ionRefresh)="[getQuestStatus($event)]">
       <ion-refresher-content></ion-refresher-content>
@@ -17,15 +16,21 @@
       <ion-card-header>
         <ion-card-title>Cuestionario de Seguimiento</ion-card-title>
         <br>
-        <ion-card-subtitle *ngIf="isEnabledMonitoring == '1'">Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle>
-        <ion-card-subtitle *ngIf="isEnabledMonitoring == '0'">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle>
+
+        <ion-card-subtitle>Estado: 
+          <ion-text *ngIf="isEnabledMonitoring == '1'" color="success">Disponible</ion-text>
+          <ion-text *ngIf="isEnabledMonitoring == '0'" color="danger">Cerrado</ion-text>
+        </ion-card-subtitle>
+
       </ion-card-header>
+
       <ion-card-content>
         <ion-label *ngIf="isEnabledMonitoring == '1'"><ion-text>Cuestionario de seguimiento</ion-text></ion-label>
         <p class="quest_time_estimate" *ngIf="isEnabledMonitoring == '1'">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
 
         <ion-label *ngIf="isEnabledMonitoring == '0' && nextMonitoringDate">Disponible a partir del <ion-text>{{nextMonitoringDate}}</ion-text></ion-label>
-        <ion-label *ngIf="!nextMonitoringDate"><ion-text color="success">No tiene que rellenar más cuestionarios!</ion-text></ion-label>
+        <ion-label *ngIf="isEnabledMonitoring == '2'"><ion-text color="success">No tiene que rellenar más cuestionarios!</ion-text></ion-label>
+        
         <ion-button mode="ios" expand="block" [disabled]="isEnabledMonitoring == '0'" (click)="presentMonitoringModal()">Comenzar</ion-button>
       </ion-card-content>
     </ion-card>
@@ -34,15 +39,19 @@
       <ion-card-header>
         <ion-card-title>Cuestionario de Barthel</ion-card-title>
         <br>
-        <ion-card-subtitle *ngIf="isEnabledBarthelseg == '1'">Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle>
-        <ion-card-subtitle *ngIf="isEnabledBarthelseg == '0'">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle>
+        
+        <ion-card-subtitle>Estado: 
+          <ion-text *ngIf="isEnabledBarthelseg == '1'" color="success">Disponible</ion-text>
+          <ion-text *ngIf="isEnabledBarthelseg == '0'" color="danger">Cerrado</ion-text>
+        </ion-card-subtitle>
+      
       </ion-card-header>
       <ion-card-content>
         <ion-label *ngIf="isEnabledBarthelseg == '1'"><ion-text>Cuestionario de Barthel</ion-text></ion-label>
         <p class="quest_time_estimate" *ngIf="isEnabledBarthelseg == '1'">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
 
         <ion-label *ngIf="isEnabledBarthelseg == '0' && nextBarthelsegDate">Disponible a partir del <ion-text>{{nextBarthelsegDate}}</ion-text></ion-label>
-        <ion-label *ngIf="!nextBarthelsegDate"><ion-text color="success">No tiene que rellenar más cuestionarios!</ion-text></ion-label>
+        <ion-label *ngIf="isEnabledBarthelseg == '2'"><ion-text color="success">No tiene que rellenar más cuestionarios!</ion-text></ion-label>
         <ion-button mode="ios" expand="block" [disabled]="isEnabledBarthelseg == '0'" (click)="presentBarthelsegModal()">Comenzar</ion-button>
       </ion-card-content>
     </ion-card>
@@ -51,15 +60,19 @@
       <ion-card-header>
         <ion-card-title>Cuestionario de Valoración Funcional de la Marcha</ion-card-title>
         <br>
-        <ion-card-subtitle *ngIf="isEnabledFacseg == '1'">Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle>
-        <ion-card-subtitle *ngIf="isEnabledFacseg == '0'">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle>
+      
+        <ion-card-subtitle>Estado: 
+          <ion-text *ngIf="isEnabledFacseg == '1'" color="success">Disponible</ion-text>
+          <ion-text *ngIf="isEnabledFacseg == '0'" color="danger">Cerrado</ion-text>
+        </ion-card-subtitle>
+
       </ion-card-header>
       <ion-card-content>
         <ion-label *ngIf="isEnabledFacseg == '1'"><ion-text>Escala FAC</ion-text></ion-label>
         <p class="quest_time_estimate" *ngIf="isEnabledFacseg == '1'">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
 
         <ion-label *ngIf="isEnabledFacseg == '0' && nextFacsegDate">Disponible a partir del <ion-text>{{nextFacsegDate}}</ion-text></ion-label>
-        <ion-label *ngIf="!nextFacsegDate"><ion-text color="success">No tiene que rellenar más cuestionarios!</ion-text></ion-label>
+        <ion-label *ngIf="isEnabledFacseg == '2'"><ion-text color="success">No tiene que rellenar más cuestionarios!</ion-text></ion-label>
         <ion-button mode="ios" expand="block" [disabled]="isEnabledFacseg == '0'" (click)="presentFacsegModal()">Comenzar</ion-button>
       </ion-card-content>
     </ion-card>
@@ -68,15 +81,19 @@
       <ion-card-header>
         <ion-card-title>Cuestionario de la Movilidad de las Extremidades Inferiores</ion-card-title>
         <br>
-        <ion-card-subtitle *ngIf="isEnabledNeuroQol == '1'">Estado: <ion-text color="success">Disponible</ion-text></ion-card-subtitle>
-        <ion-card-subtitle *ngIf="isEnabledNeuroQol == '0'">Estado: <ion-text color="danger">Cerrado</ion-text></ion-card-subtitle>
+        
+        <ion-card-subtitle>Estado: 
+          <ion-text *ngIf="isEnabledNeuroQol == '1'" color="success">Disponible</ion-text>
+          <ion-text *ngIf="isEnabledNeuroQol == '0'" color="danger">Cerrado</ion-text>
+        </ion-card-subtitle>
+
       </ion-card-header>
       <ion-card-content>
         <ion-label *ngIf="isEnabledNeuroQol == '1'"><ion-text>Escala CAT</ion-text></ion-label>
         <p class="quest_time_estimate" *ngIf="isEnabledNeuroQol == '1'">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
 
         <ion-label *ngIf="isEnabledNeuroQol == '0' && nextNeuroQolDate">Disponible a partir del <ion-text>{{nextNeuroQolDate}}</ion-text></ion-label>
-        <ion-label *ngIf="!nextNeuroQolDate"><ion-text color="success">No tiene que rellenar más cuestionarios!</ion-text></ion-label>
+        <ion-label *ngIf="isEnabledNeuroQol == '2'"><ion-text color="success">No tiene que rellenar más cuestionarios!</ion-text></ion-label>
         <ion-button mode="ios" expand="block" [disabled]="isEnabledNeuroQol == '0'" (click)="presentNeuroQoLModal()">Comenzar</ion-button>
       </ion-card-content>
     </ion-card>

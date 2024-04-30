@@ -45,10 +45,8 @@ export class MonitoringComponent  implements OnInit {
   postMonitoringForm(): void {
 
     this.monitoring_form.f_seguimiento = new Date().toISOString().split('T')[0]
-    console.log(this.monitoring_form)
 
     var i = Object.keys(this.monitoring_form).length;
-    console.log("preguntas contestadas:", i)
 
     if(i < 10){
       var camposVacios = 10 - i;
@@ -57,9 +55,10 @@ export class MonitoringComponent  implements OnInit {
 
       this.questsSrvc.postMonitoringForm(this.id, this.monitoring_form).then(()=>{
 
-        this.questsSrvc.setQuestStatus(this.id, "monitoring");
-        this.modalCntrl.dismiss().then().catch();
-        this.presentConfirmationToast();
+        this.questsSrvc.setQuestStatus(this.id, "monitoring").then(() => {
+          this.modalCntrl.dismiss().then().catch();
+          this.presentConfirmationToast();
+        });
         
       }).catch((err) => console.log(err));
     }
