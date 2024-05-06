@@ -8,7 +8,7 @@
 
 <ion-content [fullscreen]="true">
   <div>
-    <ion-refresher slot="fixed" (ionRefresh)="[getQuestStatus($event)]">
+    <ion-refresher slot="fixed" (ionRefresh)="[getEnabledStatus($event)]">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
 
@@ -26,7 +26,7 @@
 
       <ion-card-content>
         <ion-label *ngIf="isEnabledMonitoring == '1'"><ion-text>Cuestionario de seguimiento</ion-text></ion-label>
-        <p class="quest_time_estimate" *ngIf="isEnabledMonitoring == '1'">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
+        <p class="quest_time_estimate" *ngIf="isEnabledMonitoring == '1'">Tiempo estimado: <ion-text>2 minutos</ion-text></p>
 
         <ion-label *ngIf="isEnabledMonitoring == '0' && nextMonitoringDate">Disponible a partir del <ion-text>{{nextMonitoringDate}}</ion-text></ion-label>
         <ion-label *ngIf="isEnabledMonitoring == '2'"><ion-text color="success">No tiene que rellenar más cuestionarios!</ion-text></ion-label>
@@ -48,7 +48,7 @@
       </ion-card-header>
       <ion-card-content>
         <ion-label *ngIf="isEnabledBarthelseg == '1'"><ion-text>Cuestionario de Barthel</ion-text></ion-label>
-        <p class="quest_time_estimate" *ngIf="isEnabledBarthelseg == '1'">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
+        <p class="quest_time_estimate" *ngIf="isEnabledBarthelseg == '1'">Tiempo estimado: <ion-text>2 minutos</ion-text></p>
 
         <ion-label *ngIf="isEnabledBarthelseg == '0' && nextBarthelsegDate">Disponible a partir del <ion-text>{{nextBarthelsegDate}}</ion-text></ion-label>
         <ion-label *ngIf="isEnabledBarthelseg == '2'"><ion-text color="success">No tiene que rellenar más cuestionarios!</ion-text></ion-label>
@@ -69,7 +69,7 @@
       </ion-card-header>
       <ion-card-content>
         <ion-label *ngIf="isEnabledFacseg == '1'"><ion-text>Escala FAC</ion-text></ion-label>
-        <p class="quest_time_estimate" *ngIf="isEnabledFacseg == '1'">Tiempo estimado: <ion-text>3 minutos</ion-text></p>
+        <p class="quest_time_estimate" *ngIf="isEnabledFacseg == '1'">Tiempo estimado: <ion-text>1 minuto</ion-text></p>
 
         <ion-label *ngIf="isEnabledFacseg == '0' && nextFacsegDate">Disponible a partir del <ion-text>{{nextFacsegDate}}</ion-text></ion-label>
         <ion-label *ngIf="isEnabledFacseg == '2'"><ion-text color="success">No tiene que rellenar más cuestionarios!</ion-text></ion-label>

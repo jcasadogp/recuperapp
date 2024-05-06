@@ -1,12 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { DataService } from '../data/data.service';
 import { QuestControl } from 'src/app/redcap_interfaces/quest_control';
 
 import { MonitoringForm } from 'src/app/interfaces/monitoring-form';
-import { MonitoringData } from 'src/app/redcap_interfaces/monitoring_data';
 import { FacsegForm } from 'src/app/interfaces/facseg-form';
 import { Facseg } from 'src/app/redcap_interfaces/facseg';
 import { BarthelsegForm } from 'src/app/interfaces/barthelseg-form';
@@ -14,18 +13,40 @@ import { Barthelseg } from 'src/app/redcap_interfaces/barthelseg';
 
 import { StorageService } from '../storage/storage.service';
 import { LoginService } from '../login/login.service';
+import { MonitoringData } from 'src/app/redcap_interfaces/monitoring_data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestsService {
 
+  id: string
+  public currentDate;
+  questFrecuencies: number[];
+
   num_facseg: number;
   num_barthelseg: number;
   num_seguimiento: number;
   num_neuro_qol: number;
 
-  monitoring_data: MonitoringData;
+  firstMonitoring;
+  firstBarthelseg;
+  firstFacseg;
+  firstNeuroQol;
+
+  nextMonitoringDate;
+  nextBarthelsegDate;
+  nextFacsegDate;
+  nextNeuroQolDate;
+
+  isEnabledMonitoring: string;
+  isEnabledBarthelseg: string;
+  isEnabledFacseg: string;
+  isEnabledNeuroQol: string;
+
+  private numEnabledQuests: number;
+
+  questFilled: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
     private http: HttpClient,
@@ -33,6 +54,14 @@ export class QuestsService {
     private loginSrvc: LoginService,
     private storageSrvc: StorageService
   ) {
+    this.currentDate = new Date()
+    this.questFrecuencies = [1, 3, 4, 6, 9, 12]
+
+    this.nextMonitoringDate = null;
+    this.nextBarthelsegDate = null;
+    this.nextFacsegDate = null;
+    this.nextNeuroQolDate = null;
+
     this.getRecordID().then(id => {
       this.loginSrvc.getUser(id).subscribe(data => {
         this.num_facseg = data[0].num_facseg === "" ? 0 : +data[0].num_facseg;
@@ -40,7 +69,11 @@ export class QuestsService {
         this.num_seguimiento = data[0].num_seguimiento === "" ? 0 : +data[0].num_seguimiento;
         this.num_neuro_qol = data[0].num_neuro_qol === "" ? 0 : +data[0].num_neuro_qol;
       })
+
+      // this.getEnabledStatus(id)
     })
+
+    this.questFilled.emit();
   }
 
   async getRecordID(): Promise<any> {
@@ -168,7 +201,83 @@ export class QuestsService {
 
     console.log("getQuestStatus()", id, "control_cuestionarios")
 
-    return this.dataSrvc.export(record, forms);
+    return this.dataSrvc.export(record, forms)
+  }
+
+  getEnabledStatus(id: string): Observable<{ enabledQuests: string[], nextDates: string[] }> {
+    
+    return new Observable<{ enabledQuests: string[], nextDates: string[] }>(observer => {
+      this.getQuestStatus(id).subscribe({
+        next: (data: QuestControl) => {
+
+          let enabledQuests: string[];
+          let nextDates: string[];
+          
+          if(data[0].quest_control == 0){ // Automático
+            if (data[0].monitoring_date_1 && data[0].monitoring_date_1 !== "") {
+              this.checkQuestDate('Monitoring', data[0].monitoring_date_1);
+            } else {
+              this.isEnabledMonitoring = '1'
+            }
+            
+            if (data[0].barthelseg_date_1 && data[0].barthelseg_date_1 !== "") {
+              this.checkQuestDate('Barthelseg', data[0].barthelseg_date_1);
+            } else {
+              this.isEnabledBarthelseg = '1'
+            }
+            
+            if (data[0].facseg_date_1 && data[0].facseg_date_1 !== "") {
+              this.checkQuestDate('Facseg', data[0].facseg_date_1);
+            } else {
+              this.isEnabledFacseg = '1'
+            }
+            
+            if (data[0].neuroqol_date_1 && data[0].neuroqol_date_1 !== "") {
+              this.checkQuestDate('NeuroQol', data[0].neuroqol_date_1);
+            } else {
+              this.isEnabledNeuroQol = '1'
+            }
+            
+            enabledQuests = [this.isEnabledMonitoring, this.isEnabledBarthelseg, 
+              this.isEnabledFacseg, this.isEnabledNeuroQol];
+
+            nextDates = [this.nextMonitoringDate, this.nextBarthelsegDate, 
+              this.nextFacsegDate, this.nextNeuroQolDate];
+              
+            this.numEnabledQuests = this.calculatenumEnabledQuests()
+
+            console.log("**", this.isEnabledMonitoring, this.isEnabledBarthelseg, this.isEnabledFacseg, this.isEnabledNeuroQol)
+            console.log("** Calculate Enabled Quest Number: ", this.numEnabledQuests)
+            this.questFilled.emit();
+          
+          } else { //Manual
+            this.isEnabledMonitoring = "1"
+            this.isEnabledBarthelseg = "1"
+            this.isEnabledFacseg = "1"
+            this.isEnabledNeuroQol = "1"
+
+            enabledQuests = [this.isEnabledMonitoring, this.isEnabledBarthelseg, 
+              this.isEnabledFacseg, this.isEnabledNeuroQol];
+
+            nextDates = [this.nextMonitoringDate, this.nextBarthelsegDate, 
+              this.nextFacsegDate, this.nextNeuroQolDate];
+              
+            this.numEnabledQuests = this.calculatenumEnabledQuests()
+
+            console.log("**", this.isEnabledMonitoring, this.isEnabledBarthelseg, this.isEnabledFacseg, this.isEnabledNeuroQol)
+            console.log("** Calculate Enabled Quest Number: ", this.numEnabledQuests)
+            this.questFilled.emit();
+          }
+
+          observer.next({ enabledQuests, nextDates });
+          observer.complete();
+        },
+        error: (err) => {
+          console.log(err)
+        },
+        complete: () => {}
+      })
+    })
   }
 
   async setQuestStatus(id: string, quest_name: string): Promise<void> {
@@ -192,11 +301,53 @@ export class QuestsService {
           }
           
           this.dataSrvc.import(data2).subscribe((res) => {})
+          this.getEnabledStatus(id).subscribe((res) => {})
         } 
       },
       error: (err) => {console.log(err)},
       complete: () => {}
     })
+  }
+
+  checkQuestDate(prefix, first_data_date) {
+
+    let firstDate = `first${prefix}`;
+    let isEnabled = `isEnabled${prefix}`;
+    let nextDate = `next${prefix}Date`;
+
+    this[firstDate] = new Date(first_data_date)
+    
+    for (let f of this.questFrecuencies) {
+      let updateDate = new Date(this[firstDate].getTime());
+      updateDate.setMonth(updateDate.getMonth() + f);
+      
+      // console.log('*', updateDate, this.currentDate)
+      this[isEnabled] = this.datesAreEqual(updateDate, this.currentDate) ? "1" : "0";
+      this[isEnabled] = (f == this.questFrecuencies.pop() && updateDate < this.currentDate) ? "2" : this[isEnabled];
+      this[nextDate] = (this[nextDate] == null && updateDate >= this.currentDate) ? updateDate.toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'}) : this[nextDate];
+
+      // console.log('*', this[isEnabled], this.isEnabledFacseg)
+    }
+
+  }
+
+  datesAreEqual(date1, date2) {
+    return date1.getDate() === date2.getDate() &&
+           date1.getMonth() === date2.getMonth() &&
+           date1.getFullYear() === date2.getFullYear();
+  }
+  
+  calculatenumEnabledQuests(): number {
+    const totalEnabled = parseInt(this.isEnabledMonitoring) + 
+      parseInt(this.isEnabledBarthelseg) + 
+      parseInt(this.isEnabledFacseg) + 
+      parseInt(this.isEnabledNeuroQol);
+
+    return totalEnabled
+  }
+
+  getNumEnabledQuests(): number {
+    return this.numEnabledQuests;
   }
 }
 

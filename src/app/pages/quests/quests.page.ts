@@ -18,7 +18,6 @@ export class QuestsPage implements OnInit {
 
   id: string
   public currentDate;
-  questFrecuencies: number[];
 
   firstMonitoring;
   firstBarthelseg;
@@ -42,7 +41,6 @@ export class QuestsPage implements OnInit {
     private storageSrvc: StorageService
   ) {
     this.currentDate = new Date()
-    this.questFrecuencies = [1, 3, 4, 6, 9, 12]
 
     this.nextMonitoringDate = null;
     this.nextBarthelsegDate = null;
@@ -53,14 +51,12 @@ export class QuestsPage implements OnInit {
     this.isEnabledBarthelseg = "0"
     this.isEnabledFacseg = "0"
     this.isEnabledNeuroQol = "0"
-
-    console.log(this.isEnabledMonitoring, this.isEnabledBarthelseg, this.isEnabledFacseg, this.isEnabledNeuroQol)
   }
 
   ngOnInit() {
     this.getRecordID().then(data => {
       this.id = data
-      this.getQuestStatus(null)
+      this.getEnabledStatus(null)
     })
   }
 
@@ -68,76 +64,20 @@ export class QuestsPage implements OnInit {
     return await this.storageSrvc.get('RECORD_ID');
   }
 
-  getQuestStatus(event) {
-    
-    this.questsSrvc.getQuestStatus(this.id).subscribe({
+  getEnabledStatus(event) {
 
-      next: (data: QuestControl) => {
-
-        if(data[0].quest_control == 0){ // Automático
-
-          if (data[0].monitoring_date_1 && data[0].monitoring_date_1 !== "") {
-            this.checkQuestDate('Monitoring', data[0].monitoring_date_1);
-          } else {
-            this.isEnabledMonitoring = '1'
-          }
-          
-          if (data[0].barthelseg_date_1 && data[0].barthelseg_date_1 !== "") {
-            this.checkQuestDate('Barthelseg', data[0].barthelseg_date_1);
-          } else {
-            this.isEnabledBarthelseg = '1'
-          }
-          
-          if (data[0].facseg_date_1 && data[0].facseg_date_1 !== "") {
-            this.checkQuestDate('Facseg', data[0].facseg_date_1);
-          } else {
-            this.isEnabledFacseg = '1'
-          }
-          
-          if (data[0].neuroqol_date_1 && data[0].neuroqol_date_1 !== "") {
-            this.checkQuestDate('NeuroQol', data[0].neuroqol_date_1);
-          } else {
-            this.isEnabledNeuroQol = '1'
-          }
-
-          console.log(this.isEnabledMonitoring, this.isEnabledBarthelseg, this.isEnabledFacseg, this.isEnabledNeuroQol)
-
-        } else { //Manual
-          this.isEnabledMonitoring = "1"
-          this.isEnabledBarthelseg = "1"
-          this.isEnabledFacseg = "1"
-          this.isEnabledNeuroQol = "1"
-        }
-        if (event) event.target.complete();
-      },
-      error: (err) => {
-        console.log(err)
-        if (event) event.target.complete();
-      },
-      complete: () => {}
-    })
-  }
-
-  checkQuestDate(prefix, first_data_date) {
-
-    let firstDate = `first${prefix}`;
-    let isEnabled = `isEnabled${prefix}`;
-    let nextDate = `next${prefix}Date`;
-
-    this[firstDate] = new Date(first_data_date)
-    
-    for (let f of this.questFrecuencies) {
-      let updateDate = new Date(this[firstDate].getTime());
-      updateDate.setMonth(updateDate.getMonth() + f);
+    this.questsSrvc.getEnabledStatus(this.id).subscribe(({ enabledQuests, nextDates }) => {
       
-      // console.log('*', updateDate, this.currentDate)
-      this[isEnabled] = this.datesAreEqual(updateDate, this.currentDate) ? "1" : "0";
-      this[isEnabled] = (f == this.questFrecuencies.pop() && updateDate < this.currentDate) ? "2" : this[isEnabled];
-      this[nextDate] = (this[nextDate] == null && updateDate >= this.currentDate) ? updateDate.toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'}) : this[nextDate];
+      this.isEnabledMonitoring = enabledQuests[0]
+      this.isEnabledBarthelseg = enabledQuests[1]
+      this.isEnabledFacseg = enabledQuests[2]
+      this.isEnabledNeuroQol = enabledQuests[3]
 
-      // console.log('*', this[isEnabled], this.isEnabledFacseg)
-    }
-
+      this.nextMonitoringDate = nextDates[0]
+      this.nextBarthelsegDate = nextDates[1]
+      this.nextFacsegDate = nextDates[2]
+      this.nextNeuroQolDate = nextDates[3]
+    });
   }
 
   async presentMonitoringModal(){
@@ -147,7 +87,7 @@ export class QuestsPage implements OnInit {
     await modal.present();
 
     modal.onDidDismiss().then(() => {
-      this.getQuestStatus(null);
+      this.getEnabledStatus(null);
     });
   }
 
@@ -158,7 +98,7 @@ export class QuestsPage implements OnInit {
     await modal.present();
 
     modal.onDidDismiss().then(() => {
-      this.getQuestStatus(null);
+      this.getEnabledStatus(null);
     });
   }
   
@@ -169,7 +109,7 @@ export class QuestsPage implements OnInit {
     await modal.present();
 
     modal.onDidDismiss().then(() => {
-      this.getQuestStatus(null);
+      this.getEnabledStatus(null);
     });
   }  
 
@@ -180,17 +120,10 @@ export class QuestsPage implements OnInit {
     await modal.present();
 
     modal.onDidDismiss().then(() => {
-      this.getQuestStatus(null);
+      this.getEnabledStatus(null);
     });
   }
 
-  datesAreEqual(date1, date2) {
-    // console.log('-', date1.getDate(), date2.getDate(), "Are equal?", date1.getDate() === date2.getDate())
-    // console.log('-', date1.getMonth(), date2.getMonth(), "Are equal?", date1.getMonth() === date2.getMonth())
-    // console.log('-', date1.getFullYear(), date2.getFullYear(), "Are equal?", date1.getFullYear() === date2.getFullYear())
-    return date1.getDate() === date2.getDate() &&
-           date1.getMonth() === date2.getMonth() &&
-           date1.getFullYear() === date2.getFullYear();
-  }
+
 
 }

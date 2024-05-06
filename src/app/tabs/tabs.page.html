@@ -7,9 +7,9 @@
     </ion-tab-button>
 
     <ion-tab-button tab="quests" href="/tabs/quests">
-      <!-- <ion-icon aria-hidden="true" name="list"></ion-icon> -->
       <ion-icon aria-hidden="true" name="add-circle"></ion-icon>
       <ion-label>Cuestionarios</ion-label>
+      <ion-badge *ngIf="num_quests != 0">{{ num_quests }}</ion-badge>
     </ion-tab-button>
 
     <ion-tab-button tab="results" href="/tabs/results">

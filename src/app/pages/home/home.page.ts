@@ -7,6 +7,7 @@ import { EvaComponent } from 'src/app/components/eva/eva.component';
 import { Participant } from 'src/app/redcap_interfaces/participant';
 import { ParticipantService } from 'src/app/services/participant/participant.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
+import { QuestsService } from 'src/app/services/quests/quests.service';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ export class HomePage implements OnInit {
   public currentDate: string;
 
   constructor(
+    private questsSrvc: QuestsService,
     private router: Router,
     private modalCntrl: ModalController,
     private participantSrvc: ParticipantService,
@@ -32,6 +34,7 @@ export class HomePage implements OnInit {
     this.getRecordID().then(data => {
       this.id = data
       this.getParticipant(null)
+      this.getQuestStatus(null)
     })
   }
 
@@ -51,6 +54,13 @@ export class HomePage implements OnInit {
       },
       complete: () => {}
     })
+  }
+
+  getQuestStatus(event) {
+
+    this.questsSrvc.getEnabledStatus(this.id).subscribe(data => {
+      let enabledQuests = data;
+    });
   }
 
   async presentProfileModal(){
