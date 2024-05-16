@@ -14,6 +14,8 @@ import { Barthelseg } from 'src/app/redcap_interfaces/barthelseg';
 import { StorageService } from '../storage/storage.service';
 import { LoginService } from '../login/login.service';
 import { MonitoringData } from 'src/app/redcap_interfaces/monitoring_data';
+import { NeuroQoLForm } from 'src/app/interfaces/neuro_qol-form';
+import { NeuroQol } from 'src/app/redcap_interfaces/neuro_qol';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +29,7 @@ export class QuestsService {
   num_facseg: number;
   num_barthelseg: number;
   num_seguimiento: number;
-  num_neuro_qol: number;
+  num_neuroqol: number;
 
   firstMonitoring;
   firstBarthelseg;
@@ -67,10 +69,10 @@ export class QuestsService {
         this.num_facseg = data[0].num_facseg === "" ? 0 : +data[0].num_facseg;
         this.num_barthelseg = data[0].num_barthelseg === "" ? 0 : +data[0].num_barthelseg;
         this.num_seguimiento = data[0].num_seguimiento === "" ? 0 : +data[0].num_seguimiento;
-        this.num_neuro_qol = data[0].num_neuro_qol === "" ? 0 : +data[0].num_neuro_qol;
+        this.num_neuroqol = data[0].num_neuroqol === "" ? 0 : +data[0].num_neuroqol;
       })
 
-      // this.getEnabledStatus(id)
+      this.getEnabledStatus(id)
     })
 
     this.questFilled.emit();
@@ -194,6 +196,39 @@ export class QuestsService {
     })
   }
 
+  async postNeuroQolForm(id: string, neuroqol_form: NeuroQoLForm): Promise<void>{
+
+    var data: NeuroQol[] = [];
+
+    const elem: NeuroQol = {
+      record_id: id,
+      redcap_repeat_instrument: "neuroqol",
+      redcap_repeat_instance: this.num_neuroqol+1,
+      neuroqol_complete: 2
+    };
+    
+    data.push(elem);
+    
+    // Allocate NEUROQOL DATA data into data array
+    for (var key in neuroqol_form) {
+      data[0][key] = neuroqol_form[key];
+    }
+    
+    this.dataSrvc.import(data).subscribe((res) => {
+
+      var data_neuroqol = [
+        {
+          record_id: id,
+          num_neuroqol: this.num_neuroqol+1
+        }
+      ];
+
+      this.num_neuroqol++;
+      
+      this.dataSrvc.import(data_neuroqol).subscribe((res) => {})
+    })
+  }
+
   getQuestStatus(id: string): Observable<QuestControl> {
     
     var record: string = id;
@@ -209,6 +244,9 @@ export class QuestsService {
     return new Observable<{ enabledQuests: string[], nextDates: string[] }>(observer => {
       this.getQuestStatus(id).subscribe({
         next: (data: QuestControl) => {
+
+          console.log(">> ", data)
+          console.log(">> ", data[0].neuroqol_date_1)
 
           let enabledQuests: string[];
           let nextDates: string[];
@@ -233,8 +271,10 @@ export class QuestsService {
             }
             
             if (data[0].neuroqol_date_1 && data[0].neuroqol_date_1 !== "") {
+              console.log(">> Entra en if")
               this.checkQuestDate('NeuroQol', data[0].neuroqol_date_1);
             } else {
+              console.log(">> Entra en else")
               this.isEnabledNeuroQol = '1'
             }
             
@@ -316,16 +356,22 @@ export class QuestsService {
     let nextDate = `next${prefix}Date`;
 
     this[firstDate] = new Date(first_data_date)
+
+    console.log(isEnabled)
     
     for (let f of this.questFrecuencies) {
+      console.log("------", f)
       let updateDate = new Date(this[firstDate].getTime());
       updateDate.setMonth(updateDate.getMonth() + f);
+
+      console.log(">> CHECK DATE - update date", updateDate)
       
       // console.log('*', updateDate, this.currentDate)
       this[isEnabled] = this.datesAreEqual(updateDate, this.currentDate) ? "1" : "0";
-      this[isEnabled] = (f == this.questFrecuencies.pop() && updateDate < this.currentDate) ? "2" : this[isEnabled];
+      this[isEnabled] = (f == this.questFrecuencies[this.questFrecuencies.length -1] && updateDate < this.currentDate) ? "2" : this[isEnabled];
       this[nextDate] = (this[nextDate] == null && updateDate >= this.currentDate) ? updateDate.toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'}) : this[nextDate];
 
+      console.log(">> CHECK DATE - this is enabled any", this[isEnabled])
       // console.log('*', this[isEnabled], this.isEnabledFacseg)
     }
 

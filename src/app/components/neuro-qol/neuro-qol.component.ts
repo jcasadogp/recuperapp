@@ -12,8 +12,8 @@ import { StorageService } from 'src/app/services/storage/storage.service';
 export class NeuroQolComponent  implements OnInit {
 
   id: string;
-  neuro_qol_questions;
-  neuro_qol_form: NeuroQoLForm = {}
+  neuroqol_questions;
+  neuroqol_form: NeuroQoLForm = {}
 
   constructor(
     private modalCntrl: ModalController,
@@ -26,6 +26,12 @@ export class NeuroQolComponent  implements OnInit {
   ngOnInit() {
     this.getRecordID().then(data => {
       this.id = data
+      this.questsSrvc.getQuestsQuestions('neuroqol').subscribe(data => {
+        this.neuroqol_questions = data
+  
+        this.neuroqol_questions = this.neuroqol_questions.filter(quest => quest.category == "medical");
+        this.neuroqol_questions = this.neuroqol_questions.filter(quest => quest.redcap_value != "f_neuroqol");
+      });
     })
   }
 
@@ -33,8 +39,30 @@ export class NeuroQolComponent  implements OnInit {
     return await this.storageSrvc.get('RECORD_ID');
   }
 
+  postNeuroQolForm(): void {
+
+    this.neuroqol_form.f_neuroqol = new Date().toISOString().split('T')[0]
+
+    var i = Object.keys(this.neuroqol_form).length;
+
+    if(i < 20){
+      var camposVacios = 20 - i;
+      this.presentEmptyFieldsAlert;
+    } else {
+
+      this.questsSrvc.postNeuroQolForm(this.id, this.neuroqol_form).then(()=>{
+
+        this.questsSrvc.setQuestStatus(this.id, "neuroqol").then(() => {
+          this.modalCntrl.dismiss().then().catch();
+          this.presentConfirmationToast();
+        });
+        
+      }).catch((err) => console.log(err));
+    }
+  }
+
   dismissModal(): void {
-    var i = Object.keys(this.neuro_qol_form).length;
+    var i = Object.keys(this.neuroqol_form).length;
     console.log("preguntas contestadas:", i)
 
     if(i == 0){

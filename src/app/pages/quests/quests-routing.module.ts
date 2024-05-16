@@ -25,7 +25,7 @@ const routes: Routes = [
     component: FacsegComponent
   },
   {
-    path: 'neuro_qol',
+    path: 'neuroqol',
     component: NeuroQolComponent
   }
 ];

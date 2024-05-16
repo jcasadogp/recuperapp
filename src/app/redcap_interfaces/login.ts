@@ -8,7 +8,7 @@ export interface Login {
     num_seguimiento?: number,
     num_barthelseg?: number,
     num_facseg?: number,
-    num_neuro_qol?: number,
+    num_neuroqol?: number,
 
     login_complete?: number,
 }
