@@ -72,4 +72,8 @@ export class EvaService {
 
     return this.dataSrvc.export(record, forms);
   }
+
+  getNumEvaQuests(): number {
+    return this.num_eva;
+  }
 }
