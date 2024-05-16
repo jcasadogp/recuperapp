@@ -1,33 +1,34 @@
-<ion-header [translucent]="true">
-  <ion-toolbar> <!-- class="ppal-toolbar" -->
+<ion-header mode="ios" [translucent]="true" class="custom-header">
+  <ion-toolbar>
     <ion-title>Menú principal</ion-title>
-    <!-- <ion-buttons slot="end" class="toolbar-buttons" (click)="logout()"> -->
-    <ion-buttons slot="end" (click)="logout()"> <!-- class="toolbar-buttons" -->
-      <ion-icon class="logout-icon" name="log-out-outline"></ion-icon>
+    <ion-buttons class="logout-icon" slot="end" (click)="logout()">
+      <ion-icon name="log-out-outline"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content mode="ios" [fullscreen]="true" class="page_content">
 
   <ion-refresher slot="fixed" (ionRefresh)="[getParticipant($event)]">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
   <ion-item lines="none">
-    <ion-grid class="home-info">
+    <ion-grid>
       <ion-row class="home-name">Hola {{participant.f645_firstname}}</ion-row>
-      <ion-row class="home-date"><b>Fecha: &nbsp;</b>{{currentDate}}</ion-row>
+      <ion-row class="home-date"><b>Fecha: &nbsp;</b>{{currentDate_string}}</ion-row>
     </ion-grid>
-
   </ion-item>
 
-  <ion-item lines="none"><img src="assets/img/logo_recuperapp.png" alt="Logo RecuperApp"></ion-item>
+
+  <div id="logo_recuperapp">
+    <img src="assets/img/logo_recuperapp.png">
+  </div>
 
   <ion-grid>
     <ion-row>
       <ion-col size=6>
-        <ion-card class="profile-card" (click)="presentProfileModal()">
+        <ion-card mode="ios" class="profile-card" (click)="presentProfileModal()">
           <ion-card-content>
             <ion-icon size="large" name="person-outline"></ion-icon>
             <ion-card-title>Perfil</ion-card-title>
@@ -36,7 +37,7 @@
       </ion-col>
       
       <ion-col size=6>
-        <ion-card class="information-card" (click)="presentInformationModal()">
+        <ion-card mode="ios" class="information-card" (click)="presentInformationModal()">
           <ion-card-content>
             <ion-icon size="large" name="bag-add-outline"></ion-icon>
             <ion-card-title>Información</ion-card-title>
@@ -46,9 +47,11 @@
       
     </ion-row>
 
+    <ion-item *ngIf="notifyEva">Debe rellenar EVA</ion-item>
+
     <ion-row>
       <ion-col size=12>
-        <ion-card no padding class="diary-card" (click)="presentEvaModal()">
+        <ion-card mode="ios" no padding class="diary-card" (click)="presentEvaModal()">
           <ion-card-content>
             <ion-icon size="large" name="add-circle-outline"></ion-icon>
             <ion-card-title>Diario de dolor</ion-card-title>
