@@ -17,7 +17,7 @@ import { StorageService } from 'src/app/services/storage/storage.service';
 export class QuestsPage implements OnInit {
 
   id: string
-  public currentDate;
+  public currentDate: Date;
 
   firstMonitoring;
   firstBarthelseg;

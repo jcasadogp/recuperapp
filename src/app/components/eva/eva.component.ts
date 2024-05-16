@@ -12,7 +12,7 @@ import { StorageService } from 'src/app/services/storage/storage.service';
 export class EvaComponent  implements OnInit {
 
   id: string;
-  public currentDate: string;
+  public currentDate_string: string;
   eva_form: EvaForm;
 
   constructor(
@@ -22,7 +22,7 @@ export class EvaComponent  implements OnInit {
     private evaSrvc: EvaService,
     private storageSrvc: StorageService
   ) { 
-    this.currentDate = new Date().toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'})
+    this.currentDate_string = new Date().toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'})
     this.eva_form = {}
   }
 

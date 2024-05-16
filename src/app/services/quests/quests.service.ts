@@ -21,7 +21,7 @@ import { MonitoringData } from 'src/app/redcap_interfaces/monitoring_data';
 export class QuestsService {
 
   id: string
-  public currentDate;
+  public currentDate: Date;
   questFrecuencies: number[];
 
   num_facseg: number;

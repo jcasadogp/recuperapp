@@ -14,7 +14,7 @@ export class MonitoringComponent  implements OnInit {
   id: string;
   monitoring_questions;
   monitoring_form: MonitoringForm = {}
-  public currentDate: string;
+  public currentDate_string: string;
 
   constructor(
     private modalCntrl: ModalController,
@@ -23,7 +23,7 @@ export class MonitoringComponent  implements OnInit {
     private questsSrvc: QuestsService,
     private storageSrvc: StorageService
   ) {
-    this.currentDate = new Date().toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'})
+    this.currentDate_string = new Date().toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'})
    }
 
   ngOnInit() {
