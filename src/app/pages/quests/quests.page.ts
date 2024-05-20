@@ -77,6 +77,10 @@ export class QuestsPage implements OnInit {
       this.nextBarthelsegDate = nextDates[1]
       this.nextFacsegDate = nextDates[2]
       this.nextNeuroQolDate = nextDates[3]
+
+      if (event) {
+        event.target.complete();
+      }
     });
   }
 
