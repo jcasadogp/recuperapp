@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="component-toolbar">
+
+    <ion-button (click)="dismissModal()" slot="end" fill="clear">
+      <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+    </ion-button>
+
+    <ion-title>Escala Visual del Dolor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <p><ion-text><b>Fecha: </b>{{currentDate_string}}</ion-text></p>
+
+  <p><ion-text>Teniendo en cuenta la escala que se muestra en la imagen, ¿cuál es su dolor actual?</ion-text></p>
+    
+  <ion-item lines="none">
+    <ion-img src="assets/img/escala-eva.jpeg"></ion-img>
+  </ion-item>
+  
+  <p><ion-text><b>Nivel de dolor: </b>{{eva_form.eva}}</ion-text></p>
+  <ion-range mode="ios" min="0" max="10" step="1" snaps="true" ticks="true" pin="true" [(ngModel)]="eva_form.eva"></ion-range>
+
+  <ion-button mode="ios" expand="block" class="post-quest-button"
+    (click)="postEvaForm()">Enviar Respuesta</ion-button>
+  
+  </ion-content>

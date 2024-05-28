@@ -1,0 +1,313 @@
+[
+    {
+        "id": 1,
+        "question": "Sexo",
+        "redcap_value": "sexo",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Mujer", "redcap_value": 0},
+            {"answer": "Hombre", "redcap_value": 1}
+          ]
+    },{
+        "id": 2,
+        "question": "Edad",
+        "redcap_value": "edad",
+        "field_type": "text",
+        "answers": ""
+    },{
+        "id": 3,
+        "question": "Estado civil",
+        "redcap_value": "e_civil",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Soltero", "redcap_value": 0},
+            {"answer": "Casado", "redcap_value": 1},
+            {"answer": "Viudo", "redcap_value": 2},
+            {"answer": "Separado o divorciado", "redcap_value": 3}
+        ]
+    },{
+        "id": 4,
+        "question": "Enfermedades previas",
+        "redcap_value": "enf_previas",
+        "field_type": "checkbox",
+        "answers": [
+            {"answer": "Hipertensión arterial", "redcap_value": 1},
+            {"answer": "Diabetes mellitus", "redcap_value": 2},
+            {"answer": "Dislipemia", "redcap_value": 3},
+            {"answer": "Obesidad", "redcap_value": 4},
+            {"answer": "Cardiopatía isquémica", "redcap_value": 5},
+            {"answer": "Insuficiencia cardíaca crónica", "redcap_value": 6},
+            {"answer": "Fibrilación auricular", "redcap_value": 7},
+            {"answer": "Valvulopatía", "redcap_value": 8},
+            {"answer": "Enfermedad cerebrovascular", "redcap_value": 9},
+            {"answer": "Enfermedad renal crónica", "redcap_value": 10},
+            {"answer": "Demencia", "redcap_value": 11},
+            {"answer": "Cáncer", "redcap_value": 12, "sub_question": {
+                "question": "Cáncer en tratamiento activo",
+                "redcap_value": "cancer_ta",
+                "field_type": "radio",
+                "answers": [
+                    {"answer": "No", "redcap_value": 0},
+                    {"answer": "Sí", "redcap_value": 1}
+                ]
+            }},
+            {"answer": "EPOC", "redcap_value": 13, "sub_question": {
+                "question": "Enfermedad renal crónica - estadio",
+                "redcap_value": "estadio_erc",
+                "field_type": "radio",
+                "answers": [
+                    {"answer": "TFG>60", "redcap_value": 1},
+                    {"answer": "TFG 30-59", "redcap_value": 2},
+                    {"answer": "TFG 15-29", "redcap_value": 3},
+                    {"answer": "TFG< 15", "redcap_value": 4}
+                ]
+            }},
+            {"answer": "Depresión (Diagnóstico previo, tratamiento o DSM V)", "redcap_value": 14},
+            {"answer": "Otros", "redcap_value": 15, "sub_question": {
+                "question": "Otros (especifique)",
+                "redcap_value": "otros",
+                "field_type": "text",
+                "answers": ""
+            }}
+        ]
+    },{
+        "id": 5,
+        "question": "Oxigenoterapia crónica domiciliaria",
+        "redcap_value": "ocd",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "No", "redcap_value": 0},
+            {"answer": "Sí", "redcap_value": 1}
+        ]
+    },{
+        "id": 6,
+        "question": "Caídas en el último año (otras además de la actual)",
+        "redcap_value": "caidas",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "No", "redcap_value": 0},
+            {"answer": "Sí", "redcap_value": 1}
+        ]
+    },{
+        "id": 7,
+        "question": "Global Deterioration Scale de Reisberg",
+        "redcap_value": "gds",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Ausencia de alteración cognitiva", "redcap_value": 1},
+            {"answer": "Disminución cognitiva muy leve", "redcap_value": 2},
+            {"answer": "Defecto cognitivo leve", "redcap_value": 3},
+            {"answer": "Defecto cognitivo moderado", "redcap_value": 4},
+            {"answer": "Defecto cognitivo moderado-grave", "redcap_value": 5},
+            {"answer": "Defecto cognitivo grave", "redcap_value": 6},
+            {"answer": "Defecto cognitivo muy grave", "redcap_value": 7}
+        ]
+    },{
+        "id": 8,
+        "question": "Ubicación basal",
+        "redcap_value": "ub_basal",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Vive solor", "redcap_value": 0},
+            {"answer": "Vive acompañado", "redcap_value": 1},
+            {"answer": "Residencia", "redcap_value": 2},
+            {"answer": "Otra", "redcap_value": 3}
+        ]
+    },{
+        "id": 9,
+        "question": "Ayuda técnica que precisa el paciente para caminar",
+        "redcap_value": "ay_basal",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin ayuda", "redcap_value": 0},
+            {"answer": "Bastón", "redcap_value": 1},
+            {"answer": "Dos muletas", "redcap_value": 2},
+            {"answer": "Andador", "redcap_value": 3},
+            {"answer": "Silla de ruedas", "redcap_value": 4}
+        ]
+    },{
+        "id": 10,
+        "question": "Número de fármacos basales",
+        "redcap_value": "f_basales",
+        "field_type": "text",
+        "answers": "",
+        "sub_question": {
+            "question": "Fármacos basales - tipo",
+            "redcap_value": "f_basales_tipo",
+            "field_type": "checkbox",
+            "answers": [
+                {"answer": "Psicofármacos", "redcap_value": 1},
+                {"answer": "Fármacos anticoagulantes/antiagregantes", "redcap_value": 2},
+                {"answer": "Fármacos antiosteoporóticos", "redcap_value": 3, "sub_question": {
+                    "question": "Fármacos antiosteoporóticos basales",
+                    "redcap_value": "op_basales",
+                    "field_type": "checkbox",
+                    "answers": [
+                        {"answer": "No", "redcap_value": 0},
+                        {"answer": "Calcio", "redcap_value": 1},
+                        {"answer": "Calcio + vitamina D", "redcap_value": 2},
+                        {"answer": "Bifosfonatos", "redcap_value": 3},
+                        {"answer": "Denosumab", "redcap_value": 4},
+                        {"answer": "Teriparatida", "redcap_value": 5},
+                        {"answer": "Otro", "redcap_value": 6}
+                    ]
+                }}
+            ]
+        }
+    },{
+        "id": 11,
+        "question": "Fecha de ingreso",
+        "redcap_value": "f_ingreso",
+        "field_type": "text",
+        "answers": ""
+    },{
+        "id": 12,
+        "question": "Fecha de cirugía ",
+        "redcap_value": "f_cirug_a",
+        "field_type": "text",
+        "answers": ""
+    },{
+        "id": 13,
+        "question": "TIpo de fractura",
+        "redcap_value": "tipo_fractura",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Subcapital", "redcap_value": 1},
+            {"answer": "Subcapital impactada en valgo", "redcap_value": 2},
+            {"answer": "Pertocanterea", "redcap_value": 3},
+            {"answer": "Subtrocanterea", "redcap_value": 4},
+            {"answer": "Persubtrocanterea", "redcap_value": 5},
+            {"answer": "Basicervical", "redcap_value": 6},
+            {"answer": "Transcervical", "redcap_value": 7}
+        ]
+    },{
+        "id": 14,
+        "question": "Fractura asociada aguda",
+        "redcap_value": "fx_asociada",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "No", "redcap_value": 0},
+            {"answer": "Sí", "redcap_value": 1}
+        ]
+    },{
+        "id": 15,
+        "question": "Tipo de cirugía",
+        "redcap_value": "tipo_cirugia",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Tornillos canulados", "redcap_value": 1},
+            {"answer": "Prótesis parcial bipolar", "redcap_value": 2},
+            {"answer": "Clavo gamma", "redcap_value": 3},
+            {"answer": "No se realiza cirugía", "redcap_value": 4},
+            {"answer": "Clavo intertan", "redcap_value": 5},
+            {"answer": "Prótesis total", "redcap_value": 6},
+            {"answer": "Lámina placa", "redcap_value": 7}
+        ]
+    },{
+        "id": 16,
+        "question": "ASA physical status",
+        "redcap_value": "asa",
+        "field_type": "dropdown",
+        "answers": [
+            {"answer": "ASA I", "redcap_value": 1},
+            {"answer": "ASA II", "redcap_value": 2},
+            {"answer": "ASA III", "redcap_value": 3},
+            {"answer": "ASA IV", "redcap_value": 4},
+            {"answer": "ASA V", "redcap_value": 5},
+            {"answer": "ASA VI", "redcap_value": 6}
+        ]
+    },{
+        "id": 17,
+        "question": "Retraso quirúrgico",
+        "redcap_value": "ret_qx",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "No", "redcap_value": 0},
+            {"answer": "Sí", "redcap_value": 1, "sub_question": {
+                "question": "Motivo retraso quirúrgico",
+                "redcap_value": "motivo_ret_qx",
+                "field_type": "radio",
+                "answers": [
+                    {"answer": "No apto por falta de pruebas complementarias", "redcap_value": 1},
+                    {"answer": "No apto por problemas médicos activos", "redcap_value": 2},
+                    {"answer": "No apto por causa antigregantes/anticoagulantes", "redcap_value": 3},
+                    {"answer": "Retraso por imposibilidad para programarle (lista de espera)", "redcap_value": 4}
+                ]
+            }}
+        ]
+    },{
+        "id": 18,
+        "question": "Complicaciones intrahospitalarias",
+        "redcap_value": "compl_intrahosp",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "No", "redcap_value": 0},
+            {"answer": "Sí", "redcap_value": 1, "sub_question": {
+                "question": "Complicaciones intrahospitalarias (tipo)",
+                "redcap_value": "compl_intrahosp_tipo",
+                "field_type": "checkbox",
+                "answers": [
+                    {"answer": "Trombóticas", "redcap_value": 1},
+                    {"answer": "Hemorrágicas", "redcap_value": 2},
+                    {"answer": "Cardiovasculares", "redcap_value": 3},
+                    {"answer": "Cerebrovasculares", "redcap_value": 4},
+                    {"answer": "Infecciosas", "redcap_value": 5},
+                    {"answer": "Delirium", "redcap_value": 6},
+                    {"answer": "Úlceras por presión", "redcap_value": 7},
+                    {"answer": "Digestivas", "redcap_value": 8},
+                    {"answer": "Fracaso renal agudo", "redcap_value": 9},
+                    {"answer": "Quirúrgicas", "redcap_value": 10},
+                    {"answer": "Otras", "redcap_value": 11, "sub_question": {
+                        "question": "Complicaciones intrahospitalarias (otras)",
+                        "redcap_value": "comp_intrahosp_otras",
+                        "field_type": "text",
+                        "answers": ""
+                    }}
+                ]
+            }}
+        ]
+    },{
+        "id": 19,
+        "question": "Carga autorizada al alta",
+        "redcap_value": "carga_alta",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "No", "redcap_value": 0},
+            {"answer": "Sí", "redcap_value": 1}
+        ]
+    },{
+        "id": 20,
+        "question": "Destino al alta",
+        "redcap_value": "destino_alta",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Domicilio", "redcap_value": 1},
+            {"answer": "Residencia", "redcap_value": 2},
+            {"answer": "Hospital de apoyo", "redcap_value": 3},
+            {"answer": "Exitus", "redcap_value": 4, "sub_question": {
+                "question": "Causa de muerte hospitalaria",
+                "redcap_value": "causa_exitus_intrahosp",
+                "field_type": "text",
+                "answers": ""
+            }}
+        ]
+    },{
+        "id": 21,
+        "question": "Tipo de rehabilitación al alta",
+        "redcap_value": "rehab_alta",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin rehabilitación", "redcap_value": 0},
+            {"answer": "Rehabilitación domiciliaria", "redcap_value": 1},
+            {"answer": "Rehabilitación ambulatoria", "redcap_value": 2},
+            {"answer": "Rehabilitación ingresado en hospital", "redcap_value": 3}
+            
+        ]
+    },{
+        "id": 22,
+        "question": "Comentarios",
+        "redcap_value": "comentarios",
+        "field_type": "notes",
+        "answers": ""
+    }
+]

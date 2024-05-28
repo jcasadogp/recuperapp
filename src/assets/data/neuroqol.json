@@ -1,0 +1,363 @@
+[
+    {
+        "id": 0,
+        "category": "medical",
+        "question": "FECHA",
+        "label": "Fecha",
+        "redcap_value": "f_neuroqol",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 1,
+        "category": "medical",
+        "question": "¿Puede sentarse y levantarse del inodoro (excusado)?",
+        "label": "Sentarse y levantarse",
+        "redcap_value": "neuro_sentarse",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 2,
+        "category": "medical",
+        "question": "¿Puede subir y bajar aceras caminando?",
+        "label": "",
+        "redcap_value": "neuro_aceras",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]        
+    },
+    {
+        "id": 3,
+        "category": "medical",
+        "question": "¿Se puede subir y bajar de un automóvil?",
+        "label": "",
+        "redcap_value": "neuro_automovil",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 4,
+        "category": "medical",
+        "question": "¿Puede levantarse de la cama y sentarse en una silla?",
+        "label": "",
+        "redcap_value": "neuro_cama",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 5,
+        "category": "medical",
+        "question": "¿Puede abrir una puerta pesada empujándola?",
+        "label": "",
+        "redcap_value": "neuro_puerta",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 6,
+        "category": "medical",
+        "question": "¿Puede hacer mandados y compras?",
+        "label": "",
+        "redcap_value": "neuro_compras",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 7,
+        "category": "medical",
+        "question": "¿Puede levantarse del piso (suelo) sin ayuda después de haber estado acostado/a boca arriba?",
+        "label": "",
+        "redcap_value": "neuro_levantarse",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 8,
+        "category": "medical",
+        "question": "¿Puede salir a caminar durante 15 minutos por lo menos?",
+        "label": "",
+        "redcap_value": "neuro_caminar",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 9,
+        "category": "medical",
+        "question": "¿Cuánta DIFICULTAD tiene actualmente para levantarse de una silla recta sin brazos (por ejemplo, una silla de comedor)?",
+        "label": "",
+        "redcap_value": "neuro_dif_sin_brazos",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 10,
+        "category": "medical",
+        "question": "¿Cuánta DIFICULTAD tiene actualmente para sentarse y levantarse de una silla con brazos?",
+        "label": "",
+        "redcap_value": "neuro_dif_con_brazos",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 11,
+        "category": "medical",
+        "question": "¿Cuánta DIFICULTAD tiene actualmente para pasar de estar sentado/a en el borde de la cama a acostarse boca arriba?",
+        "label": "",
+        "redcap_value": "neuro_dif_cama",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 12,
+        "category": "medical",
+        "question": "¿Cuánta DIFICULTAD tiene actualmente para levantarse de un sofá bajo y blando?",
+        "label": "",
+        "redcap_value": "neuro_dif_sofa",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 13,
+        "category": "medical",
+        "question": "¿Cuánta DIFICULTAD tiene actualmente para subir y bajar un tramo de una escalera interior usando el pasamanos?",
+        "label": "",
+        "redcap_value": "neuro_dif_escalera",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 14,
+        "category": "medical",
+        "question": "¿Cuánta DIFICULTAD tiene actualmente para caminar sobre superficies irregulares (por ejemplo, el césped, un camino de tierra o una acera o banqueta) con su dispositivo para caminar?",
+        "label": "",
+        "redcap_value": "neuro_dif_irregulares",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 15,
+        "category": "medical",
+        "question": "¿Cuánta DIFICULTAD tiene actualmente para caminar sobre un piso dentro de su casa?",
+        "label": "",
+        "redcap_value": "neuro_dif_casa",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 16,
+        "category": "medical",
+        "question": "¿Cuánta DIFICULTAD tiene actualmente para caminar durante 20 minutos a paso ligero sin detenerse a descansar?",
+        "label": "",
+        "redcap_value": "neuro_dif_caminar",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 17,
+        "category": "medical",
+        "question": "¿Cuánta DIFICULTAD tiene actualmente para caminar sobre una superficie resbaladiza al aire libre?",
+        "label": "",
+        "redcap_value": "neuro_dif_resbaladiza",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 18,
+        "category": "medical",
+        "question": "¿Cuánta DIFICULTAD tiene actualmente para subir escaleras, escalón por escalón, sin usar el pasamanos? (alternando los pies)?",
+        "label": "",
+        "redcap_value": "neuro_dif_escalon",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 19,
+        "category": "medical",
+        "question": "¿Cuánta DIFICULTAD tiene actualmente para caminar por una habitación a oscuras sin caerse?",
+        "label": "",
+        "redcap_value": "neuro_dif_oscuras",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 20,
+        "category": "mycap",
+        "question": "UUID",
+        "label": "",
+        "redcap_value": "promis113_uuid",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 21,
+        "category": "mycap",
+        "question": "Start Date",
+        "label": "",
+        "redcap_value": "promis113_startdate",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 22,
+        "category": "mycap",
+        "question": "End Date",
+        "label": "",
+        "redcap_value": "promis113_enddate",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 23,
+        "category": "mycap",
+        "question": "Schedule Date",
+        "label": "",
+        "redcap_value": "promis113_scheduledate",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 24,
+        "category": "mycap",
+        "question": "Status",
+        "label": "",
+        "redcap_value": "promis113_status",
+        "field_type": "dropdown",
+        "answers": [
+            {"answer": "Deleted", "redcap_value":0},
+            {"answer": "Completed", "redcap_value":1},
+            {"answer": "Incomplete", "redcap_value":2}
+        ]
+    },
+    {
+        "id": 25,
+        "category": "mycap",
+        "question": "Supplemental Data (JSON)",
+        "label": "",
+        "redcap_value": "promis113_supplementaldata",
+        "field_type": "notes",
+        "answers": ""
+    },
+    {
+        "id": 26,
+        "category": "mycap",
+        "question": "Serailized Result",
+        "label": "",
+        "redcap_value": "promis113_serializedresult",
+        "field_type": "file",
+        "answers": ""
+    }
+]

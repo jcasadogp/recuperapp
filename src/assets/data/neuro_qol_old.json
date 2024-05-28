@@ -1,0 +1,885 @@
+[
+    {
+        "id": 0,
+        "category": "medical",
+        "question": "T-score",
+        "label": "",
+        "redcap_value": "neuroqol_banco_v10_funcionamiento_de_las_extremida_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 1,
+        "category": "medical",
+        "question": "Standard Error",
+        "label": "",
+        "redcap_value": "neuroqol_banco_v10_funcionamiento_de_las_extremida_std_error",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 2,
+        "category": "medical",
+        "question": "Puede sentarse y levantarse del inodoro (excusado)?",
+        "label": "Sentarse y levantarse",
+        "redcap_value": "promis_pfc45_db56e6",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 3,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_pfc45_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 4,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_pfc45_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 5,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_pfc45_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 6,
+        "category": "medical",
+        "question": "Puede subir y bajar aceras caminando?",
+        "label": "",
+        "redcap_value": "promis_pfa30_4b6c5e",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]        
+    },
+    {
+        "id": 7,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_pfa30_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 8,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_pfa30_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 9,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_pfa30_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 10,
+        "category": "medical",
+        "question": "Se puede subir y bajar de un automóvil?",
+        "label": "",
+        "redcap_value": "promis_pfa56_95f7fc",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 11,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_pfa56_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 12,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_pfa56_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 13,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_pfa56_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 14,
+        "category": "medical",
+        "question": "Puede levantarse de la cama y sentarse en una silla?",
+        "label": "",
+        "redcap_value": "promis_pfa45_e522ec",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 15,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_pfa45_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 16,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_pfa45_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 17,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_pfa45_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 18,
+        "category": "medical",
+        "question": "Puede abrir una puerta pesada empujándola?",
+        "label": "",
+        "redcap_value": "promis_pfa12_124b7f",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 19,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_pfa12_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 20,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_pfa12_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 21,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_pfa12_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 22,
+        "category": "medical",
+        "question": "Puede hacer mandados y compras?",
+        "label": "",
+        "redcap_value": "promis_pfa53_5d8f04",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 23,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_pfa53_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 24,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_pfa53_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 25,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_pfa53_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 26,
+        "category": "medical",
+        "question": "Puede levantarse del piso (suelo) sin ayuda después de haber estado acostado/a boca arriba?",
+        "label": "",
+        "redcap_value": "promis_pfa31_a37535",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 27,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_pfa31_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 28,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_pfa31_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 29,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_pfa31_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 30,
+        "category": "medical",
+        "question": "Puede salir a caminar durante 15 minutos por lo menos?",
+        "label": "",
+        "redcap_value": "promis_pfa23_b0c16f",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 31,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_pfa23_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 32,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_pfa23_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 33,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_pfa23_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 34,
+        "category": "medical",
+        "question": "Cuánta DIFICULTAD tiene actualmente para levantarse de una silla recta sin brazos (por ejemplo, una silla de comedor)?",
+        "label": "",
+        "redcap_value": "promis_nqmob01",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 35,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob01_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 36,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob01_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 37,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_nqmob01_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 38,
+        "category": "medical",
+        "question": "Cuánta DIFICULTAD tiene actualmente para para sentarse y levantarse de una silla con brazos?",
+        "label": "",
+        "redcap_value": "promis_nqmob03",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 39,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob03_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 40,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob03_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 41,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_nqmob03_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 42,
+        "category": "medical",
+        "question": "Cuánta DIFICULTAD tiene actualmente para pasar de estar sentado/a en el borde de la cama a acostarse boca arriba?",
+        "label": "",
+        "redcap_value": "promis_nqmob04",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 43,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob04_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 44,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob04_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 45,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_nqmob04_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 46,
+        "category": "medical",
+        "question": "Cuánta DIFICULTAD tiene actualmente para levantarse de un sofá bajo y blando?",
+        "label": "",
+        "redcap_value": "promis_nqmob06",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 47,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob06_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 48,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob06_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 49,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_nqmob06_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 50,
+        "category": "medical",
+        "question": "Cuánta DIFICULTAD tiene actualmente para subir y bajar un tramo de una escalera interior usando el pasamanos?",
+        "label": "",
+        "redcap_value": "promis_nqmob08",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 51,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob08_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 52,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob08_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 53,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_nqmob08_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 54,
+        "category": "medical",
+        "question": "Cuánta DIFICULTAD tiene actualmente para caminar sobre superficies irregulares (por ejemplo, el césped, un camino de tierra o una acera o banqueta) con su dispositivo para caminar?",
+        "label": "",
+        "redcap_value": "promis_nqmob09",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 55,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob09_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 56,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob09_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 57,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_nqmob09_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 58,
+        "category": "medical",
+        "question": "Cuánta DIFICULTAD tiene actualmente para caminar sobre un piso dentro de su casa?",
+        "label": "",
+        "redcap_value": "promis_nqmob11",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 59,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob11_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 60,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob11_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 61,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_nqmob11_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 62,
+        "category": "medical",
+        "question": "Cuánta DIFICULTAD tiene actualmente para caminar durante 20 minutos a paso ligero sin detenerse a descansar?",
+        "label": "",
+        "redcap_value": "promis_nqmob16",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 63,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob16_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 64,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob16_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 65,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_nqmob16_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 66,
+        "category": "medical",
+        "question": "Cuánta DIFICULTAD tiene actualmente para caminar sobre una superficie resbaladiza al aire libre?",
+        "label": "",
+        "redcap_value": "promis_nqmob17",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 67,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob17_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 68,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob17_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 69,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_nqmob17_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 70,
+        "category": "medical",
+        "question": "Cuánta DIFICULTAD tiene actualmente para subir escaleras, escalón por escalón, sin usar el pasamanos? (alternando los pies)?",
+        "label": "",
+        "redcap_value": "promis_nqmob21",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 71,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob21_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 72,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob21_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 73,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_nqmob21_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 74,
+        "category": "medical",
+        "question": "Cuánta DIFICULTAD tiene actualmente para caminar por una habitación a oscuras sin caerse?",
+        "label": "",
+        "redcap_value": "promis_nqmob23",
+        "field_type": "radio",
+        "answers": [
+            {"answer": "Sin dificultad", "redcap_value":1},
+            {"answer": "Con poca dificultad", "redcap_value":2},
+            {"answer": "Con alguna dificultad", "redcap_value":3},
+            {"answer": "Con mucha dificultad", "redcap_value":4},
+            {"answer": "No puedo hacerlo", "redcap_value":5}
+        ]
+    },
+    {
+        "id": 75,
+        "category": "medical",
+        "question": "T-score (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob23_tscore",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 76,
+        "category": "medical",
+        "question": "Standard Error (Cumulative)",
+        "label": "",
+        "redcap_value": "promis_nqmob23_stderror",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 77,
+        "category": "medical",
+        "question": "Question Position",
+        "label": "",
+        "redcap_value": "promis_nqmob23_qposition",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 78,
+        "category": "mycap",
+        "question": "UUID",
+        "label": "",
+        "redcap_value": "promis113_uuid",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 79,
+        "category": "mycap",
+        "question": "Start Date",
+        "label": "",
+        "redcap_value": "promis113_startdate",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 80,
+        "category": "mycap",
+        "question": "End Date",
+        "label": "",
+        "redcap_value": "promis113_enddate",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 81,
+        "category": "mycap",
+        "question": "Schedule Date",
+        "label": "",
+        "redcap_value": "promis113_scheduledate",
+        "field_type": "text",
+        "answers": ""
+    },
+    {
+        "id": 82,
+        "category": "mycap",
+        "question": "Status",
+        "label": "",
+        "redcap_value": "promis113_status",
+        "field_type": "dropdown",
+        "answers": [
+            {"answer": "Deleted", "redcap_value":0},
+            {"answer": "Completed", "redcap_value":1},
+            {"answer": "Incomplete", "redcap_value":2}
+        ]
+    },
+    {
+        "id": 83,
+        "category": "mycap",
+        "question": "Supplemental Data (JSON)",
+        "label": "",
+        "redcap_value": "promis113_supplementaldata",
+        "field_type": "notes",
+        "answers": ""
+    },
+    {
+        "id": 84,
+        "category": "mycap",
+        "question": "Serailized Result",
+        "label": "",
+        "redcap_value": "promis113_serializedresult",
+        "field_type": "file",
+        "answers": ""
+    }
+]

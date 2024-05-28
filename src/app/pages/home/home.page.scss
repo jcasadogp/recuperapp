@@ -1,0 +1,66 @@
+.logout-icon {
+  font-size: 30px;
+  margin: 2%;
+}
+
+ion-item {
+  
+  --background: white;
+
+  .home-name {
+    font-size: 26px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 8px;
+    padding-bottom: 7px;
+  }
+  
+  .home-date {
+    font-size: 16px;
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-bottom: 8px;
+  }
+}
+  
+ion-card {
+  border-radius: 10px;
+  width: 100%;
+  margin: 0 !important;
+
+  ion-card-header{
+    height: 0px;
+  }
+
+  ion-card-content{
+    text-align: center;
+    justify-content: center;
+    padding: 25px;
+  }
+
+  ion-icon {
+    color: #1e4d7d;
+  }
+
+  ion-card-title, ion-card-subtitle {
+    color: #1e4d7d;
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
+
+.profile-card{  --background: #f2efd2;  }
+.information-card{  --background: #f8d9b4;  }
+.diary-card{ --background: #9cd9bc; }
+
+#logo_recuperapp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+      height: 90px;
+      margin-top: 2%;
+      margin-bottom: 2%;
+  }
+}

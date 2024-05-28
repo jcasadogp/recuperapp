@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="component-toolbar">
+
+    <ion-button (click)="dismissModal()" slot="end" fill="clear">
+      <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+    </ion-button>
+
+    <ion-title class="expand-title">Cuestionario de Seguimiento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-text *ngFor="let q of monitoring_questions">
+    <h4>Pregunta {{q.id}}:</h4>
+    <p>{{q.question}}</p>
+
+    <!-- TEXT OR NOTES -->
+    <ion-item *ngIf="q.field_type == 'text' || q.field_type == 'notes'" lines="none">
+      <ion-input label="{{q.label}}" [(ngModel)]="monitoring_form[q.redcap_value]" placeholder="Introduzca su respuesta"></ion-input>
+    </ion-item>
+
+    <!-- RADIO OR DROPDOWN -->
+    <ion-radio-group *ngIf="q.field_type == 'radio' || q.field_type == 'dropdown'" [(ngModel)]="monitoring_form[q.redcap_value]">
+      <ion-item *ngFor="let a of q.answers" lines="none">
+        <ion-radio justify="start" labelPlacement="end" [value]="a.redcap_value">
+          <span class="ion-text-wrap">{{a.answer}}</span>
+        </ion-radio>
+      </ion-item>
+    </ion-radio-group>
+
+    <!-- CHECKBOX -->
+    <ion-list *ngIf="q.field_type == 'checkbox'">
+      <ion-item *ngFor="let a of q.answers" lines="none">
+        <ion-checkbox justify="start" labelPlacement="end" [value]="a.redcap_value" (ionChange)="updateCheckboxSelectedValues($event, q.redcap_value)">
+          {{a.answer}}
+        </ion-checkbox>
+      </ion-item>
+    </ion-list>
+
+
+    <ion-text *ngIf="q.id == 9 && monitoring_form[q.redcap_value] == 1">
+      <p>{{q.answers[1].sub_question.question}}</p>
+      <ion-item lines="none">
+        <ion-datetime [max]="currentDate_string" placeholder="Seleccione una fecha"
+          presentation="date" [preferWheel]="true"
+          [(ngModel)]="monitoring_form[q.answers[1].sub_question.redcap_value]" name="createdOn" cancelText="Cancelar" doneText="Hecho"></ion-datetime>
+      </ion-item>
+    </ion-text>
+
+    
+    
+  </ion-text>
+
+  
+  <ion-button mode="ios" expand="block" class="post-quest-button" (click)="postMonitoringForm()">Enviar Respuesta</ion-button>
+  
+</ion-content>

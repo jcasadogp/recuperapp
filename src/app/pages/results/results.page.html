@@ -1,0 +1,18 @@
+<ion-header mode="ios" [translucent]="true" class="custom-header">
+  <ion-toolbar>
+    <ion-title>
+      Resultados
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="page_content">
+
+  <ion-refresher slot="fixed" (ionRefresh)="[getEvaData($event)]">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div echarts id="evaChart" style="height:400px" class="results-chart"></div>
+  <div echarts id="questChart" style="height:400px" class="results-chart"></div>
+
+</ion-content>
