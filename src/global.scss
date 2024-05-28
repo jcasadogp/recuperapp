@@ -25,23 +25,24 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-// ion-content {
-//     --background: white;
-// }
-
 .page_content {
-    --background: #eff6f5;
+    --background: white;
 }
 
 ion-container {
     padding: 5px;
 }
 
+.component-toolbar .title-default {
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+}
+
 .custom-header {
     ion-toolbar {
-        --background: #1e4d7d; // Set the background color for the toolbar
-        --color: #ffffff; // Set the text color for the toolbar
-        font-size: 22px; // Adjust the font size for the toolbar text
+        --background: #1e4d7d;
+        --color: #ffffff;
+        font-size: 22px;
         --min-height: 55px;
     }
   }
@@ -65,7 +66,5 @@ p {
     margin-top: 5px;
 
     color: black;
-    // --background: #99FF66; //verde succes intenso
-    // --background: #FFCDD2; //rojo clarito
-    --background: #DCEDC8; //verde clarito
+    --background: #DCEDC8;
 }
