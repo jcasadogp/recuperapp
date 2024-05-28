@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar class="ppal-toolbar">
+  <ion-toolbar class="component-toolbar">
 
     <ion-button (click)="dismissModal()" slot="end" fill="clear">
       <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
@@ -12,7 +12,7 @@
 
 <ion-content>
 
-  <ion-item-divider>
+  <!-- <ion-item-divider>
     <ion-label>
       Mis datos
     </ion-label>
@@ -40,7 +40,21 @@
         <ion-col size=7></ion-col>
       </ion-row>
     </ion-grid>
-  </ion-item>
+  </ion-item> -->
+
+  <ion-text *ngFor="let q of baselineData">
+    
+    <h4>Pregunta {{q.id}}:</h4>
+    <p>{{q.question}}</p>
+
+    <ion-text *ngFor="let q2 of q.answers">
+      <p>{{q2.answer}}</p>
+
+    </ion-text>
+
+    
+    
+  </ion-text>
 
 </ion-content>
 
