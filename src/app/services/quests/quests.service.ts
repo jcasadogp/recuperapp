@@ -360,19 +360,12 @@ export class QuestsService {
     console.log(isEnabled)
     
     for (let f of this.questFrecuencies) {
-      console.log("------", f)
       let updateDate = new Date(this[firstDate].getTime());
       updateDate.setMonth(updateDate.getMonth() + f);
 
-      console.log(">> CHECK DATE - update date", updateDate)
-      
-      // console.log('*', updateDate, this.currentDate)
       this[isEnabled] = this.datesAreEqual(updateDate, this.currentDate) ? "1" : "0";
       this[isEnabled] = (f == this.questFrecuencies[this.questFrecuencies.length -1] && updateDate < this.currentDate) ? "2" : this[isEnabled];
       this[nextDate] = (this[nextDate] == null && updateDate >= this.currentDate) ? updateDate.toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'}) : this[nextDate];
-
-      console.log(">> CHECK DATE - this is enabled any", this[isEnabled])
-      // console.log('*', this[isEnabled], this.isEnabledFacseg)
     }
 
   }
