@@ -271,10 +271,8 @@ export class QuestsService {
             }
             
             if (data[0].neuroqol_date_1 && data[0].neuroqol_date_1 !== "") {
-              console.log(">> Entra en if")
               this.checkQuestDate('NeuroQol', data[0].neuroqol_date_1);
             } else {
-              console.log(">> Entra en else")
               this.isEnabledNeuroQol = '1'
             }
             
@@ -356,8 +354,6 @@ export class QuestsService {
     let nextDate = `next${prefix}Date`;
 
     this[firstDate] = new Date(first_data_date)
-
-    console.log(isEnabled)
     
     for (let f of this.questFrecuencies) {
       let updateDate = new Date(this[firstDate].getTime());
@@ -367,7 +363,6 @@ export class QuestsService {
       this[isEnabled] = (f == this.questFrecuencies[this.questFrecuencies.length -1] && updateDate < this.currentDate) ? "2" : this[isEnabled];
       this[nextDate] = (this[nextDate] == null && updateDate >= this.currentDate) ? updateDate.toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'}) : this[nextDate];
     }
-
   }
 
   datesAreEqual(date1, date2) {
