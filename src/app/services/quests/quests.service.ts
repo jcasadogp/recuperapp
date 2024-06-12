@@ -245,9 +245,6 @@ export class QuestsService {
       this.getQuestStatus(id).subscribe({
         next: (data: QuestControl) => {
 
-          console.log(">> ", data)
-          console.log(">> ", data[0].neuroqol_date_1)
-
           let enabledQuests: string[];
           let nextDates: string[];
           
