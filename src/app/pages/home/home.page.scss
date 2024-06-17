@@ -39,19 +39,19 @@ ion-card {
   }
 
   ion-icon {
-    color: #1e4d7d;
+    color: #4663ac;
   }
 
   ion-card-title, ion-card-subtitle {
-    color: #1e4d7d;
+    color: #4663ac;
     font-size: 16px;
     font-weight: bold;
   }
 }
 
-.profile-card{  --background: #f2efd2;  }
-.information-card{  --background: #f8d9b4;  }
-.diary-card{ --background: #9cd9bc; }
+.profile-card{  --background: #c8d9ed;  }
+.information-card{  --background: #e1f1fd;  }
+.diary-card{ --background: #c2cef8; }
 
 #logo_recuperapp {
   display: flex;
