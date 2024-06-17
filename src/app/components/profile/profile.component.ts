@@ -56,8 +56,6 @@ export class ProfileComponent  implements OnInit {
           return acc;
         }, {});
 
-        console.log(data)
-
         let resultArray: { Pregunta: string, Respuesta: string }[] = [];
 
         Object.keys(data[0]).forEach(key => {
@@ -95,7 +93,7 @@ export class ProfileComponent  implements OnInit {
 
         this.finalResultArray = Object.entries(groupedResult).map(([Pregunta, Respuesta]) => ({ Pregunta, Respuesta }));
 
-        console.log(this.finalResultArray);
+        // console.log(this.finalResultArray);
       },
       error: (err) => console.log(err),
       complete: () => {}

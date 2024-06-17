@@ -234,8 +234,6 @@ export class QuestsService {
     var record: string = id;
     var forms: string = "control_cuestionarios";
 
-    console.log("getQuestStatus()", id, "control_cuestionarios")
-
     return this.dataSrvc.export(record, forms)
   }
 
