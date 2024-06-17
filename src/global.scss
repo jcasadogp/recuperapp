@@ -33,14 +33,20 @@ ion-container {
     padding: 5px;
 }
 
-.component-toolbar .title-default {
-    padding-inline-start: 0;
-    padding-inline-end: 0;
+.component-toolbar {
+
+    --background: #c1d8f0;
+    
+
+    .title-default {
+        padding-inline-start: 0;
+        padding-inline-end: 0;
+    }
 }
 
 .custom-header {
     ion-toolbar {
-        --background: #1e4d7d;
+        --background: #4663ac;
         --color: #ffffff;
         font-size: 22px;
         --min-height: 55px;
