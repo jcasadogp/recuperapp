@@ -39,7 +39,7 @@ export class NeuroQolComponent  implements OnInit {
     return await this.storageSrvc.get('RECORD_ID');
   }
 
-  postNeuroQolForm(): void {
+  async postNeuroQolForm(): Promise<void> {
 
     this.neuroqol_form.f_neuroqol = new Date().toISOString().split('T')[0]
 
@@ -50,14 +50,14 @@ export class NeuroQolComponent  implements OnInit {
       this.presentEmptyFieldsAlert;
     } else {
 
-      this.questsSrvc.postNeuroQolForm(this.id, this.neuroqol_form).then(()=>{
-
-        this.questsSrvc.setQuestStatus(this.id, "neuroqol").then(() => {
-          this.modalCntrl.dismiss().then().catch();
-          this.presentConfirmationToast();
-        });
-        
-      }).catch((err) => console.log(err));
+      try {
+        this.questsSrvc.postNeuroQolForm(this.id, this.neuroqol_form);
+        await this.questsSrvc.setQuestStatus(this.id, "neuroqol");
+        await this.modalCntrl.dismiss();
+        this.presentConfirmationToast();
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 

@@ -39,20 +39,20 @@ export class FacsegComponent  implements OnInit {
     return await this.storageSrvc.get('RECORD_ID');
   }
 
-  postFacsegForm(): void {
+  async postFacsegForm(): Promise<void> {
 
     if(typeof(this.facseg_form.fac_seguimiento) == "number" || this.facseg_form.fac_seguimiento != null){
       
       this.facseg_form.f_facseg = new Date().toISOString().split('T')[0]
       
-      this.questsSrvc.postFacsegForm(this.id, this.facseg_form).then(()=>{
-
-        this.questsSrvc.setQuestStatus(this.id, "facseg").then(() => {
-          this.modalCntrl.dismiss().then().catch();
-          this.presentConfirmationToast();
-        });
-        
-      }).catch((err) => console.log(err));
+      try {
+        this.questsSrvc.postFacsegForm(this.id, this.facseg_form);
+        await this.questsSrvc.setQuestStatus(this.id, "facseg");
+        await this.modalCntrl.dismiss();
+        this.presentConfirmationToast();
+      } catch (err) {
+        console.log(err);
+      }
 
     } else {
       this.presentEmptyFieldsAlert();

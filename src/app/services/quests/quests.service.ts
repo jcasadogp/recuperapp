@@ -17,6 +17,8 @@ import { MonitoringData } from 'src/app/redcap_interfaces/monitoring_data';
 import { NeuroQoLForm } from 'src/app/interfaces/neuro_qol-form';
 import { NeuroQol } from 'src/app/redcap_interfaces/neuro_qol';
 
+import { lastValueFrom } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -117,18 +119,20 @@ export class QuestsService {
       }
     }
 
-    this.dataSrvc.import(data).subscribe((res) => {
-
+    try {
+      await lastValueFrom(this.dataSrvc.import(data));
       var data_monitoring = [
         {
           record_id: id,
-          num_seguimiento: this.num_seguimiento+1
+          num_seguimiento: this.num_seguimiento + 1
         }
       ];
-
+  
       this.num_seguimiento++;
-      this.dataSrvc.import(data_monitoring).subscribe((res) => {})
-    })
+      await lastValueFrom(this.dataSrvc.import(data_monitoring));
+    } catch (err) {
+      throw err;
+    }
   }
   
   async postBarthelsegForm(id: string, barthelseg_form: BarthelsegForm): Promise<void>{
@@ -148,20 +152,21 @@ export class QuestsService {
     for (var key in barthelseg_form) {
       data[0][key] = barthelseg_form[key];
     }
-    
-    this.dataSrvc.import(data).subscribe((res) => {
 
+    try {
+      await lastValueFrom(this.dataSrvc.import(data));
       var data_barthelseg = [
         {
           record_id: id,
           num_barthelseg: this.num_barthelseg+1
         }
       ];
-
+  
       this.num_barthelseg++;
-      
-      this.dataSrvc.import(data_barthelseg).subscribe((res) => {})
-    })
+      await lastValueFrom(this.dataSrvc.import(data_barthelseg));
+    } catch (err) {
+      throw err;
+    }
   }
   
   async postFacsegForm(id: string, facseg_form: FacsegForm): Promise<void>{
@@ -181,19 +186,20 @@ export class QuestsService {
     data[0].f_facseg = facseg_form.f_facseg;
     data[0].fac_seguimiento = facseg_form.fac_seguimiento;
 
-    this.dataSrvc.import(data).subscribe((res) => {
-
+    try {
+      await lastValueFrom(this.dataSrvc.import(data));
       var data_facseg = [
         {
           record_id: id,
           num_facseg: this.num_facseg+1
         }
       ];
-
+  
       this.num_facseg++;
-      
-      this.dataSrvc.import(data_facseg).subscribe((res) => {})
-    })
+      await lastValueFrom(this.dataSrvc.import(data_facseg));
+    } catch (err) {
+      throw err;
+    }
   }
 
   async postNeuroQolForm(id: string, neuroqol_form: NeuroQoLForm): Promise<void>{
@@ -213,20 +219,21 @@ export class QuestsService {
     for (var key in neuroqol_form) {
       data[0][key] = neuroqol_form[key];
     }
-    
-    this.dataSrvc.import(data).subscribe((res) => {
 
+    try {
+      await lastValueFrom(this.dataSrvc.import(data));
       var data_neuroqol = [
         {
           record_id: id,
           num_neuroqol: this.num_neuroqol+1
         }
       ];
-
+  
       this.num_neuroqol++;
-      
-      this.dataSrvc.import(data_neuroqol).subscribe((res) => {})
-    })
+      await lastValueFrom(this.dataSrvc.import(data_neuroqol));
+    } catch (err) {
+      throw err;
+    }
   }
 
   getQuestStatus(id: string): Observable<QuestControl> {
