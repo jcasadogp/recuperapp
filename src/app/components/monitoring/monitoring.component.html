@@ -41,14 +41,11 @@
     <ion-text *ngIf="q.id == 9 && monitoring_form[q.redcap_value] == 1">
       <p>{{q.answers[1].sub_question.question}}</p>
       <ion-item lines="none">
-        <ion-datetime [max]="currentDate_string" placeholder="Seleccione una fecha"
-          presentation="date" [preferWheel]="true"
+        <ion-datetime mode="ios" presentation="date" [preferWheel]="true" displayFormat="DD-MM-YYYY" [max]="currentDate_string" placeholder="Seleccione una fecha"
           [(ngModel)]="monitoring_form[q.answers[1].sub_question.redcap_value]" name="createdOn" cancelText="Cancelar" doneText="Hecho"></ion-datetime>
       </ion-item>
     </ion-text>
 
-    
-    
   </ion-text>
 
   
