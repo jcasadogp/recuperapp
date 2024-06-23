@@ -17,8 +17,6 @@ export class LoginService {
     var record: string = id;
     var forms: string = 'login';
 
-    console.log("getUser()", id, "login")
-
     return this.dataSrvc.export(record, forms);
   }
 }

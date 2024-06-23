@@ -68,8 +68,6 @@ export class EvaService {
     var record: string = id;
     var forms: string = "eva";
 
-    console.log("getEvaData()", id, "eva")
-
     return this.dataSrvc.export(record, forms);
   }
 

@@ -1,60 +1,35 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="component-toolbar">
-
     <ion-button (click)="dismissModal()" slot="end" fill="clear">
       <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
     </ion-button>
-
     <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
 
-  <!-- <ion-item-divider>
-    <ion-label>
-      Mis datos
-    </ion-label>
-  </ion-item-divider>
+  <h4 style="font-weight: bold;">Mis datos</h4>
 
-  <ion-item>
+  <ion-item lines="none">
     <ion-grid>
-      <ion-row>
-        <ion-col class="profile-att" style="font-weight: bold;" size=5>Nombre</ion-col>
-        <ion-col size=7>María</ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col class="profile-att" style="font-weight: bold;" size=5>Apellidos</ion-col>
-        <ion-col size=7>García</ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col class="profile-att" style="font-weight: bold;" size=5>Sexo</ion-col>
-        <ion-col size=7></ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col class="profile-att" style="font-weight: bold;" size=5>Fecha de nacimiento</ion-col>
-        <ion-col size=7></ion-col>
-      </ion-row>
+      <ng-container *ngFor="let item of finalResultArray">
+        <ion-row>
+          <ion-col class="profile-att" style="font-weight: bold;" size="12">{{item.Pregunta}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12" style="padding-left: 16px;">
+            <ng-container *ngIf="item.Respuesta.length > 1; else singleResponse">
+              <ul>
+                <li *ngFor="let resp of item.Respuesta">{{resp}}</li>
+              </ul>
+            </ng-container>
+            <ng-template #singleResponse>
+              {{item.Respuesta[0]}}
+            </ng-template>
+          </ion-col>
+        </ion-row>
+      </ng-container>
     </ion-grid>
-  </ion-item> -->
-
-  <ion-text *ngFor="let q of baselineData">
-    
-    <h4>Pregunta {{q.id}}:</h4>
-    <p>{{q.question}}</p>
-
-    <ion-text *ngFor="let q2 of q.answers">
-      <p>{{q2.answer}}</p>
-
-    </ion-text>
-
-    
-    
-  </ion-text>
-
+  </ion-item>
 </ion-content>
-

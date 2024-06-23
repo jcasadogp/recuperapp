@@ -23,7 +23,9 @@ export class MonitoringComponent  implements OnInit {
     private questsSrvc: QuestsService,
     private storageSrvc: StorageService
   ) {
-    this.currentDate_string = new Date().toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'})
+    // this.currentDate_string = new Date().toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'})
+    this.currentDate_string = new Date().toISOString();
+    this.monitoring_form.f_exitus_seguimiento = this.currentDate_string
    }
 
   ngOnInit() {
@@ -42,25 +44,39 @@ export class MonitoringComponent  implements OnInit {
     return await this.storageSrvc.get('RECORD_ID');
   }
 
-  postMonitoringForm(): void {
+  async postMonitoringForm(): Promise<void> {
+    this.monitoring_form.f_seguimiento = new Date().toISOString().split('T')[0];
+    // new Date().toISOString().split('T')[0]
+    console.log(this.monitoring_form.f_exitus_seguimiento)
 
-    this.monitoring_form.f_seguimiento = new Date().toISOString().split('T')[0]
-
+    const transformDate = (dateString: string): string => {
+      const date = new Date(dateString);
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const year = date.getFullYear();
+      return `${day}-${month}-${year}`;
+    };
+    
+    if (this.monitoring_form.f_exitus_seguimiento) {
+      console.log(transformDate(this.monitoring_form.f_exitus_seguimiento));
+    } else {
+      console.log("f_exitus_seguimiento is undefined");
+    }
+    
     var i = Object.keys(this.monitoring_form).length;
-
-    if(i < 10){
+  
+    if (i < 10) {
       var camposVacios = 10 - i;
       this.presentEmptyFieldsAlert();
     } else {
-
-      this.questsSrvc.postMonitoringForm(this.id, this.monitoring_form).then(()=>{
-
-        this.questsSrvc.setQuestStatus(this.id, "monitoring").then(() => {
-          this.modalCntrl.dismiss().then().catch();
-          this.presentConfirmationToast();
-        });
-        
-      }).catch((err) => console.log(err));
+      try {
+        await this.questsSrvc.postMonitoringForm(this.id, this.monitoring_form);
+        await this.questsSrvc.setQuestStatus(this.id, "monitoring");
+        await this.modalCntrl.dismiss();
+        this.presentConfirmationToast();
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 

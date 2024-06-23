@@ -98,9 +98,9 @@ export class ResultsPage implements OnInit {
 
     const seriesData = processedData.map(obj => [obj.fecha_eva, obj.eva]);
 
-    console.log('--- SORTED', sortedData)
-    console.log('--- FORMATTED', formattedData)
-    console.log('--- PROCESSED', processedData)
+    // console.log('--- SORTED', sortedData)
+    // console.log('--- FORMATTED', formattedData)
+    // console.log('--- PROCESSED', processedData)
 
     var xAxisData: string[] = [];
     var evaData: number[] = [];
@@ -175,6 +175,8 @@ export class ResultsPage implements OnInit {
   getQuestData(event){
     this.loginSrvc.getUser(this.id).subscribe({
       next: (data) => {
+        console.log("QUEST DATA", data)
+
         this.getQuestChart(data)
         if (event) event.target.complete();
       },

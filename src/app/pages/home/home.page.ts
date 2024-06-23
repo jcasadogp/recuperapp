@@ -79,15 +79,7 @@ export class HomePage implements OnInit {
           let updateDate = new Date(lastEvaDate.getTime());
           updateDate.setDate(updateDate.getDate() + 7);
 
-          console.log(updateDate, this.currentDate)
-
-          if(this.currentDate >= updateDate){
-            console.log("Hay que rellenar nuevo EVA")
-            this.notifyEva = true
-          } else {
-            console.log("Hace menos de 7 días que se rellenó EVA")
-            this.notifyEva = false
-          }
+          this.notifyEva = this.currentDate >= updateDate;
 
         } else {
           this.notifyEva = true

@@ -1,6 +1,6 @@
 <ion-header mode="ios" [translucent]="true" class="custom-header">
   <ion-toolbar>
-    <ion-title>Menú principal</ion-title>
+    <ion-title>MENÚ PRINCIPAL</ion-title>
     <ion-buttons class="logout-icon" slot="end" (click)="logout()">
       <ion-icon name="log-out-outline"></ion-icon>
     </ion-buttons>
@@ -47,7 +47,8 @@
       
     </ion-row>
 
-    <ion-item *ngIf="notifyEva">Debe rellenar EVA</ion-item>
+    <ion-item *ngIf="notifyEva" lines = "none" color="danger">
+      <b>¡Debe completar el Diario de Dolor!</b></ion-item>
 
     <ion-row>
       <ion-col size=12>

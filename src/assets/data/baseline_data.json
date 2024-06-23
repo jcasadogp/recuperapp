@@ -2,6 +2,7 @@
     {
         "id": 1,
         "question": "Sexo",
+        "category": "datos_personales",
         "redcap_value": "sexo",
         "field_type": "radio",
         "answers": [
@@ -11,12 +12,14 @@
     },{
         "id": 2,
         "question": "Edad",
+        "category": "datos_personales",
         "redcap_value": "edad",
         "field_type": "text",
         "answers": ""
     },{
         "id": 3,
         "question": "Estado civil",
+        "category": "datos_personales",
         "redcap_value": "e_civil",
         "field_type": "radio",
         "answers": [
@@ -28,6 +31,7 @@
     },{
         "id": 4,
         "question": "Enfermedades previas",
+        "category": "antecedentes_clinicos",
         "redcap_value": "enf_previas",
         "field_type": "checkbox",
         "answers": [
@@ -73,6 +77,7 @@
     },{
         "id": 5,
         "question": "Oxigenoterapia crónica domiciliaria",
+        "category": "antecedentes_clinicos",
         "redcap_value": "ocd",
         "field_type": "radio",
         "answers": [
@@ -82,6 +87,7 @@
     },{
         "id": 6,
         "question": "Caídas en el último año (otras además de la actual)",
+        "category": "antecedentes_clinicos",
         "redcap_value": "caidas",
         "field_type": "radio",
         "answers": [
@@ -91,6 +97,7 @@
     },{
         "id": 7,
         "question": "Global Deterioration Scale de Reisberg",
+        "category": "estado_basal",
         "redcap_value": "gds",
         "field_type": "radio",
         "answers": [
@@ -105,6 +112,7 @@
     },{
         "id": 8,
         "question": "Ubicación basal",
+        "category": "estado_basal",
         "redcap_value": "ub_basal",
         "field_type": "radio",
         "answers": [
@@ -116,6 +124,7 @@
     },{
         "id": 9,
         "question": "Ayuda técnica que precisa el paciente para caminar",
+        "category": "estado_basal",
         "redcap_value": "ay_basal",
         "field_type": "radio",
         "answers": [
@@ -128,6 +137,7 @@
     },{
         "id": 10,
         "question": "Número de fármacos basales",
+        "category": "estado_basal",
         "redcap_value": "f_basales",
         "field_type": "text",
         "answers": "",
@@ -157,18 +167,21 @@
     },{
         "id": 11,
         "question": "Fecha de ingreso",
+        "category": "datos_ingreso",
         "redcap_value": "f_ingreso",
         "field_type": "text",
         "answers": ""
     },{
         "id": 12,
-        "question": "Fecha de cirugía ",
+        "question": "Fecha de cirugía",
+        "category": "datos_ingreso",
         "redcap_value": "f_cirug_a",
         "field_type": "text",
         "answers": ""
     },{
         "id": 13,
         "question": "TIpo de fractura",
+        "category": "datos_ingreso",
         "redcap_value": "tipo_fractura",
         "field_type": "radio",
         "answers": [
@@ -183,6 +196,7 @@
     },{
         "id": 14,
         "question": "Fractura asociada aguda",
+        "category": "datos_ingreso",
         "redcap_value": "fx_asociada",
         "field_type": "radio",
         "answers": [
@@ -192,6 +206,7 @@
     },{
         "id": 15,
         "question": "Tipo de cirugía",
+        "category": "datos_ingreso",
         "redcap_value": "tipo_cirugia",
         "field_type": "radio",
         "answers": [
@@ -206,6 +221,7 @@
     },{
         "id": 16,
         "question": "ASA physical status",
+        "category": "datos_ingreso",
         "redcap_value": "asa",
         "field_type": "dropdown",
         "answers": [
@@ -219,6 +235,7 @@
     },{
         "id": 17,
         "question": "Retraso quirúrgico",
+        "category": "datos_ingreso",
         "redcap_value": "ret_qx",
         "field_type": "radio",
         "answers": [
@@ -238,6 +255,7 @@
     },{
         "id": 18,
         "question": "Complicaciones intrahospitalarias",
+        "category": "datos_ingreso",
         "redcap_value": "compl_intrahosp",
         "field_type": "radio",
         "answers": [
@@ -269,6 +287,7 @@
     },{
         "id": 19,
         "question": "Carga autorizada al alta",
+        "category": "datos_ingreso",
         "redcap_value": "carga_alta",
         "field_type": "radio",
         "answers": [
@@ -278,6 +297,7 @@
     },{
         "id": 20,
         "question": "Destino al alta",
+        "category": "datos_ingreso",
         "redcap_value": "destino_alta",
         "field_type": "radio",
         "answers": [
@@ -294,6 +314,7 @@
     },{
         "id": 21,
         "question": "Tipo de rehabilitación al alta",
+        "category": "datos_ingreso",
         "redcap_value": "rehab_alta",
         "field_type": "radio",
         "answers": [
@@ -306,6 +327,7 @@
     },{
         "id": 22,
         "question": "Comentarios",
+        "category": "datos_ingreso",
         "redcap_value": "comentarios",
         "field_type": "notes",
         "answers": ""

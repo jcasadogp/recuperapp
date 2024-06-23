@@ -17,6 +17,8 @@ import { MonitoringData } from 'src/app/redcap_interfaces/monitoring_data';
 import { NeuroQoLForm } from 'src/app/interfaces/neuro_qol-form';
 import { NeuroQol } from 'src/app/redcap_interfaces/neuro_qol';
 
+import { lastValueFrom } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -117,18 +119,20 @@ export class QuestsService {
       }
     }
 
-    this.dataSrvc.import(data).subscribe((res) => {
-
+    try {
+      await lastValueFrom(this.dataSrvc.import(data));
       var data_monitoring = [
         {
           record_id: id,
-          num_seguimiento: this.num_seguimiento+1
+          num_seguimiento: this.num_seguimiento + 1
         }
       ];
-
+  
       this.num_seguimiento++;
-      this.dataSrvc.import(data_monitoring).subscribe((res) => {})
-    })
+      await lastValueFrom(this.dataSrvc.import(data_monitoring));
+    } catch (err) {
+      throw err;
+    }
   }
   
   async postBarthelsegForm(id: string, barthelseg_form: BarthelsegForm): Promise<void>{
@@ -148,20 +152,21 @@ export class QuestsService {
     for (var key in barthelseg_form) {
       data[0][key] = barthelseg_form[key];
     }
-    
-    this.dataSrvc.import(data).subscribe((res) => {
 
+    try {
+      await lastValueFrom(this.dataSrvc.import(data));
       var data_barthelseg = [
         {
           record_id: id,
           num_barthelseg: this.num_barthelseg+1
         }
       ];
-
+  
       this.num_barthelseg++;
-      
-      this.dataSrvc.import(data_barthelseg).subscribe((res) => {})
-    })
+      await lastValueFrom(this.dataSrvc.import(data_barthelseg));
+    } catch (err) {
+      throw err;
+    }
   }
   
   async postFacsegForm(id: string, facseg_form: FacsegForm): Promise<void>{
@@ -181,19 +186,20 @@ export class QuestsService {
     data[0].f_facseg = facseg_form.f_facseg;
     data[0].fac_seguimiento = facseg_form.fac_seguimiento;
 
-    this.dataSrvc.import(data).subscribe((res) => {
-
+    try {
+      await lastValueFrom(this.dataSrvc.import(data));
       var data_facseg = [
         {
           record_id: id,
           num_facseg: this.num_facseg+1
         }
       ];
-
+  
       this.num_facseg++;
-      
-      this.dataSrvc.import(data_facseg).subscribe((res) => {})
-    })
+      await lastValueFrom(this.dataSrvc.import(data_facseg));
+    } catch (err) {
+      throw err;
+    }
   }
 
   async postNeuroQolForm(id: string, neuroqol_form: NeuroQoLForm): Promise<void>{
@@ -213,28 +219,27 @@ export class QuestsService {
     for (var key in neuroqol_form) {
       data[0][key] = neuroqol_form[key];
     }
-    
-    this.dataSrvc.import(data).subscribe((res) => {
 
+    try {
+      await lastValueFrom(this.dataSrvc.import(data));
       var data_neuroqol = [
         {
           record_id: id,
           num_neuroqol: this.num_neuroqol+1
         }
       ];
-
+  
       this.num_neuroqol++;
-      
-      this.dataSrvc.import(data_neuroqol).subscribe((res) => {})
-    })
+      await lastValueFrom(this.dataSrvc.import(data_neuroqol));
+    } catch (err) {
+      throw err;
+    }
   }
 
   getQuestStatus(id: string): Observable<QuestControl> {
     
     var record: string = id;
     var forms: string = "control_cuestionarios";
-
-    console.log("getQuestStatus()", id, "control_cuestionarios")
 
     return this.dataSrvc.export(record, forms)
   }
@@ -244,9 +249,6 @@ export class QuestsService {
     return new Observable<{ enabledQuests: string[], nextDates: string[] }>(observer => {
       this.getQuestStatus(id).subscribe({
         next: (data: QuestControl) => {
-
-          console.log(">> ", data)
-          console.log(">> ", data[0].neuroqol_date_1)
 
           let enabledQuests: string[];
           let nextDates: string[];
@@ -271,10 +273,8 @@ export class QuestsService {
             }
             
             if (data[0].neuroqol_date_1 && data[0].neuroqol_date_1 !== "") {
-              console.log(">> Entra en if")
               this.checkQuestDate('NeuroQol', data[0].neuroqol_date_1);
             } else {
-              console.log(">> Entra en else")
               this.isEnabledNeuroQol = '1'
             }
             
@@ -356,8 +356,6 @@ export class QuestsService {
     let nextDate = `next${prefix}Date`;
 
     this[firstDate] = new Date(first_data_date)
-
-    console.log(isEnabled)
     
     for (let f of this.questFrecuencies) {
       let updateDate = new Date(this[firstDate].getTime());
@@ -367,7 +365,6 @@ export class QuestsService {
       this[isEnabled] = (f == this.questFrecuencies[this.questFrecuencies.length -1] && updateDate < this.currentDate) ? "2" : this[isEnabled];
       this[nextDate] = (this[nextDate] == null && updateDate >= this.currentDate) ? updateDate.toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'}) : this[nextDate];
     }
-
   }
 
   datesAreEqual(date1, date2) {

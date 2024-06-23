@@ -40,7 +40,7 @@ export class BarthelsegComponent  implements OnInit {
     return await this.storageSrvc.get('RECORD_ID');
   }
 
-  postBarthelsegForm(): void {
+  async postBarthelsegForm(): Promise<void> {
 
     this.barthelseg_form.f_barthel = new Date().toISOString().split('T')[0]
 
@@ -51,14 +51,14 @@ export class BarthelsegComponent  implements OnInit {
       this.presentEmptyFieldsAlert;
     } else {
 
-      this.questsSrvc.postBarthelsegForm(this.id, this.barthelseg_form).then(()=>{
-
-        this.questsSrvc.setQuestStatus(this.id, "barthelseg").then(() => {
-          this.modalCntrl.dismiss().then().catch();
-          this.presentConfirmationToast();
-        });
-        
-      }).catch((err) => console.log(err));
+      try {
+        this.questsSrvc.postBarthelsegForm(this.id, this.barthelseg_form);
+        await this.questsSrvc.setQuestStatus(this.id, "barthelseg");
+        await this.modalCntrl.dismiss();
+        this.presentConfirmationToast();
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 
