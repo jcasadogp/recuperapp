@@ -113,9 +113,13 @@ export class HomePage implements OnInit {
     const modal = await this.modalCntrl.create({
       component: EvaComponent
     });
-    return await modal.present();
+    await modal.present();
+
+    modal.onDidDismiss().then(() => {
+      this.getEvaData(null)
+    });
   }
-  
+
   async logout(): Promise<any> {
     try {
       await this.storageSrvc.remove('RECORD_ID');
