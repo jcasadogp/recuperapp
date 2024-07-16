@@ -14,3 +14,8 @@ ion-text {
     font-size: 100%;
     padding-left: 0px;
 }
+
+.quest_list {
+    justify-content: start !important; /* For ion-item */
+    text-align: left !important; /* For text alignment */
+}

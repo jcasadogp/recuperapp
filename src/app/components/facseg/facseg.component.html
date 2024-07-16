@@ -22,7 +22,7 @@
 
     <!-- RADIO OR DROPDOWN -->
     <ion-radio-group *ngIf="q.field_type == 'radio' || q.field_type == 'dropdown'" [(ngModel)]="facseg_form[q.redcap_value]">
-      <ion-item *ngFor="let a of q.answers" lines="none">
+      <ion-item *ngFor="let a of q.answers" lines="none" class="quest_list">
         <ion-radio justify="start" labelPlacement="end" [value]="a.redcap_value">
           <span class="ion-text-wrap">{{a.answer}}</span>
         </ion-radio>
@@ -31,7 +31,7 @@
 
     <!-- CHECKBOX -->
     <ion-list *ngIf="q.field_type == 'checkbox'">
-      <ion-item *ngFor="let a of q.answers" lines="none">
+      <ion-item *ngFor="let a of q.answers" lines="none" class="quest_list">
         <ion-checkbox justify="start" labelPlacement="end" [value]="a.redcap_value">{{a.answer}}</ion-checkbox>
       </ion-item>
     </ion-list>
