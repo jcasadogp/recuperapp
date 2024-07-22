@@ -23,7 +23,7 @@
     <ion-radio-group *ngIf="q.field_type == 'radio' || q.field_type == 'dropdown'" [(ngModel)]="monitoring_form[q.redcap_value]">
       <ion-item *ngFor="let a of q.answers" lines="none" class="quest_list">
         <ion-radio justify="start" labelPlacement="end" [value]="a.redcap_value">
-          <span class="ion-text-wrap">{{a.answer}}</span>
+          <span class="ion-text-wrap" style="width:100%;display:block;margin-right:100vw;">{{a.answer}}</span>
         </ion-radio>
       </ion-item>
     </ion-radio-group>
