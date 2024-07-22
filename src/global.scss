@@ -35,12 +35,17 @@ ion-container {
 
 .component-toolbar {
 
-    --background: #c1d8f0;
-    
+    --background: rgb(7, 87, 173);
+    --color: #ffffff;
+
+    ion-icon{
+        color: #ffffff;
+    }
 
     .title-default {
         padding-inline-start: 0;
         padding-inline-end: 0;
+
     }
 }
 
