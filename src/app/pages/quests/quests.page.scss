@@ -15,7 +15,16 @@ ion-text {
     padding-left: 0px;
 }
 
-.quest_list {
-    justify-content: start !important; /* For ion-item */
-    text-align: left !important; /* For text alignment */
+.quest_list ion-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Aligns the content to the start (left) */
+}
+
+.quest_list ion-radio {
+  margin-right: 8px; /* Adds some space between the radio and the text */
+}
+
+.quest_list .ion-text-wrap {
+  margin-left: 8px; /* Adjust the spacing between the radio button and the text if needed */
 }
