@@ -52,8 +52,9 @@ export class HomePage implements OnInit {
 
   getParticipant(event){
     this.participantSrvc.getParticipant(this.id).subscribe({
-      next: (data: Participant) => {
+      next: (data: Participant[]) => {
         this.participant = data[0];
+        
         if (event) event.target.complete();
       },
       error: (err) => {

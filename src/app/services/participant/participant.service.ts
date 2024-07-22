@@ -16,7 +16,7 @@ export class ParticipantService {
     private http: HttpClient
   ) { }
 
-  getParticipant(id: string): Observable<Participant> {
+  getParticipant(id: string): Observable<Participant[]> {
     
     var record: string = id;
     var forms: string = "participantes";
