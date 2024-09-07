@@ -50,9 +50,18 @@
     <ion-item *ngIf="notifyEva" lines = "none" color="danger">
       <b>¡Debe completar el Diario de Dolor!</b></ion-item>
 
-    <ion-row>
-      <ion-col size=12>
-        <ion-card mode="ios" no padding class="diary-card" (click)="presentEvaModal()">
+      <ion-row style="display: flex; align-items: stretch;">
+      <ion-col size=6>
+        <ion-card mode="ios" class="notifications-card" (click)="presentNotificationsModal()" style="height: 100%;">
+          <ion-card-content>
+            <ion-icon size="large" name="notifications-outline"></ion-icon>
+            <ion-card-title>Notificaciones pendientes</ion-card-title>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size=6>
+        <ion-card mode="ios" no padding class="diary-card" (click)="presentEvaModal()" style="height: 100%;">
           <ion-card-content>
             <ion-icon size="large" name="add-circle-outline"></ion-icon>
             <ion-card-title>Diario de dolor</ion-card-title>

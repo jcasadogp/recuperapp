@@ -10,6 +10,7 @@ import { StorageService } from 'src/app/services/storage/storage.service';
 import { QuestsService } from 'src/app/services/quests/quests.service';
 import { EvaService } from 'src/app/services/eva/eva.service';
 import { Eva } from 'src/app/redcap_interfaces/eva';
+import { PendingNotificationsComponent } from 'src/app/components/pending-notifications/pending-notifications.component';
 
 @Component({
   selector: 'app-home',
@@ -106,6 +107,13 @@ export class HomePage implements OnInit {
   async presentInformationModal(){
     const modal = await this.modalCntrl.create({
       component: InformationComponent
+    });
+    return await modal.present();
+  }
+
+  async presentNotificationsModal(){
+    const modal = await this.modalCntrl.create({
+      component: PendingNotificationsComponent
     });
     return await modal.present();
   }
