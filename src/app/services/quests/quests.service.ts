@@ -342,12 +342,11 @@ export class QuestsService {
             let firstDate = new Date().toISOString().split('T')[0]
             data2[0][`${quest_name}_date_1`] = firstDate
 
-            console.log(">>> AQUÍ ACTIVARÍAMOS LAS NOTIFICACIONES")
             this.notifSrvc.scheduleNotification(quest_name, firstDate)
           }
           
-          // this.dataSrvc.import(data2).subscribe((res) => {})
-          // this.getEnabledStatus(id).subscribe((res) => {})
+          this.dataSrvc.import(data2).subscribe((res) => {})
+          this.getEnabledStatus(id).subscribe((res) => {})
         } 
       },
       error: (err) => {console.log(err)},
