@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LocalNotifications, ScheduleOptions } from '@capacitor/local-notifications';
+import { LocalNotifications, PendingLocalNotificationSchema, PendingResult, ScheduleOptions } from '@capacitor/local-notifications';
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +17,23 @@ export class LocalNotifService {
     for (let i = 0; i < str.length; i++) {
       const char = str.charCodeAt(i);
       hash = (hash << 5) - hash + char;
-      hash |= 0; // Convert to 32bit integer
+      hash |= 0;
     }
-    return Math.abs(hash); // Ensure positive number
+    return Math.abs(hash);
   }
 
   async scheduleNotification(questName, firstDate){
 
     console.log(new Date(firstDate))
+
+    const questNameMapping: { [key: string]: string } = {
+      'facseg': 'valoración funcional de la marcha',
+      'monitoring': 'seguimiento',
+      'barthelseg': 'Barthel',
+      'neuroqol': 'movilidad de las extremidades inferiores'
+    };
+    
+    const questName2 = questNameMapping[questName] || 'Desconocido';
 
     let notifications = this.questFrecuencies.map((f, index) => {
       const notificationTime = new Date(firstDate);
@@ -35,7 +44,7 @@ export class LocalNotifService {
       return {
         id: this.hashCode(questName) + index,
         title: "Rellenar cuestionarios",
-        body: "Debe rellenar el cuestionario " + questName,
+        body: "Debe rellenar el cuestionario " + questName2,
         schedule: { at: notificationTime}
       };
     });
@@ -46,12 +55,14 @@ export class LocalNotifService {
 
     console.log(options)
 
-    // try{
-    //   await LocalNotifications.schedule(options)
-    // } catch (ex) {
-    //   alert(JSON.stringify(ex))
-    // }
+    try{
+      await LocalNotifications.schedule(options)
+    } catch (ex) {
+      alert(JSON.stringify(ex))
+    }
   }
-
   
+  async getPendingNotifications(): Promise<PendingResult> {
+    return await LocalNotifications.getPending()
+  }
 }
