@@ -32,7 +32,7 @@
     <ion-list *ngIf="q.field_type == 'checkbox'">
       <ion-item *ngFor="let a of q.answers" lines="none" class="quest_list">
         <ion-checkbox justify="start" labelPlacement="end" [value]="a.redcap_value" (ionChange)="updateCheckboxSelectedValues($event, q.redcap_value)">
-          {{a.answer}}
+          <span class="ion-text-wrap" style="width:100%;display:block;margin-right:100vw;">{{a.answer}}</span>
         </ion-checkbox>
       </ion-item>
     </ion-list>
