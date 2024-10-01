@@ -21,6 +21,9 @@ log.txt
 /.versions
 /coverage
 
+# Android
+/android
+
 # Ionic
 /.ionic
 /www
