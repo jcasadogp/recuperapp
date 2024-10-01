@@ -5,7 +5,6 @@ import { BarthelsegComponent } from 'src/app/components/barthelseg/barthelseg.co
 import { FacsegComponent } from 'src/app/components/facseg/facseg.component';
 import { MonitoringComponent } from 'src/app/components/monitoring/monitoring.component';
 import { NeuroQolComponent } from 'src/app/components/neuro-qol/neuro-qol.component';
-import { QuestControl } from 'src/app/redcap_interfaces/quest_control';
 import { QuestsService } from 'src/app/services/quests/quests.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 

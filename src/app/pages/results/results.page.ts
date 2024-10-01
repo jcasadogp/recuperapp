@@ -216,10 +216,10 @@ export class ResultsPage implements OnInit {
       dataset: {
         source: [
           ['value', 'category'],
-          [num_facseg, 'Facseg'],
-          [num_barthelseg, 'Barthelseg'],
+          [num_facseg, 'Valoración funcional de la marcha'],
+          [num_barthelseg, 'Barthels'],
           [num_seguimiento, 'Seguimiento'],
-          [num_neuroqol, 'Neuroqol']
+          [num_neuroqol, 'Movilidad de las extremidades inferiores']
         ]
       },
       grid: { 
@@ -231,6 +231,11 @@ export class ResultsPage implements OnInit {
         max: 6
       },
       yAxis: { type: 'category' },
+      axisLabel: {
+        formatter: function(value) {
+          return value.length > 20 ? value.match(/.{1,20}/g).join('\n') : value;
+        }
+      },
       series: [
         {
           type: 'bar',

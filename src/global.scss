@@ -35,12 +35,11 @@ ion-container {
 
 .component-toolbar {
 
-    --background: #c1d8f0;
-    
+    --background: #4663ac;
+    --color: #ffffff;
 
-    .title-default {
-        padding-inline-start: 0;
-        padding-inline-end: 0;
+    ion-icon{
+        color: #ffffff;
     }
 }
 
@@ -50,6 +49,10 @@ ion-container {
         --color: #ffffff;
         font-size: 22px;
         --min-height: 55px;
+    }
+
+    ion-icon{
+        color: #ffffff;
     }
   }
 
@@ -72,5 +75,5 @@ p {
     margin-top: 5px;
 
     color: black;
-    --background: #DCEDC8;
+    --background: #2fdf75;
 }

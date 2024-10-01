@@ -18,6 +18,7 @@ import { NeuroQoLForm } from 'src/app/interfaces/neuro_qol-form';
 import { NeuroQol } from 'src/app/redcap_interfaces/neuro_qol';
 
 import { lastValueFrom } from 'rxjs';
+import { LocalNotifService } from '../local-notif/local-notif.service';
 
 @Injectable({
   providedIn: 'root'
@@ -56,7 +57,8 @@ export class QuestsService {
     private http: HttpClient,
     private dataSrvc: DataService,
     private loginSrvc: LoginService,
-    private storageSrvc: StorageService
+    private storageSrvc: StorageService,
+    private notifSrvc: LocalNotifService
   ) {
     this.currentDate = new Date()
     this.questFrecuencies = [1, 3, 4, 6, 9, 12]
@@ -337,7 +339,10 @@ export class QuestsService {
           data2[0] = { ...data[0], ...data2[0] };
 
           if (data[0][`${quest_name}_date_1`] == ""){
-            data2[0][`${quest_name}_date_1`] = new Date().toISOString().split('T')[0]
+            let firstDate = new Date().toISOString().split('T')[0]
+            data2[0][`${quest_name}_date_1`] = firstDate
+
+            this.notifSrvc.scheduleNotification(quest_name, firstDate)
           }
           
           this.dataSrvc.import(data2).subscribe((res) => {})

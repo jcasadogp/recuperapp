@@ -45,32 +45,39 @@ export class MonitoringComponent  implements OnInit {
   }
 
   async postMonitoringForm(): Promise<void> {
-    this.monitoring_form.f_seguimiento = new Date().toISOString().split('T')[0];
-    // new Date().toISOString().split('T')[0]
-    console.log(this.monitoring_form.f_exitus_seguimiento)
+    // this.monitoring_form.f_seguimiento = new Date().toISOString().split('T')[0]
+    // console.log(this.monitoring_form.f_exitus_seguimiento)
 
-    const transformDate = (dateString: string): string => {
+    // Define the transform function
+    const transformDateToYMD = (dateString: string): string => {
       const date = new Date(dateString);
-      const day = date.getDate().toString().padStart(2, '0');
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
       const year = date.getFullYear();
-      return `${day}-${month}-${year}`;
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      return `${year}-${month}-${day}`;
     };
-    
+
+    let num;
+
     if (this.monitoring_form.f_exitus_seguimiento) {
-      console.log(transformDate(this.monitoring_form.f_exitus_seguimiento));
+      this.monitoring_form.f_exitus_seguimiento = transformDateToYMD(this.monitoring_form.f_exitus_seguimiento);
+      console.log(this.monitoring_form.f_exitus_seguimiento);
+      num = 10
     } else {
       console.log("f_exitus_seguimiento is undefined");
+      num = 9
     }
     
     var i = Object.keys(this.monitoring_form).length;
+
+    console.log(">>>", this.monitoring_form)
   
-    if (i < 10) {
-      var camposVacios = 10 - i;
+    if (i < num) {
+      var camposVacios = num - i;
       this.presentEmptyFieldsAlert();
     } else {
       try {
-        await this.questsSrvc.postMonitoringForm(this.id, this.monitoring_form);
+        this.questsSrvc.postMonitoringForm(this.id, this.monitoring_form);
         await this.questsSrvc.setQuestStatus(this.id, "monitoring");
         await this.modalCntrl.dismiss();
         this.presentConfirmationToast();

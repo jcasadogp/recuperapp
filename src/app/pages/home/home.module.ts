@@ -11,6 +11,7 @@ import { HomePage } from './home.page';
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
 import { InformationComponent } from 'src/app/components/information/information.component';
 import { EvaComponent } from 'src/app/components/eva/eva.component';
+import { PendingNotificationsComponent } from 'src/app/components/pending-notifications/pending-notifications.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { EvaComponent } from 'src/app/components/eva/eva.component';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, ProfileComponent, InformationComponent, EvaComponent],
+  declarations: [HomePage, ProfileComponent, InformationComponent, PendingNotificationsComponent, EvaComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomePageModule {}

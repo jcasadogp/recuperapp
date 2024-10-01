@@ -5,6 +5,7 @@ import { HomePage } from './home.page';
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
 import { InformationComponent } from 'src/app/components/information/information.component';
 import { EvaComponent } from 'src/app/components/eva/eva.component';
+import { PendingNotificationsComponent } from 'src/app/components/pending-notifications/pending-notifications.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'information',
     component: InformationComponent
+  },
+  {
+    path: 'pending-notifications',
+    component: PendingNotificationsComponent
   },
   {
     path: 'eva',

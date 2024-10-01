@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="component-toolbar">
+    <ion-button (click)="dismissModal()" slot="end" fill="clear">
+      <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+    </ion-button>
+    <ion-title>NOTIFICACIONES PENDIENTES</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="groupedNotifications && groupedNotifications.length > 0; else noNotifications">
+    <ion-list>
+      <ion-card *ngFor="let group of groupedNotifications">
+        <ion-card-header>
+          <ion-card-subtitle>{{ group.date }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let notification of group.notifications" lines="none">
+              <ion-icon [ngClass]="{
+                'quest-a': notification.quest === 'valoración funcional de la marcha',
+                'quest-b': notification.quest === 'seguimiento',
+                'quest-c': notification.quest === 'Barthel',
+                'quest-d': notification.quest === 'movilidad de las extremidades inferiores'
+              }" name="ellipse" slot="start"></ion-icon>
+              <ion-label>
+                <h4><strong>{{ notification.time }}</strong> - {{ notification.quest.charAt(0).toUpperCase() + notification.quest.slice(1).toLowerCase() }}</h4>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+  </ng-container>
+
+  <ng-template #noNotifications>
+    <ion-text class="ion-padding">
+      <h4>No hay notificaciones pendientes!</h4>
+    </ion-text>
+  </ng-template>
+</ion-content>
+
