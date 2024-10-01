@@ -12,7 +12,6 @@ import { BarthelsegForm } from 'src/app/interfaces/barthelseg-form';
 import { Barthelseg } from 'src/app/redcap_interfaces/barthelseg';
 
 import { StorageService } from '../storage/storage.service';
-import { LoginService } from '../login/login.service';
 import { MonitoringData } from 'src/app/redcap_interfaces/monitoring_data';
 import { NeuroQoLForm } from 'src/app/interfaces/neuro_qol-form';
 import { NeuroQol } from 'src/app/redcap_interfaces/neuro_qol';
@@ -56,7 +55,6 @@ export class QuestsService {
   constructor(
     private http: HttpClient,
     private dataSrvc: DataService,
-    private loginSrvc: LoginService,
     private storageSrvc: StorageService,
     private notifSrvc: LocalNotifService
   ) {
@@ -69,7 +67,7 @@ export class QuestsService {
     this.nextNeuroQolDate = null;
 
     this.getRecordID().then(id => {
-      this.loginSrvc.getUser(id).subscribe(data => {
+      this.getQuestControlInfo(id).subscribe(data => {
         this.num_facseg = data[0].num_facseg === "" ? 0 : +data[0].num_facseg;
         this.num_barthelseg = data[0].num_barthelseg === "" ? 0 : +data[0].num_barthelseg;
         this.num_seguimiento = data[0].num_seguimiento === "" ? 0 : +data[0].num_seguimiento;
@@ -84,6 +82,13 @@ export class QuestsService {
 
   async getRecordID(): Promise<any> {
     return await this.storageSrvc.get('RECORD_ID');
+  }
+
+  getQuestControlInfo(id: string): Observable<any>{
+    var record: string = id;
+    var forms: string = 'control_cuestionarios';
+
+    return this.dataSrvc.export(record, forms);
   }
 
   getQuestsQuestions(quest: string): Observable<any> {

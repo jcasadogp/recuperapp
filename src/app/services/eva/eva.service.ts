@@ -1,4 +1,3 @@
-import { LoginService } from './../login/login.service';
 import { Injectable } from '@angular/core';
 
 import { DataService } from '../data/data.service';
@@ -6,6 +5,7 @@ import { EvaForm } from 'src/app/interfaces/eva-form';
 import { Eva } from 'src/app/redcap_interfaces/eva';
 import { Observable } from 'rxjs';
 import { StorageService } from '../storage/storage.service';
+import { QuestsService } from '../quests/quests.service';
 
 
 @Injectable({
@@ -17,11 +17,11 @@ export class EvaService {
 
   constructor(
     private dataSrvc: DataService,
-    private loginSrvc: LoginService,
+    private questsSrvc: QuestsService,
     private storageSrvc: StorageService
   ) {
     this.getRecordID().then(id => {
-      this.loginSrvc.getUser(id).subscribe(data => {
+      this.questsSrvc.getQuestControlInfo(id).subscribe(data => {
         this.num_eva = data[0].num_eva === "" ? 0 : +data[0].num_eva;
       })
     })
