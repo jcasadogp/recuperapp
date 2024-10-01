@@ -48,32 +48,27 @@ export class LoginPage implements OnInit {
       } else {
         var pw = data[0].contrasena;
         if(pw == this.login_params.password){
-          this.loadingController.dismiss();
-
-          //Se accede a la pantalla principal de la aplicacion
-          await this.storageSrvc.set('RECORD_ID', this.login_params.user); // Línea IMPORTANTE
-          this.router.navigateByUrl('tabs')
+          //Se accede a la pantalla principal de la aplicación
+          console.log("A. password OK")
+          await this.storageSrvc.set('RECORD_ID', this.login_params.user);
+          console.log("B. Storage setted")
+          await this.loadingController.dismiss();
+          console.log("C. Loading dismissed")
+          this.router.navigateByUrl('tabs');
+          console.log("D. routing to tabs")
 
           //Se inicializan los parametros
           this.validate_data = true;
-          this.login_params = {
-            user: '',
-            password: ''
-          };
+          this.login_params = { user: '', password: '' };
 
         } else {
           //La contraseña introducida no es correcta
           this.validate_data = false;
-          this.login_params = {
-            user: this.login_params.user,
-            password: ''
-          };
-          
+          this.login_params = { user: this.login_params.user, password: '' };
           this.loadingController.dismiss();
         }
       }
     })
-
   }
 
   async presentLoading() {
