@@ -53,7 +53,6 @@ export class BarthelsegComponent  implements OnInit {
 
       try {
         this.questsSrvc.postBarthelsegForm(this.id, this.barthelseg_form);
-        await this.questsSrvc.setQuestStatus(this.id, "barthelseg");
         await this.modalCntrl.dismiss();
         this.presentConfirmationToast();
       } catch (err) {
