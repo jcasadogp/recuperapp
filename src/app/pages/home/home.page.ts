@@ -14,6 +14,7 @@ import { PendingNotificationsComponent } from 'src/app/components/pending-notifi
 import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { LocalNotifService } from 'src/app/services/local-notif/local-notif.service';
 import { DataService } from 'src/app/services/data/data.service';
+import { Login } from 'src/app/redcap_interfaces/login';
 
 @Component({
   selector: 'app-home',
@@ -154,10 +155,10 @@ export class HomePage implements OnInit {
       console.log("++++ logged for the first time:", surgery_date)
       this.notifSrvc.scheduleNotification(surgery_date)
       
-      var import_data = [
+      var import_data: Login[] = [
         {
           record_id: this.id,
-          logged: "1"
+          logged_once: 1
         }
       ];
 
