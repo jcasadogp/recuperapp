@@ -304,7 +304,7 @@ export class QuestsService {
 
       const index = Object.values(this.questDates).findIndex(date => date === previousDate) +1;
 
-      if (index !== -1) {
+      if (index !== 0) {
         this.getQuestControlInfo(id).subscribe(data => {
           
           this.isEnabledFacseg = data[0]['control_facseg___' + index] === '0' ? '1' : '0';
@@ -349,7 +349,13 @@ export class QuestsService {
     return totalEnabled
   }
 
-  private getPreviousAndNextDate(questDates: { [key: number]: string }): { previousDate: string | null, nextDate: string | null } {
+  private getPreviousAndNextDate(questDates: { [key: number]: string } | null): { previousDate: string | null, nextDate: string | null } {
+
+    // Check if questDates is null or empty
+    if (!questDates || Object.keys(questDates).length === 0) {
+      return { previousDate: null, nextDate: null };
+  }
+    
     const today = new Date();
     const dates = Object.values(questDates).map(dateStr => new Date(dateStr));
 
