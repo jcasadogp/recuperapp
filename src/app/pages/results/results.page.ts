@@ -217,7 +217,7 @@ export class ResultsPage implements OnInit {
         source: [
           ['value', 'category'],
           [num_facseg, 'Valoración funcional de la marcha'],
-          [num_barthelseg, 'Barthels'],
+          [num_barthelseg, 'Barthel'],
           [num_seguimiento, 'Seguimiento'],
           [num_neuroqol, 'Movilidad de las extremidades inferiores']
         ]
