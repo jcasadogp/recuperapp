@@ -3,7 +3,7 @@
     <ion-button (click)="dismissModal()" slot="end" fill="clear">
       <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
     </ion-button>
-    <ion-title>NOTIFICACIONES PENDIENTES</ion-title>
+    <ion-title>NOTIFICACIONES</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -18,10 +18,8 @@
           <ion-list>
             <ion-item *ngFor="let notification of group.notifications" lines="none">
               <ion-icon [ngClass]="{
-                'quest-a': notification.quest === 'valoración funcional de la marcha',
-                'quest-b': notification.quest === 'seguimiento',
-                'quest-c': notification.quest === 'Barthel',
-                'quest-d': notification.quest === 'movilidad de las extremidades inferiores'
+                'quest-a': notification.id % 10 === 0,
+                'quest-b': notification.id % 10 !== 0
               }" name="ellipse" slot="start"></ion-icon>
               <ion-label>
                 <h4><strong>{{ notification.time }}</strong> - {{ notification.quest.charAt(0).toUpperCase() + notification.quest.slice(1).toLowerCase() }}</h4>
