@@ -62,8 +62,8 @@ export class HomePage implements OnInit {
       await this.getBaselineData(null);
       await this.getParticipant(null);
       await this.getEvaData(null);
-      await this.getQuestStatus(null);
       await this.sendNotifications();
+      await this.getQuestStatus(null);
     } catch (error) {
       console.error("Error during initialization:", error);
     }
@@ -148,11 +148,9 @@ export class HomePage implements OnInit {
 
   async sendNotifications() {
     var logged = await this.storageSrvc.get("LOGGED")
-    console.log("++++", logged)
     if(logged = "0"){
       var surgery_date = await this.storageSrvc.get("SURGERY_DATE")
 
-      console.log("++++ logged for the first time:", surgery_date)
       this.notifSrvc.scheduleNotification(surgery_date)
       
       var import_data: Login[] = [
