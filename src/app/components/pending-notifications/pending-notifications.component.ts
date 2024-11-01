@@ -27,19 +27,26 @@ export class PendingNotificationsComponent  implements OnInit {
     try {
       let pendingNotifications: PendingResult = await this.notifSrvc.getPendingNotifications();
       let pendingNotif = pendingNotifications.notifications;
+
+      let { pastNotif, upcomingNotif } = this.filterNotifications(pendingNotif);
+
+      console.log('Past Notifications:', pastNotif);
+
+      // Cancel past notifications
+      await this.cancelPastNotifications(pastNotif)
   
       // Sort by date
-      pendingNotif.sort((a, b) => {
+      upcomingNotif.sort((a, b) => {
         const dateA = a.schedule?.at ? new Date(a.schedule.at) : new Date(0);
         const dateB = b.schedule?.at ? new Date(b.schedule.at) : new Date(0);
         return dateA.getTime() - dateB.getTime();
       });
   
-      console.log('Pending Notifications:', pendingNotif);
+      console.log('Upcoming Notifications:', upcomingNotif);
   
       const groupedNotifications = new Map<string, any[]>();
   
-      pendingNotif.forEach(notif => {
+      upcomingNotif.forEach(notif => {
         const dateObject = notif.schedule?.at ? new Date(notif.schedule.at) : null;
         if (dateObject) {
           const dateKey = dateObject.toLocaleDateString('es-ES', {
@@ -53,6 +60,7 @@ export class PendingNotificationsComponent  implements OnInit {
           }
   
           groupedNotifications.get(dateKey)?.push({
+            id: notif.id,
             title: notif.title,
             body: notif.body,
             quest: notif.body.replace('Debe rellenar el cuestionario ', ''),
@@ -71,33 +79,45 @@ export class PendingNotificationsComponent  implements OnInit {
       // Sort the grouped notifications by date
       this.groupedNotifications.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   
-      console.log("FINAL:", this.groupedNotifications);
-  
     } catch (err) {
       console.error('Error getting pending notifications:', err);
     }
   }
-  
-  
 
-  async getPendingNotifications_old() {
-    try {
-      let pendingNotifications: PendingResult = await this.notifSrvc.getPendingNotifications();
-      let pendingNotif = pendingNotifications.notifications
-      console.log('Pending Notifications:', pendingNotif);
+  async cancelPastNotifications(pastNotif: PendingLocalNotificationSchema[]){
+    
+    const cancelIds = pastNotif.map(notification => {
+      return { id: notification.id };
+    });
 
-      this.notifications = pendingNotif.map(notif => {
-        return {
-          title: notif.title,
-          body: notif.body,
-          date: notif.schedule?.at || 'No date available',
-        };
-      }).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    await this.notifSrvc.cancelNotifications(cancelIds)
+  }
 
-      console.log(this.notifications)
-    } catch (err) {
-      console.error('Error getting pending notifications:', err);
+  filterNotifications(pendingNotif: PendingLocalNotificationSchema[] | null | undefined) {
+    
+    if (pendingNotif === null || pendingNotif === undefined) {
+      return { pastNotif: [], upcomingNotif: [] };
     }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const pastNotif: PendingLocalNotificationSchema[] = [];
+    const upcomingNotif: PendingLocalNotificationSchema[] = [];
+
+    pendingNotif.forEach(notification => {
+      if (notification.schedule && notification.schedule.at) {
+        const notificationDate = new Date(notification.schedule.at);
+        
+        if (notificationDate < today) {
+          pastNotif.push(notification);
+        } else {
+          upcomingNotif.push(notification);
+        }
+      }
+    });
+
+    return { pastNotif, upcomingNotif };
   }
 
   dismissModal(): void {
