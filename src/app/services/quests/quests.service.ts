@@ -285,7 +285,6 @@ export class QuestsService {
                 .filter(notif => notif.id.toString().startsWith(index.toString()))
                 .map(notif => notif.id);
               
-              console.log("Notification IDs to be cancelled: ", cancelIds);
               await this.notifSrvc.cancelNotifications(cancelIds);
             }
         }
@@ -301,6 +300,13 @@ export class QuestsService {
 
       const { previousDate, nextDate } = this.getPreviousAndNextDate(this.questDates);
       this.nextDate = nextDate;
+
+      // Check if this.questDates is null or undefined
+      if (!this.questDates || Object.values(this.questDates).length === 0) {
+        console.error("this.questDates is null or undefined");
+        observer.error("No quest dates available.");
+        return;
+      }
 
       const index = Object.values(this.questDates).findIndex(date => date === previousDate) +1;
 
