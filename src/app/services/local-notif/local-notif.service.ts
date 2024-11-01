@@ -40,7 +40,7 @@ export class LocalNotifService {
           notificationList.push({
             id: index * 10 + i,
             title: "Completar cuestionarios",
-            body: "Debe completar los cuestionarios después de " + f + " mes(es) desde la cirugía",
+            body: `Debe completar los cuestionarios después de ${f} ${f === 1 ? "mes" : "meses"} desde la cirugía`,
             schedule: { at: time },
           });
     
@@ -53,7 +53,7 @@ export class LocalNotifService {
           notificationList.push({
             id: index * 10 + i,
             title: "Recordatorio cuestionarios",
-            body: "No ha completado alguno de los cuestionarios de después de " + f + " mes(es) desde la cirugía",
+            body: `Debe completar los cuestionarios después de ${f} ${f === 1 ? "mes" : "meses"} desde la cirugía`,
             schedule: { at: time },
           });
         }
@@ -66,8 +66,6 @@ export class LocalNotifService {
       notifications: notifications
     };
 
-    console.log("** Activaríamos", options)
-
     try{
       await LocalNotifications.schedule(options)
     } catch (ex) {
@@ -76,8 +74,6 @@ export class LocalNotifService {
   }
 
   async cancelNotifications(ids): Promise<void>{
-
-    console.log("** Cancelaríamos")
 
     let options: CancelOptions = {
       notifications: ids
@@ -91,48 +87,6 @@ export class LocalNotifService {
   }
   
   async getPendingNotifications(): Promise<PendingResult> {
-    console.log("** Pendientes")
     return await LocalNotifications.getPending()
   }
-
-  // async scheduleNotification_old(questName, firstDate){
-
-  //   console.log(new Date(firstDate))
-
-  //   const questNameMapping: { [key: string]: string } = {
-  //     'facseg': 'valoración funcional de la marcha',
-  //     'monitoring': 'seguimiento',
-  //     'barthelseg': 'Barthel',
-  //     'neuroqol': 'movilidad de las extremidades inferiores'
-  //   };
-    
-  //   const questName2 = questNameMapping[questName] || 'Desconocido';
-
-  //   let notifications = this.questFrecuencies.map((f, index) => {
-  //     const notificationTime = new Date(firstDate);
-      
-  //     notificationTime.setMonth(notificationTime.getMonth() + f);
-  //     notificationTime.setHours(12, 0, 0, 0);
-    
-  //     return {
-  //       id: this.hashCode(questName) + index,
-  //       title: "Rellenar cuestionarios",
-  //       body: "Debe rellenar el cuestionario " + questName2,
-  //       schedule: { at: notificationTime}
-  //     };
-  //   });
-    
-  //   let options: ScheduleOptions = {
-  //     notifications: notifications
-  //   };
-
-  //   console.log(options)
-
-  //   try{
-  //     await LocalNotifications.schedule(options)
-  //   } catch (ex) {
-  //     alert(JSON.stringify(ex))
-  //   }
-  // }
-
 }
