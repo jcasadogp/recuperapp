@@ -261,32 +261,31 @@ export class QuestsService {
 
   async checkNotificationsStatus() {
     try {
-        const today = new Date();
-        const questDates = await this.storageSrvc.get('QUEST_DATES');
-        
-        const { previousDate } = this.getPreviousAndNextDate(questDates);
-        const index = Object.values(questDates).findIndex(date => date === previousDate) + 1;
-        
-        if (index !== -1) {
-            const controlData = await firstValueFrom(this.getQuestControlInfo(this.id));
+      const questDates = await this.storageSrvc.get('QUEST_DATES');
+      
+      const { previousDate } = this.getPreviousAndNextDate(questDates);
+      const index = Object.values(questDates).findIndex(date => date === previousDate) + 1;
+      
+      if (index !== 0) {
+          const controlData = await firstValueFrom(this.getQuestControlInfo(this.id));
 
-            const allControlsEnabled = 
-                controlData[0]['control_facseg___' + index] === "1" &&
-                controlData[0]['control_barthelseg___' + index] === "1" &&
-                controlData[0]['control_seguimiento___' + index] === "1" &&
-                controlData[0]['control_neuroqol___' + index] === "1";
+          const allControlsEnabled = 
+              controlData[0]['control_facseg___' + index] === "1" &&
+              controlData[0]['control_barthelseg___' + index] === "1" &&
+              controlData[0]['control_seguimiento___' + index] === "1" &&
+              controlData[0]['control_neuroqol___' + index] === "1";
 
-            if (allControlsEnabled) {
+          if (allControlsEnabled) {
 
-              const pendingNotifications: PendingResult = await this.notifSrvc.getPendingNotifications();
-              const pendingNotifs = pendingNotifications.notifications;
-              const cancelIds = pendingNotifs
-                .filter(notif => notif.id.toString().startsWith(index.toString()))
-                .map(notif => notif.id);
-              
-              await this.notifSrvc.cancelNotifications(cancelIds);
-            }
-        }
+            const pendingNotifications: PendingResult = await this.notifSrvc.getPendingNotifications();
+            const pendingNotifs = pendingNotifications.notifications;
+            const cancelIds = pendingNotifs
+              .filter(notif => notif.id.toString().startsWith(index.toString()))
+              .map(notif => notif.id);
+            
+            await this.notifSrvc.cancelNotifications(cancelIds);
+          }
+      }
     } catch (error) {
         console.error("Error in checkNotificationsStatus:", error);
     }
@@ -312,9 +311,9 @@ export class QuestsService {
       if (index !== 0) {
         this.getQuestControlInfo(id).subscribe(data => {
           
-          this.isEnabledFacseg = data[0]['control_facseg___' + index] === '0' ? '1' : '0';
-          this.isEnabledBarthelseg = data[0]['control_barthelseg___' + index] === '0' ? '1' : '0';
           this.isEnabledMonitoring = data[0]['control_seguimiento___' + index] === '0' ? '1' : '0';
+          this.isEnabledBarthelseg = data[0]['control_barthelseg___' + index] === '0' ? '1' : '0';
+          this.isEnabledFacseg = data[0]['control_facseg___' + index] === '0' ? '1' : '0';
           this.isEnabledNeuroQol = data[0]['control_neuroqol___' + index] === '0' ? '1' : '0';
 
           enabledQuests = [this.isEnabledMonitoring, this.isEnabledBarthelseg, this.isEnabledFacseg, this.isEnabledNeuroQol];
@@ -328,9 +327,9 @@ export class QuestsService {
   
         });
       } else {
-        this.isEnabledFacseg = '0';
-        this.isEnabledBarthelseg = '0';
         this.isEnabledMonitoring = '0';
+        this.isEnabledBarthelseg = '0';
+        this.isEnabledFacseg = '0';
         this.isEnabledNeuroQol = '0';
 
         enabledQuests = [this.isEnabledMonitoring, this.isEnabledBarthelseg, this.isEnabledFacseg, this.isEnabledNeuroQol];
@@ -359,7 +358,7 @@ export class QuestsService {
     // Check if questDates is null or empty
     if (!questDates || Object.keys(questDates).length === 0) {
       return { previousDate: null, nextDate: null };
-  }
+    }
     
     const today = new Date();
     const dates = Object.values(questDates).map(dateStr => new Date(dateStr));
