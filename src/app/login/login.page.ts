@@ -76,7 +76,6 @@ export class LoginPage implements OnInit {
 
   async presentLoading() {
     const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
       message: 'Iniciando sesión...',
       mode: 'ios'
     });
