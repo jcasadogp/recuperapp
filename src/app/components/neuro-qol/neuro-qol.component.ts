@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, AlertController, ToastController } from '@ionic/angular';
+import { ModalController, AlertController, ToastController, LoadingController } from '@ionic/angular';
 import { NeuroQoLForm } from 'src/app/interfaces/neuro_qol-form';
 import { QuestsService } from 'src/app/services/quests/quests.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
@@ -19,6 +19,7 @@ export class NeuroQolComponent  implements OnInit {
     private modalCntrl: ModalController,
     private alertCntrl: AlertController,
     private toastCntrl: ToastController,
+    private loadingCntrl: LoadingController,
     private questsSrvc: QuestsService,
     private storageSrvc: StorageService
   ) { }
@@ -46,16 +47,22 @@ export class NeuroQolComponent  implements OnInit {
     var i = Object.keys(this.neuroqol_form).length;
 
     if(i < 20){
-      var camposVacios = 20 - i;
       this.presentEmptyFieldsAlert;
     } else {
 
+      const loading = await this.loadingCntrl.create({
+        spinner: 'crescent'
+      });
+
       try {
+        await loading.present();
         await this.questsSrvc.postNeuroQolForm(this.id, this.neuroqol_form);
         await this.modalCntrl.dismiss();
         this.presentConfirmationToast();
       } catch (err) {
         console.log(err);
+      } finally {
+        await loading.dismiss();
       }
     }
   }
@@ -72,9 +79,7 @@ export class NeuroQolComponent  implements OnInit {
 
   async presentEmptyFieldsAlert() {
     const alert = await this.alertCntrl.create({
-      cssClass: 'my-custom-class',
       header: 'Campos incompletos',
-      mode:'ios',
       buttons: ['Vale']
     });
     await alert.present();
@@ -82,10 +87,8 @@ export class NeuroQolComponent  implements OnInit {
 
   async presentCloseAlert() {
     const alert = await this.alertCntrl.create({
-      cssClass: 'my-custom-class',
       header: 'Cerrar el cuestionario',
       message: 'Si sale se perderán todos los datos. ¿Desea salir de todas formas?',
-      mode:'ios',
       buttons: [
         {
           text: 'Permanecer',
@@ -107,7 +110,6 @@ export class NeuroQolComponent  implements OnInit {
     const toast = await this.toastCntrl.create({
       message: 'Sus respuestas se han registrado correctamente.',
       duration: 2000,
-      mode: 'ios',
       color: "success"
     });
     toast.present();
