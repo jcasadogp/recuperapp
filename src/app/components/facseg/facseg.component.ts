@@ -47,7 +47,6 @@ export class FacsegComponent  implements OnInit {
       
       try {
         this.questsSrvc.postFacsegForm(this.id, this.facseg_form);
-        await this.questsSrvc.setQuestStatus(this.id, "facseg");
         await this.modalCntrl.dismiss();
         this.presentConfirmationToast();
       } catch (err) {

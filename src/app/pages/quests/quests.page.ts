@@ -18,15 +18,7 @@ export class QuestsPage implements OnInit {
   id: string
   public currentDate: Date;
 
-  firstMonitoring;
-  firstBarthelseg;
-  firstFacseg;
-  firstNeuroQol;
-
-  nextMonitoringDate;
-  nextBarthelsegDate;
-  nextFacsegDate;
-  nextNeuroQolDate;
+  nextDate;
 
   isEnabledMonitoring: string;
   isEnabledBarthelseg: string;
@@ -41,10 +33,7 @@ export class QuestsPage implements OnInit {
   ) {
     this.currentDate = new Date()
 
-    this.nextMonitoringDate = null;
-    this.nextBarthelsegDate = null;
-    this.nextFacsegDate = null;
-    this.nextNeuroQolDate = null;
+    this.nextDate = "null"
 
     this.isEnabledMonitoring = "0"
     this.isEnabledBarthelseg = "0"
@@ -65,17 +54,18 @@ export class QuestsPage implements OnInit {
 
   getEnabledStatus(event) {
 
-    this.questsSrvc.getEnabledStatus(this.id).subscribe(({ enabledQuests, nextDates }) => {
+    this.questsSrvc.getEnabledStatus(this.id).subscribe(({ enabledQuests, nextDate }) => {
       
       this.isEnabledMonitoring = enabledQuests[0]
       this.isEnabledBarthelseg = enabledQuests[1]
       this.isEnabledFacseg = enabledQuests[2]
       this.isEnabledNeuroQol = enabledQuests[3]
 
-      this.nextMonitoringDate = nextDates[0]
-      this.nextBarthelsegDate = nextDates[1]
-      this.nextFacsegDate = nextDates[2]
-      this.nextNeuroQolDate = nextDates[3]
+      if (nextDate) {
+        this.nextDate = new Date(nextDate).toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' });
+      } else {
+        this.nextDate = null;
+      }
 
       if (event) {
         event.target.complete();

@@ -6,7 +6,7 @@ import { Eva } from 'src/app/redcap_interfaces/eva';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
 import * as echarts from 'echarts';
-import { LoginService } from 'src/app/services/login/login.service';
+import { QuestsService } from 'src/app/services/quests/quests.service';
 
 @Component({
   selector: 'app-results',
@@ -26,7 +26,7 @@ export class ResultsPage implements OnInit {
 
   constructor(
     private evaSrvc: EvaService,
-    private loginSrvc: LoginService,
+    private questsSrvc: QuestsService,
     private storageSrvc: StorageService
   ) { }
 
@@ -173,7 +173,7 @@ export class ResultsPage implements OnInit {
   }
 
   getQuestData(event){
-    this.loginSrvc.getUser(this.id).subscribe({
+    this.questsSrvc.getQuestControlInfo(this.id).subscribe({
       next: (data) => {
         console.log("QUEST DATA", data)
 
@@ -217,7 +217,7 @@ export class ResultsPage implements OnInit {
         source: [
           ['value', 'category'],
           [num_facseg, 'Valoración funcional de la marcha'],
-          [num_barthelseg, 'Barthels'],
+          [num_barthelseg, 'Barthel'],
           [num_seguimiento, 'Seguimiento'],
           [num_neuroqol, 'Movilidad de las extremidades inferiores']
         ]

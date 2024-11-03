@@ -78,7 +78,6 @@ export class MonitoringComponent  implements OnInit {
     } else {
       try {
         this.questsSrvc.postMonitoringForm(this.id, this.monitoring_form);
-        await this.questsSrvc.setQuestStatus(this.id, "monitoring");
         await this.modalCntrl.dismiss();
         this.presentConfirmationToast();
       } catch (err) {

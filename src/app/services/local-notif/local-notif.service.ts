@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LocalNotifications, PendingLocalNotificationSchema, PendingResult, ScheduleOptions } from '@capacitor/local-notifications';
+import { CancelOptions, LocalNotifications, LocalNotificationSchema, PendingLocalNotificationSchema, PendingResult, ScheduleOptions } from '@capacitor/local-notifications';
 
 @Injectable({
   providedIn: 'root'
@@ -22,41 +22,65 @@ export class LocalNotifService {
     return Math.abs(hash);
   }
 
-  async scheduleNotification(questName, firstDate){
+  async scheduleNotification(date){
 
-    console.log(new Date(firstDate))
-
-    const questNameMapping: { [key: string]: string } = {
-      'facseg': 'valoración funcional de la marcha',
-      'monitoring': 'seguimiento',
-      'barthelseg': 'Barthel',
-      'neuroqol': 'movilidad de las extremidades inferiores'
-    };
-    
-    const questName2 = questNameMapping[questName] || 'Desconocido';
+    console.log(new Date(date))
 
     let notifications = this.questFrecuencies.map((f, index) => {
-      const notificationTime = new Date(firstDate);
-      
-      notificationTime.setMonth(notificationTime.getMonth() + f);
-      notificationTime.setHours(12, 0, 0, 0);
+      const notificationTime = new Date(date);
+      const notificationList: LocalNotificationSchema[] = [];
     
-      return {
-        id: this.hashCode(questName) + index,
-        title: "Rellenar cuestionarios",
-        body: "Debe rellenar el cuestionario " + questName2,
-        schedule: { at: notificationTime}
-      };
-    });
+      for (let i of [0, 3, 5, 7]) {
+        const time = new Date(notificationTime);
+    
+        if (i == 0) {
+          time.setMonth(time.getMonth() + f);
+          time.setHours(12, 0, 0, 0);
+    
+          notificationList.push({
+            id: index * 10 + i,
+            title: "Completar cuestionarios",
+            body: `Debe completar los cuestionarios después de ${f} ${f === 1 ? "mes" : "meses"} desde la cirugía`,
+            schedule: { at: time },
+          });
+    
+        } else {
+          
+          time.setMonth(time.getMonth() + f);
+          time.setDate(time.getDate() + i);
+          time.setHours(12, 0, 0, 0);
+    
+          notificationList.push({
+            id: index * 10 + i,
+            title: "Recordatorio cuestionarios",
+            body: `Debe completar los cuestionarios después de ${f} ${f === 1 ? "mes" : "meses"} desde la cirugía`,
+            schedule: { at: time },
+          });
+        }
+      }
+    
+      return notificationList;
+    }).reduce((acc, val) => acc.concat(val), []);
     
     let options: ScheduleOptions = {
       notifications: notifications
     };
 
-    console.log(options)
-
     try{
       await LocalNotifications.schedule(options)
+    } catch (ex) {
+      alert(JSON.stringify(ex))
+    }
+  }
+
+  async cancelNotifications(ids): Promise<void>{
+
+    let options: CancelOptions = {
+      notifications: ids
+    };
+
+    try{
+      await LocalNotifications.cancel(options)
     } catch (ex) {
       alert(JSON.stringify(ex))
     }

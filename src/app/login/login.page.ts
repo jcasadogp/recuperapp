@@ -46,11 +46,14 @@ export class LoginPage implements OnInit {
         
         this.loadingController.dismiss();
       } else {
+        var logged = data[0].logged_once;
         var pw = data[0].contrasena;
+
         if(pw == this.login_params.password){
           //Se accede a la pantalla principal de la aplicación
           console.log("A. password OK")
           await this.storageSrvc.set('RECORD_ID', this.login_params.user);
+          await this.storageSrvc.set('LOGGED', logged);
           console.log("B. Storage setted")
           await this.loadingController.dismiss();
           console.log("C. Loading dismissed")
