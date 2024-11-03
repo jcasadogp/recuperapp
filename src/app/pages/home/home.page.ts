@@ -201,6 +201,8 @@ export class HomePage implements OnInit {
       await this.storageSrvc.remove('RECORD_ID');
       this.router.navigateByUrl('login')
     }
-    catch(e) { console.log(e) }
+    catch (err) {
+      console.log(err);
+    }
   }
 }

@@ -60,8 +60,7 @@ export class FacsegComponent  implements OnInit {
 
   dismissModal(): void {
     var i = Object.keys(this.facseg_form).length;
-    console.log("preguntas contestadas:", i)
-
+    
     if(i == 0){
       this.modalCntrl.dismiss().then().catch();
     } else {

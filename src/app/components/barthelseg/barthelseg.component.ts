@@ -63,8 +63,7 @@ export class BarthelsegComponent  implements OnInit {
 
   dismissModal(): void {
     var i = Object.keys(this.barthelseg_form).length;
-    console.log("preguntas contestadas:", i)
-
+    
     if(i == 0){
       this.modalCntrl.dismiss().then().catch();
     } else {

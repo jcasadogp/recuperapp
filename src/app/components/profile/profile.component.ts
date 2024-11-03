@@ -93,7 +93,6 @@ export class ProfileComponent  implements OnInit {
 
         this.finalResultArray = Object.entries(groupedResult).map(([Pregunta, Respuesta]) => ({ Pregunta, Respuesta }));
 
-        // console.log(this.finalResultArray);
       },
       error: (err) => console.log(err),
       complete: () => {}

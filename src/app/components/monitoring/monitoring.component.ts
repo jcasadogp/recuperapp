@@ -45,9 +45,7 @@ export class MonitoringComponent  implements OnInit {
   }
 
   async postMonitoringForm(): Promise<void> {
-    // this.monitoring_form.f_seguimiento = new Date().toISOString().split('T')[0]
-    // console.log(this.monitoring_form.f_exitus_seguimiento)
-
+    
     // Define the transform function
     const transformDateToYMD = (dateString: string): string => {
       const date = new Date(dateString);
@@ -70,8 +68,6 @@ export class MonitoringComponent  implements OnInit {
     
     var i = Object.keys(this.monitoring_form).length;
 
-    console.log(">>>", this.monitoring_form)
-  
     if (i < num) {
       var camposVacios = num - i;
       this.presentEmptyFieldsAlert();
@@ -99,8 +95,7 @@ export class MonitoringComponent  implements OnInit {
 
   dismissModal(): void {
     var i = Object.keys(this.monitoring_form).length;
-    console.log("preguntas contestadas:", i)
-
+    
     if(i == 0){
       this.modalCntrl.dismiss().then().catch();
     } else {
