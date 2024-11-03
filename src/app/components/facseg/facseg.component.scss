@@ -4,14 +4,11 @@ ion-checkbox {
     --color: #ddd;
     --color-checked: #3880ff;
     --border-color-checked: #3880ff;
-    // --checkbox-background-checked: black;
 }
 
 ion-checkbox::part(container) {
     border-radius: 5px;
     border: 2px solid #ddd;
-    // #3880ff; 
-    // #6815ec;
 }
 
 ion-radio {

@@ -23,7 +23,6 @@ export class MonitoringComponent  implements OnInit {
     private questsSrvc: QuestsService,
     private storageSrvc: StorageService
   ) {
-    // this.currentDate_string = new Date().toLocaleDateString('es-ES', {day: '2-digit', month: 'long', year: 'numeric'})
     this.currentDate_string = new Date().toISOString();
     this.monitoring_form.f_exitus_seguimiento = this.currentDate_string
    }
@@ -46,7 +45,6 @@ export class MonitoringComponent  implements OnInit {
 
   async postMonitoringForm(): Promise<void> {
     
-    // Define the transform function
     const transformDateToYMD = (dateString: string): string => {
       const date = new Date(dateString);
       const year = date.getFullYear();
@@ -107,7 +105,6 @@ export class MonitoringComponent  implements OnInit {
     const alert = await this.alertCntrl.create({
       cssClass: 'my-custom-class',
       header: 'Campos incompletos',
-      // message: 'Introducir nivel de dolor',
       mode:'ios',
       buttons: ['Vale']
     });

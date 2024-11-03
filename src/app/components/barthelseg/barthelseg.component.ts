@@ -75,7 +75,6 @@ export class BarthelsegComponent  implements OnInit {
     const alert = await this.alertCntrl.create({
       cssClass: 'my-custom-class',
       header: 'Campos incompletos',
-      // message: 'Introducir nivel de dolor',
       mode:'ios',
       buttons: ['Vale']
     });

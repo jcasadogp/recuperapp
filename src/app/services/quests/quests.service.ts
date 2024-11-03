@@ -76,7 +76,7 @@ export class QuestsService {
       });
   
       // Get enabled status
-      await this.getEnabledStatus(this.id); // Make sure this returns a promise if using awStait
+      await this.getEnabledStatus(this.id); // Make sure this returns a promise if using await
   
     } catch (error) {
       console.error("Error during initialization:", error);
@@ -266,8 +266,7 @@ export class QuestsService {
         
         const { previousDate } = this.getPreviousAndNextDate(questDates);
         const index = Object.values(questDates).findIndex(date => date === previousDate) + 1;
-        // const index = previousDate ? Object.values(questDates).findIndex(date => date === previousDate) : -1;
-
+        
         if (index !== -1) {
             const controlData = await firstValueFrom(this.getQuestControlInfo(this.id));
 

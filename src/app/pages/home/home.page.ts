@@ -101,7 +101,7 @@ export class HomePage implements OnInit {
       // Get the participant data as a single object
       const data: Participant[] = await firstValueFrom(this.participantSrvc.getParticipant(this.id));
       console.log("6. Already called participant service", data);
-      this.participant = data[0]; // Directly assign the received participant data
+      this.participant = data[0];
   
       console.log("7. this.participant", this.participant);
   
@@ -125,7 +125,7 @@ export class HomePage implements OnInit {
   
         this.notifyEva = this.currentDate >= updateDate;
       } else {
-        this.notifyEva = true; // No Eva data found
+        this.notifyEva = true;
       }
   
       if (event) event.target.complete();
