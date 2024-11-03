@@ -51,7 +51,7 @@ export class NeuroQolComponent  implements OnInit {
     } else {
 
       try {
-        this.questsSrvc.postNeuroQolForm(this.id, this.neuroqol_form);
+        await this.questsSrvc.postNeuroQolForm(this.id, this.neuroqol_form);
         await this.modalCntrl.dismiss();
         this.presentConfirmationToast();
       } catch (err) {

@@ -71,7 +71,7 @@ export class MonitoringComponent  implements OnInit {
       this.presentEmptyFieldsAlert();
     } else {
       try {
-        this.questsSrvc.postMonitoringForm(this.id, this.monitoring_form);
+        await this.questsSrvc.postMonitoringForm(this.id, this.monitoring_form);
         await this.modalCntrl.dismiss();
         this.presentConfirmationToast();
       } catch (err) {

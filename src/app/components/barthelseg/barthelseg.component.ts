@@ -47,12 +47,11 @@ export class BarthelsegComponent  implements OnInit {
     var i = Object.keys(this.barthelseg_form).length;
 
     if(i < 11){
-      var camposVacios = 11 - i;
       this.presentEmptyFieldsAlert;
     } else {
 
       try {
-        this.questsSrvc.postBarthelsegForm(this.id, this.barthelseg_form);
+        await this.questsSrvc.postBarthelsegForm(this.id, this.barthelseg_form);
         await this.modalCntrl.dismiss();
         this.presentConfirmationToast();
       } catch (err) {

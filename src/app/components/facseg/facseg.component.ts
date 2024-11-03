@@ -46,7 +46,7 @@ export class FacsegComponent  implements OnInit {
       this.facseg_form.f_facseg = new Date().toISOString().split('T')[0]
       
       try {
-        this.questsSrvc.postFacsegForm(this.id, this.facseg_form);
+        await this.questsSrvc.postFacsegForm(this.id, this.facseg_form);
         await this.modalCntrl.dismiss();
         this.presentConfirmationToast();
       } catch (err) {
