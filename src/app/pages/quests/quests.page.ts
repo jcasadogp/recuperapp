@@ -26,14 +26,13 @@ export class QuestsPage implements OnInit {
   isEnabledNeuroQol: string;
 
   constructor(
-    private router: Router,
     private modalCntrl: ModalController,
     private questsSrvc: QuestsService,
     private storageSrvc: StorageService
   ) {
     this.currentDate = new Date()
 
-    this.nextDate = "null"
+    this.nextDate = "..."
 
     this.isEnabledMonitoring = "0"
     this.isEnabledBarthelseg = "0"
@@ -53,6 +52,7 @@ export class QuestsPage implements OnInit {
   }
 
   getEnabledStatus(event) {
+    console.log("2. Dentro de getEnabledStatus")
 
     this.questsSrvc.getEnabledStatus(this.id).subscribe(({ enabledQuests, nextDate }) => {
       
@@ -80,6 +80,7 @@ export class QuestsPage implements OnInit {
     await modal.present();
 
     modal.onDidDismiss().then(() => {
+      console.log("1. Dentro de onDidDismiss - monitoring")
       this.getEnabledStatus(null);
     });
   }
@@ -91,6 +92,7 @@ export class QuestsPage implements OnInit {
     await modal.present();
 
     modal.onDidDismiss().then(() => {
+      console.log("1. Dentro de onDidDismiss - barthel")
       this.getEnabledStatus(null);
     });
   }
@@ -102,6 +104,7 @@ export class QuestsPage implements OnInit {
     await modal.present();
 
     modal.onDidDismiss().then(() => {
+      console.log("1. Dentro de onDidDismiss - facseg")
       this.getEnabledStatus(null);
     });
   }  
@@ -113,6 +116,7 @@ export class QuestsPage implements OnInit {
     await modal.present();
 
     modal.onDidDismiss().then(() => {
+      console.log("1. Dentro de onDidDismiss - neuroqol")
       this.getEnabledStatus(null);
     });
   }
