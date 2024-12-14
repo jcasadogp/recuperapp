@@ -147,11 +147,11 @@ export class HomePage implements OnInit {
   }
 
   async sendNotifications() {
-    var logged = await this.storageSrvc.get("LOGGED")
-    if(logged = "0"){
+    var first_time_device = await this.storageSrvc.get("FIRST_TIME_DEVICE")
+    if(first_time_device = "1"){
       var surgery_date = await this.storageSrvc.get("SURGERY_DATE")
 
-      this.notifSrvc.scheduleNotification(surgery_date)
+      this.notifSrvc.scheduleNotification(this.participant.f645_firstname, surgery_date)
       
       var import_data: Login[] = [
         {

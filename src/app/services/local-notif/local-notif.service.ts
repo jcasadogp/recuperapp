@@ -22,7 +22,7 @@ export class LocalNotifService {
     return Math.abs(hash);
   }
 
-  async scheduleNotification(date){
+  async scheduleNotification(name, date){
 
     console.log(new Date(date))
 
@@ -40,7 +40,7 @@ export class LocalNotifService {
           notificationList.push({
             id: index * 10 + i,
             title: "Completar cuestionarios",
-            body: `Debe completar los cuestionarios después de ${f} ${f === 1 ? "mes" : "meses"} desde la cirugía`,
+            body: `${name}, debe completar los cuestionarios después de ${f} ${f === 1 ? "mes" : "meses"} desde la cirugía`,
             schedule: { at: time },
           });
     
@@ -53,7 +53,7 @@ export class LocalNotifService {
           notificationList.push({
             id: index * 10 + i,
             title: "Recordatorio cuestionarios",
-            body: `Debe completar los cuestionarios después de ${f} ${f === 1 ? "mes" : "meses"} desde la cirugía`,
+            body: `${name}, recuerde completar los cuestionarios después de ${f} ${f === 1 ? "mes" : "meses"} desde la cirugía`,
             schedule: { at: time },
           });
         }
