@@ -1,10 +1,20 @@
 # RecuperApp
 
-## Important code:
+## After cloning the repository:
 
-For the [Storage Service](https://github.com/ionic-team/ionic-storage/blob/main/README.md):
+Add BODYEXPORT and BODYIMPORT with the Redcap token. Then:
 ```
-npm install @ionic/storage-angular
-npm install cordova-sqlite-storage
-npm install localforage-cordovasqlitedriver
+npm uninstall -g ionic
+npm install -g @ionic/cli
+
+npm install
+
+ionic build
+npx cap sync
+
+ionic cap add android
+ionic cap copy android
+
+ionic cap add ios
+ionic cap copy ios
 ```
