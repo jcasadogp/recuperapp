@@ -38,16 +38,18 @@ export class LoginPage implements OnInit {
     this.presentLoading();
     
     this.loginSrvc.getUser(id).subscribe(async data => {
+      // El usuario introducido no existe
       if(data.length === 0) {
-        // El usuario introducido no existe
         this.validate_data = false;
         this.login_params = { user: '', password: '' };
         await this.loadingController.dismiss();
+      
+        // El usuario introducido sí existe
       } else {
         var pw = data[0].contrasena;
-  
+
+        // Se accede a la pantalla principal de la aplicación
         if(pw == this.login_params.password){
-          // Se accede a la pantalla principal de la aplicación
           console.log("A. password OK");
           await this.storageSrvc.set('RECORD_ID', this.login_params.user);
           
@@ -65,7 +67,7 @@ export class LoginPage implements OnInit {
             } else {
               console.log("++ User hadn't done login on this device.");
               await this.storageSrvc.set('FIRST_TIME_DEVICE', 1);
-              await this.loginSrvc.addDevice(id, deviceId); // Add device and await its completion
+              await this.loginSrvc.addDevice(id, deviceId);
             }
   
             // Only proceed after all asynchronous operations have completed
