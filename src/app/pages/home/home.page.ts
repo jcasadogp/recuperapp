@@ -153,14 +153,14 @@ export class HomePage implements OnInit {
 
       this.notifSrvc.scheduleNotification(this.participant.f645_firstname, surgery_date)
       
-      var import_data: Login[] = [
-        {
-          record_id: this.id,
-          logged_once: 1
-        }
-      ];
+      // var import_data: Login[] = [
+      //   {
+      //     record_id: this.id,
+      //     logged_once: 1
+      //   }
+      // ];
 
-      await lastValueFrom(this.dataSrvc.import(import_data));
+      // await lastValueFrom(this.dataSrvc.import(import_data));
     }
   }
 
