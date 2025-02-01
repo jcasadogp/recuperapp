@@ -32,8 +32,7 @@ export class LoginService {
         const deviceIds = devices.map(device => device.device_id);
         const deviceCount = deviceIds.length;
         this.num_devices = deviceCount;
-        console.log('Number of devices:', deviceCount);
-  
+        
         return deviceIds;
       })
     );

@@ -4,7 +4,7 @@ export interface Login {
     contrasena?: string,
     contrasena_2?: string,
 
-    logged_once?: number,
+    // logged_once?: number,
     
     login_complete?: number,
 }
