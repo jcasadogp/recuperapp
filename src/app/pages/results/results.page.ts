@@ -79,28 +79,36 @@ export class ResultsPage implements OnInit {
     .slice()
     .sort((a, b) => new Date(a.fecha_eva).getTime() - new Date(b.fecha_eva).getTime());
 
-    // In case sortedData does not work
-    const sortedData2 = data
-    .map(obj => ({...obj,fecha_eva_date: new Date(obj.fecha_eva)}))
-    .sort((a, b) => a.fecha_eva_date.getTime() - b.fecha_eva_date.getTime())
-    .map(({ fecha_eva_date, ...rest }) => rest);
+    // // In case sortedData does not work
+    // const sortedData2 = data
+    // .map(obj => ({...obj,fecha_eva_date: new Date(obj.fecha_eva)}))
+    // .sort((a, b) => a.fecha_eva_date.getTime() - b.fecha_eva_date.getTime())
+    // .map(({ fecha_eva_date, ...rest }) => rest);
       
     const formattedData = sortedData.map(obj => {
       const formattedDate = new Date(obj.fecha_eva).toLocaleString("es-ES", { day: "numeric", month: "short", year: "numeric" });
       return { ...obj, fecha_eva: formattedDate };
     });
 
-    // Convert eva to numbers and ensure dates are sorted
-    const processedData = formattedData.map(obj => ({
-      fecha_eva: new Date(obj.fecha_eva),
+    const formattedData2 = sortedData.map(obj => {
+      const rawDate = new Date(obj.fecha_eva);
+      const formattedDate = rawDate.toLocaleString("es-ES", { day: "numeric", month: "short", year: "numeric" });
+    
+      return { ...obj, fecha_eva: formattedDate, rawFechaEva: rawDate }; 
+    });
+
+    const processedData = formattedData2.map(obj => ({
+      fecha_eva: obj.rawFechaEva,
       eva: typeof obj.eva === 'string' ? parseInt(obj.eva, 10) : obj.eva
     })).sort((a, b) => a.fecha_eva.getTime() - b.fecha_eva.getTime());
 
     const seriesData = processedData.map(obj => [obj.fecha_eva, obj.eva]);
 
-    // console.log('--- SORTED', sortedData)
-    // console.log('--- FORMATTED', formattedData)
-    // console.log('--- PROCESSED', processedData)
+    console.log('--- SORTED', sortedData)
+    console.log('--- FORMATTED', formattedData)
+    console.log('--- FORMATTED2', formattedData2)
+    console.log('--- PROCESSED', processedData)
+    console.log('--- SERIES', seriesData)
 
     var xAxisData: string[] = [];
     var evaData: number[] = [];
