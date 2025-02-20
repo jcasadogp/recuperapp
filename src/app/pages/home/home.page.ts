@@ -88,6 +88,7 @@ export class HomePage implements OnInit {
         questDates[f] = date.toISOString().split('T')[0];
       }
 
+      console.log("I will add changes here!")
       console.log("---------------------------------")
       console.log("---------------------", questDates)
       console.log("---------------------------------")
