@@ -24,6 +24,9 @@ log.txt
 # Android
 /android
 
+# IOS
+/ios
+
 # Ionic
 /.ionic
 /www

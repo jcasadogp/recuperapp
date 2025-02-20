@@ -12,23 +12,23 @@ export class LocalNotifService {
     this.questFrecuencies = [1, 3, 4, 6, 9, 12]
   }
 
-  hashCode(str: string): number {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-      const char = str.charCodeAt(i);
-      hash = (hash << 5) - hash + char;
-      hash |= 0;
-    }
-    return Math.abs(hash);
-  }
+  // hashCode(str: string): number {
+  //   let hash = 0;
+  //   for (let i = 0; i < str.length; i++) {
+  //     const char = str.charCodeAt(i);
+  //     hash = (hash << 5) - hash + char;
+  //     hash |= 0;
+  //   }
+  //   return Math.abs(hash);
+  // }
 
-  async scheduleNotification(date){
+  async scheduleNotification(name, date){
 
-    console.log(new Date(date))
+    console.log("NOTIF SERVICE =>", new Date(date))
 
     let notifications = this.questFrecuencies.map((f, index) => {
       const notificationTime = new Date(date);
-      const notificationList: LocalNotificationSchema[] = [];
+      let notificationList: LocalNotificationSchema[] = [];
     
       for (let i of [0, 3, 5, 7]) {
         const time = new Date(notificationTime);
@@ -40,7 +40,7 @@ export class LocalNotifService {
           notificationList.push({
             id: index * 10 + i,
             title: "Completar cuestionarios",
-            body: `Debe completar los cuestionarios después de ${f} ${f === 1 ? "mes" : "meses"} desde la cirugía`,
+            body: `${name}, debe completar los cuestionarios después de ${f} ${f === 1 ? "mes" : "meses"} desde la cirugía`,
             schedule: { at: time },
           });
     
@@ -53,21 +53,28 @@ export class LocalNotifService {
           notificationList.push({
             id: index * 10 + i,
             title: "Recordatorio cuestionarios",
-            body: `Debe completar los cuestionarios después de ${f} ${f === 1 ? "mes" : "meses"} desde la cirugía`,
+            body: `${name}, recuerde completar los cuestionarios después de ${f} ${f === 1 ? "mes" : "meses"} desde la cirugía`,
             schedule: { at: time },
           });
         }
       }
+
+      // **Filter out past notifications**
+      notificationList = notificationList.filter(n => n.schedule?.at && n.schedule.at.getTime() > Date.now());
     
       return notificationList;
     }).reduce((acc, val) => acc.concat(val), []);
+
+    console.log("NOTIF SERVICE =>", notifications)
     
     let options: ScheduleOptions = {
       notifications: notifications
     };
 
     try{
+      console.log(" -*-*-*-* Scheduling Notification with options:", options);
       await LocalNotifications.schedule(options)
+      console.log(" -*-*-*-* Notification scheduled successfully");
     } catch (ex) {
       alert(JSON.stringify(ex))
     }

@@ -20,9 +20,9 @@
   </ion-item>
   
   <p><ion-text><b>Nivel de dolor: </b>{{eva_form.eva}}</ion-text></p>
-  <ion-range mode="ios" min="0" max="10" step="1" snaps="true" ticks="true" pin="true" [(ngModel)]="eva_form.eva"></ion-range>
+  <ion-range min="0" max="10" step="1" snaps="true" ticks="true" pin="true" [(ngModel)]="eva_form.eva"></ion-range>
 
-  <ion-button mode="ios" expand="block" class="post-quest-button"
+  <ion-button expand="block" class="post-quest-button"
     (click)="postEvaForm()">Enviar Respuesta</ion-button>
   
   </ion-content>

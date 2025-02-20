@@ -28,13 +28,16 @@ export class PendingNotificationsComponent  implements OnInit {
       let pendingNotifications: PendingResult = await this.notifSrvc.getPendingNotifications();
       let pendingNotif = pendingNotifications.notifications;
 
+      console.log('Pending Notifications:', pendingNotif);
+      
       let { pastNotif, upcomingNotif } = this.filterNotifications(pendingNotif);
 
-      console.log('Past Notifications:', pastNotif);
+      // Cancel past notifications if there are any
+      if (pastNotif.length > 0) {
+        console.log('Past Notifications:', pastNotif);
+        await this.cancelPastNotifications(pastNotif);
+      }
 
-      // Cancel past notifications
-      await this.cancelPastNotifications(pastNotif)
-  
       // Sort by date
       upcomingNotif.sort((a, b) => {
         const dateA = a.schedule?.at ? new Date(a.schedule.at) : new Date(0);
@@ -67,7 +70,7 @@ export class PendingNotificationsComponent  implements OnInit {
             time: dateObject.toLocaleTimeString('es-ES', {
               hour: '2-digit',
               minute: '2-digit',
-              hour12: false // 24-hour format
+              hour12: false
             })
           });
         }

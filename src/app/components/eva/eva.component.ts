@@ -61,10 +61,8 @@ export class EvaComponent  implements OnInit {
 
   async presentEmptyFieldsAlert() {
     const alert = await this.alertCntrl.create({
-      cssClass: 'my-custom-class',
       header: 'Campos incompletos',
       message: 'Introducir nivel de dolor',
-      mode:'ios',
       buttons: ['Vale']
     });
     await alert.present();
@@ -72,10 +70,8 @@ export class EvaComponent  implements OnInit {
 
   async presentCloseAlert() {
     const alert = await this.alertCntrl.create({
-      cssClass: 'my-custom-class',
       header: 'Cerrar el cuestionario',
       message: 'Si sale se perderán todos los datos. ¿Desea salir de todas formas?',
-      mode:'ios',
       buttons: [
         {
           text: 'Permanecer',
@@ -97,7 +93,6 @@ export class EvaComponent  implements OnInit {
     const toast = await this.toastCntrl.create({
       message: 'Sus respuestas se han registrado correctamente.',
       duration: 2000,
-      mode: 'ios',
       color: "success"
     });
     toast.present();

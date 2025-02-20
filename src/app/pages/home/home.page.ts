@@ -81,11 +81,17 @@ export class HomePage implements OnInit {
       await this.storageSrvc.set('SURGERY_DATE', surgery_date);
   
       let questDates = {};
-      this.questFrecuencies.forEach(f => {
+
+      for (let f of this.questFrecuencies) {
         let date = new Date(surgery_date);
         date.setMonth(date.getMonth() + f);
         questDates[f] = date.toISOString().split('T')[0];
-      });
+      }
+
+      console.log("---------------------------------")
+      console.log("---------------------", questDates)
+      console.log("---------------------------------")
+
       await this.storageSrvc.set('QUEST_DATES', questDates);
   
       if (event) event.target.complete();
@@ -101,7 +107,7 @@ export class HomePage implements OnInit {
       // Get the participant data as a single object
       const data: Participant[] = await firstValueFrom(this.participantSrvc.getParticipant(this.id));
       console.log("6. Already called participant service", data);
-      this.participant = data[0]; // Directly assign the received participant data
+      this.participant = data[0];
   
       console.log("7. this.participant", this.participant);
   
@@ -125,7 +131,7 @@ export class HomePage implements OnInit {
   
         this.notifyEva = this.currentDate >= updateDate;
       } else {
-        this.notifyEva = true; // No Eva data found
+        this.notifyEva = true;
       }
   
       if (event) event.target.complete();
@@ -147,20 +153,20 @@ export class HomePage implements OnInit {
   }
 
   async sendNotifications() {
-    var logged = await this.storageSrvc.get("LOGGED")
-    if(logged = "0"){
+    var first_time_device = await this.storageSrvc.get("FIRST_TIME_DEVICE")
+    if(first_time_device = "1"){
       var surgery_date = await this.storageSrvc.get("SURGERY_DATE")
 
-      this.notifSrvc.scheduleNotification(surgery_date)
+      this.notifSrvc.scheduleNotification(this.participant.f645_firstname, surgery_date)
       
-      var import_data: Login[] = [
-        {
-          record_id: this.id,
-          logged_once: 1
-        }
-      ];
+      // var import_data: Login[] = [
+      //   {
+      //     record_id: this.id,
+      //     logged_once: 1
+      //   }
+      // ];
 
-      await lastValueFrom(this.dataSrvc.import(import_data));
+      // await lastValueFrom(this.dataSrvc.import(import_data));
     }
   }
 
@@ -201,6 +207,8 @@ export class HomePage implements OnInit {
       await this.storageSrvc.remove('RECORD_ID');
       this.router.navigateByUrl('login')
     }
-    catch(e) { console.log(e) }
+    catch (err) {
+      console.log(err);
+    }
   }
 }
