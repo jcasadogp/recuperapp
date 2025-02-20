@@ -81,11 +81,17 @@ export class HomePage implements OnInit {
       await this.storageSrvc.set('SURGERY_DATE', surgery_date);
   
       let questDates = {};
-      this.questFrecuencies.forEach(f => {
+
+      for (let f of this.questFrecuencies) {
         let date = new Date(surgery_date);
         date.setMonth(date.getMonth() + f);
         questDates[f] = date.toISOString().split('T')[0];
-      });
+      }
+
+      console.log("---------------------------------")
+      console.log("---------------------", questDates)
+      console.log("---------------------------------")
+
       await this.storageSrvc.set('QUEST_DATES', questDates);
   
       if (event) event.target.complete();
