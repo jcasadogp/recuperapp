@@ -12,26 +12,16 @@ export class LocalNotifService {
     this.questFrecuencies = [1, 3, 4, 6, 9, 12]
   }
 
-  // hashCode(str: string): number {
-  //   let hash = 0;
-  //   for (let i = 0; i < str.length; i++) {
-  //     const char = str.charCodeAt(i);
-  //     hash = (hash << 5) - hash + char;
-  //     hash |= 0;
-  //   }
-  //   return Math.abs(hash);
-  // }
-
   async scheduleNotification(name, date){
 
-    console.log("NOTIF SERVICE =>", new Date(date))
+    console.log("NOTIF SERVICE => surgery date:", new Date(date))
 
     let notifications = this.questFrecuencies.map((f, index) => {
-      const notificationTime = new Date(date);
+      const surgeryTime = new Date(date);
       let notificationList: LocalNotificationSchema[] = [];
     
       for (let i of [0, 3, 5, 7]) {
-        const time = new Date(notificationTime);
+        const time = new Date(surgeryTime);
     
         if (i == 0) {
           time.setMonth(time.getMonth() + f);
@@ -59,22 +49,21 @@ export class LocalNotifService {
         }
       }
 
-      // **Filter out past notifications**
+      // Filter out past notifications
       notificationList = notificationList.filter(n => n.schedule?.at && n.schedule.at.getTime() > Date.now());
     
       return notificationList;
     }).reduce((acc, val) => acc.concat(val), []);
 
-    console.log("NOTIF SERVICE =>", notifications)
+    console.log("NOTIF SERVICE => final notifications - ", notifications)
     
     let options: ScheduleOptions = {
       notifications: notifications
     };
 
     try{
-      console.log(" -*-*-*-* Scheduling Notification with options:", options);
       await LocalNotifications.schedule(options)
-      console.log(" -*-*-*-* Notification scheduled successfully");
+      console.log(" -- Notification scheduled successfully");
     } catch (ex) {
       alert(JSON.stringify(ex))
     }
@@ -88,6 +77,7 @@ export class LocalNotifService {
 
     try{
       await LocalNotifications.cancel(options)
+      console.log(" -- Notification canceled successfully", options);
     } catch (ex) {
       alert(JSON.stringify(ex))
     }

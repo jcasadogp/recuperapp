@@ -22,7 +22,6 @@ export class LoginPage implements OnInit {
 
   login_error_msg: boolean;
 
-
   constructor(
     private loginSrvc: LoginService,
     private router: Router,
@@ -72,7 +71,7 @@ export class LoginPage implements OnInit {
         await this.loginSrvc.addDevice(id, deviceId);
       }
 
-      console.log("=> 1-B. Storage set successfully");
+      console.log("=> 1-B. isFirstTime set in the storage");
 
       // Call `onLoginSuccess()` to store quest dates
       await this.onLoginSuccess(id);
@@ -80,11 +79,8 @@ export class LoginPage implements OnInit {
 
       // Close loading and navigate
       await this.loadingController.dismiss();
-      console.log("=> 1-D. Loading dismissed");
-
       this.router.navigateByUrl('tabs');
-      console.log("=> 1-E. Routing to tabs");
-
+      
       // Reset login form
       this.login_error_msg = false;
       this.login_params = { user: '', password: '' };

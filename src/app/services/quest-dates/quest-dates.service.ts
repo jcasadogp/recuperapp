@@ -20,11 +20,8 @@ export class QuestDatesService {
     try {
       const data = await firstValueFrom(this.participantSrvc.getBaselineData(participantId));
 
-      // if (!data || data.length === 0) {
-      //   throw new Error('No baseline data found');
-      // }
-
       const surgeryDate = data[0].f_cirug_a;
+      console.log("Surgery date to storage =>", this.SURGERY_DATE_KEY, surgeryDate)
       await this.storage.set(this.SURGERY_DATE_KEY, surgeryDate);
 
       let questDates = {};
@@ -35,7 +32,7 @@ export class QuestDatesService {
         questDates[f] = date.toISOString().split('T')[0];
       }
 
-      console.log("Storing quest dates:", questDates);
+      console.log("Quest dates to storage =>", this.QUEST_DATES_KEY, questDates)
       await this.storage.set(this.QUEST_DATES_KEY, questDates);
     } catch (error) {
       console.error('Error calculating quest dates:', error);
