@@ -20,7 +20,7 @@ export class LoginPage implements OnInit {
     password: ""
   }
 
-  validate_data: boolean;
+  login_error_msg: boolean;
 
 
   constructor(
@@ -34,7 +34,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {}
 
   async login() {
-    this.validate_data = true;
+    this.login_error_msg = false;
     const id = this.login_params.user;
     
     this.presentLoading();
@@ -43,7 +43,7 @@ export class LoginPage implements OnInit {
       const data = await firstValueFrom(this.loginSrvc.getUser(id));
       
       if (!data || data.length === 0) {
-        this.validate_data = false;
+        this.login_error_msg = true;
         this.login_params = { user: '', password: '' };
         await this.loadingController.dismiss();
         throw new Error("User not found");
@@ -51,7 +51,7 @@ export class LoginPage implements OnInit {
 
       const pw = data[0].contrasena;
       if (pw !== this.login_params.password) {
-        this.validate_data = false;
+        this.login_error_msg = true;
         this.login_params.password = '';
         await this.loadingController.dismiss();
         throw new Error("Incorrect password");
@@ -86,7 +86,7 @@ export class LoginPage implements OnInit {
       console.log("=> 1-E. Routing to tabs");
 
       // Reset login form
-      this.validate_data = true;
+      this.login_error_msg = false;
       this.login_params = { user: '', password: '' };
 
     } catch (err) {
