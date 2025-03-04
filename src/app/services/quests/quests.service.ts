@@ -62,6 +62,20 @@ export class QuestsService {
     this.questFilled.emit();
   }
 
+  /**
+   * Initializes the necessary data for the component.
+   * 
+   * This function retrieves the record ID and questionnaire dates from storage, 
+   * fetches questionnaire control information, and determines which questionnaires are enabled.
+   * 
+   * - Retrieves `id` using `getRecordID()`.
+   * - Loads `questDates` from storage.
+   * - Fetches questionnaire control info and updates tracking variables (`num_facseg`, `num_barthelseg`, etc.).
+   * - Calls `getEnabledStatus()` to determine which questionnaires are currently enabled.
+   * 
+   * @private
+   * @returns {Promise<void>} A promise that resolves once all data has been initialized.
+   */
   private async initializeData() {
     try {
       this.id = await this.getRecordID();
@@ -83,22 +97,51 @@ export class QuestsService {
     }
   }
 
+  /**
+   * Asynchronously retrieves the record ID from storage.
+   * 
+   * @returns {Promise<any>} A promise that resolves with the stored record ID.
+   */
   async getRecordID(): Promise<any> {
     return await this.storageSrvc.get('RECORD_ID');
   }
 
-  getQuestControlInfo(id: string): Observable<any>{
+  /**
+   * Retrieves questionnaire control information for a given record ID.
+   * 
+   * @param {string} id - The record ID for which the questionnaire control information is requested.
+   * @returns {Observable<any>} An observable that emits the requested data.
+   */
+  getQuestControlInfo(id: string): Observable<any> {
     var record: string = id;
     var forms: string = 'control_cuestionarios';
 
     return this.dataSrvc.export(record, forms);
   }
 
+  /**
+   * Retrieves questionnaire questions from a local JSON file.
+   * 
+   * @param {string} quest - The name of the questionnaire file (without extension).
+   * @returns {Observable<any>} An observable that emits the contents of the JSON file.
+   */
   getQuestsQuestions(quest: string): Observable<any> {
-    const path = '../../../assets/data/'+quest+'.json'
+    const path = '../../../assets/data/' + quest + '.json';
     return this.http.get(path);
   }
 
+  /**
+   * Submits a monitoring form for a specific record ID.
+   * 
+   * This function constructs a monitoring data object and submits it to the data service.
+   * It processes both simple fields and multi-select fields, ensuring the correct format.
+   * After submission, it updates the monitoring control and checks notification status.
+   * 
+   * @param {string} id - The record ID to associate with the monitoring form.
+   * @param {MonitoringForm} monitoring_form - The monitoring form data to be submitted.
+   * @returns {Promise<void>} A promise that resolves when the form submission is complete.
+   * @throws Will throw an error if the data submission fails.
+   */
   async postMonitoringForm(id: string, monitoring_form: MonitoringForm): Promise<void>{
 
     var data: MonitoringData[] = [];
@@ -148,6 +191,18 @@ export class QuestsService {
     }
   }
   
+  /**
+   * Submits a Barthel Index form for a specific record ID.
+   * 
+   * This function constructs a Barthel Index data object and submits it to the data service.
+   * It processes the form data, updates the tracking information, and ensures the monitoring
+   * control is updated accordingly.
+   * 
+   * @param {string} id - The record ID to associate with the Barthel Index form.
+   * @param {BarthelsegForm} barthelseg_form - The Barthel Index form data to be submitted.
+   * @returns {Promise<void>} A promise that resolves when the form submission is complete.
+   * @throws Will throw an error if the data submission fails.
+   */
   async postBarthelsegForm(id: string, barthelseg_form: BarthelsegForm): Promise<void>{
 
     var data: Barthelseg[] = [];
@@ -185,6 +240,18 @@ export class QuestsService {
     }
   }
   
+  /**
+   * Submits a FACSEG form for a specific record ID.
+   * 
+   * This function constructs a FACSEG data object and submits it to the data service.
+   * It processes the form data, updates the tracking information, and ensures the monitoring
+   * control is updated accordingly.
+   * 
+   * @param {string} id - The record ID to associate with the FACSEG form.
+   * @param {FacsegForm} facseg_form - The FACSEG form data to be submitted.
+   * @returns {Promise<void>} A promise that resolves when the form submission is complete.
+   * @throws Will throw an error if the data submission fails.
+   */
   async postFacsegForm(id: string, facseg_form: FacsegForm): Promise<void>{
 
     var data: Facseg[] = [];
@@ -221,6 +288,19 @@ export class QuestsService {
     }
   }
 
+  /**
+   * Submits a Neuro-QoL form for a specific record ID.
+   * 
+   * This function constructs a Neuro-QoL data object and submits it to the data service.
+   * It processes the form data, updates the tracking information, and ensures the monitoring
+   * control is updated accordingly. After submission, it checks notification status and updates
+   * the enabled status.
+   * 
+   * @param {string} id - The record ID to associate with the Neuro-QoL form.
+   * @param {NeuroQoLForm} neuroqol_form - The Neuro-QoL form data to be submitted.
+   * @returns {Promise<void>} A promise that resolves when the form submission is complete.
+   * @throws Will throw an error if the data submission fails.
+   */
   async postNeuroQolForm(id: string, neuroqol_form: NeuroQoLForm): Promise<void>{
 
     var data: NeuroQol[] = [];
@@ -259,6 +339,18 @@ export class QuestsService {
     }
   }
 
+  /**
+   * Checks the status of pending notifications and cancels them if all required forms 
+   * for the previous date have been completed.
+   * 
+   * This function retrieves stored questionnaire dates, determines the previous date,
+   * and checks whether all necessary control forms (FACSEG, Barthel, Seguimiento, NeuroQoL) 
+   * have been completed for that date. If all forms are completed, it cancels any pending 
+   * notifications related to that date.
+   * 
+   * @returns {Promise<void>} A promise that resolves when the notification status check is complete.
+   * @throws Logs an error if any step in the process fails.
+   */
   async checkNotificationsStatus() {
     try {
       const questDates = await this.storageSrvc.get('QUEST_DATES');
@@ -291,6 +383,20 @@ export class QuestsService {
     }
   }
 
+  /**
+   * Retrieves the enabled status of different questionnaires for a given record ID.
+   * 
+   * This function determines which questionnaires (Monitoring, Barthel, FACSEG, NeuroQoL)
+   * are enabled based on the completion status from the control data. It also calculates 
+   * the next available date for questionnaire submission.
+   * 
+   * @param {string} id - The record ID for which the enabled status should be retrieved.
+   * @returns {Observable<{ enabledQuests: string[], nextDate: string | null }>} 
+   *          An observable that emits an object containing:
+   *          - `enabledQuests`: An array indicating which questionnaires are enabled (values: '1' for enabled, '0' for disabled).
+   *          - `nextDate`: The next scheduled date for questionnaires or `null` if none.
+   * @throws Emits an error if no questionnaire dates are available.
+   */
   getEnabledStatus(id: string){
 
     return new Observable<{ enabledQuests: string[], nextDate: string | null }>(observer => {
@@ -344,6 +450,15 @@ export class QuestsService {
     })
   }
   
+  /**
+   * Calculates the total number of enabled questionnaires.
+   * 
+   * This function converts the enabled status of each questionnaire 
+   * (Monitoring, Barthel, FACSEG, NeuroQoL) from string to integer ('1' for enabled, '0' for disabled)
+   * and sums them to determine the total number of enabled questionnaires.
+   * 
+   * @returns {number} The total count of enabled questionnaires.
+   */
   calculatenumEnabledQuests(): number {
     const totalEnabled = parseInt(this.isEnabledMonitoring) + 
       parseInt(this.isEnabledBarthelseg) + 
@@ -353,6 +468,19 @@ export class QuestsService {
     return totalEnabled
   }
 
+  /**
+   * Determines the most recent past date (previousDate) and the next upcoming date (nextDate) 
+   * from a given set of questionnaire dates.
+   * 
+   * This function processes an object containing date values, identifies the most recent 
+   * past date, and finds the next closest future date.
+   * 
+   * @param { { [key: number]: string } | null } questDates - An object mapping numeric keys to date strings.
+   * @returns { { previousDate: string | null, nextDate: string | null } } 
+   *          An object containing:
+   *          - `previousDate`: The most recent past date in `YYYY-MM-DD` format, or `null` if none exist.
+   *          - `nextDate`: The next closest future date in `YYYY-MM-DD` format, or `null` if none exist.
+   */
   private getPreviousAndNextDate(questDates: { [key: number]: string } | null): { previousDate: string | null, nextDate: string | null } {
 
     // Check if questDates is null or empty
@@ -376,6 +504,14 @@ export class QuestsService {
     return { previousDate, nextDate };
   }
 
+  /**
+   * Retrieves the total number of enabled questionnaires.
+   * 
+   * This function returns the previously calculated number of enabled questionnaires, 
+   * which is stored in the `numEnabledQuests` property.
+   * 
+   * @returns {number} The total count of enabled questionnaires.
+   */
   getNumEnabledQuests(): number {
     return this.numEnabledQuests;
   }
