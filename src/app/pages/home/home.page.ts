@@ -4,7 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { InformationComponent } from 'src/app/components/information/information.component';
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
 import { EvaComponent } from 'src/app/components/eva/eva.component';
-import { BaselineData, Participant } from 'src/app/redcap_interfaces/participant';
+import { Participant } from 'src/app/redcap_interfaces/participant';
 import { ParticipantService } from 'src/app/services/participant/participant.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { QuestsService } from 'src/app/services/quests/quests.service';
@@ -13,8 +13,6 @@ import { Eva } from 'src/app/redcap_interfaces/eva';
 import { PendingNotificationsComponent } from 'src/app/components/pending-notifications/pending-notifications.component';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { LocalNotifService } from 'src/app/services/local-notif/local-notif.service';
-import { DataService } from 'src/app/services/data/data.service';
-import { Login } from 'src/app/redcap_interfaces/login';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +23,7 @@ export class HomePage implements OnInit {
 
   public id: string;
   questFrecuencies: number[];
+  questDates;
   public participant: Participant = {};
   public currentDate;
   public currentDate_string: string;
@@ -32,7 +31,6 @@ export class HomePage implements OnInit {
   public notifyEva: boolean
 
   constructor(
-    private dataSrvc: DataService,
     private questsSrvc: QuestsService,
     private evaSrvc: EvaService,
     private router: Router,
@@ -47,70 +45,42 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log("1. Enter ngOnInit");
+    console.log("=> 2-A. Enter ngOnInit");
     this.initializeData();
   }
   
   async initializeData() {
     try {
-      const data = await this.getRecordID();
-      console.log("3. Already called getRecordID", data);
-      this.id = data;
-      console.log("4. this.id", this.id);
+      // Step 1: Get Record ID
+      this.id = await this.getRecordID();
+      console.log("=> 2-C. Already called getRecordID - ", this.id);
   
-      // Wait for getBaselineData to complete before calling the others
-      await this.getBaselineData(null);
       await this.getParticipant(null);
       await this.getEvaData(null);
       await this.sendNotifications();
       await this.getQuestStatus(null);
+  
+      console.log("Initialization completed successfully.");
     } catch (error) {
       console.error("Error during initialization:", error);
     }
+    
   }
 
   async getRecordID(): Promise<any> {
-    console.log("2. Enter getRecordID")
+    console.log("=> 2-B. Enter getRecordID")
     return await this.storageSrvc.get('RECORD_ID');
   }
 
-  async getBaselineData(event): Promise<void> {
-    try {
-      const data: BaselineData = await firstValueFrom(this.participantSrvc.getBaselineData(this.id));
-      let surgery_date = data[0].f_cirug_a;
-      await this.storageSrvc.set('SURGERY_DATE', surgery_date);
-  
-      let questDates = {};
-
-      for (let f of this.questFrecuencies) {
-        let date = new Date(surgery_date);
-        date.setMonth(date.getMonth() + f);
-        questDates[f] = date.toISOString().split('T')[0];
-      }
-
-      console.log("I will add changes here!")
-      console.log("---------------------------------")
-      console.log("---------------------", questDates)
-      console.log("---------------------------------")
-
-      await this.storageSrvc.set('QUEST_DATES', questDates);
-  
-      if (event) event.target.complete();
-    } catch (err) {
-      console.log(err);
-      if (event) event.target.complete();
-    }
-  }
-  
   async getParticipant(event): Promise<void> {
-    console.log("5. Enter getParticipant");
+    console.log("=> 2-D. Enter getParticipant");
     try {
-      // Get the participant data as a single object
+      
       const data: Participant[] = await firstValueFrom(this.participantSrvc.getParticipant(this.id));
-      console.log("6. Already called participant service", data);
+      console.log("=> 2-E. Already called participant service", data);
       this.participant = data[0];
   
-      console.log("7. this.participant", this.participant);
+      console.log("=> 2-F. this.participant", this.participant);
   
       if (event) event.target.complete();
     } catch (err) {
@@ -120,6 +90,7 @@ export class HomePage implements OnInit {
   }
 
   async getEvaData(event): Promise<void> {
+    console.log("=> 2-G. Enter getEvaData");
     try {
       // Convert the Observable to a Promise and await the result
       const data: Eva[] = await firstValueFrom(this.evaSrvc.getEvaData(this.id));
@@ -143,6 +114,7 @@ export class HomePage implements OnInit {
   }
 
   async getQuestStatus(event): Promise<void> {
+    console.log("=> 2-I. Enter getQuestStatus");
     try {
         const data = await firstValueFrom(this.questsSrvc.getEnabledStatus(this.id));
         let enabledQuests = data.enabledQuests;
@@ -154,20 +126,12 @@ export class HomePage implements OnInit {
   }
 
   async sendNotifications() {
+    console.log("=> 2-H. Enter sendNotifications");
     var first_time_device = await this.storageSrvc.get("FIRST_TIME_DEVICE")
     if(first_time_device = "1"){
       var surgery_date = await this.storageSrvc.get("SURGERY_DATE")
 
       this.notifSrvc.scheduleNotification(this.participant.f645_firstname, surgery_date)
-      
-      // var import_data: Login[] = [
-      //   {
-      //     record_id: this.id,
-      //     logged_once: 1
-      //   }
-      // ];
-
-      // await lastValueFrom(this.dataSrvc.import(import_data));
     }
   }
 
