@@ -15,7 +15,20 @@ export class QuestDatesService {
     private participantSrvc: ParticipantService
   ) {}
 
-  // Calculate and store quest dates
+  /**
+   * Calculates and stores questionnaire dates based on a participant's surgery date and given frequencies.
+   * 
+   * This function retrieves the baseline data for a participant to get the surgery date, then 
+   * calculates future questionnaire dates based on the provided frequencies. The calculated dates 
+   * are then stored in local storage.
+   * 
+   * @param {string} participantId - The unique identifier of the participant.
+   * @param {number[]} questFrequencies - An array of numbers representing the months after surgery when questionnaires should be completed.
+   * 
+   * @returns {Promise<void>} A promise that resolves once the dates are calculated and stored.
+   * 
+   * @throws Will log an error if retrieving baseline data or storing dates fails.
+   */
   async calculateAndStoreQuestDates(participantId: string, questFrequencies: number[]): Promise<void> {
     try {
       const data = await firstValueFrom(this.participantSrvc.getBaselineData(participantId));
@@ -39,13 +52,31 @@ export class QuestDatesService {
     }
   }
 
-  // Retrieve stored quest dates
+  /**
+   * Retrieves the stored questionnaire dates from local storage.
+   * 
+   * This function fetches the stored dates that indicate when questionnaires 
+   * should be completed based on the participant's surgery date.
+   * 
+   * @returns {Promise<{ [key: number]: string } | null>} A promise that resolves 
+   *          with an object mapping months to corresponding questionnaire dates, 
+   *          or `null` if no data is found.
+   */
   async getQuestDates(): Promise<{ [key: number]: string } | null> {
     return await this.storage.get(this.QUEST_DATES_KEY);
   }
 
-  // Retrieve stored surgery date
+  /**
+   * Retrieves the stored surgery date from local storage.
+   * 
+   * This function fetches the date of surgery that was previously stored 
+   * in local storage for the participant.
+   * 
+   * @returns {Promise<string | null>} A promise that resolves with the stored 
+   *          surgery date as a string (in ISO format) or `null` if no date is found.
+   */
   async getSurgeryDate(): Promise<string | null> {
     return await this.storage.get(this.SURGERY_DATE_KEY);
   }
+
 }

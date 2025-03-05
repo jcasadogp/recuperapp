@@ -12,6 +12,21 @@ export class LocalNotifService {
     this.questFrecuencies = [1, 3, 4, 6, 9, 12]
   }
 
+  /**
+   * Schedules a series of local notifications to remind the user to complete questionnaires.
+   * 
+   * This function generates notifications based on predefined frequencies (`questFrecuencies`) 
+   * relative to a given surgery date. It schedules:
+   * - An initial notification exactly `f` months after the surgery.
+   * - Additional reminder notifications at 3, 5, and 7 days after the initial notification.
+   * 
+   * Notifications are only scheduled if their time is in the future.
+   * 
+   * @param {string} name - The name of the patient or user.
+   * @param {string | Date} date - The surgery date, used as the reference point for scheduling.
+   * 
+   * @returns {Promise<void>} A promise that resolves when the notifications are successfully scheduled.
+   */
   async scheduleNotification(name, date){
 
     console.log("NOTIF SERVICE => surgery date:", new Date(date))
@@ -69,6 +84,17 @@ export class LocalNotifService {
     }
   }
 
+  /**
+   * Cancels scheduled local notifications based on the provided notification IDs.
+   * 
+   * This function takes an array of notification IDs and attempts to cancel them using 
+   * the `LocalNotifications.cancel()` method. If the cancellation is successful, a 
+   * confirmation message is logged to the console.
+   * 
+   * @param {number[]} ids - An array of notification IDs to be canceled.
+   * 
+   * @returns {Promise<void>} A promise that resolves when the notifications are successfully canceled.
+   */
   async cancelNotifications(ids): Promise<void>{
 
     let options: CancelOptions = {
@@ -83,6 +109,14 @@ export class LocalNotifService {
     }
   }
   
+  /**
+   * Retrieves a list of all pending (scheduled but not yet triggered) local notifications.
+   * 
+   * This function calls `LocalNotifications.getPending()` to fetch all notifications 
+   * that are currently scheduled but have not been delivered yet.
+   * 
+   * @returns {Promise<PendingResult>} A promise that resolves with the list of pending notifications.
+   */
   async getPendingNotifications(): Promise<PendingResult> {
     return await LocalNotifications.getPending()
   }
