@@ -79,12 +79,6 @@ export class ResultsPage implements OnInit {
     .slice()
     .sort((a, b) => new Date(a.fecha_eva).getTime() - new Date(b.fecha_eva).getTime());
 
-    // // In case sortedData does not work
-    // const sortedData2 = data
-    // .map(obj => ({...obj,fecha_eva_date: new Date(obj.fecha_eva)}))
-    // .sort((a, b) => a.fecha_eva_date.getTime() - b.fecha_eva_date.getTime())
-    // .map(({ fecha_eva_date, ...rest }) => rest);
-      
     const formattedData = sortedData.map(obj => {
       const formattedDate = new Date(obj.fecha_eva).toLocaleString("es-ES", { day: "numeric", month: "short", year: "numeric" });
       return { ...obj, fecha_eva: formattedDate };

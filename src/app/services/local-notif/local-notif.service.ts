@@ -29,7 +29,7 @@ export class LocalNotifService {
    */
   async scheduleNotification(name, date){
 
-    console.log("NOTIF SERVICE => surgery date:", new Date(date))
+    console.log("   => NOTIF SERVICE => surgery date:", new Date(date))
 
     let notifications = this.questFrecuencies.map((f, index) => {
       const surgeryTime = new Date(date);
@@ -70,7 +70,7 @@ export class LocalNotifService {
       return notificationList;
     }).reduce((acc, val) => acc.concat(val), []);
 
-    console.log("NOTIF SERVICE => final notifications - ", notifications)
+    console.log("   => NOTIF SERVICE => final notifications - ", notifications)
     
     let options: ScheduleOptions = {
       notifications: notifications

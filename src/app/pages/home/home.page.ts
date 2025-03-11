@@ -22,7 +22,6 @@ import { LocalNotifService } from 'src/app/services/local-notif/local-notif.serv
 export class HomePage implements OnInit {
 
   public id: string;
-  // questFrecuencies: number[];
   questDates;
   public participant: Participant = {};
   public currentDate;
@@ -39,7 +38,6 @@ export class HomePage implements OnInit {
     private notifSrvc: LocalNotifService,
     private storageSrvc: StorageService
   ) {
-    // this.questFrecuencies = [1, 3, 4, 6, 9, 12]
     this.currentDate = new Date()
     this.currentDate_string = new Date().toLocaleDateString('es-ES', {day: '2-digit',month: 'long',year: 'numeric'})
   }
@@ -118,8 +116,6 @@ export class HomePage implements OnInit {
     try {
         // const data = 
         await firstValueFrom(this.questsSrvc.getEnabledStatus(this.id));
-        // let enabledQuests = data.enabledQuests;
-        // let nextDate = data.nextDate;
     } catch (err) {
         console.log(err);
     }

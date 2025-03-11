@@ -10,7 +10,6 @@ import { LocalNotifService } from 'src/app/services/local-notif/local-notif.serv
 })
 export class PendingNotificationsComponent  implements OnInit {
 
-  // notifications: PendingLocalNotificationSchema[]
   notifications;
   groupedNotifications;
 
