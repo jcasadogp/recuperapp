@@ -230,11 +230,11 @@ export class ResultsPage implements OnInit {
     this.questChart = echarts.init(questChartContainer);
 
     // CHART DATA
-    var num_facseg = data[0].num_facseg === "" ? 0 : +data[0].num_facseg;
-    var num_barthelseg = data[0].num_barthelseg === "" ? 0 : +data[0].num_barthelseg;
-    var num_seguimiento = data[0].num_seguimiento === "" ? 0 : +data[0].num_seguimiento;
-    var num_neuroqol = data[0].num_neuroqol === "" ? 0 : +data[0].num_neuroqol;
-
+    var num_seguimiento = this.sumControlValues(data[0], "control_seguimiento");
+    var num_barthelseg = this.sumControlValues(data[0], "control_barthelseg");
+    var num_facseg = this.sumControlValues(data[0], "control_facseg");
+    var num_neuroqol = this.sumControlValues(data[0], "control_neuroqol");
+    
     this.quest_chart_options = {
       title: {
         text: "Número de cuestionarios completados"
@@ -242,9 +242,9 @@ export class ResultsPage implements OnInit {
       dataset: {
         source: [
           ['value', 'category'],
-          [num_facseg, 'Valoración funcional de la marcha'],
-          [num_barthelseg, 'Barthel'],
           [num_seguimiento, 'Seguimiento'],
+          [num_barthelseg, 'Barthel'],
+          [num_facseg, 'Valoración funcional de la marcha'],
           [num_neuroqol, 'Movilidad de las extremidades inferiores']
         ]
       },
@@ -275,5 +275,20 @@ export class ResultsPage implements OnInit {
     };
 
     this.questChart.setOption(this.quest_chart_options);
+  }
+
+  /**
+   * Sums control values based on a given prefix.
+   * 
+   * @param {any} data - The data object containing values to sum.
+   * @param {string} prefix - The prefix used to identify relevant keys in the data object.
+   * @returns {number} - The total sum of values associated with the specified prefix.
+   */
+  sumControlValues(data, prefix) {
+    let sum = 0;
+    for (let i = 1; i <= 6; i++) {
+      sum += +data[`${prefix}___${i}`] || 0;
+    }
+    return sum;
   }
 }
