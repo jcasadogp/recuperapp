@@ -5,7 +5,7 @@ import { LoadingController } from '@ionic/angular';
 import { LoginService } from '../services/login/login.service';
 import { Device } from '@capacitor/device';
 import { firstValueFrom } from 'rxjs';
-import { QuestDatesService } from '../services/quest-dates/quest-dates.service';
+import { QuestsService } from '../services/quests/quests.service';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +27,7 @@ export class LoginPage implements OnInit {
     private router: Router,
     private storageSrvc: StorageService,
     public loadingController: LoadingController,
-    private questDatesSrvc: QuestDatesService
+    private questsSrvc: QuestsService
   ) {}
 
   ngOnInit() {}
@@ -93,7 +93,7 @@ export class LoginPage implements OnInit {
   async onLoginSuccess(userId: string) {
     try {
       const questFrequencies = [1, 3, 4, 6, 9, 12];
-      await this.questDatesSrvc.calculateAndStoreQuestDates(userId, questFrequencies);
+      await this.questsSrvc.calculateAndStoreQuestDates(userId, questFrequencies);
     } catch (error) {
       console.error("Error storing quest dates:", error);
     }
