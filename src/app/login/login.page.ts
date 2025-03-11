@@ -31,6 +31,15 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
 
+  /**
+   * Handles the user login process.
+   * 
+   * - Validates user credentials.
+   * - Stores user ID in local storage.
+   * - Checks if this is the first login on the current device.
+   * - Stores necessary user-related data.
+   * - Navigates to the main app screen upon successful login.
+   */
   async login() {
     this.login_error_msg = false;
     const id = this.login_params.user;
@@ -89,6 +98,14 @@ export class LoginPage implements OnInit {
     }
   }
 
+  /**
+   * Handles post-login processes for a user.
+   * 
+   * - Calculates and stores quest dates based on predefined frequencies.
+   * - Ensures quest scheduling data is available for the logged-in user.
+   * 
+   * @param userId The ID of the logged-in user.
+   */
   async onLoginSuccess(userId: string) {
     try {
       const questFrequencies = [1, 3, 4, 6, 9, 12];
@@ -98,8 +115,14 @@ export class LoginPage implements OnInit {
     }
   }
   
-
-  async presentLoading() {
+  /**
+   * Displays a loading indicator while the user login process is in progress.
+   * 
+   * - Shows a message indicating the login process.
+   * - Uses iOS-style modal for consistency.
+   * - Waits for the loading indicator to be dismissed.
+   */
+    async presentLoading() {
     const loading = await this.loadingController.create({
       message: 'Iniciando sesión...',
       mode: 'ios'

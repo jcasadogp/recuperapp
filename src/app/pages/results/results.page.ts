@@ -30,6 +30,10 @@ export class ResultsPage implements OnInit {
     private storageSrvc: StorageService
   ) { }
 
+  /**
+   * Lifecycle hook that runs when the component is initialized.
+   * Retrieves the record ID from storage and fetches EVA and questionnaire data.
+   */
   ngOnInit() {
     this.getRecordID().then(data => {
       this.id = data
@@ -38,10 +42,18 @@ export class ResultsPage implements OnInit {
     })
   }
 
+  /**
+   * Retrieves the stored record ID from local storage.
+   * @returns {Promise<any>} The stored record ID.
+   */
   async getRecordID(): Promise<any> {
     return await this.storageSrvc.get('RECORD_ID');
   }
 
+  /**
+   * Fetches EVA (pain level) data from the service and processes it.
+   * @param {any} event - Optional event object used for UI refresh completion.
+   */
   getEvaData(event){
     this.evaSrvc.getEvaData(this.id).subscribe({
       next: (data: Eva[]) => {
@@ -59,6 +71,10 @@ export class ResultsPage implements OnInit {
     })
   }
 
+  /**
+   * Processes and displays EVA data in a chart using ECharts.
+   * @param {Eva[]} data - Array of EVA data objects.
+   */
   getEvaChart(data){
 
     // CHART CONTAINER
@@ -174,6 +190,10 @@ export class ResultsPage implements OnInit {
     this.evaChart.setOption(this.eva_chart_options);
   }
 
+  /**
+   * Fetches questionnaire data and processes it for display.
+   * @param {any} event - Optional event object used for UI refresh completion.
+   */
   getQuestData(event){
     this.questsSrvc.getQuestControlInfo(this.id).subscribe({
       next: (data) => {
@@ -190,6 +210,10 @@ export class ResultsPage implements OnInit {
     })
   }
 
+  /**
+   * Processes and displays questionnaire completion data in a bar chart using ECharts.
+   * @param {any} data - The questionnaire data containing the number of completed questionnaires.
+   */
   getQuestChart(data){
     
     // CHART CONTAINER
