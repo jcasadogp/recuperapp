@@ -26,8 +26,7 @@ export class LoginPage implements OnInit {
     private loginSrvc: LoginService,
     private router: Router,
     private storageSrvc: StorageService,
-    public loadingController: LoadingController,
-    private questsSrvc: QuestsService
+    public loadingController: LoadingController
   ) {}
 
   ngOnInit() {}
@@ -93,7 +92,7 @@ export class LoginPage implements OnInit {
   async onLoginSuccess(userId: string) {
     try {
       const questFrequencies = [1, 3, 4, 6, 9, 12];
-      await this.questsSrvc.calculateAndStoreQuestDates(userId, questFrequencies);
+      await this.loginSrvc.calculateAndStoreQuestDates(userId, questFrequencies);
     } catch (error) {
       console.error("Error storing quest dates:", error);
     }
