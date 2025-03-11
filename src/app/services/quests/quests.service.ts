@@ -1,22 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { firstValueFrom, Observable } from 'rxjs';
+import { firstValueFrom, lastValueFrom, Observable } from 'rxjs';
+import { Storage } from '@ionic/storage-angular';
 
 import { DataService } from '../data/data.service';
-import { QuestControl } from 'src/app/redcap_interfaces/quest_control';
 
 import { MonitoringForm } from 'src/app/interfaces/monitoring-form';
 import { FacsegForm } from 'src/app/interfaces/facseg-form';
-import { Facseg } from 'src/app/redcap_interfaces/facseg';
 import { BarthelsegForm } from 'src/app/interfaces/barthelseg-form';
-import { Barthelseg } from 'src/app/redcap_interfaces/barthelseg';
-
-import { StorageService } from '../storage/storage.service';
-import { MonitoringData } from 'src/app/redcap_interfaces/monitoring_data';
 import { NeuroQoLForm } from 'src/app/interfaces/neuro_qol-form';
+import { MonitoringData } from 'src/app/redcap_interfaces/monitoring_data';
+import { Facseg } from 'src/app/redcap_interfaces/facseg';
+import { Barthelseg } from 'src/app/redcap_interfaces/barthelseg';
 import { NeuroQol } from 'src/app/redcap_interfaces/neuro_qol';
 
-import { lastValueFrom } from 'rxjs';
+import { StorageService } from '../storage/storage.service';
 import { LocalNotifService } from '../local-notif/local-notif.service';
 import { PendingResult } from '@capacitor/local-notifications';
 
@@ -25,15 +23,13 @@ import { PendingResult } from '@capacitor/local-notifications';
 })
 export class QuestsService {
 
+  private readonly SURGERY_DATE_KEY = 'SURGERY_DATE';
+  private readonly QUEST_DATES_KEY = 'QUEST_DATES';
+
   id: string
-  public currentDate: Date;
-  questFrecuencies: number[];
   questDates;
 
-  num_facseg: number;
-  num_barthelseg: number;
-  num_seguimiento: number;
-  num_neuroqol: number;
+  num_instance: number;
 
   isEnabledMonitoring: string;
   isEnabledBarthelseg: string;
@@ -50,15 +46,11 @@ export class QuestsService {
     private http: HttpClient,
     private dataSrvc: DataService,
     private storageSrvc: StorageService,
+    private storage: Storage,
     private notifSrvc: LocalNotifService
-  ) {
-    this.currentDate = new Date()
-    this.questFrecuencies = [1, 3, 4, 6, 9, 12]
-
+  ) { 
     this.nextDate = null;
-
     this.initializeData();
-
     this.questFilled.emit();
   }
 
@@ -77,20 +69,17 @@ export class QuestsService {
    * @returns {Promise<void>} A promise that resolves once all data has been initialized.
    */
   private async initializeData() {
+    console.log("* Initialize data at quest service")
     try {
+      console.log("* inside try")
       this.id = await this.getRecordID();
-      this.questDates = await this.storageSrvc.get('QUEST_DATES');
-  
-      // Fetch quest control info
-      this.getQuestControlInfo(this.id).subscribe(data => {
-        this.num_facseg = data[0].num_facseg === "" ? 0 : +data[0].num_facseg;
-        this.num_barthelseg = data[0].num_barthelseg === "" ? 0 : +data[0].num_barthelseg;
-        this.num_seguimiento = data[0].num_seguimiento === "" ? 0 : +data[0].num_seguimiento;
-        this.num_neuroqol = data[0].num_neuroqol === "" ? 0 : +data[0].num_neuroqol;
-      });
+      console.log(this.id)
+      this.questDates = await this.storage.get(this.QUEST_DATES_KEY);
   
       // Get enabled status
-      await this.getEnabledStatus(this.id); // Make sure this returns a promise if using await
+      await this.getEnabledStatus(this.id);
+
+      this.num_instance = await this.getQuestInstance();
   
     } catch (error) {
       console.error("Error during initialization:", error);
@@ -149,7 +138,7 @@ export class QuestsService {
     const elem: MonitoringData = {
       record_id: id,
       redcap_repeat_instrument: "datos_seguimiento",
-      redcap_repeat_instance: this.num_seguimiento+1,
+      redcap_repeat_instance: this.num_instance,
       datos_seguimiento_complete: 2
     };
     
@@ -174,18 +163,14 @@ export class QuestsService {
 
     try {
       await lastValueFrom(this.dataSrvc.import(data));
-      var data_monitoring = [
-        {
-          record_id: id,
-          num_seguimiento: this.num_seguimiento + 1
-        }
-      ];
 
-      data_monitoring[0]['control_seguimiento___' + (this.num_seguimiento + 1)] = '1';
+      var data_monitoring = [{ record_id: id }];
+      data_monitoring[0]['control_seguimiento___' + (this.num_instance)] = '1';
   
-      this.num_seguimiento++;
       await lastValueFrom(this.dataSrvc.import(data_monitoring));
       await this.checkNotificationsStatus();
+      await this.getEnabledStatus(this.id)
+
     } catch (err) {
       throw err;
     }
@@ -196,7 +181,8 @@ export class QuestsService {
    * 
    * This function constructs a Barthel Index data object and submits it to the data service.
    * It processes the form data, updates the tracking information, and ensures the monitoring
-   * control is updated accordingly.
+   * control is updated accordingly. After submission, it checks notification status and updates
+   * the enabled status.
    * 
    * @param {string} id - The record ID to associate with the Barthel Index form.
    * @param {BarthelsegForm} barthelseg_form - The Barthel Index form data to be submitted.
@@ -210,7 +196,7 @@ export class QuestsService {
     const elem: Barthelseg = {
       record_id: id,
       redcap_repeat_instrument: "barthelseg",
-      redcap_repeat_instance: this.num_barthelseg+1,
+      redcap_repeat_instance: this.num_instance,
       barthelseg_complete: 2
     };
     
@@ -223,18 +209,14 @@ export class QuestsService {
 
     try {
       await lastValueFrom(this.dataSrvc.import(data));
-      var data_barthelseg = [
-        {
-          record_id: id,
-          num_barthelseg: this.num_barthelseg+1
-        }
-      ];
 
-      data_barthelseg[0]['control_barthelseg___' + (this.num_barthelseg + 1)] = '1';
+      var data_barthelseg = [{ record_id: id }];
+      data_barthelseg[0]['control_barthelseg___' + (this.num_instance)] = '1';
   
-      this.num_barthelseg++;
       await lastValueFrom(this.dataSrvc.import(data_barthelseg));
       await this.checkNotificationsStatus();
+      await this.getEnabledStatus(this.id)
+
     } catch (err) {
       throw err;
     }
@@ -245,7 +227,8 @@ export class QuestsService {
    * 
    * This function constructs a FACSEG data object and submits it to the data service.
    * It processes the form data, updates the tracking information, and ensures the monitoring
-   * control is updated accordingly.
+   * control is updated accordingly. After submission, it checks notification status and updates
+   * the enabled status.
    * 
    * @param {string} id - The record ID to associate with the FACSEG form.
    * @param {FacsegForm} facseg_form - The FACSEG form data to be submitted.
@@ -259,7 +242,7 @@ export class QuestsService {
     const elem: Facseg = {
       record_id: id,
       redcap_repeat_instrument: "facseg",
-      redcap_repeat_instance: this.num_facseg+1,
+      redcap_repeat_instance: this.num_instance,
       facseg_complete: 2
     };
     
@@ -271,18 +254,14 @@ export class QuestsService {
 
     try {
       await lastValueFrom(this.dataSrvc.import(data));
-      var data_facseg = [
-        {
-          record_id: id,
-          num_facseg: this.num_facseg+1
-        }
-      ];
 
-      data_facseg[0]['control_facseg___' + (this.num_facseg + 1)] = '1';
+      var data_facseg = [{ record_id: id }];
+      data_facseg[0]['control_facseg___' + (this.num_instance)] = '1';
   
-      this.num_facseg++;
       await lastValueFrom(this.dataSrvc.import(data_facseg));
       await this.checkNotificationsStatus();
+      await this.getEnabledStatus(this.id)
+
     } catch (err) {
       throw err;
     }
@@ -308,7 +287,7 @@ export class QuestsService {
     const elem: NeuroQol = {
       record_id: id,
       redcap_repeat_instrument: "neuroqol",
-      redcap_repeat_instance: this.num_neuroqol+1,
+      redcap_repeat_instance: this.num_instance,
       neuroqol_complete: 2
     };
     
@@ -321,22 +300,57 @@ export class QuestsService {
 
     try {
       await lastValueFrom(this.dataSrvc.import(data));
-      var data_neuroqol = [
-        {
-          record_id: id,
-          num_neuroqol: this.num_neuroqol+1
-        }
-      ];
 
-      data_neuroqol[0]['control_neuroqol___' + (this.num_neuroqol + 1)] = '1';
+      var data_neuroqol = [{ record_id: id }];
+      data_neuroqol[0]['control_neuroqol___' + (this.num_instance)] = '1';
   
-      this.num_neuroqol++;
       await lastValueFrom(this.dataSrvc.import(data_neuroqol));
       await this.checkNotificationsStatus();
       await this.getEnabledStatus(this.id)
+
     } catch (err) {
       throw err;
     }
+  }
+
+  /**
+   * Determines the current questionnaire instance based on the stored questionnaire dates and the current date.
+   * 
+   * This function compares the current date with the stored questionnaire dates and determines which instance 
+   * the participant is currently in. The instances are based on months after surgery, and the function returns 
+   * the index of the current instance.
+   * 
+   * @returns {Promise<number | null>} A promise that resolves with the current instance number (index of the date) 
+   *          or `null` if no suitable instance is found.
+   * 
+   * @throws Will log a `null` instance if no matching date is found.
+   */
+  async getQuestInstance() {
+    const questDates = this.questDates;
+    const currentDate = new Date();
+    let instance: number = 0;
+  
+    if (questDates) {
+      const dateKeys = Object.keys(questDates).map(key => parseInt(key));
+      dateKeys.sort((a, b) => a - b);
+      
+      for (let i = 1; i < dateKeys.length; i++) {
+        const currentKey = dateKeys[i - 1];
+        const nextKey = dateKeys[i];
+  
+        const currentQuestDate = new Date(questDates[currentKey]);
+
+        console.log(currentQuestDate, currentKey, nextKey)
+  
+        if (currentDate >= currentQuestDate && (!nextKey || currentDate < new Date(questDates[nextKey]))) {
+          instance = i;
+          break;
+        }
+      }
+    }
+  
+    console.log("Quest instance:", instance);
+    return instance;
   }
 
   /**
@@ -353,33 +367,33 @@ export class QuestsService {
    */
   async checkNotificationsStatus() {
     try {
-      const questDates = await this.storageSrvc.get('QUEST_DATES');
+      const index = this.num_instance
+      console.log(index)
       
-      const { previousDate } = this.getPreviousAndNextDate(questDates);
-      const index = Object.values(questDates).findIndex(date => date === previousDate) + 1;
-      
+      // If index was 0, no quest would be yet available for the first time so no notification could be yet canceled
       if (index !== 0) {
-          const controlData = await firstValueFrom(this.getQuestControlInfo(this.id));
-
-          const allControlsEnabled = 
-              controlData[0]['control_facseg___' + index] === "1" &&
-              controlData[0]['control_barthelseg___' + index] === "1" &&
-              controlData[0]['control_seguimiento___' + index] === "1" &&
-              controlData[0]['control_neuroqol___' + index] === "1";
-
-          if (allControlsEnabled) {
-
-            const pendingNotifications: PendingResult = await this.notifSrvc.getPendingNotifications();
-            const pendingNotifs = pendingNotifications.notifications;
-            const cancelIds = pendingNotifs
-              .filter(notif => notif.id.toString().startsWith(index.toString()))
-              .map(notif => notif.id);
+        console.log(this.id)
+        const controlData = await firstValueFrom(this.getQuestControlInfo(this.id));
+        console.log(controlData)
+        
+        const allControlsEnabled = 
+          controlData[0]['control_facseg___' + index] === "1" &&
+          controlData[0]['control_barthelseg___' + index] === "1" &&
+          controlData[0]['control_seguimiento___' + index] === "1" &&
+          controlData[0]['control_neuroqol___' + index] === "1";
+          
+        if (allControlsEnabled) {
+          const pendingNotifications: PendingResult = await this.notifSrvc.getPendingNotifications();
+          const pendingNotifs = pendingNotifications.notifications;
+          const cancelIds = pendingNotifs
+            .filter(notif => notif.id.toString().startsWith(index.toString()))
+            .map(notif => notif.id);
             
-            await this.notifSrvc.cancelNotifications(cancelIds);
-          }
+          await this.notifSrvc.cancelNotifications(cancelIds);
+        }
       }
     } catch (error) {
-        console.error("Error in checkNotificationsStatus:", error);
+      console.error("Error in checkNotificationsStatus:", error);
     }
   }
 
@@ -400,10 +414,8 @@ export class QuestsService {
   getEnabledStatus(id: string){
 
     return new Observable<{ enabledQuests: string[], nextDate: string | null }>(observer => {
+      
       let enabledQuests: string[];
-
-      const { previousDate, nextDate } = this.getPreviousAndNextDate(this.questDates);
-      this.nextDate = nextDate;
 
       // Check if this.questDates is null or undefined
       if (!this.questDates || Object.values(this.questDates).length === 0) {
@@ -412,9 +424,13 @@ export class QuestsService {
         return;
       }
 
-      const index = Object.values(this.questDates).findIndex(date => date === previousDate) +1;
+      const { nextDate } = this.getNextDate(this.questDates);
+      this.nextDate = nextDate;
+
+      const index = this.num_instance
 
       if (index !== 0) {
+        
         this.getQuestControlInfo(id).subscribe(data => {
           
           this.isEnabledMonitoring = data[0]['control_seguimiento___' + index] === '0' ? '1' : '0';
@@ -424,7 +440,7 @@ export class QuestsService {
 
           enabledQuests = [this.isEnabledMonitoring, this.isEnabledBarthelseg, this.isEnabledFacseg, this.isEnabledNeuroQol];
   
-          this.numEnabledQuests = this.calculatenumEnabledQuests()
+          this.numEnabledQuests = parseInt(this.isEnabledMonitoring) + parseInt(this.isEnabledBarthelseg) + parseInt(this.isEnabledFacseg) + parseInt(this.isEnabledNeuroQol);
           console.log("**", this.isEnabledMonitoring, this.isEnabledBarthelseg, this.isEnabledFacseg, this.isEnabledNeuroQol, " - Calculate Enabled Quest Number: ", this.numEnabledQuests)
           this.questFilled.emit();
 
@@ -433,6 +449,7 @@ export class QuestsService {
   
         });
       } else {
+        
         this.isEnabledMonitoring = '0';
         this.isEnabledBarthelseg = '0';
         this.isEnabledFacseg = '0';
@@ -440,7 +457,7 @@ export class QuestsService {
 
         enabledQuests = [this.isEnabledMonitoring, this.isEnabledBarthelseg, this.isEnabledFacseg, this.isEnabledNeuroQol];
   
-        this.numEnabledQuests = this.calculatenumEnabledQuests()
+        this.numEnabledQuests = parseInt(this.isEnabledMonitoring) + parseInt(this.isEnabledBarthelseg) + parseInt(this.isEnabledFacseg) + parseInt(this.isEnabledNeuroQol);
         console.log("**", this.isEnabledMonitoring, this.isEnabledBarthelseg, this.isEnabledFacseg, this.isEnabledNeuroQol, " - Calculate Enabled Quest Number: ", this.numEnabledQuests)
         this.questFilled.emit();
 
@@ -451,58 +468,39 @@ export class QuestsService {
   }
   
   /**
-   * Calculates the total number of enabled questionnaires.
-   * 
-   * This function converts the enabled status of each questionnaire 
-   * (Monitoring, Barthel, FACSEG, NeuroQoL) from string to integer ('1' for enabled, '0' for disabled)
-   * and sums them to determine the total number of enabled questionnaires.
-   * 
-   * @returns {number} The total count of enabled questionnaires.
-   */
-  calculatenumEnabledQuests(): number {
-    const totalEnabled = parseInt(this.isEnabledMonitoring) + 
-      parseInt(this.isEnabledBarthelseg) + 
-      parseInt(this.isEnabledFacseg) + 
-      parseInt(this.isEnabledNeuroQol);
-
-    return totalEnabled
-  }
-
-  /**
-   * Determines the most recent past date (previousDate) and the next upcoming date (nextDate) 
+   * Determines the most recent past date and the next upcoming date (nextDate) 
    * from a given set of questionnaire dates.
-   * 
+   *  
    * This function processes an object containing date values, identifies the most recent 
    * past date, and finds the next closest future date.
    * 
    * @param { { [key: number]: string } | null } questDates - An object mapping numeric keys to date strings.
-   * @returns { { previousDate: string | null, nextDate: string | null } } 
-   *          An object containing:
-   *          - `previousDate`: The most recent past date in `YYYY-MM-DD` format, or `null` if none exist.
-   *          - `nextDate`: The next closest future date in `YYYY-MM-DD` format, or `null` if none exist.
+   * @returns { { nextDate: string | null } } 
+   *      An object containing:
+   *        - `nextDate`: The next closest future date in `YYYY-MM-DD` format, or `null` if none exist.
    */
-  private getPreviousAndNextDate(questDates: { [key: number]: string } | null): { previousDate: string | null, nextDate: string | null } {
+    private getNextDate(questDates: { [key: number]: string } | null): { nextDate: string | null } {
 
-    // Check if questDates is null or empty
-    if (!questDates || Object.keys(questDates).length === 0) {
-      return { previousDate: null, nextDate: null };
+      // Check if questDates is null or empty
+      if (!questDates || Object.keys(questDates).length === 0) {
+        return { nextDate: null };
+      }
+      
+      const today = new Date();
+      const dates = Object.values(questDates).map(dateStr => new Date(dateStr));
+  
+      // Filter for previous dates
+      const previousDates = dates.filter(date => date < today);
+      previousDates.sort((a, b) => b.getTime() - a.getTime());
+      const previousDate = previousDates.length > 0 ? previousDates[0].toISOString().split('T')[0] : null;
+  
+      // Find next dates after the previous date
+      const nextDates = dates.filter(date => date > (previousDate ? new Date(previousDate) : today));
+      nextDates.sort((a, b) => a.getTime() - b.getTime());
+      const nextDate = nextDates.length > 0 ? nextDates[0].toISOString().split('T')[0] : null;
+  
+      return { nextDate };
     }
-    
-    const today = new Date();
-    const dates = Object.values(questDates).map(dateStr => new Date(dateStr));
-
-    // Filter for previous dates
-    const previousDates = dates.filter(date => date < today);
-    previousDates.sort((a, b) => b.getTime() - a.getTime());
-    const previousDate = previousDates.length > 0 ? previousDates[0].toISOString().split('T')[0] : null;
-
-    // Find next dates after the previous date
-    const nextDates = dates.filter(date => date > (previousDate ? new Date(previousDate) : today));
-    nextDates.sort((a, b) => a.getTime() - b.getTime());
-    const nextDate = nextDates.length > 0 ? nextDates[0].toISOString().split('T')[0] : null;
-
-    return { previousDate, nextDate };
-  }
 
   /**
    * Retrieves the total number of enabled questionnaires.
@@ -515,6 +513,33 @@ export class QuestsService {
   getNumEnabledQuests(): number {
     return this.numEnabledQuests;
   }
-  
+
+  /**
+   * Retrieves the stored questionnaire dates from local storage.
+   * 
+   * This function fetches the stored dates that indicate when questionnaires 
+   * should be completed based on the participant's surgery date.
+   * 
+   * @returns {Promise<{ [key: number]: string } | null>} A promise that resolves 
+   *          with an object mapping months to corresponding questionnaire dates, 
+   *          or `null` if no data is found.
+   */
+  async getQuestDates(): Promise<{ [key: number]: string } | null> {
+    return await this.storage.get(this.QUEST_DATES_KEY);
+  }
+
+  /**
+   * Retrieves the stored surgery date from local storage.
+   * 
+   * This function fetches the date of surgery that was previously stored 
+   * in local storage for the participant.
+   * 
+   * @returns {Promise<string | null>} A promise that resolves with the stored 
+   *          surgery date as a string (in ISO format) or `null` if no date is found.
+   */
+  async getSurgeryDate(): Promise<string | null> {
+    return await this.storage.get(this.SURGERY_DATE_KEY);
+  }
+
 }
 
