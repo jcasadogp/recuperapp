@@ -69,9 +69,10 @@ export class NeuroQolComponent  implements OnInit {
     this.neuroqol_form.f_neuroqol = new Date().toISOString().split('T')[0]
 
     var i = Object.keys(this.neuroqol_form).length;
+    console.log(i)
 
     if(i < 20){
-      this.presentEmptyFieldsAlert;
+      this.presentEmptyFieldsAlert();
     } else {
       const loading = await this.loadingCntrl.create({ spinner: 'crescent' });
 
