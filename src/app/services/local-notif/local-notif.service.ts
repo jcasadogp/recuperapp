@@ -76,6 +76,7 @@ export class LocalNotifService {
       notifications: notifications
     };
 
+    // I will change notifications for iOS
     try{
       await LocalNotifications.schedule(options)
       console.log(" -- Notification scheduled successfully");
