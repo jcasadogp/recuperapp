@@ -56,7 +56,6 @@ export class BarthelsegComponent  implements OnInit {
     return await this.storageSrvc.get('RECORD_ID');
   }
 
-
   /**
    * Submits the Barthelseg form if all required fields are filled.
    * 
@@ -72,7 +71,7 @@ export class BarthelsegComponent  implements OnInit {
     var fieldCount = Object.keys(this.barthelseg_form).length;
 
     if (fieldCount < 11) {
-        this.presentEmptyFieldsAlert(); // Alert user if fields are missing
+      this.presentEmptyFieldsAlert(); // Alert user if fields are missing
     } else {
       const loading = await this.loadingCntrl.create({ spinner: 'crescent' });
       

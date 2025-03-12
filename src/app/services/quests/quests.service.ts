@@ -69,9 +69,7 @@ export class QuestsService {
    * @returns {Promise<void>} A promise that resolves once all data has been initialized.
    */
   private async initializeData() {
-    console.log("* Initialize data at quest service")
     try {
-      console.log("* inside try")
       this.id = await this.getRecordID();
       console.log(this.id)
       this.questDates = await this.storage.get(this.QUEST_DATES_KEY);
@@ -388,8 +386,10 @@ export class QuestsService {
           const cancelIds = pendingNotifs
             .filter(notif => notif.id.toString().startsWith(index.toString()))
             .map(notif => notif.id);
-            
-          await this.notifSrvc.cancelNotifications(cancelIds);
+          
+          if(cancelIds.length > 0){
+            await this.notifSrvc.cancelNotifications(cancelIds);
+          }
         }
       }
     } catch (error) {
