@@ -13,6 +13,11 @@ const config: CapacitorConfig = {
       iconColor: "#488AFF",
       sound: "beep.wav"
     }
+  },
+  cordova: {
+    preferences: {
+      // Add any specific Cordova plugin preferences here if needed
+    }
   }
 };
 

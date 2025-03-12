@@ -30,6 +30,10 @@ export class ResultsPage implements OnInit {
     private storageSrvc: StorageService
   ) { }
 
+  /**
+   * Lifecycle hook that runs when the component is initialized.
+   * Retrieves the record ID from storage and fetches EVA and questionnaire data.
+   */
   ngOnInit() {
     this.getRecordID().then(data => {
       this.id = data
@@ -38,10 +42,18 @@ export class ResultsPage implements OnInit {
     })
   }
 
+  /**
+   * Retrieves the stored record ID from local storage.
+   * @returns {Promise<any>} The stored record ID.
+   */
   async getRecordID(): Promise<any> {
     return await this.storageSrvc.get('RECORD_ID');
   }
 
+  /**
+   * Fetches EVA (pain level) data from the service and processes it.
+   * @param {any} event - Optional event object used for UI refresh completion.
+   */
   getEvaData(event){
     this.evaSrvc.getEvaData(this.id).subscribe({
       next: (data: Eva[]) => {
@@ -59,6 +71,10 @@ export class ResultsPage implements OnInit {
     })
   }
 
+  /**
+   * Processes and displays EVA data in a chart using ECharts.
+   * @param {Eva[]} data - Array of EVA data objects.
+   */
   getEvaChart(data){
 
     // CHART CONTAINER
@@ -79,12 +95,6 @@ export class ResultsPage implements OnInit {
     .slice()
     .sort((a, b) => new Date(a.fecha_eva).getTime() - new Date(b.fecha_eva).getTime());
 
-    // // In case sortedData does not work
-    // const sortedData2 = data
-    // .map(obj => ({...obj,fecha_eva_date: new Date(obj.fecha_eva)}))
-    // .sort((a, b) => a.fecha_eva_date.getTime() - b.fecha_eva_date.getTime())
-    // .map(({ fecha_eva_date, ...rest }) => rest);
-      
     const formattedData = sortedData.map(obj => {
       const formattedDate = new Date(obj.fecha_eva).toLocaleString("es-ES", { day: "numeric", month: "short", year: "numeric" });
       return { ...obj, fecha_eva: formattedDate };
@@ -180,6 +190,10 @@ export class ResultsPage implements OnInit {
     this.evaChart.setOption(this.eva_chart_options);
   }
 
+  /**
+   * Fetches questionnaire data and processes it for display.
+   * @param {any} event - Optional event object used for UI refresh completion.
+   */
   getQuestData(event){
     this.questsSrvc.getQuestControlInfo(this.id).subscribe({
       next: (data) => {
@@ -196,6 +210,10 @@ export class ResultsPage implements OnInit {
     })
   }
 
+  /**
+   * Processes and displays questionnaire completion data in a bar chart using ECharts.
+   * @param {any} data - The questionnaire data containing the number of completed questionnaires.
+   */
   getQuestChart(data){
     
     // CHART CONTAINER
@@ -212,11 +230,11 @@ export class ResultsPage implements OnInit {
     this.questChart = echarts.init(questChartContainer);
 
     // CHART DATA
-    var num_facseg = data[0].num_facseg === "" ? 0 : +data[0].num_facseg;
-    var num_barthelseg = data[0].num_barthelseg === "" ? 0 : +data[0].num_barthelseg;
-    var num_seguimiento = data[0].num_seguimiento === "" ? 0 : +data[0].num_seguimiento;
-    var num_neuroqol = data[0].num_neuroqol === "" ? 0 : +data[0].num_neuroqol;
-
+    var num_seguimiento = this.sumControlValues(data[0], "control_seguimiento");
+    var num_barthelseg = this.sumControlValues(data[0], "control_barthelseg");
+    var num_facseg = this.sumControlValues(data[0], "control_facseg");
+    var num_neuroqol = this.sumControlValues(data[0], "control_neuroqol");
+    
     this.quest_chart_options = {
       title: {
         text: "Número de cuestionarios completados"
@@ -224,9 +242,9 @@ export class ResultsPage implements OnInit {
       dataset: {
         source: [
           ['value', 'category'],
-          [num_facseg, 'Valoración funcional de la marcha'],
-          [num_barthelseg, 'Barthel'],
           [num_seguimiento, 'Seguimiento'],
+          [num_barthelseg, 'Barthel'],
+          [num_facseg, 'Valoración funcional de la marcha'],
           [num_neuroqol, 'Movilidad de las extremidades inferiores']
         ]
       },
@@ -257,5 +275,20 @@ export class ResultsPage implements OnInit {
     };
 
     this.questChart.setOption(this.quest_chart_options);
+  }
+
+  /**
+   * Sums control values based on a given prefix.
+   * 
+   * @param {any} data - The data object containing values to sum.
+   * @param {string} prefix - The prefix used to identify relevant keys in the data object.
+   * @returns {number} - The total sum of values associated with the specified prefix.
+   */
+  sumControlValues(data, prefix) {
+    let sum = 0;
+    for (let i = 1; i <= 6; i++) {
+      sum += +data[`${prefix}___${i}`] || 0;
+    }
+    return sum;
   }
 }

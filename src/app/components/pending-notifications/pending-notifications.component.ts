@@ -10,7 +10,6 @@ import { LocalNotifService } from 'src/app/services/local-notif/local-notif.serv
 })
 export class PendingNotificationsComponent  implements OnInit {
 
-  // notifications: PendingLocalNotificationSchema[]
   notifications;
   groupedNotifications;
 
@@ -19,10 +18,26 @@ export class PendingNotificationsComponent  implements OnInit {
     private modalCntrl: ModalController
   ) { }
 
+  /**
+   * Lifecycle hook that runs when the component is initialized.
+   * 
+   * - Calls `getPendingNotifications()` to retrieve any pending notifications.
+   * - Ensures notification status is checked as soon as the component loads.
+   */
   ngOnInit() {
     this.getPendingNotifications();
   }
 
+  /**
+   * Retrieves and processes pending notifications.
+   * 
+   * - Fetches pending notifications from the notification service.
+   * - Filters notifications into past and upcoming categories.
+   * - Cancels past notifications to ensure cleanup.
+   * - Sorts upcoming notifications by date.
+   * - Groups notifications by formatted date for display.
+   * - Stores the grouped notifications for further use.
+   */
   async getPendingNotifications() {
     try {
       let pendingNotifications: PendingResult = await this.notifSrvc.getPendingNotifications();
@@ -87,6 +102,14 @@ export class PendingNotificationsComponent  implements OnInit {
     }
   }
 
+  /**
+   * Cancels past notifications to prevent outdated alerts.
+   * 
+   * - Extracts notification IDs from the provided past notifications.
+   * - Calls the notification service to cancel these notifications.
+   * 
+   * @param pastNotif - An array of past notifications that need to be canceled.
+   */
   async cancelPastNotifications(pastNotif: PendingLocalNotificationSchema[]){
     
     const cancelIds = pastNotif.map(notification => {
@@ -96,6 +119,16 @@ export class PendingNotificationsComponent  implements OnInit {
     await this.notifSrvc.cancelNotifications(cancelIds)
   }
 
+  /**
+   * Filters pending notifications into past and upcoming categories.
+   * 
+   * - Separates notifications based on whether their scheduled time is before or after today.
+   * - Ensures only valid notifications with a scheduled time are processed.
+   * - Helps manage notifications by allowing cancellation of past ones and display of upcoming ones.
+   * 
+   * @param pendingNotif - Array of pending notifications to be categorized.
+   * @returns An object containing arrays of past and upcoming notifications.
+   */
   filterNotifications(pendingNotif: PendingLocalNotificationSchema[] | null | undefined) {
     
     if (pendingNotif === null || pendingNotif === undefined) {
@@ -123,6 +156,12 @@ export class PendingNotificationsComponent  implements OnInit {
     return { pastNotif, upcomingNotif };
   }
 
+  /**
+  * Handles modal dismissal.
+  * 
+  * - If the form is empty, dismisses the modal immediately.
+  * - If the form contains data, prompts the user with a confirmation alert before closing.
+  */
   dismissModal(): void {
 		this.modalCntrl.dismiss().then().catch();
   }

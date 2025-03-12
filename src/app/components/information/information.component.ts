@@ -14,6 +14,12 @@ export class InformationComponent  implements OnInit {
 
   ngOnInit() {}
 
+  /**
+  * Handles modal dismissal.
+  * 
+  * - If the form is empty, dismisses the modal immediately.
+  * - If the form contains data, prompts the user with a confirmation alert before closing.
+  */
   dismissModal(): void {
 		this.modalCntrl.dismiss().then().catch();
   }

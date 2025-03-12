@@ -22,7 +22,7 @@
       <ion-input [(ngModel)]="login_params.password" name="password" [type]="'password'" [placeholder]="'Contraseña'"></ion-input>
     </ion-item>
 
-    <ion-text *ngIf="validate_data == false" style="font-weight: bold;" color="danger">Nombre de usuario o contraseña no válidos</ion-text>
+    <ion-text *ngIf="login_error_msg == true" style="font-weight: bold;" color="danger">Nombre de usuario o contraseña no válidos</ion-text>
 
     <ion-button expand="block" shape="round" type="submit" [disabled]="!login_params.user || !login_params.password" (click)="login()">Acceder</ion-button>
 

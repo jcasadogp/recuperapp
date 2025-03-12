@@ -5,6 +5,7 @@ import { LoadingController } from '@ionic/angular';
 import { LoginService } from '../services/login/login.service';
 import { Device } from '@capacitor/device';
 import { firstValueFrom } from 'rxjs';
+import { QuestsService } from '../services/quests/quests.service';
 
 @Component({
   selector: 'app-login',
@@ -19,8 +20,7 @@ export class LoginPage implements OnInit {
     password: ""
   }
 
-  validate_data: boolean;
-
+  login_error_msg: boolean;
 
   constructor(
     private loginSrvc: LoginService,
@@ -31,71 +31,98 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
 
-  login(){
-    this.validate_data = true;
-  
-    var id = this.login_params.user;
+  /**
+   * Handles the user login process.
+   * 
+   * - Validates user credentials.
+   * - Stores user ID in local storage.
+   * - Checks if this is the first login on the current device.
+   * - Stores necessary user-related data.
+   * - Navigates to the main app screen upon successful login.
+   */
+  async login() {
+    this.login_error_msg = false;
+    const id = this.login_params.user;
+    
     this.presentLoading();
     
-    this.loginSrvc.getUser(id).subscribe(async data => {
-      // El usuario introducido no existe
-      if(data.length === 0) {
-        this.validate_data = false;
+    try {
+      const data = await firstValueFrom(this.loginSrvc.getUser(id));
+      
+      if (!data || data.length === 0) {
+        this.login_error_msg = true;
         this.login_params = { user: '', password: '' };
         await this.loadingController.dismiss();
-      
-        // El usuario introducido sí existe
-      } else {
-        var pw = data[0].contrasena;
-
-        // Se accede a la pantalla principal de la aplicación
-        if(pw == this.login_params.password){
-          console.log("A. password OK");
-          await this.storageSrvc.set('RECORD_ID', this.login_params.user);
-          
-          const deviceId = (await Device.getId()).identifier;
-          console.log("++ Device Id:", deviceId);
-  
-          try {
-            // Convert the getDevices Observable to a Promise
-            const deviceIds = await firstValueFrom(this.loginSrvc.getDevices(id));
-            console.log("++ device ids", deviceIds);
-  
-            if (deviceIds.includes(deviceId)) {
-              console.log("++ User already did login on this device.");
-              await this.storageSrvc.set('FIRST_TIME_DEVICE', 0);
-            } else {
-              console.log("++ User hadn't done login on this device.");
-              await this.storageSrvc.set('FIRST_TIME_DEVICE', 1);
-              await this.loginSrvc.addDevice(id, deviceId);
-            }
-  
-            // Only proceed after all asynchronous operations have completed
-            console.log("B. Storage setted");
-            await this.loadingController.dismiss();
-            console.log("C. Loading dismissed");
-            this.router.navigateByUrl('tabs');
-            console.log("D. routing to tabs");
-  
-            // Se inicializan los parametros
-            this.validate_data = true;
-            this.login_params = { user: '', password: '' };
-          } catch (err) {
-            console.error("Error in device handling:", err);
-            this.loadingController.dismiss();
-          }
-        } else {
-          // La contraseña introducida no es correcta
-          this.validate_data = false;
-          this.login_params = { user: this.login_params.user, password: '' };
-          await this.loadingController.dismiss();
-        }
+        throw new Error("User not found");
       }
-    });
+
+      const pw = data[0].contrasena;
+      if (pw !== this.login_params.password) {
+        this.login_error_msg = true;
+        this.login_params.password = '';
+        await this.loadingController.dismiss();
+        throw new Error("Incorrect password");
+      }
+
+      console.log("=> 1-A. Password OK");
+
+      // Store user ID
+      await this.storageSrvc.set('RECORD_ID', id);
+      
+      // Get Device ID and registered devices - Determine if it's the first login on this device
+      const deviceId = (await Device.getId()).identifier;
+      const deviceIds = await firstValueFrom(this.loginSrvc.getDevices(id));
+      const isFirstTime = !deviceIds.includes(deviceId);
+      await this.storageSrvc.set('FIRST_TIME_DEVICE', isFirstTime ? 1 : 0);
+
+      if (isFirstTime) {
+        await this.loginSrvc.addDevice(id, deviceId);
+      }
+
+      console.log("=> 1-B. isFirstTime set in the storage");
+
+      // Call `onLoginSuccess()` to store quest dates
+      await this.onLoginSuccess(id);
+      console.log("=> 1-C. Stored quest dates and surgery date");
+
+      // Close loading and navigate
+      await this.loadingController.dismiss();
+      this.router.navigateByUrl('tabs');
+      
+      // Reset login form
+      this.login_error_msg = false;
+      this.login_params = { user: '', password: '' };
+
+    } catch (err) {
+      await this.loadingController.dismiss();
+    }
+  }
+
+  /**
+   * Handles post-login processes for a user.
+   * 
+   * - Calculates and stores quest dates based on predefined frequencies.
+   * - Ensures quest scheduling data is available for the logged-in user.
+   * 
+   * @param userId The ID of the logged-in user.
+   */
+  async onLoginSuccess(userId: string) {
+    try {
+      const questFrequencies = [1, 3, 4, 6, 9, 12];
+      await this.loginSrvc.calculateAndStoreQuestDates(userId, questFrequencies);
+    } catch (error) {
+      console.error("Error storing quest dates:", error);
+    }
   }
   
-
-  async presentLoading() {
+  /**
+   * Displays a loading indicator while the user login process is in progress.
+   * 
+   * - Shows a message indicating the login process.
+   * - Uses iOS-style modal for consistency.
+   * - Waits for the loading indicator to be dismissed.
+   */
+    async presentLoading() {
     const loading = await this.loadingController.create({
       message: 'Iniciando sesión...',
       mode: 'ios'

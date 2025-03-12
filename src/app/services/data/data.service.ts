@@ -24,6 +24,13 @@ export class DataService {
   // ===============================================================================================
   // EXPORT DATA DE REDCAP A LA APLICACIÓN
   // ===============================================================================================
+  /**
+   * Exports data from REDCap for a given record and form.
+   * 
+   * @param {string} record - The specific record ID to export.
+   * @param {string} forms - The form name(s) to export data from.
+   * @returns {Observable<any>} - The response from the REDCap API.
+   */
   export(record: string, forms: string){
     var body_export = new URLSearchParams(BODYEXPORT);
     body_export.set("records", record);
@@ -36,6 +43,12 @@ export class DataService {
   // ===============================================================================================
   // IMPORT DATA DE LA APLICACIÓN A REDCAP
   // ===============================================================================================
+  /**
+   * Imports data from the application into REDCap.
+   * 
+   * @param {any} data - The data to be imported in JSON format.
+   * @returns {Observable<any>} - The response from the REDCap API.
+   */
   import(data: any){
     var body_import = new URLSearchParams(BODYIMPORT);
     body_import.set("data", JSON.stringify(data));
