@@ -200,8 +200,10 @@ export class HomePage implements OnInit {
     try {
       // Check if the device is being used for the first time
       const firstTimeDevice = await this.storageSrvc.get("FIRST_TIME_DEVICE");
-      
-      if (firstTimeDevice === "1") {
+      console.log(firstTimeDevice)
+
+      if (firstTimeDevice === 1) {
+        console.log("   - It is the first time in this devie => schedule notifications")
         // Retrieve the stored surgery date
         const surgeryDate = await this.storageSrvc.get("SURGERY_DATE");
         
