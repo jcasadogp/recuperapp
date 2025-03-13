@@ -10,6 +10,15 @@ export class LocalNotifService {
 
   constructor() { 
     this.questFrecuencies = [1, 3, 4, 6, 9, 12]
+    this.registerForegroundNotifications(); // Ensure foreground notifications show on iOS
+  }
+
+  /**
+   * Request notification permissions (iOS required)
+   */
+  async requestPermission(): Promise<boolean> {
+    const perm = await LocalNotifications.requestPermissions();
+    return perm.display === 'granted';
   }
 
   /**
@@ -22,44 +31,54 @@ export class LocalNotifService {
    * 
    * Notifications are only scheduled if their time is in the future.
    * 
+   * Before scheduling, the function checks if the user has granted notification permissions.
+   * If permissions are denied, the scheduling process is aborted.
+   * 
    * @param {string} name - The name of the patient or user.
    * @param {string | Date} date - The surgery date, used as the reference point for scheduling.
    * 
-   * @returns {Promise<void>} A promise that resolves when the notifications are successfully scheduled.
+   * @returns {Promise<void>} A promise that resolves when the notifications are successfully scheduled,
+   * or rejects if permissions are denied.
    */
-  async scheduleNotification(name, date){
+  async scheduleNotification(name, date) {
+    console.log("   => NOTIF SERVICE => surgery date:", new Date(date));
 
-    console.log("   => NOTIF SERVICE => surgery date:", new Date(date))
+    const hasPermission = await this.requestPermission();
+    if (!hasPermission) {
+      console.error("Notification permission denied");
+      return;
+    }
 
-    let notifications = this.questFrecuencies.map((f, index) => {
+    let notifications = this.questFrecuencies.map(f => {
       const surgeryTime = new Date(date);
       let notificationList: LocalNotificationSchema[] = [];
-    
+
       for (let i of [0, 3, 5, 7]) {
         const time = new Date(surgeryTime);
     
         if (i == 0) {
           time.setMonth(time.getMonth() + f);
           time.setHours(12, 0, 0, 0);
-    
+          
           notificationList.push({
-            id: index * 10 + i,
-            title: "Completar cuestionarios",
+            id: f * 10 + i,
+            title: "¡Completar cuestionarios!",
             body: `${name}, debe completar los cuestionarios después de ${f} ${f === 1 ? "mes" : "meses"} desde la cirugía`,
             schedule: { at: time },
+            sound: 'default'
           });
     
         } else {
-          
           time.setMonth(time.getMonth() + f);
           time.setDate(time.getDate() + i);
           time.setHours(12, 0, 0, 0);
-    
+          
           notificationList.push({
-            id: index * 10 + i,
-            title: "Recordatorio cuestionarios",
+            id: f * 10 + i,
+            title: "¡Recordatorio cuestionarios!",
             body: `${name}, recuerde completar los cuestionarios después de ${f} ${f === 1 ? "mes" : "meses"} desde la cirugía`,
             schedule: { at: time },
+            sound: 'default'
           });
         }
       }
@@ -70,19 +89,28 @@ export class LocalNotifService {
       return notificationList;
     }).reduce((acc, val) => acc.concat(val), []);
 
-    console.log("   => NOTIF SERVICE => final notifications - ", notifications)
+    console.log("   => NOTIF SERVICE => final notifications - ", notifications);
     
-    let options: ScheduleOptions = {
-      notifications: notifications
-    };
+    let options: ScheduleOptions = { notifications };
 
-    // I will change notifications for iOS
-    try{
-      await LocalNotifications.schedule(options)
+    try {
+      await LocalNotifications.schedule(options);
       console.log(" -- Notification scheduled successfully");
     } catch (ex) {
-      alert(JSON.stringify(ex))
+      alert(JSON.stringify(ex));
     }
+  }
+
+  /**
+   * Ensure local notifications appear when the app is in the foreground (iOS)
+   */
+  registerForegroundNotifications() {
+    LocalNotifications.addListener('localNotificationReceived', (notification) => {
+      console.log("Foreground notification received", notification);
+
+      // Show an alert when a notification arrives in the foreground
+      alert(`📢 ${notification.title}\n${notification.body}`);
+    });
   }
 
   /**
@@ -98,8 +126,10 @@ export class LocalNotifService {
    */
   async cancelNotifications(ids): Promise<void>{
 
+    console.log("*** Entered cancel notifications in the local notif servuce", ids)
+    
     let options: CancelOptions = {
-      notifications: ids
+      notifications: ids.map(id => ({ id }))
     };
 
     try{
@@ -121,4 +151,5 @@ export class LocalNotifService {
   async getPendingNotifications(): Promise<PendingResult> {
     return await LocalNotifications.getPending()
   }
+
 }

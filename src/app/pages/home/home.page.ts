@@ -198,18 +198,22 @@ export class HomePage implements OnInit {
     console.log("=> 2-H. Enter sendNotifications");
 
     try {
-      // Check if the device is being used for the first time
       const firstTimeDevice = await this.storageSrvc.get("FIRST_TIME_DEVICE");
-      console.log(firstTimeDevice)
-
+      
       if (firstTimeDevice === 1) {
-        console.log("   - It is the first time in this devie => schedule notifications")
-        // Retrieve the stored surgery date
-        const surgeryDate = await this.storageSrvc.get("SURGERY_DATE");
-        
-        // Schedule a notification using the participant's first name and surgery date
-        this.notifSrvc.scheduleNotification(this.participant.f645_firstname, surgeryDate);
+        console.log("   => the user is the first log in")
+        const hasPermission = await this.notifSrvc.requestPermission();
+      
+        if (hasPermission) {
+          console.log("   => the user has notifications permissions")
+          const surgeryDate = await this.storageSrvc.get("SURGERY_DATE");
+          this.notifSrvc.scheduleNotification(this.participant.f645_firstname ?? 'Paciente', surgeryDate);
+        } else {
+          console.warn("User denied notification permissions. Notifications will not be scheduled.");
+          alert("Las notificaciones están deshabilitadas. Habilítelas en la configuración del dispositivo.");
+        }
       }
+
     } catch (error) {
       console.error("Error scheduling notifications:", error);
     }
