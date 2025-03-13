@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
-import { DataService } from '../data/data.service';
-import { firstValueFrom, lastValueFrom, Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Devices } from 'src/app/redcap_interfaces/devices';
 import { DeviceId } from '@capacitor/device';
 import { Storage } from '@ionic/storage-angular';
+
+// Services
+import { DataService } from '../data/data.service';
 import { ParticipantService } from '../participant/participant.service';
+
+// Redcap Interfaces
+import { Devices } from 'src/app/redcap_interfaces/devices';
 
 @Injectable({
   providedIn: 'root'

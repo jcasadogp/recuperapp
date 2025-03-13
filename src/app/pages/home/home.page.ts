@@ -1,18 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { firstValueFrom } from 'rxjs';
+
+// Components
+import { PendingNotificationsComponent } from 'src/app/components/pending-notifications/pending-notifications.component';
 import { InformationComponent } from 'src/app/components/information/information.component';
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
 import { EvaComponent } from 'src/app/components/eva/eva.component';
-import { Participant } from 'src/app/redcap_interfaces/participant';
-import { ParticipantService } from 'src/app/services/participant/participant.service';
+
+// Services
 import { StorageService } from 'src/app/services/storage/storage.service';
+import { LocalNotifService } from 'src/app/services/local-notif/local-notif.service';
+import { ParticipantService } from 'src/app/services/participant/participant.service';
 import { QuestsService } from 'src/app/services/quests/quests.service';
 import { EvaService } from 'src/app/services/eva/eva.service';
+
+// Redcap Interfaces
 import { Eva } from 'src/app/redcap_interfaces/eva';
-import { PendingNotificationsComponent } from 'src/app/components/pending-notifications/pending-notifications.component';
-import { firstValueFrom, lastValueFrom } from 'rxjs';
-import { LocalNotifService } from 'src/app/services/local-notif/local-notif.service';
+import { Participant } from 'src/app/redcap_interfaces/participant';
 
 @Component({
   selector: 'app-home',

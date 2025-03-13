@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CancelOptions, LocalNotifications, LocalNotificationSchema, PendingLocalNotificationSchema, PendingResult, ScheduleOptions } from '@capacitor/local-notifications';
+import { CancelOptions, LocalNotifications, LocalNotificationSchema, PendingResult, ScheduleOptions } from '@capacitor/local-notifications';
 
 @Injectable({
   providedIn: 'root'

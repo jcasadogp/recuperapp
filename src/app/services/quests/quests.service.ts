@@ -1,22 +1,25 @@
-import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { firstValueFrom, lastValueFrom, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage-angular';
+import { PendingResult } from '@capacitor/local-notifications';
 
+// Services
 import { DataService } from '../data/data.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
+import { LocalNotifService } from '../local-notif/local-notif.service';
 
-import { MonitoringForm } from 'src/app/interfaces/monitoring-form';
-import { FacsegForm } from 'src/app/interfaces/facseg-form';
-import { BarthelsegForm } from 'src/app/interfaces/barthelseg-form';
-import { NeuroQoLForm } from 'src/app/interfaces/neuro_qol-form';
+// Redcap Interfaces
 import { MonitoringData } from 'src/app/redcap_interfaces/monitoring_data';
-import { Facseg } from 'src/app/redcap_interfaces/facseg';
 import { Barthelseg } from 'src/app/redcap_interfaces/barthelseg';
+import { Facseg } from 'src/app/redcap_interfaces/facseg';
 import { NeuroQol } from 'src/app/redcap_interfaces/neuro_qol';
 
-import { StorageService } from '../storage/storage.service';
-import { LocalNotifService } from '../local-notif/local-notif.service';
-import { PendingResult } from '@capacitor/local-notifications';
+// Interfaces
+import { MonitoringForm } from 'src/app/interfaces/monitoring-form';
+import { BarthelsegForm } from 'src/app/interfaces/barthelseg-form';
+import { FacsegForm } from 'src/app/interfaces/facseg-form';
+import { NeuroQoLForm } from 'src/app/interfaces/neuro_qol-form';
 
 @Injectable({
   providedIn: 'root'
