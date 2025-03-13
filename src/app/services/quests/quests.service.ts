@@ -383,9 +383,17 @@ export class QuestsService {
         if (allControlsEnabled) {
           const pendingNotifications: PendingResult = await this.notifSrvc.getPendingNotifications();
           const pendingNotifs = pendingNotifications.notifications;
+
+          console.log("*** Got pending notifications", pendingNotifs)
+
+          const questFrecuencies = [1, 3, 4, 6, 9, 12];
+          const f = questFrecuencies[index - 1];
+
           const cancelIds = pendingNotifs
-            .filter(notif => notif.id.toString().startsWith(index.toString()))
+            .filter(notif => Math.floor(notif.id / 10) === f)
             .map(notif => notif.id);
+
+          console.log("*** Filtered pending notifications", cancelIds)
           
           if(cancelIds.length > 0){
             await this.notifSrvc.cancelNotifications(cancelIds);
