@@ -12,7 +12,6 @@ import { Eva } from 'src/app/redcap_interfaces/eva';
 // Interfaces
 import { EvaForm } from 'src/app/interfaces/eva-form';
 
-
 @Injectable({
   providedIn: 'root'
 })
