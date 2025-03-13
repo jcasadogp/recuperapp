@@ -4,9 +4,19 @@
         max-height: 45px;
         display: block;
         margin: 0 auto;
-        margin-top: 7%;
-        margin-bottom: 5%;
         background-color: transparent;
+    }
+
+    .logo-uah {
+        max-height: 35px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .logo-irycis {
+        max-height: 37px;
+        margin-top: 4px;
+        margin-bottom: 4px;
     }
 }
 
@@ -17,15 +27,31 @@ ion-content {
         display: flex;
         flex-direction: column;
         align-items: center;
-
+        
         img {
             height: 90px;
-            margin-bottom: 10%;
+            margin-top: 5%;
+            margin-bottom: 5%;
+        }
+    }
+
+    #subheader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        img {
+            height: 70px;
+            margin-top: 1%;
+            margin-bottom: 1%;
         }
     }
 
     #form {
+        background-color: rgba(0, 84, 233, 0.05);
         margin-top: 5%;
+        margin-right: 3%;
+        margin-left: 3%;
         padding-left: 30px;
         padding-right: 30px;
 
@@ -44,7 +70,7 @@ ion-content {
             height: 48px;
             font-size: 18px;
             text-transform: initial;
-            border-radius: 50px;
+            // border-radius: 50px;
             box-shadow: 1px 8px 8px 0px rgba(0,0,0,0.05)
         }
     }
