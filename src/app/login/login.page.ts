@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { StorageService } from '../services/storage/storage.service';
-import { LoadingController } from '@ionic/angular';
-import { LoginService } from '../services/login/login.service';
-import { Device } from '@capacitor/device';
 import { firstValueFrom } from 'rxjs';
-import { QuestsService } from '../services/quests/quests.service';
+import { LoadingController } from '@ionic/angular';
+import { Device } from '@capacitor/device';
+
+// Services
+import { StorageService } from 'src/app/services/storage/storage.service';
+import { LoginService } from '../services/login/login.service';
 
 @Component({
   selector: 'app-login',

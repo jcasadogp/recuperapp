@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+
+// Components
+import { MonitoringComponent } from 'src/app/components/monitoring/monitoring.component';
 import { BarthelsegComponent } from 'src/app/components/barthelseg/barthelseg.component';
 import { FacsegComponent } from 'src/app/components/facseg/facseg.component';
-import { MonitoringComponent } from 'src/app/components/monitoring/monitoring.component';
 import { NeuroQolComponent } from 'src/app/components/neuro-qol/neuro-qol.component';
-import { QuestsService } from 'src/app/services/quests/quests.service';
+
+// Services
 import { StorageService } from 'src/app/services/storage/storage.service';
+import { QuestsService } from 'src/app/services/quests/quests.service';
 
 @Component({
   selector: 'app-quests',

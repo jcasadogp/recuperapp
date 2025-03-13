@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
-import { DataService } from '../data/data.service';
-import { Participant, BaselineData } from 'src/app/redcap_interfaces/participant';
 import { HttpClient } from '@angular/common/http';
-import { StorageService } from '../storage/storage.service';
+
+// Services
+import { DataService } from '../data/data.service';
+
+// Redcap Interfaces
+import { Participant, BaselineData } from 'src/app/redcap_interfaces/participant';
 
 @Injectable({
   providedIn: 'root'

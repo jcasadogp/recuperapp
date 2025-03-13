@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
-import type { EChartsOption } from 'echarts';
-import { EvaService } from 'src/app/services/eva/eva.service';
-import { Eva } from 'src/app/redcap_interfaces/eva';
+// Services
 import { StorageService } from 'src/app/services/storage/storage.service';
-
-import * as echarts from 'echarts';
 import { QuestsService } from 'src/app/services/quests/quests.service';
+import { EvaService } from 'src/app/services/eva/eva.service';
+
+// Redcap Interfaces
+import { Eva } from 'src/app/redcap_interfaces/eva';
+
+// Charts
+import * as echarts from 'echarts';
+import type { EChartsOption } from 'echarts';
+
 
 @Component({
   selector: 'app-results',

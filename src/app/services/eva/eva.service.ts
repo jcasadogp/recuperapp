@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
-
-import { DataService } from '../data/data.service';
-import { EvaForm } from 'src/app/interfaces/eva-form';
-import { Eva } from 'src/app/redcap_interfaces/eva';
 import { Observable } from 'rxjs';
-import { StorageService } from '../storage/storage.service';
-import { QuestsService } from '../quests/quests.service';
 
+// Services
+import { DataService } from '../data/data.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
+import { QuestsService } from 'src/app/services/quests/quests.service';
+
+// Redcap Interfaces
+import { Eva } from 'src/app/redcap_interfaces/eva';
+
+// Interfaces
+import { EvaForm } from 'src/app/interfaces/eva-form';
 
 @Injectable({
   providedIn: 'root'
