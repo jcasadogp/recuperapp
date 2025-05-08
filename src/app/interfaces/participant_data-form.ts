@@ -18,7 +18,6 @@ export interface ParticipantDataForm {
 
     f_basales?: string,
     f_basales_tipo?: string[]
-    // op_basales?: string[]
     
     f_ingreso?: string,
     f_cirug_a?: string,

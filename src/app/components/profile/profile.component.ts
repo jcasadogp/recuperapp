@@ -26,6 +26,13 @@ export class ProfileComponent  implements OnInit {
     private storageSrvc: StorageService
   ) { }
 
+  /**
+   * Initializes component data on component load.
+   * 
+   * - Retrieves the record ID from storage.
+   * - Fetches the baseline data structure from the participant service.
+   * - Calls `getBaselineData()` to load additional baseline details.
+   */
   ngOnInit() {
     this.getRecordID().then(data => {
       this.id = data
@@ -33,14 +40,22 @@ export class ProfileComponent  implements OnInit {
         this.baselineData_structure = data
       });
       this.getBaselineData()
-    }) 
-    
+    })
   }
 
+  /**
+   * Retrieves the stored record ID from the storage service.
+   * 
+   * @returns {Promise<any>} A promise that resolves to the stored record ID.
+   */
   async getRecordID(): Promise<any> {
     return await this.storageSrvc.get('RECORD_ID');
   }
 
+  /**
+   * Fetches and processes the baseline data for the participant.
+   * Filters relevant questions and maps responses to a structured format.
+   */
   getBaselineData(){
     this.participantSrvc.getBaselineData(this.id).subscribe({
       next: (data: BaselineData) => {
@@ -93,13 +108,18 @@ export class ProfileComponent  implements OnInit {
 
         this.finalResultArray = Object.entries(groupedResult).map(([Pregunta, Respuesta]) => ({ Pregunta, Respuesta }));
 
-        // console.log(this.finalResultArray);
       },
       error: (err) => console.log(err),
       complete: () => {}
     })
   }
   
+  /**
+  * Handles modal dismissal.
+  * 
+  * - If the form is empty, dismisses the modal immediately.
+  * - If the form contains data, prompts the user with a confirmation alert before closing.
+  */
   dismissModal(): void {
 		this.modalCntrl.dismiss().then().catch();
   }
