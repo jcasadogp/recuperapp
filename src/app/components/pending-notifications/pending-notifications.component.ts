@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PendingLocalNotificationSchema, PendingResult } from '@capacitor/local-notifications';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { LocalNotifService } from 'src/app/services/local-notif/local-notif.service';
 
 @Component({
@@ -15,7 +15,8 @@ export class PendingNotificationsComponent  implements OnInit {
 
   constructor(
     private notifSrvc: LocalNotifService,
-    private modalCntrl: ModalController
+    private modalCntrl: ModalController,
+    private alertCntrl: AlertController
   ) { }
 
   /**
@@ -120,6 +121,30 @@ export class PendingNotificationsComponent  implements OnInit {
   }
 
   /**
+   * Cancels upcoming notifications in case the user asks for it.
+   * 
+   * - Extracts notification IDs from the pending notifications.
+   * - Calls the notification service to cancel these notifications.
+   * 
+   * @param pastNotif - An array of past notifications that need to be canceled.
+   */
+  async cancelUpcomingNotifications() {
+    let pendingNotifications: PendingResult = await this.notifSrvc.getPendingNotifications();
+    let pendingNotif = pendingNotifications.notifications;
+
+    console.log('Pending Notifications:', pendingNotif);
+
+    let { pastNotif, upcomingNotif } = this.filterNotifications(pendingNotif);
+    
+    // Cancel past notifications if there are any
+    if (pastNotif.length > 0) {
+      console.log('Upcoming Notifications:', upcomingNotif);
+      await this.cancelPastNotifications(upcomingNotif);
+    }
+
+  }
+
+  /**
    * Filters pending notifications into past and upcoming categories.
    * 
    * - Separates notifications based on whether their scheduled time is before or after today.
@@ -154,6 +179,37 @@ export class PendingNotificationsComponent  implements OnInit {
     });
 
     return { pastNotif, upcomingNotif };
+  }
+
+  /**
+   * Presents a confirmation alert to the user before cancelling upcoming notifications.
+   * 
+   * - Displays an alert with "cancel" and "confirm" options.
+   * - If the user confirms, it proceeds to cancel future notifications by calling `cancelUpcomingNotifications()`.
+   * 
+   * This ensures the user does not accidentally delete notifications without intent.
+   */
+  async confirmCancelUpcomingNotifications() {
+    
+    const alert = await this.alertCntrl.create({
+        header: 'Cancelar futuras notificaciones',
+        message: '¿Está seguro de que quiere cancelar todas las futuras notificaciones?',
+        buttons: [
+          {
+            text: 'Sí, cancelarlas',
+            cssClass: 'secondary',
+            handler: () => {
+              this.cancelUpcomingNotifications()
+            }
+          },{
+            text: 'No, mantenerlas',
+            role: 'cancel'
+          }
+        ]
+    });
+
+    await alert.present();
+
   }
 
   /**
