@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { PendingLocalNotificationSchema, PendingResult } from '@capacitor/local-notifications';
 import { ModalController, AlertController } from '@ionic/angular';
+
+// Services
+import { StorageService } from 'src/app/services/storage/storage.service';
 import { LocalNotifService } from 'src/app/services/local-notif/local-notif.service';
+import { ParticipantService } from 'src/app/services/participant/participant.service';
+
+// Redcap Interfaces
+import { Participant } from 'src/app/redcap_interfaces/participant';
 
 @Component({
   selector: 'app-pending-notifications',
@@ -12,11 +20,14 @@ export class PendingNotificationsComponent  implements OnInit {
 
   notifications;
   groupedNotifications;
+  public participant: Participant = {};
 
   constructor(
     private notifSrvc: LocalNotifService,
     private modalCntrl: ModalController,
-    private alertCntrl: AlertController
+    private alertCntrl: AlertController,
+    private participantSrvc: ParticipantService,
+    private storageSrvc: StorageService
   ) { }
 
   /**
@@ -143,6 +154,63 @@ export class PendingNotificationsComponent  implements OnInit {
     }
 
   }
+
+  /**
+   * Reschedules upcoming notifications for the user if none are currently pending.
+   * 
+   * - Checks for existing pending notifications via the notification service.
+   * - If no notifications are pending:
+   *   - Requests notification permissions from the user.
+   *   - Retrieves the user's participant ID and corresponding participant data.
+   *   - Retrieves the scheduled surgery date.
+   *   - Schedules a new notification using the participant's first name and the surgery date.
+   * 
+   * Handles possible errors or missing data gracefully:
+   * - Logs a warning if no participant ID is found in storage.
+   * - Warns if the user denies notification permissions.
+   * - Handles empty participant data or scheduling failures.
+   * 
+   * @returns {Promise<void>} Resolves when the operation completes or fails silently with logs.
+   */
+  async rescheduleUpcomingNotifications() {
+    try {
+      let pendingNotifications: PendingResult = await this.notifSrvc.getPendingNotifications();
+      let pendingNotif = pendingNotifications.notifications;
+
+      if (pendingNotif.length === 0) {
+        console.log("   => there are no pending notifications, rescheduling them");
+
+        const hasPermission = await this.notifSrvc.requestPermission();
+
+        if (hasPermission) {
+          let id = await this.storageSrvc.get('RECORD_ID');
+          if (!id) {
+            console.warn("No RECORD_ID found in storage. Cannot reset notifications.");
+            return;
+          }
+
+          const data: Participant[] = await firstValueFrom(this.participantSrvc.getParticipant(id));
+          if (!data || data.length === 0) {
+            console.warn("No participant data found.");
+            return;
+          }
+
+          this.participant = data[0];
+
+          console.log("   => the user has notifications permissions");
+          const surgeryDate = await this.storageSrvc.get("SURGERY_DATE");
+          this.notifSrvc.scheduleNotification(this.participant.f645_firstname ?? 'Paciente', surgeryDate);
+        } else {
+          console.warn("User denied notification permissions. Notifications will not be scheduled.");
+          alert("Las notificaciones están deshabilitadas. Habilítelas en la configuración del dispositivo.");
+        }
+      }
+
+    } catch (error) {
+      console.error("Error scheduling notifications:", error);
+    }
+  }
+
 
   /**
    * Filters pending notifications into past and upcoming categories.
