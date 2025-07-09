@@ -128,8 +128,12 @@ export class LocalNotifService {
 
     console.log("*** Entered cancel notifications in the local notif servuce", ids)
     
+    // let options: CancelOptions = {
+    //   notifications: ids.map(id => ({ id }))
+    // };
+
     let options: CancelOptions = {
-      notifications: ids.map(id => ({ id }))
+      notifications: ids // already in the form [{ id: number }]
     };
 
     try{
