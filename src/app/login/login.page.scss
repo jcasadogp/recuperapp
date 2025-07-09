@@ -35,6 +35,13 @@ ion-content {
         }
     }
 
+    .safe-area-wrapper {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+    }
+
     #subheader {
         display: flex;
         flex-direction: column;
@@ -49,11 +56,11 @@ ion-content {
 
     #form {
         background-color: rgba(0, 84, 233, 0.05);
-        margin-top: 5%;
-        margin-right: 3%;
-        margin-left: 3%;
-        padding-left: 30px;
-        padding-right: 30px;
+        margin: 5% auto;
+        padding: 30px;
+        border-radius: 20px;
+        max-width: 320px;
+        width: 100%;
 
         h1 {
             display: flex;
@@ -63,15 +70,16 @@ ion-content {
             font-size: 26px;
             color: #010100;
             margin-top: 15px;
+            margin-bottom: 30px;
         }
 
         ion-button {
             margin-top: 35px;
+            margin-bottom: 20px;
             height: 48px;
             font-size: 18px;
             text-transform: initial;
-            // border-radius: 50px;
-            box-shadow: 1px 8px 8px 0px rgba(0,0,0,0.05)
+            box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.05);
         }
     }
 }
