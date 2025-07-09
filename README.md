@@ -1,7 +1,7 @@
 # RecuperApp
 
 ## Environment setup
-```
+```bash
 npm --version
 # sudo npm install -g npm@latest
 node --version
@@ -18,19 +18,23 @@ xcode-select -p
 
 ## After cloning the repository:
 
-Add BODYEXPORT and BODYIMPORT with the Redcap token. Then:
+To keep your REDCap token out of version control and protect sensitive data, create a separate file, called `env.local.ts`, in your root directoy (next to `src/`):
+```ts
+export const REDCAP_TOKEN = '###';
 ```
+```bash
 npm uninstall -g ionic
 npm install -g @ionic/cli
 
 npm install
 
 ionic build
-npx cap sync
 
 ionic cap add android
 ionic cap copy android
+ionic cap sync android
 
 ionic cap add ios
 ionic cap copy ios
+ionic cap sync ios
 ```
