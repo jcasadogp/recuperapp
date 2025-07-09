@@ -62,7 +62,7 @@ export class PendingNotificationsComponent  implements OnInit {
       // Cancel past notifications if there are any
       if (pastNotif.length > 0) {
         console.log('Past Notifications:', pastNotif);
-        await this.cancelPastNotifications(pastNotif);
+        await this.cancelScheduledNotifications(pastNotif);
       }
 
       // Sort by date
@@ -120,11 +120,11 @@ export class PendingNotificationsComponent  implements OnInit {
    * - Extracts notification IDs from the provided past notifications.
    * - Calls the notification service to cancel these notifications.
    * 
-   * @param pastNotif - An array of past notifications that need to be canceled.
+   * @param notif - An array of notifications that need to be canceled.
    */
-  async cancelPastNotifications(pastNotif: PendingLocalNotificationSchema[]){
+  async cancelScheduledNotifications(notif: PendingLocalNotificationSchema[]){
     
-    const cancelIds = pastNotif.map(notification => {
+    const cancelIds = notif.map(notification => {
       return { id: notification.id };
     });
 
@@ -148,9 +148,12 @@ export class PendingNotificationsComponent  implements OnInit {
     let { pastNotif, upcomingNotif } = this.filterNotifications(pendingNotif);
     
     // Cancel past notifications if there are any
-    if (pastNotif.length > 0) {
+    if (upcomingNotif.length > 0) {
       console.log('Upcoming Notifications:', upcomingNotif);
-      await this.cancelPastNotifications(upcomingNotif);
+      await this.cancelScheduledNotifications(upcomingNotif);
+
+      // Get pending notifications after having removed them
+      await this.getPendingNotifications();
     }
 
   }
@@ -200,6 +203,10 @@ export class PendingNotificationsComponent  implements OnInit {
           console.log("   => the user has notifications permissions");
           const surgeryDate = await this.storageSrvc.get("SURGERY_DATE");
           this.notifSrvc.scheduleNotification(this.participant.f645_firstname ?? 'Paciente', surgeryDate);
+
+          // Get pending notifications after having rescheduled them
+          await this.getPendingNotifications();
+
         } else {
           console.warn("User denied notification permissions. Notifications will not be scheduled.");
           alert("Las notificaciones están deshabilitadas. Habilítelas en la configuración del dispositivo.");
