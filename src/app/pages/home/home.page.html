@@ -1,4 +1,4 @@
-<ion-header mode="ios" [translucent]="true" class="custom-header">
+<ion-header [translucent]="true" class="custom-header">
   <ion-toolbar>
     <ion-title>MENÚ PRINCIPAL</ion-title>
     <ion-buttons class="logout-icon" slot="end" (click)="logout()">
@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content mode="ios" [fullscreen]="true" class="page_content">
+<ion-content [fullscreen]="true" class="page_content">
 
   <ion-refresher slot="fixed" (ionRefresh)="[getParticipant($event)]">
     <ion-refresher-content></ion-refresher-content>
@@ -22,13 +22,13 @@
 
 
   <div id="logo_recuperapp">
-    <img src="assets/img/logo_recuperapp.png">
+    <img src="assets/img/logos/logo_recuperapp.png">
   </div>
 
   <ion-grid>
     <ion-row>
       <ion-col size=6>
-        <ion-card mode="ios" class="profile-card" (click)="presentProfileModal()">
+        <ion-card class="profile-card" (click)="presentProfileModal()">
           <ion-card-content>
             <ion-icon size="large" name="person-outline"></ion-icon>
             <ion-card-title>Perfil</ion-card-title>
@@ -37,7 +37,7 @@
       </ion-col>
       
       <ion-col size=6>
-        <ion-card mode="ios" class="information-card" (click)="presentInformationModal()">
+        <ion-card class="information-card" (click)="presentInformationModal()">
           <ion-card-content>
             <ion-icon size="large" name="bag-add-outline"></ion-icon>
             <ion-card-title>Información</ion-card-title>
@@ -52,7 +52,7 @@
 
       <ion-row style="display: flex; align-items: stretch;">
       <ion-col size=6>
-        <ion-card mode="ios" class="notifications-card" (click)="presentNotificationsModal()" style="height: 100%;">
+        <ion-card class="notifications-card" (click)="presentNotificationsModal()" style="height: 100%;">
           <ion-card-content>
             <ion-icon size="large" name="notifications-outline"></ion-icon>
             <ion-card-title>Notificaciones pendientes</ion-card-title>
@@ -61,7 +61,7 @@
       </ion-col>
 
       <ion-col size=6>
-        <ion-card mode="ios" no padding class="diary-card" (click)="presentEvaModal()" style="height: 100%;">
+        <ion-card no padding class="diary-card" (click)="presentEvaModal()" style="height: 100%;">
           <ion-card-content>
             <ion-icon size="large" name="add-circle-outline"></ion-icon>
             <ion-card-title>Diario de dolor</ion-card-title>

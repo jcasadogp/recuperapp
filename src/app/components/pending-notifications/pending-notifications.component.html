@@ -8,6 +8,23 @@
 </ion-header>
 
 <ion-content>
+
+  <div style="display: flex; width: 100%; margin-top: 16px;">
+    <ion-button 
+      color="danger" 
+      (click)="confirmCancelUpcomingNotifications()" 
+      style="flex: 1; white-space: normal; word-break: break-word; margin-right: 4px;">
+      Cancelar todas las notificaciones futuras
+    </ion-button>
+
+    <ion-button 
+      color="primary" 
+      (click)="rescheduleUpcomingNotifications()" 
+      style="flex: 1; white-space: normal; word-break: break-word; margin-left: 4px;">
+      Reprogramar notificaciones
+    </ion-button>
+  </div>
+
   <ng-container *ngIf="groupedNotifications && groupedNotifications.length > 0; else noNotifications">
     <ion-list>
       <ion-card *ngFor="let group of groupedNotifications">

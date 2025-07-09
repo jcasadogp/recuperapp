@@ -1,16 +1,34 @@
-<ion-content id="header">
-  
-  <ion-row justify-content-center class="logos_group">
-    <ion-col size="6">
-      <img src="assets/img/logo_irycis.png" alt="Logo IRYCIS" class="logo">
-    </ion-col>
-    <ion-col size="6">
-      <img src="assets/img/logo_uah.png" alt="Logo UAH" class="logo">
-    </ion-col>
-  </ion-row>
+<ion-content id="header" fullscreen>
 
+  <!-- <ion-row justify-content-center class="logos_group">
+    
+    <ion-col size="6" class="logo-wrapper">
+      <img src="assets/img/logos/logo_upm_grande.png" alt="Logo UPM" class="logo secondary-logo">
+    </ion-col>
+    
+    <ion-col size="6" class="logo-wrapper">
+      <img src="assets/img/logos/logo_uah.png" alt="Logo UAH" class="logo logo-uah">
+    </ion-col>
+  
+  </ion-row>   -->
+
+  <div class="safe-area-wrapper">
+    <ion-row justify-content-center class="logos_group">
+      <ion-col size="6" class="logo-wrapper">
+        <img src="assets/img/logos/logo_upm_grande.png" alt="Logo UPM" class="logo secondary-logo">
+      </ion-col>
+      <ion-col size="6" class="logo-wrapper">
+        <img src="assets/img/logos/logo_uah.png" alt="Logo UAH" class="logo logo-uah">
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div id="subheader">
+    <img src="assets/img/logos/logo_irycis.png">
+  </div>
+  
   <div id="header">
-    <img src="assets/img/logo_recuperapp.png">
+    <img src="assets/img/logos/logo_recuperapp.png">
   </div>
 
   <form id="form">
@@ -22,7 +40,7 @@
       <ion-input [(ngModel)]="login_params.password" name="password" [type]="'password'" [placeholder]="'Contraseña'"></ion-input>
     </ion-item>
 
-    <ion-text *ngIf="validate_data == false" style="font-weight: bold;" color="danger">Nombre de usuario o contraseña no válidos</ion-text>
+    <ion-text *ngIf="login_error_msg == true" style="font-weight: bold;" color="danger">Nombre de usuario o contraseña no válidos</ion-text>
 
     <ion-button expand="block" shape="round" type="submit" [disabled]="!login_params.user || !login_params.password" (click)="login()">Acceder</ion-button>
 

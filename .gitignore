@@ -1,9 +1,11 @@
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
-# Specific file with data for RedCAP (including token)
-src/app/shared/body-import.ts
-src/app/shared/body-export.ts
+env.local.ts
+
+# # Specific file with data for RedCAP (including token)
+# src/app/shared/body-import.ts
+# src/app/shared/body-export.ts
 
 *~
 *.sw[mnpcod]
@@ -23,6 +25,9 @@ log.txt
 
 # Android
 /android
+
+# IOS
+/ios
 
 # Ionic
 /.ionic
