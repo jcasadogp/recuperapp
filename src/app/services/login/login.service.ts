@@ -125,7 +125,8 @@ export class LoginService {
       for (let f of questFrequencies) {
         let date = new Date(surgeryDate);
         date.setMonth(date.getMonth() + f);
-        questDates[f] = date.toISOString().split('T')[0];
+        // questDates[f] = date.toISOString().split('T')[0];
+        questDates[f] = date.toLocaleDateString('en-CA');
       }
       
       console.log("   => Quest dates to storage =>", this.QUEST_DATES_KEY, questDates)
