@@ -1,16 +1,4 @@
-<ion-content id="header" fullscreen>
-
-  <!-- <ion-row justify-content-center class="logos_group">
-    
-    <ion-col size="6" class="logo-wrapper">
-      <img src="assets/img/logos/logo_upm_grande.png" alt="Logo UPM" class="logo secondary-logo">
-    </ion-col>
-    
-    <ion-col size="6" class="logo-wrapper">
-      <img src="assets/img/logos/logo_uah.png" alt="Logo UAH" class="logo logo-uah">
-    </ion-col>
-  
-  </ion-row>   -->
+<ion-content id="header" fullscreen [scrollY]="true">
 
   <div class="safe-area-wrapper">
     <ion-row justify-content-center class="logos_group">
@@ -33,11 +21,13 @@
 
   <form id="form">
     <h1>Inicio de sesión</h1>
+    
     <ion-item class="ion-margin-bottom">
-      <ion-input [(ngModel)]="login_params.user" name="user" [type]="'text'" [placeholder]="'Usuario'"></ion-input>
+      <ion-input [(ngModel)]="login_params.user" name="user" type="text" autocapitalize="none" placeholder="Usuario" autofocus></ion-input>
     </ion-item>
+
     <ion-item class="ion-margin-bottom">
-      <ion-input [(ngModel)]="login_params.password" name="password" [type]="'password'" [placeholder]="'Contraseña'"></ion-input>
+      <ion-input [(ngModel)]="login_params.password" name="password" type="password" autocapitalize="none" placeholder="Contraseña"></ion-input>
     </ion-item>
 
     <ion-text *ngIf="login_error_msg == true" style="font-weight: bold;" color="danger">Nombre de usuario o contraseña no válidos</ion-text>

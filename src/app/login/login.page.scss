@@ -22,6 +22,18 @@
 
 ion-content {
     --background: white;
+    --offset-bottom: auto;
+    --keyboard-offset: 0px;
+
+    // Ensure the content can scroll when keyboard is open
+    &.keyboard-padding {
+        --offset-bottom: var(--keyboard-height, 0px);
+    }
+
+    // iOS-specific adjustments
+    &.ios {
+        --offset-bottom: auto;
+    }
 
     #header {
         display: flex;
@@ -36,11 +48,11 @@ ion-content {
     }
 
     .safe-area-wrapper {
-        padding-top: env(safe-area-inset-top);
+        padding-top: max(env(safe-area-inset-top), 25px);
         padding-bottom: env(safe-area-inset-bottom);
         padding-left: env(safe-area-inset-left);
         padding-right: env(safe-area-inset-right);
-    }
+}
 
     #subheader {
         display: flex;
@@ -54,13 +66,20 @@ ion-content {
         }
     }
 
+    
     #form {
         background-color: rgba(0, 84, 233, 0.05);
-        margin: 5% auto;
+        margin: 20px auto;
         padding: 30px;
         border-radius: 20px;
         max-width: 320px;
         width: 100%;
+
+        // Remove centering when keyboard is open
+        &.keyboard-open {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
 
         h1 {
             display: flex;
@@ -95,11 +114,69 @@ ion-content {
         --padding-top: 20px;
         --padding-bottom: 20px;
         --padding-start: 5px;
+
+        // Prevent zoom on iOS input focus
+        input {
+            font-size: 16px !important;
+        }
     }
 
     a {
         font-size: 17px;
         letter-spacing: 0.5px;
         text-decoration: none;
+    }
+}
+
+// Platform-specific keyboard adjustments
+.ios {
+    ion-content {
+        --offset-bottom: auto;
+    }
+    
+    // Prevent zoom on input focus (iOS Safari behavior)  
+    ion-input input {
+        font-size: 16px !important;
+    }
+}
+
+.md {
+    // Android-specific adjustments if needed
+    ion-content {
+        --offset-bottom: auto;
+    }
+}
+
+// Keyboard-specific adjustments for both platforms
+body.keyboard-open {
+    ion-content #form {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        
+        h1 {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        ion-button {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+    }
+
+    // iOS-specific keyboard open adjustments
+    &.ios {
+        ion-content #form {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    }
+
+    // Android-specific keyboard open adjustments  
+    &.md {
+        ion-content #form {
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
     }
 }

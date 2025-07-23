@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { LoadingController } from '@ionic/angular';
 import { Device } from '@capacitor/device';
+import { Keyboard, KeyboardResize } from '@capacitor/keyboard';
 
 // Services
 import { StorageService } from 'src/app/services/storage/storage.service';
@@ -14,7 +15,7 @@ import { LoginService } from '../services/login/login.service';
   styleUrls: ['./login.page.scss'],
 })
 
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, AfterViewInit {
 
   login_params = {
     user: "",
@@ -31,6 +32,40 @@ export class LoginPage implements OnInit {
   ) {}
 
   ngOnInit() {}
+
+  async ngAfterViewInit() {
+    // Set up keyboard listeners to adjust spacing
+    Keyboard.addListener('keyboardWillShow', (info) => {
+      document.body.classList.add('keyboard-open');
+      const content = document.querySelector('ion-content');
+      const form = document.querySelector('#form');
+      if (content) {
+        content.classList.add('keyboard-padding');
+      }
+      if (form) {
+        form.classList.add('keyboard-open');
+      }
+    });
+
+    Keyboard.addListener('keyboardWillHide', () => {
+      document.body.classList.remove('keyboard-open');
+      const content = document.querySelector('ion-content');
+      const form = document.querySelector('#form');
+      if (content) {
+        content.classList.remove('keyboard-padding');
+      }
+      if (form) {
+        form.classList.remove('keyboard-open');
+      }
+    });
+
+    // Force resize mode
+    try {
+      await Keyboard.setResizeMode({ mode: KeyboardResize.Body });
+    } catch (error) {
+      console.log('Keyboard error:', error);
+    }
+  }
 
   /**
    * Handles the user login process.
