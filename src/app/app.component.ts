@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { register } from 'swiper/element/bundle';
+import { Keyboard, KeyboardResize } from '@capacitor/keyboard';
 
 register();
 
@@ -19,5 +20,16 @@ export class AppComponent {
         }
       }
     });
+
+    // Set keyboard resize mode when app starts
+    this.initKeyboard();
+  }
+
+  private async initKeyboard() {
+    try {
+      await Keyboard.setResizeMode({ mode: KeyboardResize.Body });
+    } catch (error) {
+      console.log('Keyboard plugin not available:', error);
+    }
   }
 }
