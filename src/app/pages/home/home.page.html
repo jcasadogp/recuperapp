@@ -1,4 +1,4 @@
-<ion-header [translucent]="true" class="custom-header">
+<ion-header  class="page-component-header" statusbar-padding>
   <ion-toolbar>
     <ion-title>MENÚ PRINCIPAL</ion-title>
     <ion-buttons class="logout-icon" slot="end" (click)="logout()">
@@ -9,7 +9,7 @@
 
 <ion-content [fullscreen]="true" class="page_content">
 
-  <ion-refresher slot="fixed" (ionRefresh)="[getParticipant($event)]">
+  <ion-refresher slot="fixed" (ionRefresh)="getParticipant($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 

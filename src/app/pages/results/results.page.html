@@ -1,4 +1,4 @@
-<ion-header [translucent]="true" class="custom-header">
+<ion-header  class="page-component-header">
   <ion-toolbar>
     <ion-title>RESULTADOS</ion-title>
   </ion-toolbar>
@@ -6,7 +6,7 @@
 
 <ion-content [fullscreen]="true" class="page_content">
 
-  <ion-refresher slot="fixed" (ionRefresh)="[getEvaData($event), getQuestData($event)]">
+  <ion-refresher slot="fixed" (ionRefresh)="getEvaData($event); getQuestData($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
