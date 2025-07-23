@@ -33,28 +33,36 @@ ion-container {
     padding: 5px;
 }
 
-.component-toolbar {
-
-    --background: #4663ac;
-    --color: #ffffff;
-
-    ion-icon{
-        color: #ffffff;
-    }
-}
-
-.custom-header {
+.page-component-header {
     ion-toolbar {
         --background: #4663ac;
         --color: #ffffff;
         font-size: 22px;
-        --min-height: 55px;
+        --min-height: 3.6rem; // Relative to root font size
+        height: 4.1rem;
+        padding-top: 1.6rem;
+        padding-bottom: 0.2rem;
+        
+        display: flex;
+        align-items: flex-end; // Changed from center to flex-end for bottom alignment
+        
+        ion-title { 
+            margin: 0;
+            font-size: 18px;
+        }
+        
+        ion-buttons { 
+            margin: 0;
+            ion-icon {
+                font-size: 1.7rem; // Relative size
+                }
+        }
     }
-
-    ion-icon{
+    
+    ion-icon {
         color: #ffffff;
     }
-  }
+}
 
 h4 {
     padding: 5px;
