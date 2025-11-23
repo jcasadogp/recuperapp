@@ -156,10 +156,11 @@
                         {"answer": "No", "redcap_value": 0},
                         {"answer": "Calcio", "redcap_value": 1},
                         {"answer": "Calcio + vitamina D", "redcap_value": 2},
-                        {"answer": "Bifosfonatos", "redcap_value": 3},
-                        {"answer": "Denosumab", "redcap_value": 4},
-                        {"answer": "Teriparatida", "redcap_value": 5},
-                        {"answer": "Otro", "redcap_value": 6}
+                        {"answer": "Vitamina D", "redcap_value": 3},
+                        {"answer": "Bifosfonatos", "redcap_value": 4},
+                        {"answer": "Denosumab", "redcap_value": 5},
+                        {"answer": "Teriparatida", "redcap_value": 6},
+                        {"answer": "Otro", "redcap_value": 7}
                     ]
                 }}
             ]
