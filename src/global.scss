@@ -34,17 +34,21 @@ ion-container {
 }
 
 .page-component-header {
+    
+    padding-top: env(safe-area-inset-top);
+    
     ion-toolbar {
         --background: #4663ac;
         --color: #ffffff;
         font-size: 22px;
-        --min-height: 3.6rem; // Relative to root font size
+        --min-height: 3.6rem;
         height: 4.1rem;
-        padding-top: 1.6rem;
+        
+        padding-top: 0.5rem;
         padding-bottom: 0.2rem;
         
         display: flex;
-        align-items: flex-end; // Changed from center to flex-end for bottom alignment
+        align-items: flex-end;
         
         ion-title { 
             margin: 0;
@@ -54,8 +58,8 @@ ion-container {
         ion-buttons { 
             margin: 0;
             ion-icon {
-                font-size: 1.7rem; // Relative size
-                }
+                font-size: 1.7rem;
+            }
         }
     }
     
